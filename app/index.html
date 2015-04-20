@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="extremeResults" class="no-js">
+<html lang="en" ng-app="app" class="no-js">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,15 +8,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     <link rel="stylesheet" href="app.css">
     <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body>
+<body ng-controller="AppController as app" layout="column" flex>
+
+<md-toolbar layout="row">
+    <md-button class="menu-button" ng-click="app.toggleSideNav()" aria-label="Menu" hide-gt-sm>
+        <md-icon md-svg-icon="bower_components/material-design-icons/navigation/svg/production/ic_menu_24px.svg"></md-icon>
+    </md-button>
+
+    <h2>Extreme Results</h2>
+</md-toolbar>
+
+
+<div layout="row" flex>
+    <md-sidenav layout="column" md-component-id="mainSideNav" id="mainSideNav" md-is-locked-open="$mdMedia('gt-sm')"
+                class="md-sidenav-left md-whiteframe-z2">
+        <md-list class="navList">
+            <md-list-item>
+                <md-button class="navButton">
+                    Test
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button class="navButton lastNavButton">
+                    Test
+                </md-button>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+
+    <md-content flex layout-padding id="content">
+        <ng-view></ng-view>
+    </md-content>
+</div>
 
 
 
 <script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+
+<script src="components/start/start.js"></script>
+
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="app.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,34 @@
+
+#mainSideNav {
+    width: 200px;
+    min-width: 200px;
+}
+
+md-toolbar {
+    max-height: 64px;
+}
+
+md-toolbar h2 {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 16px;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.menu-button {
+    width: 48px;
+    height: 48px;
+    margin: auto 0 auto 4px;
+}
+
+.navButton {
+    width: 100%;
+    text-align: left;
+    padding: 8px;
+    height: 50px;
+}
+
+.navList {
+    padding: 0;
+}
