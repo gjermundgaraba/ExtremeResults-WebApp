@@ -4,10 +4,19 @@
   "description": "A web app for Extreme Results. Extreme Results is implement the systems proposed in the book 'Getting Results the Agile Way'.",
   "dependencies": {},
   "devDependencies": {
+    "del": "^1.1.1",
+    "fs": "0.0.2",
+    "gulp": "^3.8.11",
+    "gulp-bundle-assets": "^2.19.1",
+    "gulp-replace": "^0.5.3",
+    "gulp-webserver": "^0.9.1",
     "jasmine-core": "^2.3.0",
     "karma": "^0.12.31",
     "karma-chrome-launcher": "^0.1.8",
-    "karma-jasmine": "^0.3.5"  },
+    "karma-jasmine": "^0.3.5",
+    "main-bower-files": "^2.7.0",
+    "vinyl-paths": "^1.0.0"
+  },
   "scripts": {
     "test": "test"
   },
