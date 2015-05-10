@@ -9,6 +9,6 @@
             restrict: 'E',
             templateUrl: 'dailyOutcomes/dailyOutcomes.partial.html',
             controller: 'DailyOutcomesController'
-        }
+        };
     }
 })();

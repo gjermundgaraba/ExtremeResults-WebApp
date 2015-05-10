@@ -6,7 +6,9 @@ var bundle = require('gulp-bundle-assets'),
     fs = require('fs'),
     replace = require('gulp-replace'),
     connect = require('gulp-connect'),
-    templateCache = require('gulp-angular-templatecache');
+    templateCache = require('gulp-angular-templatecache'),
+    jshint = require('gulp-jshint'),
+    karma = require('karma').server;
 
 gulp.task('clean', function () {
     return gulp.src(['public', 'tmp'])
@@ -24,7 +26,6 @@ gulp.task('compile', ['bundle'], function () {
         .pipe(gulp.dest('public'))
         .pipe(connect.reload());
 });
-
 
 gulp.task('bundle', ['clean', 'templates'], function() {
     return gulp.src('./bundle.config.js')
@@ -59,8 +60,31 @@ gulp.task('webserver', ['compile'], function () {
 
 gulp.task('build', ['clean', 'bundle', 'compile']);
 
-gulp.task('default', ['build', 'datWatch', 'webserver']);
-
 gulp.task('datWatch', function() {
     gulp.watch(['./src/app/**/*.*'], ['compile']);
 });
+
+gulp.task('default', ['build', 'datWatch', 'webserver']);
+
+gulp.task('jshint', function() {
+    return gulp.src('./src/app/**/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
+});
+
+gulp.task('jshint:watch', ['jshint'], function() {
+    gulp.watch(['./src/app/**/*.js'], ['jshint']);
+});
+
+gulp.task('check', ['jshint', 'test'], function() {
+    gulp.watch(['./src/app/**/*.js'], ['test']);
+
+});
+
+gulp.task('tdd', function (done) {
+    karma.start({
+        configFile: __dirname + '/karma.conf.js'
+    }, done);
+});
+
+

@@ -13,7 +13,7 @@
                 restUrl: this.baseUrl + '/' + this.restVersion,
                 applicationId: this.applicationId,
                 restApiKey: this.restApiKey
-            }
-        }
+            };
+        };
     }
 })();
