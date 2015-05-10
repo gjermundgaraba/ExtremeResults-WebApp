@@ -25,6 +25,20 @@ npm install -g karma-cli
 
 ### Setup
 
+#### Install dependencies for building:
 ```bash
 npm install
 ```
+
+```bash
+bower install
+```
+
+#### Build and run
+
+To build and run the application, you can just use
+```bash
+gulp
+```
+
+

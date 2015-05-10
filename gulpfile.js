@@ -5,8 +5,8 @@ var bundle = require('gulp-bundle-assets'),
     vinylPaths = require('vinyl-paths'),
     fs = require('fs'),
     replace = require('gulp-replace'),
-    server = require('gulp-webserver');
-
+    connect = require('gulp-connect'),
+    templateCache = require('gulp-angular-templatecache');
 
 gulp.task('clean', function () {
     return gulp.src(['public', 'tmp'])
@@ -19,12 +19,14 @@ gulp.task('compile', ['bundle'], function () {
 
     return gulp.src(['src/index.html'])
         .pipe(replace('<!-- vendor-js-injectionpoint -->', manifest.vendor.scripts))
+        .pipe(replace('<!-- templates-js-injectionpoint -->', '<script src=\'templates.js\'></script>'))
         .pipe(replace('<!-- main-js-injectionpoint -->', manifest.main.scripts))
-        .pipe(gulp.dest('public'));
+        .pipe(gulp.dest('public'))
+        .pipe(connect.reload());
 });
 
 
-gulp.task('bundle', ['clean'], function() {
+gulp.task('bundle', ['clean', 'templates'], function() {
     return gulp.src('./bundle.config.js')
         .pipe(bundle())
         .pipe(bundle.results({
@@ -34,16 +36,31 @@ gulp.task('bundle', ['clean'], function() {
         .pipe(gulp.dest('./public'));
 });
 
+gulp.task('templates', function() {
+    return gulp.src('src/app/**/*.html')
+        .pipe(templateCache(
+            'templates.js',
+            {
+                module: 'xr.templates',
+                root: '',
+                standalone: true
+            }
+        ))
+        .pipe(gulp.dest('public'));
+});
 
 gulp.task('webserver', ['compile'], function () {
-    gulp.src('public')
-        .pipe(server({
-            defaultFile: 'index.html',
-            livereload: true,
-            open: true
-        }));
+    connect.server({
+        root: 'public',
+        livereload: true
+    });
+
 });
 
 gulp.task('build', ['clean', 'bundle', 'compile']);
 
-gulp.task('default', ['build', 'webserver']);
+gulp.task('default', ['build', 'datWatch', 'webserver']);
+
+gulp.task('datWatch', function() {
+    gulp.watch(['./src/**/*.*'], ['compile']);
+});

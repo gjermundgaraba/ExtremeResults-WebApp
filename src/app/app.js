@@ -1,5 +1,5 @@
 (function () {
     'use strict';
 
-    angular.module('app', []);
+    angular.module('xr', ['xr.templates', 'xr.dailyOutcomes']);
 })();

@@ -3,6 +3,7 @@ module.exports = {
         main: {
             scripts: [
                 './src/app/app.js',
+                './src/**/*.module.js',
                 './src/app/**/*.js'
             ],
             styles: './src/**/*.css'
