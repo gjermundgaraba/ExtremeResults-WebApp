@@ -6,6 +6,9 @@ module.exports = {
                 './src/**/*.module.js',
                 './src/app/**/*.js'
             ],
+            options: {
+                uglify: true
+            },
             styles: './src/**/*.css'
         },
         vendor: {

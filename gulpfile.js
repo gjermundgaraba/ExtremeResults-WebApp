@@ -17,7 +17,7 @@ gulp.task('clean', function () {
 gulp.task('compile', ['bundle'], function () {
     var manifest = JSON.parse(fs.readFileSync('./tmp/manifest.json', 'utf8'));
 
-    return gulp.src(['src/index.html'])
+    return gulp.src(['src/app/index.html'])
         .pipe(replace('<!-- vendor-js-injectionpoint -->', manifest.vendor.scripts))
         .pipe(replace('<!-- templates-js-injectionpoint -->', '<script src=\'templates.js\'></script>'))
         .pipe(replace('<!-- main-js-injectionpoint -->', manifest.main.scripts))
@@ -62,5 +62,5 @@ gulp.task('build', ['clean', 'bundle', 'compile']);
 gulp.task('default', ['build', 'datWatch', 'webserver']);
 
 gulp.task('datWatch', function() {
-    gulp.watch(['./src/**/*.*'], ['compile']);
+    gulp.watch(['./src/app/**/*.*'], ['compile']);
 });

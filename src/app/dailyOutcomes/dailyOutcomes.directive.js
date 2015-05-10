@@ -2,12 +2,13 @@
     'use strict';
 
     angular.module('xr.dailyOutcomes')
-        .directive('dailyOutcomes', dailyOutcomesDirectory);
+        .directive('dailyOutcomes', dailyOutcomesDirective);
 
-    function dailyOutcomesDirectory() {
+    function dailyOutcomesDirective() {
         return {
             restrict: 'E',
-            templateUrl: 'dailyOutcomes/dailyOutcomes.partial.html'
+            templateUrl: 'dailyOutcomes/dailyOutcomes.partial.html',
+            controller: 'DailyOutcomesController'
         }
     }
 })();
