@@ -16,7 +16,7 @@ gulp.task('clean', function () {
 });
 
 
-gulp.task('compile', ['bundle'], function () {
+gulp.task('compile', ['clean', 'bundle'], function () {
     var manifest = JSON.parse(fs.readFileSync('./tmp/manifest.json', 'utf8'));
 
     return gulp.src(['src/app/index.html'])
@@ -37,7 +37,7 @@ gulp.task('bundle', ['clean', 'templates'], function() {
         .pipe(gulp.dest('./public'));
 });
 
-gulp.task('templates', function() {
+gulp.task('templates', ['clean'], function() {
     return gulp.src('src/app/**/*.html')
         .pipe(templateCache(
             'templates.js',
@@ -86,5 +86,3 @@ gulp.task('tdd', function (done) {
         configFile: __dirname + '/karma.conf.js'
     }, done);
 });
-
-

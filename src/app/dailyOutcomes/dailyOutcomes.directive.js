@@ -8,7 +8,8 @@
         return {
             restrict: 'E',
             templateUrl: 'dailyOutcomes/dailyOutcomes.partial.html',
-            controller: 'DailyOutcomesController'
+            controller: 'DailyOutcomesController',
+            controllerAs: 'vm'
         };
     }
 })();

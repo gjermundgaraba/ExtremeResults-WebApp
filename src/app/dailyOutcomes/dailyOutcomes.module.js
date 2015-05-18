@@ -1,5 +1,5 @@
 (function () {
     'use strict';
 
-    angular.module('xr.dailyOutcomes', ['xr.parse']);
+    angular.module('xr.dailyOutcomes', ['xr.core', 'xr.parse', 'ngMessages']);
 })();
