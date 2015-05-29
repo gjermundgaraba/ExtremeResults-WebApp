@@ -1,0 +1,21 @@
+.flex-container-column {
+    display: flex;
+    flex-flow: column;
+}
+
+.flex-container-row {
+    display: flex;
+    flex-flow: row;
+}
+
+nav {
+    width: 200px;
+}
+
+header {
+    height: 80px;
+}
+
+.flex-column {
+    flex: 1;
+}

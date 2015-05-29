@@ -2,7 +2,9 @@
   "name": "ExtremeResults",
   "version": "1.0.0",
   "description": "A web app for Extreme Results. Extreme Results is implement the systems proposed in the book 'Getting Results the Agile Way'.",
-  "dependencies": {},
+  "dependencies": {
+    "angular-route": "^1.4.0"
+  },
   "devDependencies": {
     "del": "^1.1.1",
     "fs": "0.0.2",

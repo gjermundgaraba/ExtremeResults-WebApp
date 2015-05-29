@@ -14,10 +14,13 @@ module.exports = {
         vendor: {
             scripts: [
                 { src: './bower_components/angular/angular.js', minSrc: './bower_components/angular/angular.min.js' },
-                { src: './bower_components/angular-messages/angular-messages.js', minSrc: './bower_components/angular-messages/angular-messages.min.js' }
+                { src: './bower_components/angular-messages/angular-messages.js', minSrc: './bower_components/angular-messages/angular-messages.min.js' },
+                { src: './node_modules/angular-route/angular-route.js', minSrc: './node_modules/angular-route/angular-route.min.js' }
+            ],
+            styles: [
             ],
             options: {
-                useMin: true, // {(boolean|string|Array)} pre-minified files from bower
+                useMin: false, // {(boolean|string|Array)} pre-minified files from bower
                 uglify: false
             }
         }

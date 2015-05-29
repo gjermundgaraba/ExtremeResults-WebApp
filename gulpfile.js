@@ -16,15 +16,22 @@ gulp.task('clean', function () {
 });
 
 
-gulp.task('compile', ['clean', 'bundle'], function () {
+gulp.task('compile', ['clean', 'bundle', 'fonts'], function () {
     var manifest = JSON.parse(fs.readFileSync('./tmp/manifest.json', 'utf8'));
 
     return gulp.src(['src/app/index.html'])
         .pipe(replace('<!-- vendor-js-injectionpoint -->', manifest.vendor.scripts))
+        //.pipe(replace('<!-- vendor-css-injectionpoint -->', manifest.vendor.styles))
         .pipe(replace('<!-- templates-js-injectionpoint -->', '<script src=\'templates.js\'></script>'))
         .pipe(replace('<!-- main-js-injectionpoint -->', manifest.main.scripts))
+        .pipe(replace('<!-- main-css-injectionpoint -->', manifest.main.styles))
         .pipe(gulp.dest('public'))
         .pipe(connect.reload());
+});
+
+gulp.task('fonts', ['clean'], function () {
+    return gulp.src('./node_modules/bootstrap/dist/fonts/*.*')
+        .pipe(gulp.dest('public/fonts'));
 });
 
 gulp.task('bundle', ['clean', 'templates'], function() {
@@ -58,7 +65,7 @@ gulp.task('webserver', ['compile'], function () {
 
 });
 
-gulp.task('build', ['clean', 'bundle', 'compile']);
+gulp.task('build', ['clean', 'bundle', 'compile', 'fonts']);
 
 gulp.task('datWatch', function() {
     gulp.watch(['./src/app/**/*.*'], ['compile']);
