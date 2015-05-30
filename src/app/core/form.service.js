@@ -3,14 +3,14 @@
 
     angular
         .module('xr.core')
-        .factory('FormService', FormService);
+        .factory('FormService', FormServiceFactory);
 
-    FormService.$inject = [];
+    FormServiceFactory.$inject = [];
 
-    function FormService() {
+    function FormServiceFactory() {
         var service = {
             setAllFieldsToDirty: setAllFieldsToDirty,
-            allFieldsAreValid: allFieldAreValid
+            allFieldsAreValid: allFieldsAreValid
         };
 
         return service;
@@ -23,7 +23,7 @@
             }
         }
 
-        function allFieldAreValid(form) {
+        function allFieldsAreValid(form) {
             var allFieldsAreValid = true;
 
             for (var field in form) {
