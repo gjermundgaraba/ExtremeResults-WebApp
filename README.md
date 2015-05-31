@@ -6,6 +6,9 @@ Extreme Results is implement the systems proposed in the book 'Getting Results t
 The app is built using Angular and uses Parse as back-end.
 More details about setting the app up on your own is coming soon.
 
+All documents for the project is located on this Evernote notebook:
+https://www.evernote.com/pub/bjaanes/extremeresults
+
 
 ## Installation
 
@@ -40,5 +43,15 @@ To build and run the application, you can just use
 ```bash
 gulp
 ```
+
+
+#### Test
+
+To run the tests in a TDD matter
+```bash
+gulp tdd
+```
+
+Otherwise you can run the tests from karma as you normally would.
 
 
