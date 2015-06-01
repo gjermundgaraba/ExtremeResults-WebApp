@@ -5,6 +5,7 @@
         .module('xr',
         [
             'ngRoute',
+            'xr.header',
             'xr.navigation',
             'xr.templates', // gets made during build step (see gulpfile)
             'xr.dailyOutcome',
