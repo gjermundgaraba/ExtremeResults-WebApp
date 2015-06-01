@@ -1,14 +1,14 @@
 (function () {
     'use strict';
 
-    describe('DailyOutcomes Controller', function(){
+    describe('DailyOutcome Controller', function(){
 
         var ParseServiceMock,
             FormServiceMock,
             controller,
             q;
 
-        beforeEach(module('xr.dailyOutcomes'));
+        beforeEach(module('xr.dailyOutcome'));
         beforeEach(module(function ($provide) {
             ParseServiceMock = {
                 postObject: function () {}
@@ -24,7 +24,7 @@
         }));
         beforeEach(inject(function($controller, $q) {
             q = $q;
-            controller = $controller('DailyOutcomesController');
+            controller = $controller('DailyOutcomeController');
         }));
 
         describe('save method', function () {
