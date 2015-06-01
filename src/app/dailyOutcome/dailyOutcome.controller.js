@@ -2,19 +2,19 @@
     'use strict';
 
     angular
-        .module('xr.dailyOutcomes')
-        .controller('DailyOutcomesController', DailyOutcomesController);
+        .module('xr.dailyOutcome')
+        .controller('DailyOutcomeController', DailyOutcomeController);
 
-    DailyOutcomesController.$inject = ['ParseService', 'FormService'];
+    DailyOutcomeController.$inject = ['ParseService', 'FormService'];
 
-    function DailyOutcomesController(ParseService, FormService) {
+    function DailyOutcomeController(ParseService, FormService) {
         var vm = this;
         vm.save = save;
 
         function save() {
-            FormService.setAllFieldsToDirty(vm.dailyOutcomesForm);
+            FormService.setAllFieldsToDirty(vm.dailyOutcomeForm);
 
-            if (FormService.allFieldsAreValid(vm.dailyOutcomesForm)) {
+            if (FormService.allFieldsAreValid(vm.dailyOutcomeForm)) {
                 var dailyOutcome = {
                     firstStory: vm.outcome1,
                     secondStory: vm.outcome2,
