@@ -24,15 +24,15 @@
         }
 
         function allFieldsAreValid(form) {
-            var allFieldsAreValid = true;
+            var fieldsAreValid = true;
 
             for (var field in form) {
                 if (field[0] !== '$' && !form[field].$valid) {
-                    allFieldsAreValid = false;
+                    fieldsAreValid = false;
                 }
             }
 
-            return allFieldsAreValid;
+            return fieldsAreValid;
         }
     }
 

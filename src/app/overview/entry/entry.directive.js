@@ -14,7 +14,7 @@
                 entryObj: '='
             },
             templateUrl: 'overview/entry/entry.partial.html'
-        }
+        };
     }
 
 })();

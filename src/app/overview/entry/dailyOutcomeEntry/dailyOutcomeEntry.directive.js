@@ -14,7 +14,7 @@
                 dailyOutcome: '='
             },
             templateUrl: 'overview/entry/dailyOutcomeEntry/dailyOutcomeEntry.partial.html'
-        }
+        };
     }
 
 })();

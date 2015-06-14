@@ -14,7 +14,7 @@
                 mondayVision: '='
             },
             templateUrl: 'overview/entry/mondayVisionEntry/mondayVisionEntry.partial.html'
-        }
+        };
     }
 
 })();

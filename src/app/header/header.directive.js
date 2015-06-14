@@ -11,6 +11,6 @@
         return {
             restrict: 'AE',
             templateUrl: 'header/header.partial.html'
-        }
+        };
     }
 })();

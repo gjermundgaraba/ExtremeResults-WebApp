@@ -36,7 +36,9 @@ gulp.task('fonts', ['clean'], function () {
 
 gulp.task('bundle', ['clean', 'templates'], function() {
     return gulp.src('./bundle.config.js')
-        .pipe(bundle())
+        .pipe(bundle({
+            quietMode: true
+        }))
         .pipe(bundle.results({
             dest: './tmp',
             fileName: 'manifest'
@@ -68,10 +70,10 @@ gulp.task('webserver', ['compile'], function () {
 gulp.task('build', ['clean', 'bundle', 'compile', 'fonts']);
 
 gulp.task('datWatch', function() {
-    gulp.watch(['./src/app/**/*.*'], ['compile']);
+    gulp.watch(['./src/app/**/*.*'], ['jshint', 'compile']);
 });
 
-gulp.task('default', ['build', 'datWatch', 'webserver']);
+gulp.task('default', ['build', 'jshint', 'datWatch', 'webserver']);
 
 gulp.task('jshint', function() {
     return gulp.src('./src/app/**/*.js')

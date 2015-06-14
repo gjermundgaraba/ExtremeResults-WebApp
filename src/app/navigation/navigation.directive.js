@@ -11,7 +11,7 @@
         return {
             restrict: 'AE',
             templateUrl: 'navigation/navigation.partial.html'
-        }
+        };
     }
 
 

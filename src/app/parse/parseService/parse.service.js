@@ -28,7 +28,8 @@
                     return httpObj.data.results;
                 })
                 .catch(function (httpErrorObj) {
-                    return $q.reject('Could not get objects: "' + httpErrorObj.data.error + '" (' + httpErrorObj.status + ')');
+                    return $q.reject('Could not get objects: "' +
+                        httpErrorObj.data.error + '" (' + httpErrorObj.status + ')');
                 });
         }
 
@@ -60,7 +61,8 @@
                     return httpObj.data.result;
                 })
                 .catch(function (httpErrorObj) {
-                    return $q.reject('Could not get objects: "' + httpErrorObj.data.error + '" (' + httpErrorObj.status + ')');
+                    return $q.reject('Could not get objects: "' +
+                        httpErrorObj.data.error + '" (' + httpErrorObj.status + ')');
                 });
         }
     }

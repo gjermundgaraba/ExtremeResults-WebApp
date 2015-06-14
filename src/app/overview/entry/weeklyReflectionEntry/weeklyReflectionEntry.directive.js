@@ -14,7 +14,7 @@
                 weeklyReflection: '='
             },
             templateUrl: 'overview/entry/weeklyReflectionEntry/weeklyReflectionEntry.partial.html'
-        }
+        };
     }
 
 })();
