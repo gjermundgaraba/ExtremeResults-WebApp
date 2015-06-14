@@ -17,7 +17,7 @@ module.exports = function (config) {
 
         frameworks: ['jasmine'],
 
-        browsers: ['Chrome'],
+        browsers: ['Firefox'],
 
         reporters: ['progress', 'coverage'],
 
@@ -37,8 +37,6 @@ module.exports = function (config) {
             'karma-coverage',
             'karma-junit-reporter'
         ]
-
-
 
     });
 };

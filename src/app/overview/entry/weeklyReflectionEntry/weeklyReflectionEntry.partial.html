@@ -1,7 +1,7 @@
 <h3>Weekly Reflection</h3>
-<p>{{weeklyReflection.date.iso | date}}</p>
+<span class="pull-right">Week{{weeklyReflection.createdAt | date : "w"}}</span>
 
-Things that went well:
+<p>Things that went well:</p>
 <ol>
     <li>{{weeklyReflection.firstThingThatWentWell}}</li>
     <li>{{weeklyReflection.secondThingThatWentWell}}</li>
