@@ -27,7 +27,7 @@
 
                 ParseService.postObject('DailyOutcome', dailyOutcome)
                     .then(function () {
-                        $location.path('overview');
+                        //$location.path('overview');
                     });
             }
 
