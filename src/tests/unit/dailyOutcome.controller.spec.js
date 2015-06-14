@@ -28,8 +28,11 @@
         }));
 
         describe('save method', function () {
+            var deferred;
+
             beforeEach(function () {
-                spyOn(ParseServiceMock, 'postObject');
+                deferred = q.defer();
+                spyOn(ParseServiceMock, 'postObject').and.returnValue(deferred.promise);
 
                 controller.dailyOutcomesForm = {
                     '$someAngularThing': {},

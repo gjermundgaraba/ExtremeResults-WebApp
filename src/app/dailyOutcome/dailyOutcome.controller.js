@@ -5,9 +5,9 @@
         .module('xr.dailyOutcome')
         .controller('DailyOutcomeController', DailyOutcomeController);
 
-    DailyOutcomeController.$inject = ['ParseService', 'FormService'];
+    DailyOutcomeController.$inject = ['ParseService', 'FormService', '$location'];
 
-    function DailyOutcomeController(ParseService, FormService) {
+    function DailyOutcomeController(ParseService, FormService, $location) {
         var vm = this;
         vm.save = save;
 
@@ -25,7 +25,10 @@
                     }
                 };
 
-                ParseService.postObject('DailyOutcome', dailyOutcome);
+                ParseService.postObject('DailyOutcome', dailyOutcome)
+                    .then(function () {
+                        $location.path('overview');
+                    });
             }
 
         }

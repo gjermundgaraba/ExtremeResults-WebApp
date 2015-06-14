@@ -1,0 +1,11 @@
+<div ng-switch="entryObj.className" class="overview-entry">
+    <div ng-switch-when="DailyOutcome">
+        <daily-outcome-entry daily-outcome="entryObj"></daily-outcome-entry>
+    </div>
+    <div ng-switch-when="MondayVision">
+        <monday-vision-entry monday-vision="entryObj"></monday-vision-entry>
+    </div>
+    <div ng-switch-when="WeeklyReflection">
+        <weekly-reflection-entry weekly-reflection="entryObj"></weekly-reflection-entry>
+    </div>
+</div>

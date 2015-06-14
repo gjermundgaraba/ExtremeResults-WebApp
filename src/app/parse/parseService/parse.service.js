@@ -55,9 +55,9 @@
                 }
             };
 
-            return $http.post(ParseKeyService.restUrl + '/functions/' + functionName, config)
+            return $http.post(ParseKeyService.restUrl + '/functions/' + functionName, null, config)
                 .then(function (httpObj) {
-                    return httpObj.data.results;
+                    return httpObj.data.result;
                 })
                 .catch(function (httpErrorObj) {
                     return $q.reject('Could not get objects: "' + httpErrorObj.data.error + '" (' + httpErrorObj.status + ')');

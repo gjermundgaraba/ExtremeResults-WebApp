@@ -69,7 +69,7 @@
 
         describe('callFunction', function () {
             it('should return data on successful POST call', function () {
-                httpBackend.whenPOST('/functions/test').respond(200, {results: [{}, {}]});
+                httpBackend.whenPOST('/functions/test').respond(200, {result: [{}, {}]});
 
                 var data;
                 ParseService.callFunction('test').then(function(returnData) {
