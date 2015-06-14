@@ -6,6 +6,8 @@
         var ParseServiceMock,
             FormServiceMock,
             controller,
+            rootScope,
+            location,
             q;
 
         beforeEach(module('xr.dailyOutcome'));
@@ -22,9 +24,11 @@
             $provide.value('ParseService', ParseServiceMock);
             $provide.value('FormService', FormServiceMock);
         }));
-        beforeEach(inject(function($controller, $q) {
+        beforeEach(inject(function($controller, $q, $rootScope, $location) {
             q = $q;
-            controller = $controller('DailyOutcomeController');
+            location = $location;
+            rootScope = $rootScope;
+            controller = $controller('DailyOutcomeController', {'$location': location});
         }));
 
         describe('save method', function () {
@@ -100,7 +104,24 @@
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].secondStory).toBe(controller.outcome2);
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].thirdStory).toBeDefined();
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].thirdStory).toBe(controller.outcome3);
-            })
+            });
+
+            describe('finished', function () {
+                beforeEach(function () {
+                    spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
+                    controller.save();
+                });
+
+                it('should change location to overview on post success', function () {
+                    spyOn(location, 'path');
+
+                    deferred.resolve();
+                    rootScope.$digest();
+
+                    expect(location.path).toHaveBeenCalledWith('overview');
+                });
+            });
+
         });
 
     });
