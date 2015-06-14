@@ -1,5 +1,7 @@
 # ExtremeResults Web App
 
+![Travis Build Status](https://travis-ci.org/bjaanes/ExtremeResults-WebApp.svg?branch=master)
+
 A web app for Extreme Results.
 Extreme Results is implement the systems proposed in the book 'Getting Results the Agile Way'.
 
