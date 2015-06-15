@@ -10,6 +10,7 @@
             'xr.templates', // gets made during build step (see gulpfile)
             'xr.dailyOutcome',
             'xr.mondayVision',
+            'xr.weeklyReflection',
             'xr.overview'
         ])
         .config(['ParseKeyServiceProvider', function(ParseKeyServiceProvider) {
@@ -31,6 +32,11 @@
                 .when('/monday-vision', {
                     templateUrl: 'mondayVision/mondayVision.partial.html',
                     controller: 'MondayVisionController',
+                    controllerAs: 'vm'
+                })
+                .when('/weekly-reflection', {
+                    templateUrl: 'weeklyReflection/weeklyReflection.partial.html',
+                    controller: 'WeeklyReflectionController',
                     controllerAs: 'vm'
                 })
                 .otherwise({
