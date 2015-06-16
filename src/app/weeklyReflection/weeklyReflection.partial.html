@@ -1,1 +1,46 @@
 <h3>Weekly Reflection</h3>
+
+<form name="vm.weeklyReflectionForm" novalidate>
+    <h4>Things that went well</h4>
+    <div>
+        <label for="firstThingThatWentWell">First thing that went well</label>
+        <input ng-model="vm.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" required>
+        <form-validation-messages input="vm.weeklyReflectionForm.firstThingThatWentWell"></form-validation-messages>
+    </div>
+
+    <div>
+        <label for="secondThingThatWentWell">Second thing that went well</label>
+        <input ng-model="vm.secondThingThatWentWell" id="secondThingThatWentWell" name="secondThingThatWentWell" type="text" required>
+        <form-validation-messages input="vm.weeklyReflectionForm.secondThingThatWentWell"></form-validation-messages>
+    </div>
+
+    <div>
+        <label for="thirdThingThatWentWell">Third thing that went well</label>
+        <input ng-model="vm.thirdThingThatWentWell" id="thirdThingThatWentWell" name="thirdThingThatWentWell" type="text" required>
+        <form-validation-messages input="vm.weeklyReflectionForm.thirdThingThatWentWell"></form-validation-messages>
+    </div>
+
+    <h4>Things to improve</h4>
+    <div>
+        <label for="firstThingToImprove">First thing to improve</label>
+        <input ng-model="vm.firstThingToImprove" id="firstThingToImprove" name="firstThingToImprove" type="text" required>
+        <form-validation-messages input="vm.weeklyReflectionForm.firstThingToImprove"></form-validation-messages>
+    </div>
+
+    <div>
+        <label for="secondThingToImprove">Second thing to improve</label>
+        <input ng-model="vm.secondThingToImprove" id="secondThingToImprove" name="secondThingToImprove" type="text" required>
+        <form-validation-messages input="vm.weeklyReflectionForm.secondThingToImprove"></form-validation-messages>
+    </div>
+
+    <div>
+        <label for="thirdThingToImprove">Third thing to improve</label>
+        <input ng-model="vm.thirdThingToImprove" id="thirdThingToImprove" name="thirdThingToImprove" type="text" required>
+        <form-validation-messages input="vm.weeklyReflectionForm.thirdThingToImprove"></form-validation-messages>
+    </div>
+
+    <div>
+        <button type="button" ng-click="vm.save()">Save</button>
+    </div>
+
+</form>

@@ -79,16 +79,6 @@
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe('DailyOutcome');
             });
 
-            it('should save the date as ISO 8601 String', function () {
-                spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
-
-                controller.save();
-
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].date).toBeDefined();
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].date.__type).toBe('Date');
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].date.iso).toMatch("[0-9]{4}-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]{3}Z");
-            });
-
             it('should save all stories', function () {
                 spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
 
