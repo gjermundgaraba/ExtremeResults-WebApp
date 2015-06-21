@@ -9,7 +9,6 @@
 
     function MondayVisionController(FormService, ParseService, $location) {
         var vm = this;
-
         vm.save = save;
 
         function save() {

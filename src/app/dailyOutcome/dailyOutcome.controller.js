@@ -26,8 +26,6 @@
                         $location.path('overview');
                     });
             }
-
         }
     }
-
 })();

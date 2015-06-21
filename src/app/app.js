@@ -4,7 +4,7 @@
     angular
         .module('xr',
         [
-            'ngRoute',
+            'ui.router',
             'xr.header',
             'xr.navigation',
             'xr.templates', // gets made during build step (see gulpfile)
@@ -17,30 +17,32 @@
             ParseKeyServiceProvider.applicationId = 'up5CMogFVZwyOSwLx7JljkinU6ZVyuUKM0asSK1P';
             ParseKeyServiceProvider.restApiKey = 'TtFcYgRiVB9PLPIbWhm4pBxRUwfRYup2mvCtUlZb';
         }])
-        .config(['$routeProvider', function($routeProvider) {
-            $routeProvider
-                .when('/overview', {
+        .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise("/overview");
+            $stateProvider
+                .state('overview', {
+                    url: '/overview',
                     templateUrl: 'overview/overview.partial.html',
                     controller: 'OverviewController',
                     controllerAs: 'vm'
                 })
-                .when('/daily-outcome', {
+                .state('daily-outcome', {
+                    url: '/daily-outcome',
                     templateUrl: 'dailyOutcome/dailyOutcome.partial.html',
                     controller: 'DailyOutcomeController',
                     controllerAs: 'vm'
                 })
-                .when('/monday-vision', {
+                .state('monday-vision', {
+                    url: '/monday-vision',
                     templateUrl: 'mondayVision/mondayVision.partial.html',
                     controller: 'MondayVisionController',
                     controllerAs: 'vm'
                 })
-                .when('/weekly-reflection', {
+                .state('weekly-reflection', {
+                    url: '/weekly-reflection',
                     templateUrl: 'weeklyReflection/weeklyReflection.partial.html',
                     controller: 'WeeklyReflectionController',
                     controllerAs: 'vm'
-                })
-                .otherwise({
-                    redirectTo: '/overview'
                 });
         }]);
 

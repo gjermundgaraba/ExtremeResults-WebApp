@@ -15,7 +15,7 @@ module.exports = {
             scripts: [
                 { src: './bower_components/angular/angular.js', minSrc: './bower_components/angular/angular.min.js' },
                 { src: './bower_components/angular-messages/angular-messages.js', minSrc: './bower_components/angular-messages/angular-messages.min.js' },
-                { src: './node_modules/angular-route/angular-route.js', minSrc: './node_modules/angular-route/angular-route.min.js' }
+                { src: './node_modules/angular-ui-router/release/angular-ui-router.js', minSrc: './node_modules/angular-ui-router/release/angular-ui-router.min.js' }
             ],
             styles: [
             ],
