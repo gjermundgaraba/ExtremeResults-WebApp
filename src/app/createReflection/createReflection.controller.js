@@ -2,15 +2,15 @@
     'use strict';
 
     angular
-        .module('xr.weeklyReflection')
-        .controller('WeeklyReflectionController', WeeklyReflectionController);
+        .module('xr.createReflection')
+        .controller('CreateReflectionController', CreateReflectionController);
 
-    WeeklyReflectionController.$inject = ['ParseService', 'FormService', '$location'];
+    CreateReflectionController.$inject = ['ParseService', 'FormService', '$location', 'reflectionType'];
 
-    function WeeklyReflectionController(ParseService, FormService, $location) {
+    function CreateReflectionController(ParseService, FormService, $location, reflectionType) {
         var vm = this;
-
         vm.save = save;
+        vm.header = generateHeader();
 
         function save() {
             FormService.setAllFieldsToDirty(vm.weeklyReflectionForm);
@@ -22,14 +22,19 @@
                     thirdThingThatWentWell: vm.thirdThingThatWentWell,
                     firstThingToImprove: vm.firstThingToImprove,
                     secondThingToImprove: vm.secondThingToImprove,
-                    thirdThingToImprove: vm.thirdThingToImprove,
+                    thirdThingToImprove: vm.thirdThingToImprove
                 };
 
-                ParseService.postObject('WeeklyReflection', weeklyReflection)
+                ParseService.postObject(reflectionType, weeklyReflection)
                     .then(function () {
                         $location.path('overview');
                     });
             }
+        }
+
+        function generateHeader() {
+            // For now, this works because all types are just camel cased names
+            return reflectionType.replace(/([a-z])([A-Z])/g, '$1 $2');
         }
     }
 

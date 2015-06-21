@@ -8,9 +8,8 @@
             'xr.header',
             'xr.navigation',
             'xr.templates', // gets made during build step (see gulpfile)
-            'xr.dailyOutcome',
-            'xr.mondayVision',
-            'xr.weeklyReflection',
+            'xr.createOutcome',
+            'xr.createReflection',
             'xr.overview'
         ])
         .config(['ParseKeyServiceProvider', function(ParseKeyServiceProvider) {
@@ -28,21 +27,36 @@
                 })
                 .state('daily-outcome', {
                     url: '/daily-outcome',
-                    templateUrl: 'dailyOutcome/dailyOutcome.partial.html',
-                    controller: 'DailyOutcomeController',
-                    controllerAs: 'vm'
+                    templateUrl: 'createOutcome/createOutcome.partial.html',
+                    controller: 'CreateOutcomeController',
+                    controllerAs: 'vm',
+                    resolve: {
+                        outcomeType: function () {
+                            return 'DailyOutcome';
+                        }
+                    }
                 })
                 .state('monday-vision', {
                     url: '/monday-vision',
-                    templateUrl: 'mondayVision/mondayVision.partial.html',
-                    controller: 'MondayVisionController',
-                    controllerAs: 'vm'
+                    templateUrl: 'createOutcome/createOutcome.partial.html',
+                    controller: 'CreateOutcomeController',
+                    controllerAs: 'vm',
+                    resolve: {
+                        outcomeType: function () {
+                            return 'MondayVision';
+                        }
+                    }
                 })
                 .state('weekly-reflection', {
                     url: '/weekly-reflection',
-                    templateUrl: 'weeklyReflection/weeklyReflection.partial.html',
-                    controller: 'WeeklyReflectionController',
-                    controllerAs: 'vm'
+                    templateUrl: 'createReflection/createReflection.partial.html',
+                    controller: 'CreateReflectionController',
+                    controllerAs: 'vm',
+                    resolve: {
+                        reflectionType: function () {
+                            return 'WeeklyReflection';
+                        }
+                    }
                 });
         }]);
 

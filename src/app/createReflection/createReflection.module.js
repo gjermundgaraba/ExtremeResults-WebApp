@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('xr.weeklyReflection', []);
+        .module('xr.createReflection', []);
 })();

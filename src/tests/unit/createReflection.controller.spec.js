@@ -1,16 +1,17 @@
 (function () {
     'use strict';
 
-    describe('WeeklyReflection Controller', function(){
+    describe('CreateCreateReflection Controller', function(){
 
         var ParseServiceMock,
             FormServiceMock,
             controller,
             rootScope,
             location,
+            reflectionTypeMock,
             q;
 
-        beforeEach(module('xr.weeklyReflection'));
+        beforeEach(module('xr.createReflection'));
         beforeEach(module(function ($provide) {
             ParseServiceMock = {
                 postObject: function () {}
@@ -21,14 +22,17 @@
                 allFieldsAreValid: function () {}
             };
 
+            reflectionTypeMock = 'ReflectionTypeMock';
+
             $provide.value('ParseService', ParseServiceMock);
             $provide.value('FormService', FormServiceMock);
+            $provide.value('reflectionType', reflectionTypeMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope, $location) {
             q = $q;
             location = $location;
             rootScope = $rootScope;
-            controller = $controller('WeeklyReflectionController', {'$location': location});
+            controller = $controller('CreateReflectionController', {'$location': location});
         }));
 
         describe('save method', function () {
@@ -74,12 +78,12 @@
             });
 
 
-            it('should save to DailyOutcome class', function () {
+            it('should save to reflectionType class', function () {
                 spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
 
                 controller.save();
 
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe('WeeklyReflection');
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe(reflectionTypeMock);
             });
 
             it('should save all fields', function () {
@@ -121,6 +125,12 @@
                     rootScope.$digest();
 
                     expect(location.path).toHaveBeenCalledWith('overview');
+                });
+            });
+
+            describe('header', function () {
+                it('should be Reflection Type Mock', function () {
+                    expect(controller.header).toBe('Reflection Type Mock');
                 });
             });
 

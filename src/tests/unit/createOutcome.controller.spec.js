@@ -1,16 +1,17 @@
 (function () {
     'use strict';
 
-    describe('DailyOutcome Controller', function(){
+    describe('CreateOutcome controller', function(){
 
         var ParseServiceMock,
             FormServiceMock,
             controller,
             rootScope,
             location,
+            outcomeTypeMock,
             q;
 
-        beforeEach(module('xr.dailyOutcome'));
+        beforeEach(module('xr.createOutcome'));
         beforeEach(module(function ($provide) {
             ParseServiceMock = {
                 postObject: function () {}
@@ -21,14 +22,17 @@
                 allFieldsAreValid: function () {}
             };
 
+            outcomeTypeMock = 'OutcomeTypeMock';
+
             $provide.value('ParseService', ParseServiceMock);
             $provide.value('FormService', FormServiceMock);
+            $provide.value('outcomeType', outcomeTypeMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope, $location) {
             q = $q;
             location = $location;
             rootScope = $rootScope;
-            controller = $controller('DailyOutcomeController', {'$location': location});
+            controller = $controller('CreateOutcomeController', {'$location': location});
         }));
 
         describe('save method', function () {
@@ -38,7 +42,7 @@
                 deferred = q.defer();
                 spyOn(ParseServiceMock, 'postObject').and.returnValue(deferred.promise);
 
-                controller.dailyOutcomesForm = {
+                controller.createOutcomeForm = {
                     '$someAngularThing': {},
                     'outcome1': { $pristine: true, $valid: true, $setDirty: function() {} },
                     'outcome2': { $pristine: true, $valid: true, $setDirty: function() {} },
@@ -71,12 +75,12 @@
             });
 
 
-            it('should save to DailyOutcome class', function () {
+            it('should save to outcomeType class', function () {
                 spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
 
                 controller.save();
 
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe('DailyOutcome');
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe(outcomeTypeMock);
             });
 
             it('should save all stories', function () {
@@ -110,6 +114,12 @@
 
                     expect(location.path).toHaveBeenCalledWith('overview');
                 });
+            });
+
+            describe('header', function () {
+               it('should be Outcome Type Mock', function () {
+                    expect(controller.header).toBe('Outcome Type Mock');
+               });
             });
 
         });
