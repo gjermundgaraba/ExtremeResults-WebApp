@@ -39,3 +39,10 @@ header {
 .overview-entry h3 {
     display: inline-block;
 }
+
+.md-toolbar-tools h1 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: inherit;
+}
+

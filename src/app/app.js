@@ -5,6 +5,7 @@
         .module('xr',
         [
             'ui.router',
+            'ngMaterial',
             'xr.header',
             'xr.navigation',
             'xr.templates', // gets made during build step (see gulpfile)
@@ -17,7 +18,7 @@
             ParseKeyServiceProvider.restApiKey = 'TtFcYgRiVB9PLPIbWhm4pBxRUwfRYup2mvCtUlZb';
         }])
         .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise("/overview");
+            $urlRouterProvider.otherwise('/overview');
             $stateProvider
                 .state('overview', {
                     url: '/overview',
@@ -58,6 +59,12 @@
                         }
                     }
                 });
+        }])
+        .controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav){
+            $scope.toggleSidenav = function(menuId) {
+                $mdSidenav(menuId).toggle();
+            };
+
         }]);
 
 

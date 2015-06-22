@@ -8,7 +8,8 @@ var bundle = require('gulp-bundle-assets'),
     connect = require('gulp-connect'),
     templateCache = require('gulp-angular-templatecache'),
     jshint = require('gulp-jshint'),
-    karma = require('karma').server;
+    karma = require('karma').server,
+    csslint = require('gulp-csslint');
 
 gulp.task('clean', function () {
     return gulp.src(['public', 'tmp'])
@@ -16,22 +17,17 @@ gulp.task('clean', function () {
 });
 
 
-gulp.task('compile', ['clean', 'bundle', 'fonts'], function () {
+gulp.task('compile', ['clean', 'bundle'], function () {
     var manifest = JSON.parse(fs.readFileSync('./tmp/manifest.json', 'utf8'));
 
     return gulp.src(['src/app/index.html'])
         .pipe(replace('<!-- vendor-js-injectionpoint -->', manifest.vendor.scripts))
-        //.pipe(replace('<!-- vendor-css-injectionpoint -->', manifest.vendor.styles))
+        .pipe(replace('<!-- vendor-css-injectionpoint -->', manifest.vendor.styles))
         .pipe(replace('<!-- templates-js-injectionpoint -->', '<script src=\'templates.js\'></script>'))
         .pipe(replace('<!-- main-js-injectionpoint -->', manifest.main.scripts))
         .pipe(replace('<!-- main-css-injectionpoint -->', manifest.main.styles))
         .pipe(gulp.dest('public'))
         .pipe(connect.reload());
-});
-
-gulp.task('fonts', ['clean'], function () {
-    return gulp.src('./node_modules/bootstrap/dist/fonts/*.*')
-        .pipe(gulp.dest('public/fonts'));
 });
 
 gulp.task('bundle', ['clean', 'templates'], function() {
@@ -67,13 +63,13 @@ gulp.task('webserver', ['compile'], function () {
 
 });
 
-gulp.task('build', ['clean', 'bundle', 'compile', 'fonts']);
+gulp.task('build', ['clean', 'bundle', 'compile']);
 
 gulp.task('datWatch', function() {
-    gulp.watch(['./src/app/**/*.*'], ['jshint', 'compile']);
+    gulp.watch(['./src/app/**/*.*'], ['jshint', 'csslint', 'compile']);
 });
 
-gulp.task('default', ['build', 'jshint', 'datWatch', 'webserver']);
+gulp.task('default', ['build', 'jshint', 'csslint', 'datWatch', 'webserver']);
 
 gulp.task('jshint', function() {
     return gulp.src('./src/app/**/*.js')
@@ -94,4 +90,12 @@ gulp.task('tdd', function (done) {
     karma.start({
         configFile: __dirname + '/karma.conf.js'
     }, done);
+});
+
+gulp.task('csslint', function() {
+    gulp.src('src/app/**/*.css')
+        .pipe(csslint({
+
+        }))
+        .pipe(csslint.reporter());
 });
