@@ -46,3 +46,7 @@ header {
     margin: inherit;
 }
 
+.layout-content {
+    max-width: 846px;
+}
+

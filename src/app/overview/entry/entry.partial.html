@@ -1,4 +1,4 @@
-<div ng-switch="entryObj.className" class="overview-entry">
+<md-card ng-switch="entryObj.className">
     <div ng-switch-when="DailyOutcome">
         <daily-outcome-entry daily-outcome="entryObj"></daily-outcome-entry>
     </div>
@@ -8,4 +8,4 @@
     <div ng-switch-when="WeeklyReflection">
         <weekly-reflection-entry weekly-reflection="entryObj"></weekly-reflection-entry>
     </div>
-</div>
+</md-card>

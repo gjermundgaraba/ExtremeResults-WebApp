@@ -10,6 +10,7 @@
     function overviewEntryDirective() {
         return {
             restrict: 'AE',
+            replace: true,
             scope: {
                 entryObj: '='
             },
