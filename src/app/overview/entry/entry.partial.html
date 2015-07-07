@@ -1,11 +1,11 @@
 <md-card ng-switch="entryObj.className">
     <div ng-switch-when="DailyOutcome">
-        <daily-outcome-entry daily-outcome="entryObj"></daily-outcome-entry>
+        <outcome-entry outcome-obj="entryObj"></outcome-entry>
     </div>
     <div ng-switch-when="MondayVision">
-        <monday-vision-entry monday-vision="entryObj"></monday-vision-entry>
+        <outcome-entry outcome-obj="entryObj"></outcome-entry>
     </div>
     <div ng-switch-when="WeeklyReflection">
-        <weekly-reflection-entry weekly-reflection="entryObj"></weekly-reflection-entry>
+        <reflection-entry reflection-obj="entryObj"></reflection-entry>
     </div>
 </md-card>
