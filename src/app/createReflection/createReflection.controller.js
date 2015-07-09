@@ -22,10 +22,11 @@
                     thirdThingThatWentWell: vm.thirdThingThatWentWell,
                     firstThingToImprove: vm.firstThingToImprove,
                     secondThingToImprove: vm.secondThingToImprove,
-                    thirdThingToImprove: vm.thirdThingToImprove
+                    thirdThingToImprove: vm.thirdThingToImprove,
+                    typeName: reflectionType.typeName
                 };
 
-                ParseService.postObject(reflectionType, weeklyReflection)
+                ParseService.postObject(reflectionType.className, weeklyReflection)
                     .then(function () {
                         $location.path('overview');
                     });
@@ -33,8 +34,7 @@
         }
 
         function generateHeader() {
-            // For now, this works because all types are just camel cased names
-            return reflectionType.replace(/([a-z])([A-Z])/g, '$1 $2');
+            return reflectionType.typeName + ' ' + reflectionType.className;
         }
     }
 

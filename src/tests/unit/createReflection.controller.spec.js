@@ -22,7 +22,10 @@
                 allFieldsAreValid: function () {}
             };
 
-            reflectionTypeMock = 'ReflectionTypeMock';
+            reflectionTypeMock = {
+                className: 'Reflection',
+                typeName: 'MockType'
+            };
 
             $provide.value('ParseService', ParseServiceMock);
             $provide.value('FormService', FormServiceMock);
@@ -78,13 +81,23 @@
             });
 
 
-            it('should save to reflectionType class', function () {
+            it('should save to reflectionType className', function () {
                 spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
 
                 controller.save();
 
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe(reflectionTypeMock);
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe(reflectionTypeMock.className);
             });
+
+            it('should save outcomeType', function () {
+                spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
+
+                controller.save();
+
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].typeName).toBeDefined();
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].typeName).toBe(reflectionTypeMock.typeName);
+            });
+
 
             it('should save all fields', function () {
                 spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
@@ -129,8 +142,8 @@
             });
 
             describe('header', function () {
-                it('should be Reflection Type Mock', function () {
-                    expect(controller.header).toBe('Reflection Type Mock');
+                it('should be MockType Reflection', function () {
+                    expect(controller.header).toBe('MockType Reflection');
                 });
             });
 

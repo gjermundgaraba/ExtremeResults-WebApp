@@ -1,0 +1,21 @@
+<md-dialog>
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 flex>{{vm.header}}</h2>
+                <md-button class="md-icon-button" ng-click="vm.hide()">
+                    <md-icon md-svg-src="src/app/assets/close.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <overview-entry entry-obj="vm.entryObj"></overview-entry>
+        </md-dialog-content>
+        <div class="md-actions" layout="row">
+            <span flex></span>
+            <md-button ng-click="vm.hide()" class="md-primary">
+                OK
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

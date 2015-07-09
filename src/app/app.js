@@ -17,7 +17,7 @@
             ParseKeyServiceProvider.applicationId = 'up5CMogFVZwyOSwLx7JljkinU6ZVyuUKM0asSK1P';
             ParseKeyServiceProvider.restApiKey = 'TtFcYgRiVB9PLPIbWhm4pBxRUwfRYup2mvCtUlZb';
         }])
-        .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+        .config(['$stateProvider', '$urlRouterProvider', 'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
             $urlRouterProvider.otherwise('/overview');
             $stateProvider
                 .state('overview', {
@@ -33,7 +33,7 @@
                     controllerAs: 'vm',
                     resolve: {
                         outcomeType: function () {
-                            return 'DailyOutcome';
+                            return CoreTypes.dailyOutcome;
                         }
                     }
                 })
@@ -44,7 +44,7 @@
                     controllerAs: 'vm',
                     resolve: {
                         outcomeType: function () {
-                            return 'MondayVision';
+                            return CoreTypes.mondayVision;
                         }
                     }
                 })
@@ -55,7 +55,7 @@
                     controllerAs: 'vm',
                     resolve: {
                         reflectionType: function () {
-                            return 'WeeklyReflection';
+                            return CoreTypes.weeklyReflection;
                         }
                     }
                 });

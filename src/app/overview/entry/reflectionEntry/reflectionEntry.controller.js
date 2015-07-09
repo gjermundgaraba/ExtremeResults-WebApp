@@ -5,20 +5,19 @@
         .module('xr.overview')
         .controller('ReflectionEntryController', ReflectionEntryController);
 
-    ReflectionEntryController.$inject = ['$scope', '$filter'];
+    ReflectionEntryController.$inject = ['$scope', 'XrUtils'];
 
-    function ReflectionEntryController($scope, $filter) {
+    function ReflectionEntryController($scope, XrUtils) {
         var vm = this;
         vm.header = generateHeader();
         vm.reflectionTime = generateOutcomeTime();
 
         function generateHeader() {
-            // For now, this works because all types are just camel cased names
-            return $scope.reflectionObj.className.replace(/([a-z])([A-Z])/g, '$1 $2');
+            return XrUtils.getEntryHeader($scope.reflectionObj);
         }
 
         function generateOutcomeTime() {
-            return 'Week ' + $filter('date')($scope.reflectionObj.createdAt, 'w');
+            return XrUtils.getFormattedEntryDate($scope.reflectionObj);
         }
     }
 })();

@@ -19,10 +19,11 @@
                 var outcome = {
                     firstStory: vm.outcome1,
                     secondStory: vm.outcome2,
-                    thirdStory: vm.outcome3
+                    thirdStory: vm.outcome3,
+                    typeName: outcomeType.typeName
                 };
 
-                ParseService.postObject(outcomeType, outcome)
+                ParseService.postObject(outcomeType.className, outcome)
                     .then(function () {
                         $location.path('overview');
                     });
@@ -30,8 +31,7 @@
         }
 
         function generateHeader() {
-            // For now, this works because all types are just camel cased names
-            return outcomeType.replace(/([a-z])([A-Z])/g, '$1 $2');
+            return outcomeType.typeName + ' ' + outcomeType.className;
         }
     }
 })();

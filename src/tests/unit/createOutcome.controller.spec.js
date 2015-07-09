@@ -22,7 +22,10 @@
                 allFieldsAreValid: function () {}
             };
 
-            outcomeTypeMock = 'OutcomeTypeMock';
+            outcomeTypeMock = {
+                className: 'Outcome',
+                typeName: 'MockType'
+            };
 
             $provide.value('ParseService', ParseServiceMock);
             $provide.value('FormService', FormServiceMock);
@@ -75,12 +78,21 @@
             });
 
 
-            it('should save to outcomeType class', function () {
+            it('should save to outcomeType className', function () {
                 spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
 
                 controller.save();
 
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe(outcomeTypeMock);
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe(outcomeTypeMock.className);
+            });
+
+            it('should save outcomeType', function () {
+                spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
+
+                controller.save();
+
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].typeName).toBeDefined();
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].typeName).toBe(outcomeTypeMock.typeName);
             });
 
             it('should save all stories', function () {
@@ -117,8 +129,8 @@
             });
 
             describe('header', function () {
-               it('should be Outcome Type Mock', function () {
-                    expect(controller.header).toBe('Outcome Type Mock');
+               it('should be MockType Outcome', function () {
+                    expect(controller.header).toBe('MockType Outcome');
                });
             });
 

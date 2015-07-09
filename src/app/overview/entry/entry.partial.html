@@ -1,11 +1,8 @@
-<md-card ng-switch="entryObj.className">
-    <div ng-switch-when="DailyOutcome">
+<div ng-switch="entryObj.className" ng-click="vm.showEntry(entryObj)">
+    <div ng-switch-when="Outcome">
         <outcome-entry outcome-obj="entryObj"></outcome-entry>
     </div>
-    <div ng-switch-when="MondayVision">
-        <outcome-entry outcome-obj="entryObj"></outcome-entry>
-    </div>
-    <div ng-switch-when="WeeklyReflection">
+    <div ng-switch-when="Reflection">
         <reflection-entry reflection-obj="entryObj"></reflection-entry>
     </div>
-</md-card>
+</div>

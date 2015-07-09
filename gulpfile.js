@@ -66,7 +66,7 @@ gulp.task('webserver', ['compile'], function () {
 gulp.task('build', ['clean', 'bundle', 'compile']);
 
 gulp.task('datWatch', function() {
-    gulp.watch(['./src/app/**/*.*'], ['jshint', 'csslint', 'compile']);
+    gulp.watch(['./src/app/**/*.*'], ['jshint', 'csslint', 'build']);
 });
 
 gulp.task('default', ['build', 'jshint', 'csslint', 'datWatch', 'webserver']);

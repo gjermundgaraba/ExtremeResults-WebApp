@@ -14,6 +14,8 @@
             scope: {
                 entryObj: '='
             },
+            controller: 'EntryController',
+            controllerAs: 'vm',
             templateUrl: 'overview/entry/entry.partial.html'
         };
     }
