@@ -1,16 +1,19 @@
-<h3>{{::vm.header}}</h3>
-<span class="pull-right">{{::vm.reflectionTime}}</span>
+<md-content>
+    <h3 class="md-title">{{::vm.header}}</h3>
+    <span class="pull-right">{{::vm.reflectionTime}}</span>
 
-<p>Things that went well:</p>
-<ol>
-    <li>{{reflectionObj.firstThingThatWentWell}}</li>
-    <li>{{reflectionObj.secondThingThatWentWell}}</li>
-    <li>{{reflectionObj.thirdThingThatWentWell}}</li>
-</ol>
+    <md-subheader>Things that went well</md-subheader>
+    <ol>
+        <li>{{reflectionObj.firstThingThatWentWell}}</li>
+        <li>{{reflectionObj.secondThingThatWentWell}}</li>
+        <li>{{reflectionObj.thirdThingThatWentWell}}</li>
+    </ol>
 
-Things to improve:
-<ol>
-    <li>{{reflectionObj.firstThingToImprove}}</li>
-    <li>{{reflectionObj.secondThingToImprove}}</li>
-    <li>{{reflectionObj.thirdThingToImprove}}</li>
-</ol>
+    <md-subheader>Things to improve</md-subheader>
+    <ol>
+        <li>{{reflectionObj.firstThingToImprove}}</li>
+        <li>{{reflectionObj.secondThingToImprove}}</li>
+        <li>{{reflectionObj.thirdThingToImprove}}</li>
+    </ol>
+</md-content>
+

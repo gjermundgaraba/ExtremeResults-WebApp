@@ -15,5 +15,5 @@
                 className: 'Reflection',
                 typeName: 'Weekly'
             }
-        })
+        });
 })();

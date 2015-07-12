@@ -17,7 +17,9 @@
             ParseKeyServiceProvider.applicationId = 'up5CMogFVZwyOSwLx7JljkinU6ZVyuUKM0asSK1P';
             ParseKeyServiceProvider.restApiKey = 'TtFcYgRiVB9PLPIbWhm4pBxRUwfRYup2mvCtUlZb';
         }])
-        .config(['$stateProvider', '$urlRouterProvider', 'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
+        .config(['$stateProvider',
+                '$urlRouterProvider',
+                'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
             $urlRouterProvider.otherwise('/overview');
             $stateProvider
                 .state('overview', {
