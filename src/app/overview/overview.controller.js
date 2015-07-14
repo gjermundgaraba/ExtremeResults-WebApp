@@ -11,10 +11,16 @@
         var vm = this;
 
         vm.overviewEntries = [];
+        vm.activeEntries = [];
 
         ParseService.callFunction('getEntries')
             .then(function(data) {
                 vm.overviewEntries = data;
+            });
+
+        ParseService.callFunction('getActiveEntries')
+            .then(function(data) {
+                vm.activeEntries = data;
             });
     }
 
