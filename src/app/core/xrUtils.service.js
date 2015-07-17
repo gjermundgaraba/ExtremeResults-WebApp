@@ -17,9 +17,9 @@
         function getFormattedEntryDate(entry) {
             switch (entry.typeName) {
                 case 'Daily':
-                    return $filter('date')(entry.createdAt);
+                    return $filter('date')(entry.effectiveDate.iso);
                 case 'Weekly':
-                    return 'Week ' + $filter('date')(entry.createdAt, 'w');
+                    return 'Week ' + $filter('date')(entry.effectiveDate.iso, 'w');
                 default:
                     return '';
 

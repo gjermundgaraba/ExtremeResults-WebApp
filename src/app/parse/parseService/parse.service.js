@@ -48,7 +48,7 @@
 
         }
 
-        function callFunction(functionName) {
+        function callFunction(functionName, data) {
             var config = {
                 headers: {
                     'X-Parse-Application-Id': ParseKeyService.applicationId,
@@ -56,7 +56,7 @@
                 }
             };
 
-            return $http.post(ParseKeyService.restUrl + '/functions/' + functionName, null, config)
+            return $http.post(ParseKeyService.restUrl + '/functions/' + functionName, data, config)
                 .then(function (httpObj) {
                     return httpObj.data.result;
                 })

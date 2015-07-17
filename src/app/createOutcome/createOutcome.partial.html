@@ -1,32 +1,46 @@
-<h3 class="md-headline">{{::vm.header}}</h3>
 
-<form name="vm.createOutcomeForm" novalidate>
-    <md-input-container flex>
-        <label>Outcome 1</label>
-        <input ng-model="vm.outcome1" id="outcome1" name="outcome1" required>
-        <div ng-messages="vm.createOutcomeForm.outcome1.$error" ng-show="vm.createOutcomeForm.outcome1.$dirty">
-            <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+<md-content>
+    <h3 class="md-headline">{{::vm.header}}</h3>
+
+    <form name="vm.createOutcomeForm" novalidate>
+        <md-input-container flex>
+            <label>Outcome 1</label>
+            <input ng-model="vm.outcome1" id="outcome1" name="outcome1" required>
+            <div ng-messages="vm.createOutcomeForm.outcome1.$error" ng-show="vm.createOutcomeForm.outcome1.$dirty">
+                <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex>
+            <label>Outcome 2</label>
+            <input ng-model="vm.outcome2" id="outcome2" name="outcome2" required>
+            <div ng-messages="vm.createOutcomeForm.outcome2.$error" ng-show="vm.createOutcomeForm.outcome2.$dirty">
+                <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+            </div>
+        </md-input-container>
+
+        <md-input-container flex>
+            <label>Outcome 3</label>
+            <input ng-model="vm.outcome3" id="outcome3" name="outcome3" required>
+            <div ng-messages="vm.createOutcomeForm.outcome3.$error" ng-show="vm.createOutcomeForm.outcome3.$dirty">
+                <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+            </div>
+        </md-input-container>
+
+        <div>
+            <md-button ng-click="vm.save()" class="md-raised md-primary">Save</md-button>
         </div>
-    </md-input-container>
 
-    <md-input-container flex>
-        <label>Outcome 2</label>
-        <input ng-model="vm.outcome2" id="outcome2" name="outcome2" required>
-        <div ng-messages="vm.createOutcomeForm.outcome2.$error" ng-show="vm.createOutcomeForm.outcome2.$dirty">
-            <div ng-messages-include="core/formValidationMessages.partial.html"></div>
-        </div>
-    </md-input-container>
+    </form>
+</md-content>
 
-    <md-input-container flex>
-        <label>Outcome 3</label>
-        <input ng-model="vm.outcome3" id="outcome3" name="outcome3" required>
-        <div ng-messages="vm.createOutcomeForm.outcome3.$error" ng-show="vm.createOutcomeForm.outcome3.$dirty">
-            <div ng-messages-include="core/formValidationMessages.partial.html"></div>
-        </div>
-    </md-input-container>
+<md-content ng-if="vm.relatedEntries.length > 0">
+    <md-divider></md-divider>
 
-    <div>
-        <md-button ng-click="vm.save()" class="md-raised md-primary">Save</md-button>
-    </div>
+    <h3 class="md-title">Related</h3>
 
-</form>
+    <md-card ng-repeat="relatedEntry in vm.relatedEntries">
+        <overview-entry entry-obj="relatedEntry"></overview-entry>
+    </md-card>
+
+</md-content>

@@ -9,12 +9,14 @@
             rootScope,
             location,
             reflectionTypeMock,
+            relatedEntriesDeferred,
             q;
 
         beforeEach(module('xr.createReflection'));
         beforeEach(module(function ($provide) {
             ParseServiceMock = {
-                postObject: function () {}
+                postObject: function () {},
+                callFunction: function () {}
             };
 
             FormServiceMock = {
@@ -35,8 +37,24 @@
             q = $q;
             location = $location;
             rootScope = $rootScope;
+
+            relatedEntriesDeferred = q.defer();
+            spyOn(ParseServiceMock, 'callFunction').and.returnValue(relatedEntriesDeferred.promise);
+
             controller = $controller('CreateReflectionController', {'$location': location});
         }));
+
+        describe('init', function () {
+            it('should get related entries', function () {
+                var relatedEntries = [{test: 1}];
+
+                relatedEntriesDeferred.resolve(relatedEntries);
+                rootScope.$digest();
+
+                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getRelatedEntriesForReflection', {typeName: reflectionTypeMock.typeName});
+                expect(controller.relatedEntries).toBe(relatedEntries);
+            });
+        });
 
         describe('save method', function () {
             var deferred;
@@ -123,6 +141,16 @@
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].secondThingToImprove).toBe(controller.secondThingToImprove);
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].thirdThingToImprove).toBeDefined();
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].thirdThingToImprove).toBe(controller.thirdThingToImprove);
+            });
+
+            it('should save the date as ISO 8601 String', function () {
+                spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
+
+                controller.save();
+
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].effectiveDate).toBeDefined();
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].effectiveDate.__type).toBe('Date');
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].effectiveDate.iso).toMatch("[0-9]{4}-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]{3}Z");
             });
 
             describe('finished', function () {

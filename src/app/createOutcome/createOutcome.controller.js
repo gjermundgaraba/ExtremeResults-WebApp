@@ -11,6 +11,7 @@
         var vm = this;
         vm.save = save;
         vm.header = generateHeader();
+        vm.relatedEntries = [];
 
         function save() {
             FormService.setAllFieldsToDirty(vm.createOutcomeForm);
@@ -20,6 +21,10 @@
                     firstStory: vm.outcome1,
                     secondStory: vm.outcome2,
                     thirdStory: vm.outcome3,
+                    effectiveDate: {
+                        "__type": "Date",
+                        "iso": new Date().toISOString()
+                    },
                     typeName: outcomeType.typeName
                 };
 
@@ -33,5 +38,10 @@
         function generateHeader() {
             return outcomeType.typeName + ' ' + outcomeType.className;
         }
+
+        ParseService.callFunction("getRelatedEntriesForOutcome", {typeName: outcomeType.typeName})
+            .then(function (data) {
+                vm.relatedEntries = data;
+            });
     }
 })();

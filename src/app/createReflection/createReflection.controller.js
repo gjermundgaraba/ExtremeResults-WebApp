@@ -11,6 +11,7 @@
         var vm = this;
         vm.save = save;
         vm.header = generateHeader();
+        vm.relatedEntries = [];
 
         function save() {
             FormService.setAllFieldsToDirty(vm.weeklyReflectionForm);
@@ -23,6 +24,10 @@
                     firstThingToImprove: vm.firstThingToImprove,
                     secondThingToImprove: vm.secondThingToImprove,
                     thirdThingToImprove: vm.thirdThingToImprove,
+                    effectiveDate: {
+                        "__type": "Date",
+                        "iso": new Date().toISOString()
+                    },
                     typeName: reflectionType.typeName
                 };
 
@@ -36,6 +41,12 @@
         function generateHeader() {
             return reflectionType.typeName + ' ' + reflectionType.className;
         }
+
+        ParseService.callFunction("getRelatedEntriesForReflection", {typeName: reflectionType.typeName})
+            .then(function (data) {
+                console.log(data);
+                vm.relatedEntries = data;
+            });
     }
 
 })();

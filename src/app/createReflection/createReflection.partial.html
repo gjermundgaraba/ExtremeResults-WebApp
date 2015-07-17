@@ -57,3 +57,14 @@
 
     </form>
 </md-content>
+
+<md-content ng-if="vm.relatedEntries.length > 0">
+    <md-divider></md-divider>
+
+    <h3 class="md-title">Related</h3>
+
+    <md-card ng-repeat="relatedEntry in vm.relatedEntries">
+        <overview-entry entry-obj="relatedEntry"></overview-entry>
+    </md-card>
+
+</md-content>
