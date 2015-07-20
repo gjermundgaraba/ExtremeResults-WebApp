@@ -44,7 +44,6 @@
 
         ParseService.callFunction("getRelatedEntriesForReflection", {typeName: reflectionType.typeName})
             .then(function (data) {
-                console.log(data);
                 vm.relatedEntries = data;
             });
     }

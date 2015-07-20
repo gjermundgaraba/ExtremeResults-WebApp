@@ -1,70 +1,77 @@
 
-<md-content>
-    <h3 class="md-headline">Weekly Reflection</h3>
+<div>
+    <md-toolbar>
+        <h1 class="md-toolbar-tools">
+            {{::vm.header}}
+        </h1>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <form name="vm.weeklyReflectionForm" novalidate>
+            <md-input-container flex>
+                <label for="firstThingThatWentWell">First thing that went well</label>
+                <input ng-model="vm.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" required>
+                <div ng-messages="vm.weeklyReflectionForm.firstThingThatWentWell.$error" ng-show="vm.weeklyReflectionForm.firstThingThatWentWell.$dirty">
+                    <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+                </div>
+            </md-input-container>
 
-    <form name="vm.weeklyReflectionForm" novalidate>
-        <md-input-container flex>
-            <label for="firstThingThatWentWell">First thing that went well</label>
-            <input ng-model="vm.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" required>
-            <div ng-messages="vm.weeklyReflectionForm.firstThingThatWentWell.$error" ng-show="vm.weeklyReflectionForm.firstThingThatWentWell.$dirty">
-                <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+            <md-input-container flex>
+                <label for="secondThingThatWentWell">Second thing that went well</label>
+                <input ng-model="vm.secondThingThatWentWell" id="secondThingThatWentWell" name="secondThingThatWentWell" type="text" required>
+                <div ng-messages="vm.weeklyReflectionForm.secondThingThatWentWell.$error" ng-show="vm.weeklyReflectionForm.secondThingThatWentWell.$dirty">
+                    <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex>
+                <label for="thirdThingThatWentWell">Third thing that went well</label>
+                <input ng-model="vm.thirdThingThatWentWell" id="thirdThingThatWentWell" name="thirdThingThatWentWell" type="text" required>
+                <div ng-messages="vm.weeklyReflectionForm.thirdThingThatWentWell.$error" ng-show="vm.weeklyReflectionForm.thirdThingThatWentWell.$dirty">
+                    <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex>
+                <label for="firstThingToImprove">First thing to improve</label>
+                <input ng-model="vm.firstThingToImprove" id="firstThingToImprove" name="firstThingToImprove" type="text" required>
+                <div ng-messages="vm.weeklyReflectionForm.firstThingToImprove.$error" ng-show="vm.weeklyReflectionForm.firstThingToImprove.$dirty">
+                    <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex>
+                <label for="secondThingToImprove">Second thing to improve</label>
+                <input ng-model="vm.secondThingToImprove" id="secondThingToImprove" name="secondThingToImprove" type="text" required>
+                <div ng-messages="vm.weeklyReflectionForm.secondThingToImprove.$error" ng-show="vm.weeklyReflectionForm.secondThingToImprove.$dirty">
+                    <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex>
+                <label for="thirdThingToImprove">Third thing to improve</label>
+                <input ng-model="vm.thirdThingToImprove" id="thirdThingToImprove" name="thirdThingToImprove" type="text" required>
+                <div ng-messages="vm.weeklyReflectionForm.thirdThingToImprove.$error" ng-show="vm.weeklyReflectionForm.thirdThingToImprove.$dirty">
+                    <div ng-messages-include="core/formValidationMessages.partial.html"></div>
+                </div>
+            </md-input-container>
+
+            <div>
+                <md-button ng-click="vm.save()" class="md-raised md-primary">Save</md-button>
             </div>
-        </md-input-container>
 
-        <md-input-container flex>
-            <label for="secondThingThatWentWell">Second thing that went well</label>
-            <input ng-model="vm.secondThingThatWentWell" id="secondThingThatWentWell" name="secondThingThatWentWell" type="text" required>
-            <div ng-messages="vm.weeklyReflectionForm.secondThingThatWentWell.$error" ng-show="vm.weeklyReflectionForm.secondThingThatWentWell.$dirty">
-                <div ng-messages-include="core/formValidationMessages.partial.html"></div>
-            </div>
-        </md-input-container>
+        </form>
+    </md-content>
+</div>
 
-        <md-input-container flex>
-            <label for="thirdThingThatWentWell">Third thing that went well</label>
-            <input ng-model="vm.thirdThingThatWentWell" id="thirdThingThatWentWell" name="thirdThingThatWentWell" type="text" required>
-            <div ng-messages="vm.weeklyReflectionForm.thirdThingThatWentWell.$error" ng-show="vm.weeklyReflectionForm.thirdThingThatWentWell.$dirty">
-                <div ng-messages-include="core/formValidationMessages.partial.html"></div>
-            </div>
-        </md-input-container>
-
-        <md-input-container flex>
-            <label for="firstThingToImprove">First thing to improve</label>
-            <input ng-model="vm.firstThingToImprove" id="firstThingToImprove" name="firstThingToImprove" type="text" required>
-            <div ng-messages="vm.weeklyReflectionForm.firstThingToImprove.$error" ng-show="vm.weeklyReflectionForm.firstThingToImprove.$dirty">
-                <div ng-messages-include="core/formValidationMessages.partial.html"></div>
-            </div>
-        </md-input-container>
-
-        <md-input-container flex>
-            <label for="secondThingToImprove">Second thing to improve</label>
-            <input ng-model="vm.secondThingToImprove" id="secondThingToImprove" name="secondThingToImprove" type="text" required>
-            <div ng-messages="vm.weeklyReflectionForm.secondThingToImprove.$error" ng-show="vm.weeklyReflectionForm.secondThingToImprove.$dirty">
-                <div ng-messages-include="core/formValidationMessages.partial.html"></div>
-            </div>
-        </md-input-container>
-
-        <md-input-container flex>
-            <label for="thirdThingToImprove">Third thing to improve</label>
-            <input ng-model="vm.thirdThingToImprove" id="thirdThingToImprove" name="thirdThingToImprove" type="text" required>
-            <div ng-messages="vm.weeklyReflectionForm.thirdThingToImprove.$error" ng-show="vm.weeklyReflectionForm.thirdThingToImprove.$dirty">
-                <div ng-messages-include="core/formValidationMessages.partial.html"></div>
-            </div>
-        </md-input-container>
-
-        <div>
-            <md-button ng-click="vm.save()" class="md-raised md-primary">Save</md-button>
-        </div>
-
-    </form>
-</md-content>
-
-<md-content ng-if="vm.relatedEntries.length > 0">
-    <md-divider></md-divider>
-
-    <h3 class="md-title">Related</h3>
-
-    <md-card ng-repeat="relatedEntry in vm.relatedEntries">
-        <overview-entry entry-obj="relatedEntry"></overview-entry>
-    </md-card>
-
-</md-content>
+<div ng-if="vm.relatedEntries.length > 0">
+    <md-toolbar>
+        <h1 class="md-toolbar-tools">
+            Related
+        </h1>
+    </md-toolbar>
+    <md-content>
+        <md-card ng-repeat="relatedEntry in vm.relatedEntries">
+            <overview-entry entry-obj="relatedEntry"></overview-entry>
+        </md-card>
+    </md-content>
+</div>

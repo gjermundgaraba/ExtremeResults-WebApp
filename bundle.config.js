@@ -21,7 +21,8 @@ module.exports = {
                 { src: './node_modules/angular-ui-router/release/angular-ui-router.js', minSrc: './node_modules/angular-ui-router/release/angular-ui-router.min.js' }
             ],
             styles: [
-                { src: './bower_components/angular-material/angular-material.css', minSrc: './bower_components/angular-material/angular-material.min.css' }
+                { src: './bower_components/angular-material/angular-material.css', minSrc: './bower_components/angular-material/angular-material.min.css' },
+                { src: './node_modules/font-awesome/css/font-awesome.css', minSrc: './node_modules/font-awesome/css/font-awesome.min.css' }
             ],
             options: {
                 useMin: false, // {(boolean|string|Array)} pre-minified files from bower
@@ -29,5 +30,10 @@ module.exports = {
             }
         }
     },
-    copy: './src/**/*.{png,svg}'
+    copy: [
+        {
+            src: './node_modules/font-awesome/fonts/*.*',
+            base: './node_modules/font-awesome/'
+        }
+        ]
 };

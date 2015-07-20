@@ -1,15 +1,22 @@
 <md-content ng-if="vm.activeEntries.length > 0">
-    <h3 class="md-headline">Current Outcomes</h3>
+    <md-toolbar>
+        <h1 class="md-toolbar-tools">
+            Current Outcomes
+        </h1>
+    </md-toolbar>
 
     <md-card ng-repeat="activeEntry in vm.activeEntries">
         <overview-entry entry-obj="activeEntry"></overview-entry>
     </md-card>
 </md-content>
 
-<md-divider ng-if="vm.activeEntries.length > 0 && vm.overviewEntries.length > 0"></md-divider>
-
 <md-content ng-if="vm.overviewEntries.length > 0">
-    <h3 class="md-headline">All Entries</h3>
+    <md-toolbar>
+        <h1 class="md-toolbar-tools">
+            All Entries
+        </h1>
+    </md-toolbar>
+
 
     <md-card ng-repeat="entry in vm.overviewEntries">
         <overview-entry entry-obj="entry"></overview-entry>
