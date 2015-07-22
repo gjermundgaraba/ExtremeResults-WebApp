@@ -14,8 +14,8 @@
             'xr.overview'
         ])
         .config(['ParseKeyServiceProvider', function(ParseKeyServiceProvider) {
-            ParseKeyServiceProvider.applicationId = 'up5CMogFVZwyOSwLx7JljkinU6ZVyuUKM0asSK1P';
-            ParseKeyServiceProvider.restApiKey = 'TtFcYgRiVB9PLPIbWhm4pBxRUwfRYup2mvCtUlZb';
+            ParseKeyServiceProvider.applicationId = '<!APPLICATION-ID!>';
+            ParseKeyServiceProvider.restApiKey = '<!REST-API-KEY!>';
         }])
         .config(['$stateProvider',
                 '$urlRouterProvider',

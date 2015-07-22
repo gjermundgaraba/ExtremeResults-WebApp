@@ -9,7 +9,8 @@ var bundle = require('gulp-bundle-assets'),
     templateCache = require('gulp-angular-templatecache'),
     jshint = require('gulp-jshint'),
     karma = require('karma').server,
-    csslint = require('gulp-csslint');
+    csslint = require('gulp-csslint'),
+    argv = require('yargs').argv;
 
 gulp.task('clean', function () {
     return gulp.src(['public', 'tmp'])
@@ -39,6 +40,8 @@ gulp.task('bundle', ['clean', 'templates'], function() {
             dest: './tmp',
             fileName: 'manifest'
         }))
+        .pipe(replace('<!APPLICATION-ID!>', argv.prod ? '2CThkkVCrwd6sI3Ox3ee9e0J8YkKyxJ7MdSJag9M' : 'up5CMogFVZwyOSwLx7JljkinU6ZVyuUKM0asSK1P'))
+        .pipe(replace('<!REST-API-KEY!>', argv.prod ? 'VL3nlNneieFCdSrDTUGkKpDPqW1u4LHRTUofSR5u' : 'TtFcYgRiVB9PLPIbWhm4pBxRUwfRYup2mvCtUlZb'))
         .pipe(gulp.dest('./public'));
 });
 
