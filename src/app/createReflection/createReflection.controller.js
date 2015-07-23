@@ -25,8 +25,8 @@
                     secondThingToImprove: vm.secondThingToImprove,
                     thirdThingToImprove: vm.thirdThingToImprove,
                     effectiveDate: {
-                        "__type": "Date",
-                        "iso": new Date().toISOString()
+                        '__type': 'Date',
+                        'iso': new Date().toISOString()
                     },
                     typeName: reflectionType.typeName
                 };
@@ -42,7 +42,7 @@
             return reflectionType.typeName + ' ' + reflectionType.className;
         }
 
-        ParseService.callFunction("getRelatedEntriesForReflection", {typeName: reflectionType.typeName})
+        ParseService.callFunction('getRelatedEntriesForReflection', {typeName: reflectionType.typeName})
             .then(function (data) {
                 vm.relatedEntries = data;
             });

@@ -22,8 +22,8 @@
                     secondStory: vm.outcome2,
                     thirdStory: vm.outcome3,
                     effectiveDate: {
-                        "__type": "Date",
-                        "iso": new Date().toISOString()
+                        '__type': 'Date',
+                        'iso': new Date().toISOString()
                     },
                     typeName: outcomeType.typeName
                 };
@@ -39,7 +39,7 @@
             return outcomeType.typeName + ' ' + outcomeType.className;
         }
 
-        ParseService.callFunction("getRelatedEntriesForOutcome", {typeName: outcomeType.typeName})
+        ParseService.callFunction('getRelatedEntriesForOutcome', {typeName: outcomeType.typeName})
             .then(function (data) {
                 vm.relatedEntries = data;
             });

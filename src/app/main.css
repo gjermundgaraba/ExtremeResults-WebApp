@@ -29,18 +29,13 @@ header {
 }
 
 .overview-entry {
-    width: 300px;
-    height: 180px;
     margin: 5px;
     border: 1px solid #333;
     overflow: hidden;
-}
-
-.overview-entry h3 {
     display: inline-block;
 }
 
-.md-toolbar-tools h1 {
+.md-toolbar-tools {
     font-size: inherit;
     font-weight: inherit;
     margin: inherit;

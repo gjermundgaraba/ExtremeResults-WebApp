@@ -23,3 +23,13 @@
     </md-card>
 </md-content>
 
+<md-content ng-if="vm.activeEntries.length === 0 && vm.overviewEntries.length === 0">
+    <h1 class="md-display-1">Welcome to Extreme Results</h1>
+    <p>
+    Is this your first time here?
+    </p>
+    <p>
+    Why don't you start off by <a ui-sref="daily-outcome">create a Daily Outcome</a>?
+    </p>
+</md-content>
+
