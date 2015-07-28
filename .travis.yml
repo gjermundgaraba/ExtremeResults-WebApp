@@ -14,3 +14,4 @@ before_script:
 
 script:
   - node_modules/.bin/karma start karma.conf.js --no-auto-watch --single-run
+  - node_modules/.bin/protractor e2e-tests/protractor.conf.js --browser=firefox
