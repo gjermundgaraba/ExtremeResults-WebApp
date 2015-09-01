@@ -39,6 +39,10 @@ npm install
 bower install
 ```
 
+```bash
+webdriver-manager update
+```
+
 #### Build and run
 
 To build and run the application, you can just use
@@ -49,11 +53,23 @@ gulp
 
 #### Test
 
-To run the tests in a TDD matter
+To run the unit tests in a TDD matter
 ```bash
 gulp tdd
 ```
 
 Otherwise you can run the tests from karma as you normally would.
 
+
+To run the e2e tests with protractor you can do the following:
+
+Start the selenium server
+```bash
+webdriver-manager start
+```
+
+Run the tests:
+```bash
+protractor protractor.conf.js
+```
 
