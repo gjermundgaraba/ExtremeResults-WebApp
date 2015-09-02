@@ -1,5 +1,5 @@
 nav {
-    width: 200px;
+    width: 100%;
 }
 
 header {
@@ -43,5 +43,20 @@ header {
 
 .layout-content {
     max-width: 846px;
+}
+
+.menu-link {
+    width: 100%;
+}
+
+.md-menu-button {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    width: 100%;
+    min-height: 48px;
+    margin: 0;
+    padding: 0 0 0 10px;
+    text-align: left;
 }
 
