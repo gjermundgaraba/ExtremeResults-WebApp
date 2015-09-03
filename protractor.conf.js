@@ -1,4 +1,5 @@
 exports.config = {
+    framework: 'jasmine2',
     params: {
         client: 'http://localhost:8080/'
     },
