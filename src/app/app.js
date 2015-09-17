@@ -6,6 +6,8 @@
         [
             'ui.router',
             'ngMaterial',
+            'ngCookies',
+            'xr.auth',
             'xr.header',
             'xr.navigation',
             'xr.templates', // gets made during build step (see gulpfile)
@@ -16,6 +18,22 @@
         .config(['ParseKeyServiceProvider', function(ParseKeyServiceProvider) {
             ParseKeyServiceProvider.applicationId = '<!APPLICATION-ID!>';
             ParseKeyServiceProvider.restApiKey = '<!REST-API-KEY!>';
+        }])
+        .run(['$rootScope', '$mdDialog', '$state', function run($rootScope, $mdDialog, $state) {
+            $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+                if (typeof $rootScope.currentUser === 'undefined') {
+                    event.preventDefault();
+                    $mdDialog
+                        .show({
+                            controller: 'LoginModalController',
+                            controllerAs: 'vm',
+                            templateUrl: 'auth/loginModal/loginModal.partial.html'
+                        })
+                        .then(function() {
+                            $state.go(toState, toParams);
+                        });
+                }
+            });
         }])
         .config(['$stateProvider',
                 '$urlRouterProvider',

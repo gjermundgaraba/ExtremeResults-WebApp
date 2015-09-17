@@ -1,0 +1,36 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>Login</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="loginDialog">
+
+        <form name="vm.loginForm">
+            <md-input-container>
+                <label>Username</label>
+                <input required name="username" ng-model="vm.username">
+                <div ng-messages="vm.loginForm.username.$error" ng-show="vm.loginForm.username.$dirty">
+                    <div ng-message="required">Username is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Password</label>
+                <input type="password" required name="password" ng-model="vm.password">
+                <div ng-messages="vm.loginForm.password.$error" ng-show="vm.loginForm.password.$dirty">
+                    <div ng-message="required">Password is required.</div>
+                </div>
+            </md-input-container>
+        </form>
+
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button class="md-primary">
+            Create User
+        </md-button>
+        <md-button ng-click="vm.login()" class="md-primary">
+            Login
+        </md-button>
+    </div>
+</md-dialog>

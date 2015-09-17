@@ -14,6 +14,7 @@ module.exports = {
         vendor: {
             scripts: [
                 { src: './bower_components/angular/angular.js', minSrc: './bower_components/angular/angular.min.js' },
+                { src: './bower_components/angular-cookies/angular-cookies.js', minSrc: './bower_components/angular-cookies/angular-cookies.min.js' },
                 { src: './bower_components/angular-animate/angular-animate.js', minSrc: './bower_components/angular-animate/angular-animate.min.js' },
                 { src: './bower_components/angular-aria/angular-aria.js', minSrc: './bower_components/angular-aria/angular-aria.min.js' },
                 { src: './bower_components/angular-material/angular-material.js', minSrc: './bower_components/angular-material/angular-material.min.js' },

@@ -60,3 +60,7 @@ header {
     text-align: left;
 }
 
+.loginDialog {
+    width: 400px;
+}
+
