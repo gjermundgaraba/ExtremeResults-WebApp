@@ -12,10 +12,10 @@ describe('Overview Page', function () {
 
     beforeEach(function () {
         browser.get(browser.params.client);
+        common.loginButton.click();
     });
 
     it('should have a help section when there are no entries', function () {
-        browser.get(browser.params.client);
         expect(overviewPage.firstTimeHelp.isPresent()).toBe(true);
     });
 

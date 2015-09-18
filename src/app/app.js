@@ -20,26 +20,13 @@
             ParseKeyServiceProvider.applicationId = '<!APPLICATION-ID!>';
             ParseKeyServiceProvider.restApiKey = '<!REST-API-KEY!>';
         }])
-        .run(['$rootScope', '$mdDialog', '$state', function run($rootScope, $mdDialog, $state) {
-            $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-                if (typeof $rootScope.currentUser === 'undefined') {
-                    event.preventDefault();
-                    $mdDialog
-                        .show({
-                            controller: 'LoginModalController',
-                            controllerAs: 'vm',
-                            templateUrl: 'auth/loginModal/loginModal.partial.html'
-                        })
-                        .then(function() {
-                            $state.go(toState, toParams);
-                        });
-                }
-            });
-        }])
         .config(['$stateProvider',
                 '$urlRouterProvider',
                 'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
-            $urlRouterProvider.otherwise('/overview');
+                $urlRouterProvider.otherwise( function($injector) {
+                    var $state = $injector.get('$state');
+                    $state.go("overview");
+                });
             $stateProvider
                 .state('overview', {
                     url: '/overview',
@@ -80,6 +67,22 @@
                         }
                     }
                 });
+        }])
+        .run(['$rootScope', '$mdDialog', '$state', function run($rootScope, $mdDialog, $state) {
+            $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+                if (typeof $rootScope.currentUser === 'undefined') {
+                    event.preventDefault();
+                    $mdDialog
+                        .show({
+                            controller: 'LoginModalController',
+                            controllerAs: 'vm',
+                            templateUrl: 'auth/loginModal/loginModal.partial.html'
+                        })
+                        .then(function() {
+                            $state.go(toState, toParams);
+                        });
+                }
+            });
         }])
         .controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav){
             $scope.toggleSidenav = function(menuId) {
