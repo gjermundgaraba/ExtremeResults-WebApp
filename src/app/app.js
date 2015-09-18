@@ -7,6 +7,7 @@
             'ui.router',
             'ngMaterial',
             'ngCookies',
+            'ngAnimate',
             'xr.auth',
             'xr.header',
             'xr.navigation',

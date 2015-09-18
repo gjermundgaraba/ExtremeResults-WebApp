@@ -8,8 +8,11 @@
             controller,
             rootScope,
             location,
+            formattedEntryDateMock,
+            entryHeaderMock,
             outcomeTypeMock,
             relatedEntriesDeferred,
+            XrUtilsMock,
             q;
 
         beforeEach(module('xr.createOutcome'));
@@ -26,12 +29,20 @@
 
             outcomeTypeMock = {
                 className: 'Outcome',
-                typeName: 'MockType'
+                typeName: 'Daily'
+            };
+
+            formattedEntryDateMock = 'mockymockmockdate';
+            entryHeaderMock = 'headheadheader';
+            XrUtilsMock = {
+                getFormattedEntryDate: function () { return formattedEntryDateMock },
+                getEntryHeader: function () { return entryHeaderMock }
             };
 
             $provide.value('ParseService', ParseServiceMock);
             $provide.value('FormService', FormServiceMock);
             $provide.value('outcomeType', outcomeTypeMock);
+            $provide.value('XrUtils', XrUtilsMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope, $location) {
             q = $q;
@@ -158,8 +169,8 @@
             });
 
             describe('header', function () {
-               it('should be MockType Outcome', function () {
-                    expect(controller.header).toBe('MockType Outcome');
+               it('should have entryheader and date', function () {
+                    expect(controller.header).toBe(entryHeaderMock + ' for ' + formattedEntryDateMock);
                });
             });
 

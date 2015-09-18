@@ -8,6 +8,7 @@
   "dependencies": {
     "angular": "1.4.6",
     "angular-cookies": "1.4.6",
+    "angular-loading-bar": "~0.8.0",
     "angular-material": "0.11",
     "angular-messages": "1.4.6"
   },

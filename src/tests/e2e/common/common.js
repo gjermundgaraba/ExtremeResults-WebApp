@@ -2,6 +2,8 @@ var http = require('https');
 
 var Common = function () {
 
+    this.loginButton = element(by.css('[ng-click="vm.login()"]'));
+
     this.clearDB = function () {
         var deferred = protractor.promise.defer();
 

@@ -5,9 +5,9 @@
         .module('xr.createOutcome')
         .controller('CreateOutcomeController', CreateOutcomeController);
 
-    CreateOutcomeController.$inject = ['ParseService', 'FormService', '$location', 'outcomeType'];
+    CreateOutcomeController.$inject = ['ParseService', 'FormService', '$location', 'outcomeType', 'XrUtils'];
 
-    function CreateOutcomeController(ParseService, FormService, $location, outcomeType) {
+    function CreateOutcomeController(ParseService, FormService, $location, outcomeType, XrUtils) {
         var vm = this;
         vm.save = save;
         vm.header = generateHeader();
@@ -36,7 +36,7 @@
         }
 
         function generateHeader() {
-            return outcomeType.typeName + ' ' + outcomeType.className;
+            return XrUtils.getEntryHeader(outcomeType) + ' for ' + XrUtils.getFormattedEntryDate(outcomeType, new Date());
         }
 
         ParseService.callFunction('getRelatedEntriesForOutcome', {typeName: outcomeType.typeName})

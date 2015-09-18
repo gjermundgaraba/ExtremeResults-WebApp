@@ -14,12 +14,14 @@
 
         return service;
 
-        function getFormattedEntryDate(entry) {
+        function getFormattedEntryDate(entry, optionalDate) {
+            var date = optionalDate || entry.effectiveDate.iso;
+
             switch (entry.typeName) {
                 case 'Daily':
-                    return $filter('date')(entry.effectiveDate.iso);
+                    return $filter('date')(date);
                 case 'Weekly':
-                    return 'Week ' + $filter('date')(entry.effectiveDate.iso, 'w');
+                    return 'Week ' + $filter('date')(date, 'w');
                 default:
                     return '';
 

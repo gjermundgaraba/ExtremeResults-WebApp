@@ -7,7 +7,11 @@ describe('Overview Page', function () {
     var common = new Common();
 
     beforeAll(function () {
-       common.clearDB();
+        common.clearDB();
+    });
+
+    beforeEach(function () {
+        browser.get(browser.params.client);
     });
 
     it('should have a help section when there are no entries', function () {
