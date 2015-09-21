@@ -2,7 +2,15 @@ var http = require('https');
 
 var Common = function () {
 
-    this.loginButton = element(by.css('[ng-click="vm.login()"]'));
+    this.loginButton = element(by.id('loginButton'));
+
+    this.setLoginUserName = function (userName) {
+        element(by.model('vm.username')).sendKeys(userName);
+    };
+
+    this.setPassword = function (password) {
+        element(by.model('vm.password')).sendKeys(password);
+    };
 
     this.clearDB = function () {
         var deferred = protractor.promise.defer();

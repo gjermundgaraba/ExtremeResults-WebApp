@@ -12,7 +12,10 @@ describe('Overview Page', function () {
 
     beforeEach(function () {
         browser.get(browser.params.client);
+        common.setLoginUserName('bjaanes');
+        common.setPassword('1234');
         common.loginButton.click();
+        browser.waitForAngular();
     });
 
     it('should have a help section when there are no entries', function () {

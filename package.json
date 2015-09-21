@@ -30,7 +30,10 @@
     "yargs": "3.23.0"
   },
   "scripts": {
-    "test": "test"
+    "start": "node node_modules/gulp/bin/gulp.js",
+    "test": "node node_modules/gulp/bin/gulp.js tdd",
+    "selenium": "node node_modules/protractor/bin/webdriver-manager update && node node_modules/protractor/bin/webdriver-manager start",
+    "e2e": "node node_modules/protractor/bin/protractor protractor.conf.js"
   },
   "repository": {
     "type": "git",

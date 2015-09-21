@@ -91,7 +91,69 @@
 
                 httpBackend.flush();
                 expect(error).toBeDefined();
-            })
+            });
+        });
+
+        describe('login', function () {
+            it('should return data on successful POST call', function () {
+                httpBackend.whenGET('/login?password=test&username=test').respond(200, {sessionToken: 'token2323423'});
+
+                var data;
+                ParseService.login('test', 'test').then(function(returnData) {
+                    data = returnData;
+                });
+
+                httpBackend.flush();
+                expect(data).toBeDefined();
+            });
+
+            it('should return an error when POST call fails', function () {
+                httpBackend.whenGET('/login?password=test&username=test').respond(500, {error: 'server error'});
+
+                var error;
+                ParseService.login('test', 'test').catch(function (e) {
+                    error = e;
+                });
+
+                httpBackend.flush();
+                expect(error).toBeDefined();
+            });
+        });
+
+        describe('retrieveCurrentUser', function () {
+            it('should return data on successful POST call', function () {
+                httpBackend.whenGET('/users/me').respond(200, {username: 'test'});
+
+                var data;
+                ParseService.retrieveCurrentUser('testAuthKey').then(function(returnData) {
+                    data = returnData;
+                });
+
+                httpBackend.flush();
+                expect(data).toBeDefined();
+            });
+
+            it('should return an error when POST call fails', function () {
+                httpBackend.whenGET('/users/me').respond(500, {error: 'server error'});
+
+                var error;
+                ParseService.retrieveCurrentUser('testAuthKey').catch(function (e) {
+                    error = e;
+                });
+
+                httpBackend.flush();
+                expect(error).toBeDefined();
+            });
+
+            it('should set set the auth key in the header', function () {
+                httpBackend.expectGET('/users/me', function(headers) {
+                    return (headers['X-Parse-Session-Token'] === 'testAuthKey');
+                }).respond(200, {});
+
+                ParseService.retrieveCurrentUser('testAuthKey');
+
+                httpBackend.flush();
+            });
         });
 
         describe('headers', function () {

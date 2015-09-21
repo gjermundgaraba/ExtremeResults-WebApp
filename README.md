@@ -24,10 +24,6 @@ Install bower and karma-cli
 npm install -g bower
 ```
 
-```bash
-npm install -g karma-cli
-```
-
 ### Setup
 
 #### Install dependencies for building:
@@ -39,15 +35,12 @@ npm install
 bower install
 ```
 
-```bash
-webdriver-manager update
-```
 
 #### Build and run
 
 To build and run the application, you can just use
 ```bash
-gulp
+npm start
 ```
 
 
@@ -55,7 +48,7 @@ gulp
 
 To run the unit tests in a TDD matter
 ```bash
-gulp tdd
+npm test
 ```
 
 Otherwise you can run the tests from karma as you normally would.
@@ -65,11 +58,11 @@ To run the e2e tests with protractor you can do the following:
 
 Start the selenium server
 ```bash
-webdriver-manager start
+npm run selenium
 ```
 
 Run the tests:
 ```bash
-protractor protractor.conf.js
+npm run e2e
 ```
 

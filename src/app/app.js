@@ -25,7 +25,7 @@
                 'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
                 $urlRouterProvider.otherwise( function($injector) {
                     var $state = $injector.get('$state');
-                    $state.go("overview");
+                    $state.go('overview');
                 });
             $stateProvider
                 .state('overview', {
@@ -68,10 +68,19 @@
                     }
                 });
         }])
-        .run(['$rootScope', '$mdDialog', '$state', function run($rootScope, $mdDialog, $state) {
+        .run(['AuthService', '$rootScope', '$mdDialog', '$state', function run(AuthService, $rootScope, $mdDialog, $state) {
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-                if (typeof $rootScope.currentUser === 'undefined') {
+                if (!AuthService.anyOneLoggedIn()) {
                     event.preventDefault();
+                    showLoginDialog();
+                } else {
+                    AuthService.updateCurrentUser()
+                        .catch(function () {
+                            showLoginDialog();
+                        });
+                }
+
+                function showLoginDialog() {
                     $mdDialog
                         .show({
                             controller: 'LoginModalController',

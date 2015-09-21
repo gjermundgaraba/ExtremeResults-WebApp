@@ -36,7 +36,8 @@
         }
 
         function generateHeader() {
-            return XrUtils.getEntryHeader(outcomeType) + ' for ' + XrUtils.getFormattedEntryDate(outcomeType, new Date());
+            return XrUtils.getEntryHeader(outcomeType) + ' for ' +
+                   XrUtils.getFormattedEntryDate(outcomeType, new Date());
         }
 
         ParseService.callFunction('getRelatedEntriesForOutcome', {typeName: outcomeType.typeName})

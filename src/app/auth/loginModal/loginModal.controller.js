@@ -13,9 +13,10 @@
         vm.login = login;
 
         function login() {
-            AuthService.login();
-
-            $mdDialog.hide();
+            AuthService.login(vm.username, vm.password)
+                .then(function () {
+                    $mdDialog.hide();
+                });
         }
     }
 })();
