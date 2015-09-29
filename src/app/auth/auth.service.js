@@ -10,7 +10,8 @@
         var service = {
             anyOneLoggedIn: anyOneLoggedIn,
             updateCurrentUser: updateCurrentUser,
-            login: login
+            login: login,
+            logout: logout
         };
 
         return service;
@@ -40,7 +41,10 @@
                     $rootScope.currentUser = user;
                     $cookies.put('xrAuthCookie', user.sessionToken);
                 });
+        }
 
+        function logout() {
+            $cookies.remove('xrAuthCookie');
         }
     }
 })();

@@ -25,16 +25,24 @@
                 'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
                 $urlRouterProvider.otherwise( function($injector) {
                     var $state = $injector.get('$state');
-                    $state.go('overview');
+                    $state.go('app.overview');
                 });
             $stateProvider
-                .state('overview', {
+                .state('login', {
+                    url: '/login',
+                    templateUrl: 'login/login.partial.html'
+                })
+                .state('app', {
+                    url: '',
+                    templateUrl: 'app.html'
+                })
+                .state('app.overview', {
                     url: '/overview',
                     templateUrl: 'overview/overview.partial.html',
                     controller: 'OverviewController',
                     controllerAs: 'vm'
                 })
-                .state('daily-outcome', {
+                .state('app.daily-outcome', {
                     url: '/daily-outcome',
                     templateUrl: 'createOutcome/createOutcome.partial.html',
                     controller: 'CreateOutcomeController',
@@ -45,7 +53,7 @@
                         }
                     }
                 })
-                .state('monday-vision', {
+                .state('app.monday-vision', {
                     url: '/monday-vision',
                     templateUrl: 'createOutcome/createOutcome.partial.html',
                     controller: 'CreateOutcomeController',
@@ -56,7 +64,7 @@
                         }
                     }
                 })
-                .state('weekly-reflection', {
+                .state('app.weekly-reflection', {
                     url: '/weekly-reflection',
                     templateUrl: 'createReflection/createReflection.partial.html',
                     controller: 'CreateReflectionController',
@@ -72,31 +80,25 @@
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
                 if (!AuthService.anyOneLoggedIn()) {
                     event.preventDefault();
-                    showLoginDialog();
+                    $state.go('login');
                 } else {
                     AuthService.updateCurrentUser()
                         .catch(function () {
-                            showLoginDialog();
-                        });
-                }
-
-                function showLoginDialog() {
-                    $mdDialog
-                        .show({
-                            controller: 'LoginModalController',
-                            controllerAs: 'vm',
-                            templateUrl: 'auth/loginModal/loginModal.partial.html'
-                        })
-                        .then(function() {
-                            $state.go(toState, toParams);
+                            $state.go('login');
                         });
                 }
             });
         }])
-        .controller('AppCtrl', ['$scope', '$mdSidenav', function($scope, $mdSidenav){
+        .controller('AppCtrl', ['$scope', '$mdSidenav', 'AuthService', '$rootScope', function($scope, $mdSidenav, AuthService, $rootScope){
             $scope.toggleSidenav = function(menuId) {
                 $mdSidenav(menuId).toggle();
             };
+
+            $scope.logout = function () {
+                AuthService.logout();
+
+                $rootScope.$broadcast('$stateChangeStart', 'overview');
+            }
 
         }]);
 

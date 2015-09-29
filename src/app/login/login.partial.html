@@ -1,0 +1,25 @@
+<form name="vm.loginForm" ng-submit="vm.login()">
+    <md-input-container>
+        <label>Username</label>
+        <input required name="username" ng-model="vm.username">
+        <div ng-messages="vm.loginForm.username.$error" ng-show="vm.loginForm.username.$dirty">
+            <div ng-message="required">Username is required.</div>
+        </div>
+    </md-input-container>
+    <md-input-container>
+        <label>Password</label>
+        <input type="password" required name="password" ng-model="vm.password">
+        <div ng-messages="vm.loginForm.password.$error" ng-show="vm.loginForm.password.$dirty">
+            <div ng-message="required">Password is required.</div>
+        </div>
+    </md-input-container>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button class="md-primary">
+            Register
+        </md-button>
+        <md-button id="loginButton" class="md-primary">
+            Login
+        </md-button>
+    </div>
+</form>
