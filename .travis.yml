@@ -7,9 +7,8 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - webdriver-manager update
   - npm install
-  - npm install -g bower
-  - bower install
-  - gulp > /dev/null &
+  - npm run clientdep
+  - npm start > /dev/null &
   - sleep 10 # give server time to start
 
 script:

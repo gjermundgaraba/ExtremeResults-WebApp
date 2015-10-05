@@ -16,13 +16,7 @@ https://www.evernote.com/pub/bjaanes/extremeresults
 
 ### Requirements:
 
-* Node.js
-
-Install bower and karma-cli
-
-```bash
-npm install -g bower
-```
+* Node.js with npm
 
 ### Setup
 
@@ -31,8 +25,9 @@ npm install -g bower
 npm install
 ```
 
+To install client dependencies
 ```bash
-bower install
+npm run clientdep
 ```
 
 

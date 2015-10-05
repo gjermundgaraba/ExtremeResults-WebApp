@@ -9,6 +9,7 @@
             'ngCookies',
             'ngAnimate',
             'xr.auth',
+            'xr.login',
             'xr.header',
             'xr.navigation',
             'xr.templates', // gets made during build step (see gulpfile)
@@ -20,17 +21,18 @@
             ParseKeyServiceProvider.applicationId = '<!APPLICATION-ID!>';
             ParseKeyServiceProvider.restApiKey = '<!REST-API-KEY!>';
         }])
-        .config(['$stateProvider',
-                '$urlRouterProvider',
-                'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
-                $urlRouterProvider.otherwise( function($injector) {
-                    var $state = $injector.get('$state');
-                    $state.go('app.overview');
-                });
+        .config(['$stateProvider', '$urlRouterProvider', 'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
+            $urlRouterProvider.otherwise( function($injector) {
+                var $state = $injector.get('$state');
+                $state.go('app.overview');
+            });
+
             $stateProvider
                 .state('login', {
                     url: '/login',
-                    templateUrl: 'login/login.partial.html'
+                    templateUrl: 'login/login.partial.html',
+                    controller: 'LoginController',
+                    'controllerAs': 'vm'
                 })
                 .state('app', {
                     url: '',
@@ -78,14 +80,16 @@
         }])
         .run(['AuthService', '$rootScope', '$mdDialog', '$state', function run(AuthService, $rootScope, $mdDialog, $state) {
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-                if (!AuthService.anyOneLoggedIn()) {
-                    event.preventDefault();
-                    $state.go('login');
-                } else {
-                    AuthService.updateCurrentUser()
-                        .catch(function () {
-                            $state.go('login');
-                        });
+                if (toState.name !== 'login') {
+                    if (!AuthService.anyOneLoggedIn()) {
+                        event.preventDefault();
+                        $state.go('login');
+                    } else {
+                        AuthService.updateCurrentUser()
+                            .catch(function () {
+                                $state.go('login');
+                            });
+                    }
                 }
             });
         }])

@@ -6,6 +6,7 @@
     "angular-ui-router": "0.2.15"
   },
   "devDependencies": {
+    "bower": "^1.5.3",
     "del": "1.2.1",
     "fs": "0.0.2",
     "gulp": "3.9.0",
@@ -30,10 +31,11 @@
     "yargs": "3.23.0"
   },
   "scripts": {
-    "start": "node node_modules/gulp/bin/gulp.js",
-    "test": "node node_modules/gulp/bin/gulp.js tdd",
-    "selenium": "node node_modules/protractor/bin/webdriver-manager update && node node_modules/protractor/bin/webdriver-manager start",
-    "e2e": "node node_modules/protractor/bin/protractor protractor.conf.js"
+    "clientdep": "bower install --no-interactive",
+    "start": "node_modules/.bin/gulp",
+    "test": "node_modules/.bin/gulp tdd",
+    "selenium": "node_modules/.bin/webdriver-manager update && node_modules/.bin/webdriver-manager start",
+    "e2e": "node_modules/.bin/protractor protractor.conf.js"
   },
   "repository": {
     "type": "git",

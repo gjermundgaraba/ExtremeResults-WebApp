@@ -19,7 +19,7 @@ describe('Overview Page', function () {
     });
 
     it('should have a help section when there are no entries', function () {
-        //expect(overviewPage.firstTimeHelp.isPresent()).toBe(true);
+        expect(overviewPage.firstTimeHelp.isPresent()).toBe(true);
     });
 
 });
