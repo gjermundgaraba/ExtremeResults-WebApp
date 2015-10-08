@@ -6,18 +6,19 @@
     </md-toolbar>
     <form name="vm.loginForm" ng-submit="vm.login()">
         <md-input-container>
-            <label>Username</label>
-            <input required name="username" ng-model="vm.username">
+            <label for="loginUsernameField">Username</label>
+            <input id="loginUsernameField" required name="username" ng-model="vm.username">
         </md-input-container>
 
         <md-input-container>
-            <label>Password</label>
-            <input type="password" required name="password" ng-model="vm.password">
+            <label for="loginPasswordField">Password</label>
+            <input id="loginPasswordField" type="password" required name="password" ng-model="vm.password">
         </md-input-container>
 
-        <md-button ng-disabled="vm.isLoggingIn" class="md-primary">
+        <md-button type="button" ng-disabled="vm.isLoggingIn" ng-click="vm.register()" class="md-primary">
             Register
         </md-button>
+
         <md-button ng-disabled="vm.isLoggingIn" id="loginButton" class="md-primary">
             Login
         </md-button>

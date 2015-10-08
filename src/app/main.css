@@ -60,7 +60,7 @@ header {
     text-align: left;
 }
 
-.login-container {
+.login-container, .register-container {
     width: 600px;
     border-radius: 4px;
     margin-bottom: 16px;

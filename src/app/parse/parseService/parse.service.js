@@ -9,6 +9,7 @@
     function ParseServiceFactory(ParseKeyService, $http, $q) {
         var service = {
             login: login,
+            register: register,
             getAllObjects: getAllObjects,
             postObject: postObject,
             callFunction: callFunction,
@@ -24,7 +25,28 @@
 
         return service;
 
+        function login(username, password) {
+            config.params = {
+                username: username,
+                password: password
+            };
 
+            return $http.get(ParseKeyService.restUrl + '/login', config)
+                .then(function (httpObj) {
+                    return httpObj.data;
+                });
+        }
+
+        function register(user) {
+            return $http.post(ParseKeyService.restUrl + '/users', user, config)
+                .then(function (httpObj) {
+                    return httpObj.data;
+                })
+                .catch(function (httpErrorObj) {
+                    return $q.reject('Could not register new user: "' +
+                        httpErrorObj.data.error + '" (' + httpErrorObj.status + ')');
+                });
+        }
 
         function getAllObjects(className) {
             return $http.get(ParseKeyService.restUrl + '/classes/' + className, config)
@@ -53,18 +75,6 @@
                 .catch(function (httpErrorObj) {
                     return $q.reject('Could not call function: ' + functionName + ' "' +
                         httpErrorObj.data.error + '" (' + httpErrorObj.status + ')');
-                });
-        }
-
-        function login(username, password) {
-            config.params = {
-                username: username,
-                password: password
-            };
-
-            return $http.get(ParseKeyService.restUrl + '/login', config)
-                .then(function (httpObj) {
-                    return httpObj.data;
                 });
         }
 

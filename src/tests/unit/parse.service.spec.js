@@ -20,6 +20,75 @@
             ParseService = _ParseService_;
         }));
 
+        describe('login', function () {
+            it('should return data on successful POST call', function () {
+                httpBackend.whenGET('/login?password=test&username=test').respond(200, {sessionToken: 'token2323423'});
+
+                var data;
+                ParseService.login('test', 'test').then(function(returnData) {
+                    data = returnData;
+                });
+
+                httpBackend.flush();
+                expect(data).toBeDefined();
+            });
+
+            it('should return an error when POST call fails', function () {
+                httpBackend.whenGET('/login?password=test&username=test').respond(500, {error: 'server error'});
+
+                var error;
+                ParseService.login('test', 'test').catch(function (e) {
+                    error = e;
+                });
+
+                httpBackend.flush();
+                expect(error).toBeDefined();
+            });
+        });
+
+        describe('register', function () {
+            var user;
+
+            beforeEach(function () {
+                user = {
+                    username: 'test',
+                    password: 'test'
+                }
+            });
+
+            it('should return data on successful POST call', function () {
+                var response = {
+                    createdAt: "2011-11-07T20:58:34.448Z",
+                    objectId: "g7y9tkhB7O",
+                    sessionToken: "r:pnktnjyb996sj4p156gjtp4im"
+                };
+                httpBackend.whenPOST('/users').respond(201, response);
+
+                var data;
+                ParseService.register(user).then(function(returnData) {
+                    data = returnData;
+                });
+
+                httpBackend.flush();
+                expect(data.createdAt).toBe(response.createdAt);
+                expect(data.objectId).toBe(response.objectId);
+                expect(data.sessionToken).toBe(response.sessionToken);
+            });
+
+            it('should return an error when GET call fails', function () {
+                var errorResponse = {error: 'server error'};
+                httpBackend.whenPOST('/users').respond(500, errorResponse);
+
+                var error;
+                ParseService.register(user).catch(function (e) {
+                    error = e;
+                });
+
+                httpBackend.flush();
+                expect(error).toBeDefined();
+            })
+        });
+
         describe('getAllObjects', function () {
             it('should return data on successful GET call', function () {
                 httpBackend.whenGET('/classes/test').respond(200, {results: [{}, {}]});
@@ -86,32 +155,6 @@
 
                 var error;
                 ParseService.callFunction('test').catch(function (e) {
-                    error = e;
-                });
-
-                httpBackend.flush();
-                expect(error).toBeDefined();
-            });
-        });
-
-        describe('login', function () {
-            it('should return data on successful POST call', function () {
-                httpBackend.whenGET('/login?password=test&username=test').respond(200, {sessionToken: 'token2323423'});
-
-                var data;
-                ParseService.login('test', 'test').then(function(returnData) {
-                    data = returnData;
-                });
-
-                httpBackend.flush();
-                expect(data).toBeDefined();
-            });
-
-            it('should return an error when POST call fails', function () {
-                httpBackend.whenGET('/login?password=test&username=test').respond(500, {error: 'server error'});
-
-                var error;
-                ParseService.login('test', 'test').catch(function (e) {
                     error = e;
                 });
 

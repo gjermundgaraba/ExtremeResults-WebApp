@@ -11,7 +11,8 @@
             anyOneLoggedIn: anyOneLoggedIn,
             updateCurrentUser: updateCurrentUser,
             login: login,
-            logout: logout
+            logout: logout,
+            register: register
         };
 
         return service;
@@ -45,6 +46,16 @@
 
         function logout() {
             $cookies.remove('xrAuthCookie');
+        }
+
+        function register(user) {
+            return ParseService.register(user)
+                .then(function (registerObj) {
+                    user.objectId = registerObj.objectId;
+                    user.sessionToken = registerObj.sessionToken;
+                    $rootScope.currentUser = user;
+                    $cookies.put('xrAuthCookie', user.sessionToken);
+                });
         }
     }
 })();

@@ -32,7 +32,13 @@
                     url: '/login',
                     templateUrl: 'login/login.partial.html',
                     controller: 'LoginController',
-                    'controllerAs': 'vm'
+                    controllerAs: 'vm'
+                })
+                .state('register', {
+                    url: '/register',
+                    templateUrl: 'register/register.partial.html',
+                    controller: 'RegisterController',
+                    controllerAs: 'vm'
                 })
                 .state('app', {
                     url: '',
@@ -79,8 +85,8 @@
                 });
         }])
         .run(['AuthService', '$rootScope', '$mdDialog', '$state', function run(AuthService, $rootScope, $mdDialog, $state) {
-            $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-                if (toState.name !== 'login') {
+            $rootScope.$on('$stateChangeStart', function (event, toState) {
+                if (toState.name !== 'login' && toState.name !== 'register') {
                     if (!AuthService.anyOneLoggedIn()) {
                         event.preventDefault();
                         $state.go('login');

@@ -1,0 +1,25 @@
+<div class="register-container md-whiteframe-z3">
+    <md-toolbar class="demo-toolbar md-primary md-default-theme">
+        <div class="md-toolbar-tools">
+            <h3 class="ng-binding">Register on Extreme Results</h3>
+        </div>
+    </md-toolbar>
+    <form name="vm.loginForm" ng-submit="vm.register()">
+        <md-input-container>
+            <label for="registerUsernameField">Username</label>
+            <input id="registerUsernameField" required name="username" ng-model="vm.username">
+        </md-input-container>
+
+        <md-input-container>
+            <label for="registerPasswordField">Password</label>
+            <input id="registerPasswordField" type="password" required name="password" ng-model="vm.password">
+        </md-input-container>
+
+        <md-button ng-disabled="vm.isRegistering" class="md-primary">
+            Back to login
+        </md-button>
+        <md-button ng-disabled="vm.isRegistering" id="registerButton" class="md-primary">
+            Register
+        </md-button>
+    </form>
+</div>
