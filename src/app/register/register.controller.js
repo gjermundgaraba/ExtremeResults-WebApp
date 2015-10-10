@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('xr.login')
+        .module('xr.register')
         .controller('RegisterController', RegisterController);
 
     RegisterController.$inject = ['AuthService', '$state'];
