@@ -31,11 +31,12 @@
     "yargs": "3.23.0"
   },
   "scripts": {
-    "clientdep": "bower install --no-interactive",
-    "start": "node_modules/.bin/gulp",
-    "test": "node_modules/.bin/gulp tdd",
-    "selenium": "node_modules/.bin/webdriver-manager update && node_modules/.bin/webdriver-manager start",
-    "e2e": "node_modules/.bin/protractor protractor.conf.js"
+    "clientdep": "bower install --allow-root --no-interactive",
+    "start": "gulp",
+    "buildprod": "gulp build --prod",
+    "test": "gulp tdd",
+    "selenium": "webdriver-manager update && webdriver-manager start",
+    "e2e": "protractor protractor.conf.js"
   },
   "repository": {
     "type": "git",
