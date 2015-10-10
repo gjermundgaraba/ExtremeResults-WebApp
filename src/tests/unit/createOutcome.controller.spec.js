@@ -4,7 +4,6 @@
     describe('CreateOutcome controller', function(){
 
         var ParseServiceMock,
-            FormServiceMock,
             controller,
             rootScope,
             location,
@@ -22,11 +21,6 @@
                 callFunction: function () {}
             };
 
-            FormServiceMock = {
-                setAllFieldsToDirty: function () {},
-                allFieldsAreValid: function () {}
-            };
-
             outcomeTypeMock = {
                 className: 'Outcome',
                 typeName: 'Daily'
@@ -40,7 +34,6 @@
             };
 
             $provide.value('ParseService', ParseServiceMock);
-            $provide.value('FormService', FormServiceMock);
             $provide.value('outcomeType', outcomeTypeMock);
             $provide.value('XrUtils', XrUtilsMock);
         }));
@@ -82,42 +75,14 @@
                 }
             });
 
-            it('should set all fields to dirty', function() {
-                spyOn(FormServiceMock, 'setAllFieldsToDirty');
-
-                controller.save();
-
-                expect(FormServiceMock.setAllFieldsToDirty).toHaveBeenCalled();
-            });
-
-            it('should save if all fields a valid', function () {
-                spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
-
-                controller.save();
-
-                expect(ParseServiceMock.postObject).toHaveBeenCalled();
-            });
-
-            it('should not save if any fields are not valid', function () {
-                spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(false);
-
-                controller.save();
-
-                expect(ParseServiceMock.postObject).not.toHaveBeenCalled()
-            });
-
 
             it('should save to outcomeType className', function () {
-                spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
-
                 controller.save();
 
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe(outcomeTypeMock.className);
             });
 
             it('should save outcomeType', function () {
-                spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
-
                 controller.save();
 
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].typeName).toBeDefined();
@@ -125,8 +90,6 @@
             });
 
             it('should save all stories', function () {
-                spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
-
                 controller.outcome1 = "Test1";
                 controller.outcome2 = "Test2";
                 controller.outcome3 = "Test3";
@@ -143,8 +106,6 @@
             });
 
             it('should save the date as ISO 8601 String', function () {
-                spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
-
                 controller.save();
 
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].effectiveDate).toBeDefined();
@@ -154,7 +115,6 @@
 
             describe('finished', function () {
                 beforeEach(function () {
-                    spyOn(FormServiceMock, 'allFieldsAreValid').and.returnValue(true);
                     controller.save();
                 });
 
