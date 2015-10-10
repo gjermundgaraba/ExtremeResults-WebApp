@@ -8,9 +8,8 @@ describe('Overview Page', function () {
 
     beforeAll(function () {
         common.clearDB();
-    });
+        browser.driver.manage().deleteAllCookies();
 
-    beforeEach(function () {
         browser.get(browser.params.client);
         common.setLoginUserName('bjaanes');
         common.setPassword('1234');
