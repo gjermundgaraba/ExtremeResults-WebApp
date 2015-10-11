@@ -10,6 +10,7 @@
             'ngAnimate',
             'xr.auth',
             'xr.login',
+            'xr.register',
             'xr.header',
             'xr.navigation',
             'xr.templates', // gets made during build step (see gulpfile)
@@ -84,7 +85,9 @@
                     }
                 });
         }])
-        .run(['AuthService', '$rootScope', '$mdDialog', '$state', function run(AuthService, $rootScope, $mdDialog, $state) {
+        .run(['AuthService', '$rootScope', '$mdDialog', '$state',
+                    function run(AuthService, $rootScope, $mdDialog, $state) {
+
             $rootScope.$on('$stateChangeStart', function (event, toState) {
                 if (toState.name !== 'login' && toState.name !== 'register') {
                     if (!AuthService.anyOneLoggedIn()) {
@@ -98,8 +101,11 @@
                     }
                 }
             });
+
         }])
-        .controller('AppCtrl', ['$scope', '$mdSidenav', 'AuthService', '$rootScope', function($scope, $mdSidenav, AuthService, $rootScope){
+        .controller('AppCtrl', ['$scope', '$mdSidenav', 'AuthService', '$rootScope',
+                    function($scope, $mdSidenav, AuthService, $rootScope) {
+
             $scope.toggleSidenav = function(menuId) {
                 $mdSidenav(menuId).toggle();
             };
@@ -108,10 +114,8 @@
                 AuthService.logout();
 
                 $rootScope.$broadcast('$stateChangeStart', 'overview');
-            }
+            };
 
         }]);
-
-
 
 })();
