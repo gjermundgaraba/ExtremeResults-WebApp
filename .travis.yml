@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "0.10"
+  - "2.14.7"
 
 before_script:
   - export DISPLAY=:99.0
@@ -9,6 +9,7 @@ before_script:
   - npm install
   - npm run clientdep
   - npm start > /dev/null &
+  - npm run selenium > /dev/null &
   - sleep 10 # give server time to start
 
 script:

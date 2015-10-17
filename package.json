@@ -31,7 +31,7 @@
     "yargs": "3.27.0"
   },
   "scripts": {
-    "clientdep": "bower install --allow-root --no-interactive",
+    "clientdep": "bower install --allow-root --config.interactive=false",
     "start": "gulp",
     "buildprod": "gulp build --prod",
     "test": "gulp tdd",
