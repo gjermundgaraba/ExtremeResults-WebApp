@@ -94,10 +94,16 @@
                         event.preventDefault();
                         $state.go('login');
                     } else {
-                        AuthService.updateCurrentUser()
-                            .catch(function () {
-                                $state.go('login');
-                            });
+                        if (typeof AuthService.getCurrentUser() === 'undefined') {
+                            event.preventDefault();
+                            AuthService.updateCurrentUser()
+                                .then(function () {
+                                    $state.go(toState);
+                                })
+                                .catch(function () {
+                                    $state.go('login');
+                                });
+                        }
                     }
                 }
             });

@@ -5,9 +5,9 @@
         .module('xr.createOutcome')
         .controller('CreateOutcomeController', CreateOutcomeController);
 
-    CreateOutcomeController.$inject = ['ParseService', '$location', 'outcomeType', 'XrUtils'];
+    CreateOutcomeController.$inject = ['ParseService', '$location', 'outcomeType', 'XrUtils', 'AuthService'];
 
-    function CreateOutcomeController(ParseService, $location, outcomeType, XrUtils) {
+    function CreateOutcomeController(ParseService, $location, outcomeType, XrUtils, AuthService) {
         var vm = this;
         vm.save = save;
         vm.header = generateHeader();
@@ -22,7 +22,15 @@
                     '__type': 'Date',
                     'iso': new Date().toISOString()
                 },
-                typeName: outcomeType.typeName
+                typeName: outcomeType.typeName,
+                ACL: {
+                    "*": { }
+                }
+            };
+
+            outcome.ACL[AuthService.getCurrentUser().objectId] = {
+                "read": true,
+                "write": true
             };
 
             ParseService.postObject(outcomeType.className, outcome)

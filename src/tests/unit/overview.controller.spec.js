@@ -4,6 +4,8 @@
     describe('Overview Controller', function(){
 
         var ParseServiceMock,
+            userTokenMock,
+            AuthServiceMock,
             controller,
             rootScope,
             initDeferred,
@@ -15,7 +17,15 @@
                 callFunction: function () {}
             };
 
+            userTokenMock = '1234';
+            AuthServiceMock = {
+                getUserToken: function () {
+                    return userTokenMock;
+                }
+            };
+
             $provide.value('ParseService', ParseServiceMock);
+            $provide.value('AuthService', AuthServiceMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope) {
             q = $q;
@@ -35,7 +45,11 @@
             });
 
             it('should get entries', function () {
-                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getEntries');
+                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getEntries', null, userTokenMock);
+            });
+
+            it('should get active entries', function () {
+                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getActiveEntries', null, userTokenMock);
             });
 
             it('should update array of overviews when entries get back from service', function () {

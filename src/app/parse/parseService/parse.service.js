@@ -26,12 +26,13 @@
         return service;
 
         function login(username, password) {
-            config.params = {
+            var configWithToken = getConfigCopy();
+            configWithToken.params = {
                 username: username,
                 password: password
             };
 
-            return $http.get(ParseKeyService.restUrl + '/login', config)
+            return $http.get(ParseKeyService.restUrl + '/login', configWithToken)
                 .then(function (httpObj) {
                     return httpObj.data;
                 });
@@ -48,8 +49,10 @@
                 });
         }
 
-        function getAllObjects(className) {
-            return $http.get(ParseKeyService.restUrl + '/classes/' + className, config)
+        function getAllObjects(className, token) {
+            var configWithToken = getConfigCopyWithToken(token);
+
+            return $http.get(ParseKeyService.restUrl + '/classes/' + className, configWithToken)
                 .then(function (httpObj) {
                     return httpObj.data.results;
                 })
@@ -59,16 +62,20 @@
                 });
         }
 
-        function postObject(className, object) {
-            return $http.post(ParseKeyService.restUrl + '/classes/' + className, object, config)
+        function postObject(className, object, token) {
+            var configWithToken = getConfigCopyWithToken(token);
+
+            return $http.post(ParseKeyService.restUrl + '/classes/' + className, object, configWithToken)
                 .then(function(httpObj) {
                     return httpObj.data;
                 });
 
         }
 
-        function callFunction(functionName, data) {
-            return $http.post(ParseKeyService.restUrl + '/functions/' + functionName, data, config)
+        function callFunction(functionName, data, token) {
+            var configWithToken = getConfigCopyWithToken(token);
+
+            return $http.post(ParseKeyService.restUrl + '/functions/' + functionName, data, configWithToken)
                 .then(function (httpObj) {
                     return httpObj.data.result;
                 })
@@ -79,13 +86,19 @@
         }
 
         function retrieveCurrentUser(token) {
-            var configCopy = getConfigCopy();
-            configCopy.headers['X-Parse-Session-Token'] = token;
+            var configWithToken = getConfigCopyWithToken(token);
 
-            return $http.get(ParseKeyService.restUrl + '/users/me', configCopy)
+            return $http.get(ParseKeyService.restUrl + '/users/me', configWithToken)
                 .then(function (httpObj) {
                     return httpObj.data;
                 });
+        }
+
+        function getConfigCopyWithToken(token) {
+            var configCopy = getConfigCopy();
+            configCopy.headers['X-Parse-Session-Token'] = token;
+
+            return configCopy;
         }
 
         function getConfigCopy() {

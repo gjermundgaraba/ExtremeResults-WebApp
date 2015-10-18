@@ -4,11 +4,15 @@
     angular.module('xr.auth')
         .factory('AuthService', AuthServiceFactory);
 
-    AuthServiceFactory.$inject = ['ParseService', '$cookies', '$rootScope', '$q'];
+    AuthServiceFactory.$inject = ['ParseService', '$cookies', '$q'];
 
-    function AuthServiceFactory(ParseService, $cookies, $rootScope, $q) {
+    function AuthServiceFactory(ParseService, $cookies, $q) {
+        var currentUser;
+
         var service = {
             anyOneLoggedIn: anyOneLoggedIn,
+            getCurrentUser: getCurrenUser,
+            getUserToken: getUserToken,
             updateCurrentUser: updateCurrentUser,
             login: login,
             logout: logout,
@@ -22,14 +26,21 @@
             return (typeof authCookie !== 'undefined');
         }
 
+        function getCurrenUser() {
+            return currentUser;
+        }
+
+        function getUserToken() {
+            return currentUser.sessionToken;
+        }
 
         function updateCurrentUser() {
             var authCookie = $cookies.get('xrAuthCookie');
 
-            if ((typeof authCookie !== 'undefined') && (typeof $rootScope.currentUser === 'undefined')) {
+            if ((typeof authCookie !== 'undefined') && (typeof currentUser === 'undefined')) {
                 return ParseService.retrieveCurrentUser(authCookie)
                     .then(function (user) {
-                        $rootScope.currentUser = user;
+                        currentUser = user;
                     });
             } else {
                 return $q.resolve();
@@ -39,13 +50,14 @@
         function login(username, password) {
             return ParseService.login(username, password)
                 .then(function (user) {
-                    $rootScope.currentUser = user;
+                    currentUser = user;
                     $cookies.put('xrAuthCookie', user.sessionToken);
                 });
         }
 
         function logout() {
             $cookies.remove('xrAuthCookie');
+            currentUser = undefined;
         }
 
         function register(user) {
@@ -53,7 +65,7 @@
                 .then(function (registerObj) {
                     user.objectId = registerObj.objectId;
                     user.sessionToken = registerObj.sessionToken;
-                    $rootScope.currentUser = user;
+                    currentUser = user;
                     $cookies.put('xrAuthCookie', user.sessionToken);
                 });
         }

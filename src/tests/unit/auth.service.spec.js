@@ -50,7 +50,7 @@ describe('AuthService', function () {
             deferred.resolve(user);
             rootScope.$digest();
 
-            expect(rootScope.currentUser).toBe(user);
+            expect(AuthService.getCurrentUser()).toBe(user);
         });
 
         it('should set the xrAuthCookie', function () {
@@ -97,7 +97,7 @@ describe('AuthService', function () {
             retrieveCurrentUserDeferred.resolve(user);
             rootScope.$digest();
 
-            expect(rootScope.currentUser).toBe(user);
+            expect(AuthService.getCurrentUser()).toBe(user);
         });
 
         it('should not set rootScope.currentUser if it is already set', function () {
@@ -111,7 +111,7 @@ describe('AuthService', function () {
             retrieveCurrentUserDeferred.resolve(user);
             rootScope.$digest();
 
-            expect(rootScope.currentUser).toBe(user);
+            expect(AuthService.getCurrentUser()).toBe(user);
         });
 
         it('should not set rootScope.currentUser if no cookie exists', function () {

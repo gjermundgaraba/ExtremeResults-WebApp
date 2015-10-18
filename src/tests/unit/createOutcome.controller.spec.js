@@ -4,6 +4,8 @@
     describe('CreateOutcome controller', function(){
 
         var ParseServiceMock,
+            AuthServiceMock,
+            userMock,
             controller,
             rootScope,
             location,
@@ -26,6 +28,15 @@
                 typeName: 'Daily'
             };
 
+            userMock = {
+                objectId: '1234'
+            };
+            AuthServiceMock = {
+                getCurrentUser: function () {
+                    return userMock;
+                }
+            };
+
             formattedEntryDateMock = 'mockymockmockdate';
             entryHeaderMock = 'headheadheader';
             XrUtilsMock = {
@@ -36,6 +47,7 @@
             $provide.value('ParseService', ParseServiceMock);
             $provide.value('outcomeType', outcomeTypeMock);
             $provide.value('XrUtils', XrUtilsMock);
+            $provide.value('AuthService', AuthServiceMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope, $location) {
             q = $q;
@@ -102,6 +114,24 @@
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].secondStory).toBe(controller.outcome2);
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].thirdStory).toBeDefined();
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].thirdStory).toBe(controller.outcome3);
+            });
+
+            it('should set ACL', function () {
+                controller.outcome1 = "Test1";
+                controller.outcome2 = "Test2";
+                controller.outcome3 = "Test3";
+
+                controller.save();
+
+                var expectedACL = {
+                    "*": { }
+                };
+                expectedACL[userMock.objectId] = {
+                    "read": true,
+                    "write": true
+                };
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].ACL).toBeDefined();
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].ACL).toEqual(expectedACL);
 
             });
 
