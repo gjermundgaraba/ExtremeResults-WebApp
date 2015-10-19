@@ -4,6 +4,8 @@
     describe('CreateCreateReflection Controller', function(){
 
         var ParseServiceMock,
+            AuthServiceMock,
+            userMock,
             controller,
             rootScope,
             location,
@@ -18,6 +20,15 @@
                 callFunction: function () {}
             };
 
+            userMock = {
+                objectId: '1234'
+            };
+            AuthServiceMock = {
+                getCurrentUser: function () {
+                    return userMock;
+                }
+            };
+
             reflectionTypeMock = {
                 className: 'Reflection',
                 typeName: 'MockType'
@@ -25,6 +36,7 @@
 
             $provide.value('ParseService', ParseServiceMock);
             $provide.value('reflectionType', reflectionTypeMock);
+            $provide.value('AuthService', AuthServiceMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope, $location) {
             q = $q;
@@ -105,6 +117,28 @@
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].thirdThingToImprove).toBeDefined();
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].thirdThingToImprove).toBe(controller.thirdThingToImprove);
             });
+
+            it('should set ACL', function () {
+                controller.firstThingThatWentWell = "Test 11";
+                controller.secondThingThatWentWell = "Test 12";
+                controller.thirdThingThatWentWell = "Test 13";
+                controller.firstThingToImprove = "Test 21";
+                controller.secondThingToImprove = "Test 22";
+                controller.thirdThingToImprove = "Test 23";
+
+                controller.save();
+
+                var expectedACL = {
+                    '*': { }
+                };
+                expectedACL[userMock.objectId] = {
+                    read: true,
+                    write: true
+                };
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].ACL).toBeDefined();
+                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].ACL).toEqual(expectedACL);
+            });
+
 
             it('should save the date as ISO 8601 String', function () {
                 controller.save();

@@ -24,13 +24,13 @@
                 },
                 typeName: outcomeType.typeName,
                 ACL: {
-                    "*": { }
+                    '*': { }
                 }
             };
 
             outcome.ACL[AuthService.getCurrentUser().objectId] = {
-                "read": true,
-                "write": true
+                read: true,
+                write: true
             };
 
             ParseService.postObject(outcomeType.className, outcome)

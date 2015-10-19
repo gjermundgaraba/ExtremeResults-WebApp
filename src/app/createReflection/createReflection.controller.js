@@ -5,9 +5,9 @@
         .module('xr.createReflection')
         .controller('CreateReflectionController', CreateReflectionController);
 
-    CreateReflectionController.$inject = ['ParseService', '$location', 'reflectionType'];
+    CreateReflectionController.$inject = ['ParseService', '$location', 'reflectionType', 'AuthService'];
 
-    function CreateReflectionController(ParseService, $location, reflectionType) {
+    function CreateReflectionController(ParseService, $location, reflectionType, AuthService) {
         var vm = this;
         vm.save = save;
         vm.header = generateHeader();
@@ -25,7 +25,15 @@
                     '__type': 'Date',
                     'iso': new Date().toISOString()
                 },
-                typeName: reflectionType.typeName
+                typeName: reflectionType.typeName,
+                ACL: {
+                    '*': { }
+                }
+            };
+
+            weeklyReflection.ACL[AuthService.getCurrentUser().objectId] = {
+                read: true,
+                write: true
             };
 
             ParseService.postObject(reflectionType.className, weeklyReflection)

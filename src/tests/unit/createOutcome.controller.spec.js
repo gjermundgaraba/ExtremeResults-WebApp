@@ -132,7 +132,6 @@
                 };
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].ACL).toBeDefined();
                 expect(ParseServiceMock.postObject.calls.mostRecent().args[1].ACL).toEqual(expectedACL);
-
             });
 
             it('should save the date as ISO 8601 String', function () {
