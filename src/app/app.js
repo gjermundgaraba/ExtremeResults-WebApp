@@ -22,6 +22,11 @@
             ParseKeyServiceProvider.applicationId = '<!APPLICATION-ID!>';
             ParseKeyServiceProvider.restApiKey = '<!REST-API-KEY!>';
         }])
+        .config(function($mdThemingProvider) {
+            $mdThemingProvider.theme('default')
+                .primaryPalette('blue')
+                .accentPalette('red');
+        })
         .config(['$stateProvider', '$urlRouterProvider', 'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
             $urlRouterProvider.otherwise( function($injector) {
                 var $state = $injector.get('$state');

@@ -43,6 +43,7 @@ header {
 
 .layout-content {
     max-width: 846px;
+    min-height: calc(100vh - 64px);
 }
 
 .menu-link {
