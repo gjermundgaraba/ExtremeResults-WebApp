@@ -6,7 +6,7 @@
     "angular-ui-router": "0.2.15"
   },
   "devDependencies": {
-    "bower": "1.5.3",
+    "bower": "1.6.3",
     "del": "2.0.2",
     "fs": "0.0.2",
     "gulp": "3.9.0",
