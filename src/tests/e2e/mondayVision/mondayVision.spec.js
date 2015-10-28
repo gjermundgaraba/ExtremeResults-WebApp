@@ -20,7 +20,7 @@ describe('Daily Outcome Page', function () {
     });
 
     beforeEach(function () {
-        common.mondayVisionMenuButton.click();
+        common.dailyOutcomeMenuButton.click();
     });
 
     it('should be able to create a new daily outcome', function () {

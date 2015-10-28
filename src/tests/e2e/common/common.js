@@ -6,6 +6,7 @@ var Common = function () {
 
     this.overviewMenuButton = element(by.css('[ui-sref="app.overview"]'));
     this.dailyOutcomeMenuButton = element(by.css('[ui-sref="app.daily-outcome"]'));
+    this.mondayVisionMenuButton = element(by.css('[ui-sref="app.monday-vision"]'));
 
     this.setLoginUserName = function (userName) {
         element(by.model('vm.username')).sendKeys(userName);
