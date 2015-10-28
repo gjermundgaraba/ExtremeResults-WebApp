@@ -15,17 +15,19 @@
         vm.register = register;
 
         function login() {
-            vm.isLoggingIn = true;
-            AuthService.login(vm.username, vm.password)
-                .then(function () {
-                    $state.go('app.overview');
-                })
-                .catch(function () {
-                    alert('Wrong username or password');
-                })
-                .finally(function() {
-                    vm.isLoggingIn = false;
-                });
+            if (vm.loginForm.$valid) {
+                vm.isLoggingIn = true;
+                AuthService.login(vm.username, vm.password)
+                    .then(function () {
+                        $state.go('app.overview');
+                    })
+                    .catch(function () {
+                        alert('Wrong username or password');
+                    })
+                    .finally(function() {
+                        vm.isLoggingIn = false;
+                    });
+            }
         }
 
         function register() {

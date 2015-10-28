@@ -12,24 +12,32 @@
         vm.isRegistering = false;
 
         vm.register = function () {
-            vm.isRegistering = true;
+            if (vm.registerForm.$valid) {
+                vm.isRegistering = true;
 
-            var user = {
-                username: vm.username,
-                password: vm.password
-            };
+                var user = {
+                    username: vm.username,
+                    password: vm.password
+                };
 
-            AuthService.register(user)
-                .then(function () {
-                    $state.go('app.overview');
-                })
-                .catch(function () {
-                    alert('Something went wrong!');
-                })
-                .finally(function() {
-                    vm.isRegistering = false;
-                });
+                AuthService.register(user)
+                    .then(function () {
+                        $state.go('app.overview');
+                    })
+                    .catch(function () {
+                        alert('Something went wrong!');
+                    })
+                    .finally(function() {
+                        vm.isRegistering = false;
+                    });
+            }
+
+
         };
+
+        vm.backToLogin = function () {
+            $state.go('login');
+        }
     }
 
 })();

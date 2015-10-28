@@ -27,6 +27,9 @@
             scope = $rootScope;
 
             controller = $controller('LoginController');
+            controller.loginForm = {
+                $valid: true
+            }
         }));
 
         describe('login', function () {

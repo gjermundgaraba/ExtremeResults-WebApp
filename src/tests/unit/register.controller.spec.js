@@ -27,6 +27,9 @@
             scope = $rootScope;
 
             controller = $controller('RegisterController');
+            controller.registerForm = {
+                $valid: true
+            };
         }));
 
         describe('register', function () {
