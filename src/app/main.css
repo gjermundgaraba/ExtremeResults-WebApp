@@ -65,13 +65,11 @@ header {
     width: 600px;
     border-radius: 4px;
     margin-bottom: 16px;
-    -webkit-transition: 0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
     transition: 0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
     padding-bottom: 0;
     position: fixed;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
 

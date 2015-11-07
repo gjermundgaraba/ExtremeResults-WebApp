@@ -10,7 +10,8 @@ describe('AuthService', function () {
     beforeEach(module(function ($provide) {
         ParseServiceMock = {
             login: function () {},
-            retrieveCurrentUser: function () {}
+            retrieveCurrentUser: function () {},
+            register: function () {}
         };
 
         CookiesServiceMock = {
@@ -153,6 +154,58 @@ describe('AuthService', function () {
 
             expect(error).toBe(true);
         });
-    })
+    });
+
+    describe('register', function () {
+        var registerDeferred,
+            returnedUser;
+
+        beforeEach(function () {
+            returnedUser = {
+                objectId: 'lkjlkj',
+                sessionToken: 'ksdf342k3jh4k2j3h4'
+            };
+            registerDeferred = q.defer();
+            spyOn(ParseServiceMock, 'register').and.returnValue(registerDeferred.promise);
+        });
+
+        it('should resolve when service is OK', function () {
+            var resolved = false;
+
+            AuthService.register({}).then(function () {
+                resolved = true;
+            });
+
+            registerDeferred.resolve(returnedUser);
+            rootScope.$digest();
+
+            expect(resolved).toBe(true);
+        });
+
+        it('should return an error when service fails', function () {
+            var error = false;
+
+            AuthService.register({}).catch(function () {
+                error = true;
+            });
+
+            registerDeferred.reject();
+            rootScope.$digest();
+
+            expect(error).toBe(true);
+        });
+
+        it('should update objectId and sessionToken after register completes', function () {
+            AuthService.register({});
+
+            registerDeferred.resolve(returnedUser);
+            rootScope.$digest();
+
+            var user = AuthService.getCurrentUser();
+            expect(user.objectId).toBe(returnedUser.objectId);
+            expect(user.sessionToken).toBe(returnedUser.sessionToken);
+        });
+
+    });
 
 });

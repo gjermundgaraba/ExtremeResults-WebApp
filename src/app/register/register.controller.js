@@ -10,8 +10,10 @@
     function RegisterController(AuthService, $state) {
         var vm = this;
         vm.isRegistering = false;
+        vm.register = register;
+        vm.backToLogin = backToLogin;
 
-        vm.register = function () {
+        function register () {
             if (vm.registerForm.$valid) {
                 vm.isRegistering = true;
 
@@ -31,11 +33,9 @@
                         vm.isRegistering = false;
                     });
             }
+        }
 
-
-        };
-
-        vm.backToLogin = function () {
+        function backToLogin () {
             $state.go('login');
         }
     }

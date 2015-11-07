@@ -10,7 +10,7 @@ module.exports = function (config) {
             'bower_components/angular-cookies/angular-cookies.js',
             'src/app/**/*.module.js',
             'src/app/**/*.js',
-            'src/tests/unit/*.js'
+            'src/tests/unit/**/*.js'
         ],
 
         autoWatch: true,

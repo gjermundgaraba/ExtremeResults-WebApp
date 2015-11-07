@@ -9,15 +9,8 @@
 
     function ReflectionEntryController($scope, XrUtils) {
         var vm = this;
-        vm.header = generateHeader();
-        vm.reflectionTime = generateOutcomeTime();
 
-        function generateHeader() {
-            return XrUtils.getEntryHeader($scope.reflectionObj);
-        }
-
-        function generateOutcomeTime() {
-            return XrUtils.getFormattedEntryDate($scope.reflectionObj);
-        }
+        vm.header = XrUtils.getEntryHeader($scope.reflectionObj);
+        vm.reflectionTime = XrUtils.getFormattedEntryDate($scope.reflectionObj);
     }
 })();
