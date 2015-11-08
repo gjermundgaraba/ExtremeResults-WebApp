@@ -1,21 +1,23 @@
 var DailyOutcomePage = require('../common/createOutcome.po.js');
 var OverviewPage = require('../overview/overview.po.js');
+var Login = require('../login/login.po.js');
 var Common = require('../common/common.js');
 
 describe('Daily Outcome Page', function () {
 
     var dailyOutcomePage = new DailyOutcomePage();
     var overviewPage = new OverviewPage();
+    var login = new Login();
     var common = new Common();
 
     beforeAll(function () {
         common.clearDB();
         browser.driver.manage().deleteAllCookies();
 
-        browser.get(browser.params.client);
-        common.setLoginUserName('bjaanes');
-        common.setPassword('1234');
-        common.loginButton.click();
+        common.goHome();
+        login.setLoginUserName('bjaanes');
+        login.setPassword('1234');
+        login.loginButton.click();
         browser.waitForAngular();
     });
 

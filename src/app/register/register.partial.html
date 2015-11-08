@@ -16,7 +16,7 @@
         <md-input-container>
             <label for="registerPasswordField">Password</label>
             <input id="registerPasswordField" type="password" required name="password" ng-model="vm.password">
-            <div ng-messages="vm.registerForm.username.$error" ng-show="vm.registerForm.username.$error.required && vm.registerForm.$submitted">
+            <div ng-messages="vm.registerForm.password.$error" ng-show="vm.registerForm.password.$error.required && vm.registerForm.$submitted">
                 <div ng-message="required">This is required.</div>
             </div>
         </md-input-container>

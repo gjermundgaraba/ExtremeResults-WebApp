@@ -2,20 +2,14 @@ var http = require('https');
 
 var Common = function () {
 
-    this.loginButton = element(by.id('loginButton'));
+    this.goHome = function () {
+        browser.get(browser.params.client)
+    };
 
     this.overviewMenuButton = element(by.css('[ui-sref="app.overview"]'));
     this.dailyOutcomeMenuButton = element(by.css('[ui-sref="app.daily-outcome"]'));
     this.mondayVisionMenuButton = element(by.css('[ui-sref="app.monday-vision"]'));
     this.weeklyReflectionMenuButton = element(by.css('[ui-sref="app.weekly-reflection"]'));
-
-    this.setLoginUserName = function (userName) {
-        element(by.model('vm.username')).sendKeys(userName);
-    };
-
-    this.setPassword = function (password) {
-        element(by.model('vm.password')).sendKeys(password);
-    };
 
     this.clearDB = function () {
         var deferred = protractor.promise.defer();
@@ -38,6 +32,16 @@ var Common = function () {
         req.end();
 
         return deferred.promise;
+    };
+
+    this.generateRandomUsername = function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
     };
 
 };
