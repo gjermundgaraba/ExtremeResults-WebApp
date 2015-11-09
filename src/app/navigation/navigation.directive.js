@@ -10,7 +10,9 @@
     function xrNavigationDirective() {
         return {
             restrict: 'AE',
-            templateUrl: 'navigation/navigation.partial.html'
+            templateUrl: 'navigation/navigation.partial.html',
+            controller: 'NavigationController',
+            controllerAs: 'vm'
         };
     }
 

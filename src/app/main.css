@@ -73,3 +73,20 @@ header {
     transform: translate(-50%, -50%);
 }
 
+@media (max-width: 650px) {
+    .login-container, .register-container {
+        width: 400px;
+    }
+}
+
+@media (max-width: 450px) {
+    .login-container, .register-container {
+        width: 300px;
+    }
+}
+
+@media (max-width: 350px) {
+    .login-container, .register-container {
+        width: 250px;
+    }
+}

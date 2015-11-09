@@ -25,11 +25,6 @@ https://www.evernote.com/pub/bjaanes/extremeresults
 npm install
 ```
 
-To install extra (necessary) client dependencies
-```bash
-npm run clientdep
-```
-
 
 #### Build and run
 

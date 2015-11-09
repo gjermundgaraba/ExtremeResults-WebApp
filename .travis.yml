@@ -7,7 +7,6 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - webdriver-manager update
   - npm install
-  - npm run clientdep
   - npm start > /dev/null &
   - npm run selenium > /dev/null &
   - sleep 10 # give server time to start
