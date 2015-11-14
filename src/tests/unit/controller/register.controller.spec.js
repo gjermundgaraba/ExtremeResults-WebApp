@@ -45,6 +45,13 @@
                 expect(controller.isRegistering).toBe(true);
             });
 
+            it('should not call login service if form is invalid', function () {
+                controller.registerForm.$valid = false;
+
+                controller.register();
+                expect(controller.isRegistering).toBe(false);
+                expect(AuthServiceMock.register.calls.count()).toBe(0);
+            });
 
             it('should send username and password to auth service', function () {
                 controller.username = 'usernametest';
@@ -84,6 +91,16 @@
                     expect(controller.isRegistering).toBe(false);
                 });
             })
+
+            describe('backToLogin', function () {
+                it('should go to login state', function () {
+                    spyOn($stateMock, 'go');
+
+                    controller.backToLogin();
+
+                    expect($stateMock.go).toHaveBeenCalledWith('login');
+                });
+            });
         });
 
     });

@@ -33,7 +33,7 @@
                 write: true
             };
 
-            ParseService.postObject(outcomeType.className, outcome)
+            ParseService.postObject(outcomeType.className, outcome, AuthService.getUserToken)
                 .then(function () {
                     $location.path('overview');
                 });

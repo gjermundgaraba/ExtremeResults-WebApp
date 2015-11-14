@@ -13,6 +13,7 @@
             scope: {
                 outcomeObj: '='
             },
+            bindToController: true,
             controller: 'OutcomeEntryController',
             controllerAs: 'vm',
             templateUrl: 'overview/entry/outcomeEntry/outcomeEntry.partial.html'

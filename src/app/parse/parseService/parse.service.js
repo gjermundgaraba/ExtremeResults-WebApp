@@ -12,6 +12,7 @@
             register: register,
             getAllObjects: getAllObjects,
             postObject: postObject,
+            updateObject: updateObject,
             callFunction: callFunction,
             retrieveCurrentUser: retrieveCurrentUser
         };
@@ -69,7 +70,15 @@
                 .then(function(httpObj) {
                     return httpObj.data;
                 });
+        }
 
+        function updateObject(className, id, updateObject, token) {
+            var configWithToken = getConfigCopyWithToken(token);
+
+            return $http.put(ParseKeyService.restUrl + '/classes/' + className + '/' + id, updateObject, configWithToken)
+                .then(function (httpObj) {
+                    return httpObj.data.updatedAt;
+                });
         }
 
         function callFunction(functionName, data, token) {

@@ -6,10 +6,10 @@ var Common = function () {
         browser.get(browser.params.client)
     };
 
-    this.overviewMenuButton = element(by.css('[ui-sref="app.overview"]'));
-    this.dailyOutcomeMenuButton = element(by.css('[ui-sref="app.daily-outcome"]'));
-    this.mondayVisionMenuButton = element(by.css('[ui-sref="app.monday-vision"]'));
-    this.weeklyReflectionMenuButton = element(by.css('[ui-sref="app.weekly-reflection"]'));
+    this.overviewMenuButton = element(by.buttonText('Overview'));
+    this.dailyOutcomeMenuButton = element(by.buttonText('Daily Outcome'));
+    this.mondayVisionMenuButton = element(by.buttonText('Monday Vision'));
+    this.weeklyReflectionMenuButton = element(by.buttonText('Weekly Reflection'));
 
     this.clearDB = function () {
         var deferred = protractor.promise.defer();

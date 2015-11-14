@@ -136,6 +136,29 @@
             });
         });
 
+        describe('updateObject', function () {
+            it('should return data on successful POST call', function () {
+                var object = {
+                    className: 'derp',
+                    updatedAt: '2011-08-21T14:00:00.123Z'
+                };
+                var result = {
+                    updatedAt: '2011-08-21T18:02:52.248Z'
+                };
+                httpBackend.whenPUT('/classes/test/objidthingy').respond(200, result);
+
+                var data;
+                ParseService.updateObject('test', 'objidthingy', object).then(function(returnData) {
+                    data = returnData;
+                });
+
+                httpBackend.flush();
+                console.log(data);
+                expect(data).toBeDefined();
+                expect(data).toBe(result.updatedAt);
+            });
+        });
+
         describe('callFunction', function () {
             it('should return data on successful POST call', function () {
                 httpBackend.whenPOST('/functions/test').respond(200, {result: [{}, {}]});

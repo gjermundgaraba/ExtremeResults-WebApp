@@ -8,6 +8,7 @@
             'ngMaterial',
             'ngCookies',
             'ngAnimate',
+            'ngMdIcons',
             'xr.auth',
             'xr.login',
             'xr.register',

@@ -19,7 +19,8 @@ module.exports = {
                 { src: './node_modules/angular-aria/angular-aria.js', minSrc: './node_modules/angular-aria/angular-aria.min.js' },
                 { src: './node_modules/angular-material/angular-material.js', minSrc: './node_modules/angular-material/angular-material.min.js' },
                 { src: './node_modules/angular-messages/angular-messages.js', minSrc: './node_modules/angular-messages/angular-messages.min.js' },
-                { src: './node_modules/angular-ui-router/release/angular-ui-router.js', minSrc: './node_modules/angular-ui-router/release/angular-ui-router.min.js' }
+                { src: './node_modules/angular-ui-router/release/angular-ui-router.js', minSrc: './node_modules/angular-ui-router/release/angular-ui-router.min.js' },
+                { src: './node_modules/angular-material-icons/angular-material-icons.js', minSrc: './node_modules/angular-material-icons/angular-material-icons.min.js' }
             ],
             styles: [
                 { src: './node_modules/angular-material/angular-material.css', minSrc: './node_modules/angular-material/angular-material.min.css' }

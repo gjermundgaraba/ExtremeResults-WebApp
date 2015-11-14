@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "A web app for Extreme Results. Extreme Results is implement the systems proposed in the book 'Getting Results the Agile Way'.",
   "dependencies": {
-    "angular-ui-router": "0.2.15",
     "angular": "1.4.7",
     "angular-cookies": "1.4.7",
     "angular-material": "0.11.4",
-    "angular-messages": "1.4.7"
+    "angular-material-icons": "^0.6.0",
+    "angular-messages": "1.4.7",
+    "angular-ui-router": "0.2.15"
   },
   "devDependencies": {
     "angular-mocks": "1.4.7",
@@ -41,7 +42,8 @@
     "buildprod": "gulp build --prod",
     "test": "gulp tdd",
     "selenium": "webdriver-manager update && webdriver-manager start",
-    "e2e": "protractor protractor.conf.js"
+    "e2e": "protractor protractor.conf.js",
+    "debuge2e": "protractor debug protractor.conf.js"
   },
   "repository": {
     "type": "git",
