@@ -11,7 +11,7 @@
 
         var service = {
             anyOneLoggedIn: anyOneLoggedIn,
-            getCurrentUser: getCurrenUser,
+            getCurrentUser: getCurrentUser,
             getUserToken: getUserToken,
             updateCurrentUser: updateCurrentUser,
             login: login,
@@ -26,7 +26,7 @@
             return (typeof authCookie !== 'undefined');
         }
 
-        function getCurrenUser() {
+        function getCurrentUser() {
             return currentUser;
         }
 

@@ -12,7 +12,6 @@
             'xr.auth',
             'xr.login',
             'xr.register',
-            'xr.header',
             'xr.navigation',
             'xr.templates', // gets made during build step (see gulpfile)
             'xr.createOutcome',
