@@ -13,7 +13,7 @@
         vm.goToState = function (state) {
             $state.go(state);
             $mdSidenav('left').close();
-        }
+        };
     }
 
 })();

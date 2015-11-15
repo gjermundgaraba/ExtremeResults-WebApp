@@ -75,7 +75,8 @@
         function updateObject(className, id, updateObject, token) {
             var configWithToken = getConfigCopyWithToken(token);
 
-            return $http.put(ParseKeyService.restUrl + '/classes/' + className + '/' + id, updateObject, configWithToken)
+            return $http.put(ParseKeyService.restUrl + '/classes/' + className + '/' +
+                        id, updateObject, configWithToken)
                 .then(function (httpObj) {
                     return httpObj.data.updatedAt;
                 });
