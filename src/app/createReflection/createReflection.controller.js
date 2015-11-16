@@ -13,6 +13,11 @@
         vm.header = generateHeader();
         vm.relatedEntries = [];
 
+        ParseService.callFunction('getRelatedEntriesForReflection', {typeName: reflectionType.typeName}, AuthService.getUserToken)
+            .then(function (data) {
+                vm.relatedEntries = data;
+            });
+
         function save() {
             var weeklyReflection = {
                 firstThingThatWentWell: vm.firstThingThatWentWell,
@@ -45,11 +50,6 @@
         function generateHeader() {
             return reflectionType.typeName + ' ' + reflectionType.className;
         }
-
-        ParseService.callFunction('getRelatedEntriesForReflection', {typeName: reflectionType.typeName})
-            .then(function (data) {
-                vm.relatedEntries = data;
-            });
     }
 
 })();

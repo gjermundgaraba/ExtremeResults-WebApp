@@ -13,6 +13,11 @@
         vm.header = generateHeader();
         vm.relatedEntries = [];
 
+        ParseService.callFunction('getRelatedEntriesForOutcome', {typeName: outcomeType.typeName}, AuthService.getUserToken)
+            .then(function (data) {
+                vm.relatedEntries = data;
+            });
+
         function save() {
             var outcome = {
                 firstStory: vm.outcome1,
@@ -43,10 +48,5 @@
             return XrUtils.getEntryHeader(outcomeType) + ' for ' +
                    XrUtils.getFormattedEntryDate(outcomeType, new Date());
         }
-
-        ParseService.callFunction('getRelatedEntriesForOutcome', {typeName: outcomeType.typeName})
-            .then(function (data) {
-                vm.relatedEntries = data;
-            });
     }
 })();
