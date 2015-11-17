@@ -34,6 +34,9 @@
             AuthServiceMock = {
                 getCurrentUser: function () {
                     return userMock;
+                },
+                getUserToken: function () {
+                    return '1234';
                 }
             };
 
@@ -67,7 +70,7 @@
                 relatedEntriesDeferred.resolve(relatedEntries);
                 rootScope.$digest();
 
-                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getRelatedEntriesForOutcome', {typeName: outcomeTypeMock.typeName});
+                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getRelatedEntriesForOutcome', {typeName: outcomeTypeMock.typeName}, AuthServiceMock.getUserToken());
                 expect(controller.relatedEntries).toBe(relatedEntries);
             });
         });

@@ -13,7 +13,7 @@
         vm.header = generateHeader();
         vm.relatedEntries = [];
 
-        ParseService.callFunction('getRelatedEntriesForReflection', {typeName: reflectionType.typeName}, AuthService.getUserToken)
+        ParseService.callFunction('getRelatedEntriesForReflection', {typeName: reflectionType.typeName}, AuthService.getUserToken())
             .then(function (data) {
                 vm.relatedEntries = data;
             });
