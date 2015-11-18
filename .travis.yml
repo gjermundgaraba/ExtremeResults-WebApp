@@ -14,3 +14,8 @@ before_script:
 script:
   - node_modules/.bin/karma start karma.conf.js --no-auto-watch --single-run
   - node_modules/.bin/protractor protractor.conf.js --browser=firefox
+
+before_install:
+  - pip install codecov
+after_success:
+  - codecov
