@@ -13,6 +13,7 @@
   "devDependencies": {
     "angular-mocks": "1.4.7",
     "bower": "1.6.3",
+    "codecov.io": "^0.1.6",
     "del": "2.0.2",
     "fs": "0.0.2",
     "gulp": "3.9.0",
