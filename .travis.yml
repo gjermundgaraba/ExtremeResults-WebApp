@@ -16,6 +16,6 @@ script:
   - node_modules/.bin/protractor protractor.conf.js --browser=firefox
 
 before_install:
-  - pip install codecov
+  - pip install --user codecov
 after_success:
   - codecov
