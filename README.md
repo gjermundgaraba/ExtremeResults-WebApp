@@ -3,20 +3,27 @@
 ![Travis Build Status](https://travis-ci.org/bjaanes/ExtremeResults-WebApp.svg?branch=master)
 
 A web app for Extreme Results.
+
+
 Extreme Results is implement the systems proposed in the book 'Getting Results the Agile Way'.
+Read more about Agile Results here: http://gettingresults.com/wiki/Explained_-_Agile_Results_in_a_Nutshell
+
+
+## Technology
 
 The app is built using Angular and uses Parse as back-end.
+
 It also uses Cloud Code hosted in Parse to be able to perform several calls.
 All of that code is located here: https://github.com/bjaanes/ExtremeResults-CloudCode
+
 
 To develop or deploy XR on your own, you need to set up your own project with Parse:
 https://parse.com/
 
 You also need the correct data structure. The structure can be found here:
+[DATAMODEL.md](DATAMODEL.md)
 
 
-All documents for the project is located on this Evernote notebook:
-https://www.evernote.com/pub/bjaanes/extremeresults
 
 
 ## Installation
