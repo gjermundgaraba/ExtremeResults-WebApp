@@ -6,7 +6,14 @@ A web app for Extreme Results.
 Extreme Results is implement the systems proposed in the book 'Getting Results the Agile Way'.
 
 The app is built using Angular and uses Parse as back-end.
-More details about setting the app up on your own is coming soon.
+It also uses Cloud Code hosted in Parse to be able to perform several calls.
+All of that code is located here: https://github.com/bjaanes/ExtremeResults-CloudCode
+
+To develop or deploy XR on your own, you need to set up your own project with Parse:
+https://parse.com/
+
+You also need the correct data structure. The structure can be found here:
+
 
 All documents for the project is located on this Evernote notebook:
 https://www.evernote.com/pub/bjaanes/extremeresults
