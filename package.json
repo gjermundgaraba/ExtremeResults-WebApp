@@ -44,7 +44,9 @@
     "test": "gulp tdd",
     "selenium": "webdriver-manager update && webdriver-manager start",
     "e2e": "protractor protractor.conf.js",
-    "debuge2e": "protractor debug protractor.conf.js"
+    "debuge2e": "protractor debug protractor.conf.js",
+    "citest": "karma start karma.conf.js --no-auto-watch --single-run",
+    "cie2e": "protractor protractor.conf.js --browser=firefox"
   },
   "repository": {
     "type": "git",

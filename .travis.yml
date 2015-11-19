@@ -12,8 +12,8 @@ before_script:
   - sleep 10 # give server time to start
 
 script:
-  - node_modules/.bin/karma start karma.conf.js --no-auto-watch --single-run
-  - node_modules/.bin/protractor protractor.conf.js --browser=firefox
+  - npm run citest
+  - npm run cie2e
 
 before_install:
   - pip install --user codecov
