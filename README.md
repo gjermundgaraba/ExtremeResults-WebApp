@@ -2,7 +2,7 @@
 
 ![Travis Build Status](https://travis-ci.org/bjaanes/ExtremeResults-WebApp.svg?branch=master)
 [![codecov.io](https://codecov.io/github/bjaanes/ExtremeResults-WebApp/coverage.svg?branch=master)](https://codecov.io/github/bjaanes/ExtremeResults-WebApp?branch=master)
-[![Code Climate](https://codeclimate.com/github/bjaanes/ExtremeResults-WebApp/badges/gpa.svg)](https://codeclimate.com/github/bjaanes/ExtremeResults-WebApp)
+<!--[![Code Climate](https://codeclimate.com/github/bjaanes/ExtremeResults-WebApp/badges/gpa.svg)](https://codeclimate.com/github/bjaanes/ExtremeResults-WebApp)-->
 [![Dependencies](https://david-dm.org/bjaanes/ExtremeResults-WebApp.svg)](https://david-dm.org/bjaanes/ExtremeResults-WebApp)
 
 A web app for Extreme Results.
