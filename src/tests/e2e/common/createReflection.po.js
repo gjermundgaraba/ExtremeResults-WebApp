@@ -9,6 +9,8 @@ var ReflectionPage = function () {
     this.thirdThingToImproveInputField = element(by.model('vm.thirdThingToImprove'));
 
     this.saveButton = element(by.cssContainingText('button', 'Save'));
+
+    this.relatedEntries = element.all(by.repeater('relatedEntry in vm.relatedEntries'));
 };
 
 module.exports = ReflectionPage;

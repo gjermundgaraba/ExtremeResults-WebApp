@@ -15,6 +15,7 @@
     "bower": "1.6.3",
     "codecov.io": "^0.1.6",
     "del": "2.0.2",
+    "eslint": "1.9.0",
     "fs": "0.0.2",
     "gulp": "3.9.0",
     "gulp-angular-templatecache": "1.8.0",

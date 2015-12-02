@@ -72,11 +72,11 @@
                 });
         }
 
-        function updateObject(className, id, updateObject, token) {
+        function updateObject(className, id, objectToUpdate, token) {
             var configWithToken = getConfigCopyWithToken(token);
 
             return $http.put(ParseKeyService.restUrl + '/classes/' + className + '/' +
-                        id, updateObject, configWithToken)
+                        id, objectToUpdate, configWithToken)
                 .then(function (httpObj) {
                     return httpObj.data.updatedAt;
                 });

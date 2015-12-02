@@ -5,6 +5,10 @@ var OverviewPage = function () {
     this.currentOutcomes = element.all(by.repeater('activeEntry in vm.activeEntries'));
     this.allEntries = element.all(by.repeater('entry in vm.overviewEntries'));
 
+    this.titleFromCurrentOutcome = function (index) {
+        return this.currentOutcomes.get(index).element(by.css('.entry-title'));
+    };
+
     this.firstStoryFromCurrentOutcome = function (index) {
         return this.currentOutcomes.get(index).element(by.binding('vm.outcomeObj.firstStory'));
     };

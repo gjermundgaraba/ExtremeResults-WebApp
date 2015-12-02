@@ -21,7 +21,8 @@
                     secondStory: vm.outcome.secondStory,
                     thirdStory: vm.outcome.thirdStory
                 };
-                ParseService.updateObject(vm.outcome.className, vm.outcome.objectId, updateObject, AuthService.getUserToken())
+                ParseService.updateObject(vm.outcome.className, vm.outcome.objectId,
+                        updateObject, AuthService.getUserToken())
                     .then(function () {
                         $mdDialog.hide(vm.outcome);
                     })

@@ -6,6 +6,8 @@ var CreateOutcomePage = function () {
     this.outcome3InputField = element(by.model('vm.outcome3'));
 
     this.saveButton = element(by.cssContainingText('button', 'Save'));
+
+    this.relatedEntries = element.all(by.repeater('relatedEntry in vm.relatedEntries'));
 };
 
 module.exports = CreateOutcomePage;
