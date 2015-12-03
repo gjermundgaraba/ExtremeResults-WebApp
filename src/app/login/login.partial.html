@@ -8,7 +8,7 @@
         <md-input-container>
             <label for="loginUsernameField">Username</label>
             <input id="loginUsernameField" required name="username" ng-model="vm.username">
-            <div ng-messages="vm.loginForm.username.$error" ng-show="vm.loginForm.username.$error.required && vm.loginForm.$submitted">
+            <div ng-messages="vm.loginForm.username.$error" ng-if="vm.loginForm.username.$error.required && vm.loginForm.$submitted">
                 <div ng-message="required">This is required.</div>
             </div>
         </md-input-container>
@@ -16,7 +16,7 @@
         <md-input-container>
             <label for="loginPasswordField">Password</label>
             <input id="loginPasswordField" type="password" required name="password" ng-model="vm.password">
-            <div ng-messages="vm.loginForm.password.$error" ng-show="vm.loginForm.password.$error.required && vm.loginForm.$submitted">
+            <div ng-messages="vm.loginForm.password.$error" ng-if="vm.loginForm.password.$error.required && vm.loginForm.$submitted">
                 <div ng-message="required">This is required.</div>
             </div>
         </md-input-container>

@@ -152,7 +152,6 @@ describe('ParseService', function(){
             });
 
             httpBackend.flush();
-            console.log(data);
             expect(data).toBeDefined();
             expect(data).toBe(result.updatedAt);
         });

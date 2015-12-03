@@ -31,3 +31,10 @@ Extra fields:
 * secondThingToImprove: String
 * thirdThingToImprove: String
 * effectiveDate: String
+
+## HotSpotBucket
+Custom class for Hot Spots buckets, they each contain a list of Hot Spots
+
+Extra fields:
+* name: String
+* hotSpots: Array

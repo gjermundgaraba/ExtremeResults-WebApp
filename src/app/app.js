@@ -16,7 +16,8 @@
             'xr.templates', // gets made during build step (see gulpfile)
             'xr.createOutcome',
             'xr.createReflection',
-            'xr.overview'
+            'xr.overview',
+            'xr.hotSpots'
         ])
         .config(['ParseKeyServiceProvider', function(ParseKeyServiceProvider) {
             ParseKeyServiceProvider.applicationId = '<!APPLICATION-ID!>';
@@ -88,6 +89,12 @@
                             return CoreTypes.weeklyReflection;
                         }
                     }
+                })
+                .state('app.hot-spots', {
+                    url: '/hot-spots',
+                    templateUrl: 'hotSpots/hotSpots.partial.html',
+                    controller: 'HotSpotsController',
+                    controllerAs: 'vm'
                 });
         }])
         .run(['AuthService', '$rootScope', '$mdDialog', '$state', function (AuthService, $rootScope, $mdDialog, $state) {
