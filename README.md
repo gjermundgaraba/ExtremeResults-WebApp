@@ -8,9 +8,10 @@
 A web app for Extreme Results.
 
 
-Extreme Results is implement the systems proposed in the book 'Getting Results the Agile Way'.
+Extreme Results is trying to implement the systems proposed in the book 'Getting Results the Agile Way'.
 Read more about Agile Results here: http://gettingresults.com/wiki/Explained_-_Agile_Results_in_a_Nutshell
 
+Usually, you would implement Agile Results with pen and paper, or something simple like Evernote. I don't think that's good enough. I want to link everything togetether, making it easy so see the bigger picture.
 
 ## Technology
 
