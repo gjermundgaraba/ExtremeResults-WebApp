@@ -7,7 +7,7 @@
     <form name="vm.registerForm" ng-submit="vm.register()" novalidate>
         <md-input-container>
             <label for="registerUsernameField">Username</label>
-            <input id="registerUsernameField" type="email" required name="username" ng-model="vm.username">
+            <input id="registerUsernameField" autocapitalize="none" required name="username" ng-model="vm.username">
             <div ng-messages="vm.registerForm.username.$error" ng-if="vm.registerForm.username.$error.required && vm.registerForm.$submitted">
                 <div ng-message="required">This is required.</div>
             </div>
