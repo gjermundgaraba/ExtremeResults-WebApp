@@ -7,8 +7,8 @@
     <form name="vm.registerForm" ng-submit="vm.register()" novalidate>
         <md-input-container>
             <label for="registerUsernameField">Username</label>
-            <input id="registerUsernameField" required name="username" ng-model="vm.username">
-            <div ng-messages="vm.registerForm.username.$error" ng-show="vm.registerForm.username.$error.required && vm.registerForm.$submitted">
+            <input id="registerUsernameField" type="email" required name="username" ng-model="vm.username">
+            <div ng-messages="vm.registerForm.username.$error" ng-if="vm.registerForm.username.$error.required && vm.registerForm.$submitted">
                 <div ng-message="required">This is required.</div>
             </div>
         </md-input-container>
@@ -16,7 +16,7 @@
         <md-input-container>
             <label for="registerPasswordField">Password</label>
             <input id="registerPasswordField" type="password" required name="password" ng-model="vm.password">
-            <div ng-messages="vm.registerForm.password.$error" ng-show="vm.registerForm.password.$error.required && vm.registerForm.$submitted">
+            <div ng-messages="vm.registerForm.password.$error" ng-if="vm.registerForm.password.$error.required && vm.registerForm.$submitted">
                 <div ng-message="required">This is required.</div>
             </div>
         </md-input-container>
