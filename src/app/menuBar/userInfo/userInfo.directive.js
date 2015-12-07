@@ -10,6 +10,9 @@
     function xrUserInfoDirective() {
         return {
             restrict: 'AE',
+            scope: {
+
+            },
             templateUrl: 'menuBar/userInfo/userInfo.partial.html',
             controller: 'UserInfoController',
             controllerAs: 'vm'

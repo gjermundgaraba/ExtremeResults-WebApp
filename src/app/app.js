@@ -11,9 +11,9 @@
             'ngAnimate',
             'ngMdIcons',
             'xr.auth',
-            'xr.menuBar',
             'xr.login',
             'xr.register',
+            'xr.menuBar',
             'xr.navigation',
             'xr.templates', // gets made during build step (see gulpfile)
             'xr.createOutcome',
@@ -117,7 +117,6 @@
                     }
                 }
             });
-
         }]);
 
 })();
