@@ -1,29 +1,47 @@
 <div>
 
-    <md-content class="md-padding" layout="column">
-        <div ng-repeat="hotSpotBucket in vm.hotSpotBuckets">
-            <h2 class="md-title">{{hotSpotBucket.name}}</h2>
-            <md-chips ng-model="hotSpotBucket.hotSpots"
-                      md-on-add="vm.handleHotSpotAdd(hotSpotBucket)"
-                      md-on-remove="vm.handleHotSpotDelete(hotSpotBucket)">
-            </md-chips>
-            <md-button ng-click="vm.handleHotSpotAdd(hotSpotBucket)">Temp Save Button For Now</md-button>
-            <br/>
-        </div>
+    <div class="md-whiteframe-1dp">
+        <md-toolbar>
+            <h1 class="md-toolbar-tools">
+                Create New Hot Spot Bucket
+            </h1>
+        </md-toolbar>
+        <md-content class="md-padding" layout="column">
 
-        <form name="vm.hotSpotBucketForm" ng-submit="vm.saveHotSpotBucket()">
-            <md-input-container flex>
-                <label for="hotSpotBucketName">Hot Spot Bucket</label>
-                <input ng-model="vm.hotSpotBucketName" id="hotSpotBucketName" name="hotSpotBucketName" type="text" required>
-            </md-input-container>
+            <form name="vm.hotSpotBucketForm" ng-submit="vm.saveHotSpotBucket()">
+                <md-input-container flex>
+                    <label for="hotSpotBucketName">Hot Spot Bucket Name</label>
+                    <input ng-model="vm.hotSpotBucketName" id="hotSpotBucketName" name="hotSpotBucketName" type="text" required>
+                </md-input-container>
+                <div>
+                    <md-button class="md-raised md-accent">Create</md-button>
+                </div>
+            </form>
+        </md-content>
 
-            <div>
-                <md-button class="md-raised md-accent">Save</md-button>
+    </div>
+
+    <br />
+
+    <div class="md-whiteframe-1dp">
+        <md-toolbar>
+            <h1 class="md-toolbar-tools">
+                Hot Spot Buckets
+            </h1>
+        </md-toolbar>
+        <md-content class="md-padding">
+
+            <div ng-repeat="hotSpotBucket in vm.hotSpotBuckets">
+                <h2 class="md-title hot-spot-bucket-title">{{hotSpotBucket.name}} <ng-md-icon size="18" class="edit-button" ng-click="vm.editHotSpotBucket(hotSpotBucket)" icon="mode_edit"></ng-md-icon></h2>
+                <md-chips ng-model="hotSpotBucket.hotSpots"
+                          md-on-add="vm.handleHotSpotAdd(hotSpotBucket)"
+                          md-on-remove="vm.handleHotSpotDelete(hotSpotBucket)">
+                </md-chips>
+                <md-button ng-click="vm.handleHotSpotAdd(hotSpotBucket)">Temp Save Button For Now</md-button>
+                <br/>
             </div>
-
-        </form>
-
-    </md-content>
+        </md-content>
+    </div>
 
 
 </div>

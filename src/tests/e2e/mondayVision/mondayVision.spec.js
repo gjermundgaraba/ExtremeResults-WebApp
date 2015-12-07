@@ -1,5 +1,4 @@
 var CreateOutcomePage = require('../common/createOutcome.po.js');
-var CreateReflectionPage = require('../common/createReflection.po.js');
 var OverviewPage = require('../overview/overview.po.js');
 var Login = require('../login/login.po.js');
 var Common = require('../common/common.js');
@@ -7,7 +6,6 @@ var Common = require('../common/common.js');
 describe('Daily Outcome Page', function () {
 
     var createOutcomePage = new CreateOutcomePage();
-    var createReflectionPage = new CreateReflectionPage();
     var overviewPage = new OverviewPage();
     var login = new Login();
     var common = new Common();
@@ -24,6 +22,7 @@ describe('Daily Outcome Page', function () {
     });
 
     beforeEach(function () {
+        common.goHome();
         common.mondayVisionMenuButton.click();
     });
 

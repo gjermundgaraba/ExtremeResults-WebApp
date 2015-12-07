@@ -4,9 +4,23 @@
     describe('ParseService', function(){
 
         var XrUtils,
-            filter;
+            filter,
+            momentMock,
+            mockWeekNumber;
 
         beforeEach(module('xr.core'));
+        beforeEach(module(function ($provide) {
+            mockWeekNumber = 42;
+            momentMock = function () {
+                return {
+                    isoWeek: function () {
+                        return mockWeekNumber;
+                    }
+                }
+            };
+
+            $provide.value('moment', momentMock);
+        }));
         beforeEach(inject(function(_XrUtils_, $filter) {
             XrUtils = _XrUtils_;
             filter = $filter;
@@ -38,7 +52,7 @@
                 };
 
                 var formattedDate = XrUtils.getFormattedEntryDate(weeklyEntry);
-                expect(formattedDate).toBe('Week ' + filter('date')(weeklyEntry.effectiveDate.iso, 'w'));
+                expect(formattedDate).toBe('Week ' + mockWeekNumber);
             });
 
             it('should return empty string for non-supported entries', function () {

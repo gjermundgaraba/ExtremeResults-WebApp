@@ -1,0 +1,13 @@
+<md-toolbar layout="row">
+    <div class="md-toolbar-tools">
+        <md-button ng-click="vm.toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+            <md-icon aria-label="Menu" md-svg-icon="assets/menu.svg"></md-icon>
+        </md-button>
+        <h1>Extreme Results</h1>
+        <span flex></span>
+        <xr-user-info></xr-user-info>
+        <md-button ng-click="vm.logout()">
+            Logout
+        </md-button>
+    </div>
+</md-toolbar>

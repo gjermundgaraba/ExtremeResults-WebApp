@@ -4,9 +4,9 @@
     angular.module('xr.core')
         .factory('XrUtils', XrUtilsFactory);
 
-    XrUtilsFactory.$inject = ['$filter'];
+    XrUtilsFactory.$inject = ['$filter', 'moment'];
 
-    function XrUtilsFactory($filter) {
+    function XrUtilsFactory($filter, moment) {
         var service = {
             getFormattedEntryDate: getFormattedEntryDate,
             getEntryHeader: getEntryHeader
@@ -21,7 +21,7 @@
                 case 'Daily':
                     return $filter('date')(date);
                 case 'Weekly':
-                    return 'Week ' + $filter('date')(date, 'w');
+                    return 'Week ' + moment(date).isoWeek();
                 default:
                     return '';
 

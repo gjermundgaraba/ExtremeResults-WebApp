@@ -5,11 +5,13 @@
         .module('xr',
         [
             'ui.router',
+            'angularMoment',
             'ngMaterial',
             'ngCookies',
             'ngAnimate',
             'ngMdIcons',
             'xr.auth',
+            'xr.menuBar',
             'xr.login',
             'xr.register',
             'xr.navigation',
@@ -115,19 +117,6 @@
                     }
                 }
             });
-
-        }])
-        .controller('AppCtrl', ['$scope', '$mdSidenav', 'AuthService', '$rootScope',  function($scope, $mdSidenav, AuthService, $rootScope) {
-
-            $scope.toggleSidenav = function(menuId) {
-                $mdSidenav(menuId).toggle();
-            };
-
-            $scope.logout = function () {
-                AuthService.logout();
-
-                $rootScope.$broadcast('$stateChangeStart', 'overview');
-            };
 
         }]);
 

@@ -159,13 +159,12 @@
                     expect(location.path).toHaveBeenCalledWith('overview');
                 });
             });
+        });
 
-            describe('header', function () {
-               it('should have entryheader and date', function () {
-                    expect(controller.header).toBe(entryHeaderMock + ' for ' + formattedEntryDateMock);
-               });
+        describe('header', function () {
+            it('should have entryheader and date', function () {
+                expect(controller.header).toBe(entryHeaderMock + ' for ' + formattedEntryDateMock);
             });
-
         });
 
     });

@@ -11,6 +11,9 @@
             location,
             reflectionTypeMock,
             relatedEntriesDeferred,
+            XrUtilsMock,
+            formattedEntryDateMock,
+            entryHeaderMock,
             q;
 
         beforeEach(module('xr.createReflection'));
@@ -37,8 +40,16 @@
                 typeName: 'MockType'
             };
 
+            formattedEntryDateMock = 'mockymockmockdate';
+            entryHeaderMock = 'headheadheader';
+            XrUtilsMock = {
+                getFormattedEntryDate: function () { return formattedEntryDateMock },
+                getEntryHeader: function () { return entryHeaderMock }
+            };
+
             $provide.value('ParseService', ParseServiceMock);
             $provide.value('reflectionType', reflectionTypeMock);
+            $provide.value('XrUtils', XrUtilsMock);
             $provide.value('AuthService', AuthServiceMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope, $location) {
@@ -165,13 +176,12 @@
                     expect(location.path).toHaveBeenCalledWith('overview');
                 });
             });
+        });
 
-            describe('header', function () {
-                it('should be MockType Reflection', function () {
-                    expect(controller.header).toBe('MockType Reflection');
-                });
+        describe('header', function () {
+            it('should have entryheader and date', function () {
+                expect(controller.header).toBe(entryHeaderMock + ' for ' + formattedEntryDateMock);
             });
-
         });
 
     });

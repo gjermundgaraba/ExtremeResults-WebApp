@@ -5,6 +5,8 @@
 
         var ParseServiceMock,
             AuthServiceMock,
+            mdDialogMock,
+            mdDialogDeferred,
             initDeferred,
             controller,
             rootScope,
@@ -29,9 +31,13 @@
                 }
             };
 
+            mdDialogMock = {
+                show: function () {}
+            };
 
             $provide.value('ParseService', ParseServiceMock);
             $provide.value('AuthService', AuthServiceMock);
+            $provide.value('$mdDialog', mdDialogMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope) {
             q = $q;
@@ -39,6 +45,12 @@
 
             initDeferred = q.defer();
             spyOn(ParseServiceMock, 'getAllObjects').and.returnValue(initDeferred.promise);
+
+            mdDialogDeferred = q.defer();
+            mdDialogMock.show = function (showObj) {
+                showObj.locals.hotSpotBucket.name = 'Edited';
+                return mdDialogDeferred.promise;
+            };
 
             controller = $controller('HotSpotsController', {'$location': location});
         }));
@@ -118,6 +130,44 @@
                 controller.saveHotSpotBucket();
 
                 expect(ParseServiceMock.postObject).toHaveBeenCalled();
+            });
+        });
+
+        describe('edit hotSpotBucket', function () {
+            it('should not send in the original object to the dialog', function () {
+                // I need that the mdDialogMock will change the outcome sent in, make sure of this
+                var hotSpotBucket = {
+                    name: 'NotEdited',
+                    hotSpots: []
+                };
+                controller.editHotSpotBucket(hotSpotBucket);
+
+                expect(hotSpotBucket.name).toBe('NotEdited');
+            });
+
+            it('should not change the outcome if the edit is canceled', function () {
+                var hotSpotBucket = {
+                    name: 'NotEdited',
+                    hotSpots: []
+                };
+                controller.editHotSpotBucket(hotSpotBucket);
+                mdDialogDeferred.reject();
+
+                expect(hotSpotBucket.name).toBe('NotEdited');
+            });
+
+            it('should update the outcome if the edit is finished', function () {
+                var hotSpotBucket = {
+                    name: 'NotEdited',
+                    hotSpots: []
+                };
+                controller.editHotSpotBucket(hotSpotBucket);
+                mdDialogDeferred.resolve({
+                    name: 'Edited'
+                });
+                rootScope.$digest();
+
+                expect(hotSpotBucket.name).toBe('Edited');
             });
         });
 

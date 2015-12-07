@@ -1,0 +1,17 @@
+<md-dialog ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Edit Hot Spot Bucket</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="edit-dialog">
+        <form name="vm.editHotSpotBucketForm" ng-submit="vm.save()">
+            <md-input-container flex>
+                <label for="hotSpotBucketName">Hot Spot Bucket Name</label>
+                <input ng-model="vm.hotSpotBucket.name" id="hotSpotBucketName" name="hotSpotBucketName" required>
+            </md-input-container>
+
+            <md-button ng-disabled="vm.saving" type="submit" class="md-raised md-accent">Save</md-button>
+        </form>
+    </md-dialog-content>
+</md-dialog>

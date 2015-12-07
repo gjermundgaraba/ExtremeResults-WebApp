@@ -41,6 +41,10 @@ header {
     margin: inherit;
 }
 
+.hot-spot-bucket-title {
+    padding-left: 10px;
+}
+
 .layout-content {
     max-width: 846px;
     min-height: calc(100vh - 64px);
@@ -77,10 +81,14 @@ header {
     margin-top: 0;
 }
 
-.edit-button {
+.overview-edit-button {
     position: absolute;
     right: 16px;
     top: 16px;
+}
+
+.edit-button {
+    cursor: pointer;
 }
 
 .edit-button:hover {
@@ -89,6 +97,10 @@ header {
 
 .edit-dialog {
     width: 400px;
+}
+
+.user-info {
+    padding-top: 6px;
 }
 
 @media (max-width: 650px) {

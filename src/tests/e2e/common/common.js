@@ -10,6 +10,7 @@ var Common = function () {
     this.dailyOutcomeMenuButton = element(by.buttonText('Daily Outcome'));
     this.mondayVisionMenuButton = element(by.buttonText('Monday Vision'));
     this.weeklyReflectionMenuButton = element(by.buttonText('Weekly Reflection'));
+    this.hotSpotsMenuButton = element(by.buttonText('Hot Spots'));
 
     this.clearDB = function () {
         var deferred = protractor.promise.defer();

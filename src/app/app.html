@@ -1,16 +1,5 @@
-<div layout="column" ng-controller="AppCtrl" layout-fill>
-    <md-toolbar layout="row">
-        <div class="md-toolbar-tools">
-            <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
-                <md-icon aria-label="Menu" md-svg-icon="assets/menu.svg"></md-icon>
-            </md-button>
-            <h1>Extreme Results</h1>
-            <span flex></span>
-            <md-button ng-click="logout()">
-                Logout
-            </md-button>
-        </div>
-    </md-toolbar>
+<div layout="column" layout-fill>
+    <xr-menu-bar></xr-menu-bar>
     <section layout="row" flex>
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
             <md-content>

@@ -5,14 +5,15 @@
         .module('xr.hotSpots')
         .controller('HotSpotsController', HotSpotsController);
 
-    HotSpotsController.$inject = ['ParseService', 'AuthService'];
+    HotSpotsController.$inject = ['ParseService', 'AuthService', '$mdDialog'];
 
-    function HotSpotsController(ParseService, AuthService) {
+    function HotSpotsController(ParseService, AuthService, $mdDialog) {
         var vm = this;
         vm.hotSpotBuckets = [];
         vm.handleHotSpotAdd = handleHotSpotChange;
         vm.handleHotSpotDelete = handleHotSpotChange;
         vm.saveHotSpotBucket = saveHotSpotBucket;
+        vm.editHotSpotBucket = editHotSpotBucket;
 
         getAllHotSpotBuckets();
 
@@ -48,9 +49,28 @@
 
                 ParseService.postObject('HotSpotBucket', hotSpotBucket)
                     .then(function () {
+                        vm.hotSpotBucketName = ''; // Reset field
                         getAllHotSpotBuckets();
                     });
             }
+        }
+
+        function editHotSpotBucket(hotSpotBucket) {
+            var hotSpotBucketCopy = {};
+            angular.copy(hotSpotBucket, hotSpotBucketCopy);
+            $mdDialog.show({
+                controller: 'EditHotSpotBucketController',
+                controllerAs: 'vm',
+                bindToController: true,
+                templateUrl: 'hotSpots/editHotSpotBucket/editHotSpotBucket.partial.html',
+                parent: angular.element(document.body),
+                locals: {
+                    hotSpotBucket: hotSpotBucketCopy
+                },
+                clickOutsideToClose: true
+            }).then(function (updatedHotSpotBucket) {
+                hotSpotBucket.name = updatedHotSpotBucket.name;
+            });
         }
     }
 

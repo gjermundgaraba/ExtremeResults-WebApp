@@ -5,9 +5,9 @@
         .module('xr.createReflection')
         .controller('CreateReflectionController', CreateReflectionController);
 
-    CreateReflectionController.$inject = ['ParseService', '$location', 'reflectionType', 'AuthService'];
+    CreateReflectionController.$inject = ['ParseService', '$location', 'reflectionType', 'XrUtils', 'AuthService'];
 
-    function CreateReflectionController(ParseService, $location, reflectionType, AuthService) {
+    function CreateReflectionController(ParseService, $location, reflectionType, XrUtils, AuthService) {
         var vm = this;
         vm.save = save;
         vm.header = generateHeader();
@@ -50,8 +50,10 @@
         }
 
         function generateHeader() {
-            return reflectionType.typeName + ' ' + reflectionType.className;
+            return XrUtils.getEntryHeader(reflectionType) + ' for ' +
+                XrUtils.getFormattedEntryDate(reflectionType, new Date());
         }
+
     }
 
 })();
