@@ -12,18 +12,23 @@
 
         vm.overviewEntries = [];
         vm.activeEntries = [];
+        vm.allEntriesLoaded = false;
+        vm.getAllEntries = getAllEntries;
 
         var token = AuthService.getUserToken();
-
-        ParseService.callFunction('getEntries', null, token)
-            .then(function(data) {
-                vm.overviewEntries = data;
-            });
 
         ParseService.callFunction('getActiveEntries', null, token)
             .then(function(data) {
                 vm.activeEntries = data;
             });
+
+        function getAllEntries() {
+            ParseService.callFunction('getEntries', null, token)
+                .then(function(data) {
+                    vm.allEntriesLoaded = true;
+                    vm.overviewEntries = data;
+                });
+        }
     }
 
 })();

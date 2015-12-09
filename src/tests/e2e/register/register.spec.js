@@ -45,7 +45,7 @@ describe('Register Page', function () {
         registerPage.passwordInputField.sendKeys('abcd1234&&%');
         registerPage.registerButton.click();
 
-        expect(overviewPage.firstTimeHelp.isPresent()).toBe(true);
+        expect(overviewPage.currentOutcomesHeader.isPresent()).toBe(true);
     });
 
 });

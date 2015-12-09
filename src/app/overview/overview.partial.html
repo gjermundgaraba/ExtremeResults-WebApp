@@ -1,4 +1,4 @@
-<md-content ng-if="vm.activeEntries.length > 0" class="md-whiteframe-1dp">
+<md-content class="md-whiteframe-1dp">
     <md-toolbar>
         <h1 class="md-toolbar-tools">
             Current Outcomes
@@ -12,17 +12,18 @@
 
 <br />
 
-<md-content ng-if="vm.overviewEntries.length > 0" class="md-whiteframe-1dp">
+<md-content class="md-whiteframe-1dp">
     <md-toolbar>
-        <h1 class="md-toolbar-tools">
-            All Entries
-        </h1>
+        <div class="md-toolbar-tools">
+            <h1 class="md-toolbar-tools">
+                All Entries
+            </h1>
+            <span flex></span>
+            <ng-md-icon size="30" ng-if="!vm.allEntriesLoaded" ng-click="vm.getAllEntries()" class="fake-button load-button" icon="cloud_download"></ng-md-icon>
+        </div>
     </md-toolbar>
-
 
     <md-card ng-repeat="entry in vm.overviewEntries">
         <overview-entry entry-obj="entry"></overview-entry>
     </md-card>
 </md-content>
-
-<first-time-help ng-if="vm.activeEntries.length === 0 && vm.overviewEntries.length === 0"></first-time-help>

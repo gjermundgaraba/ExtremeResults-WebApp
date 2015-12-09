@@ -44,10 +44,6 @@
                 expect(controller.overviewEntries.length).toBe(0);
             });
 
-            it('should get entries', function () {
-                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getEntries', null, userTokenMock);
-            });
-
             it('should get active entries', function () {
                 expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getActiveEntries', null, userTokenMock);
             });
@@ -58,7 +54,21 @@
                 initDeferred.resolve(resolvedData);
                 rootScope.$digest();
 
-                expect(controller.overviewEntries).toBe(resolvedData);
+                expect(controller.activeEntries).toBe(resolvedData);
+            });
+        });
+
+        describe('getAllEntries', function () {
+
+            it('should get all entries and update them', function () {
+                var allEntries = [{hi: null}, {hui: 'HOTL!'}];
+
+                controller.getAllEntries();
+
+                initDeferred.resolve(allEntries);
+                rootScope.$digest();
+
+                expect(controller.overviewEntries).toBe(allEntries);
             });
 
         });

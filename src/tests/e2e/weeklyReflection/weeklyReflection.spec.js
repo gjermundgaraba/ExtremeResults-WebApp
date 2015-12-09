@@ -42,6 +42,7 @@ describe('Daily Outcome Page', function () {
         createReflectionPage.saveButton.click();
 
         common.overviewMenuButton.click();
+        overviewPage.downloadAllEntriesButton.click();
 
         expect(overviewPage.allEntries.count()).toBe(1);
     });

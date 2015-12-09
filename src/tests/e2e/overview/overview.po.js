@@ -1,6 +1,6 @@
 
 var OverviewPage = function () {
-    this.firstTimeHelp = element(by.css('first-time-help'));
+    this.currentOutcomesHeader = element(by.cssContainingText('.md-toolbar-tools', 'Current Outcomes'));
 
     this.currentOutcomes = element.all(by.repeater('activeEntry in vm.activeEntries'));
     this.allEntries = element.all(by.repeater('entry in vm.overviewEntries'));
@@ -24,6 +24,8 @@ var OverviewPage = function () {
     this.editCurrentOutcomeButton = function (index) {
         return this.currentOutcomes.get(index).element(by.css('[ng-click="vm.editOutcome()"]'));
     };
+
+    this.downloadAllEntriesButton = element(by.css('[ng-click="vm.getAllEntries()"]'));
 };
 
 module.exports = OverviewPage;

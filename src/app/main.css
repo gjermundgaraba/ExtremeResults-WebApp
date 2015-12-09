@@ -87,7 +87,7 @@ header {
     top: 16px;
 }
 
-.edit-button {
+.fake-button {
     cursor: pointer;
 }
 
@@ -101,6 +101,10 @@ header {
 
 .user-info {
     padding-top: 6px;
+}
+
+.load-button {
+    fill: #fff;
 }
 
 @media (max-width: 650px) {

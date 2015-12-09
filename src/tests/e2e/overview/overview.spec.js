@@ -27,13 +27,6 @@ describe('Overview Page', function () {
         common.goHome();
     });
 
-    describe('init', function () {
-        it('should have a help section when there are no entries', function () {
-            expect(overviewPage.firstTimeHelp.isPresent()).toBe(true);
-        });
-
-    });
-
     describe('edit', function () {
         beforeAll(function () {
             common.dailyOutcomeMenuButton.click();
