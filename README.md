@@ -13,6 +13,23 @@ Read more about Agile Results here: http://gettingresults.com/wiki/Explained_-_A
 
 Usually, you would implement Agile Results with pen and paper, or something simple like Evernote. I don't think that's good enough. I want to link everything togetether, making it easy so see the bigger picture.
 
+## Screenshots
+
+### Overview
+![Overview](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/Overview.png "Overview")
+
+### Daily Outcome
+![Daily Outcome](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/DailyOutcome.png "Daily Outcome")
+
+### Weekly Outcome
+![Weekly Outcome](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/WeeklyOutcome.png "Weekly Outcome")
+
+### Weekly Reflection
+![Weekly Reflection](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/WeeklyReflection.png "Weekly Reflection")
+
+### Hot Spots
+![Hot Spots](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/HotSpots.png "Hot Spots")
+
 ## Technology
 
 The app is built using Angular and uses Parse as back-end.
