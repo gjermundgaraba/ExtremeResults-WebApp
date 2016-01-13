@@ -6,17 +6,17 @@
     </md-toolbar>
     <md-dialog-content class="edit-dialog">
         <form name="vm.createOutcomeForm" ng-submit="vm.save()">
-            <md-input-container flex>
+            <md-input-container class="md-block">
                 <label for="outcome1">Outcome 1</label>
                 <input ng-model="vm.outcome.firstStory" id="outcome1" name="outcome1" required>
             </md-input-container>
 
-            <md-input-container flex>
+            <md-input-container class="md-block">
                 <label>Outcome 2</label>
                 <input ng-model="vm.outcome.secondStory" id="outcome2" name="outcome2" required>
             </md-input-container>
 
-            <md-input-container flex>
+            <md-input-container class="md-block">
                 <label>Outcome 3</label>
                 <input ng-model="vm.outcome.thirdStory" id="outcome3" name="outcome3" required>
             </md-input-container>

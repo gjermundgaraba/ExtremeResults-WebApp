@@ -5,7 +5,7 @@
         </div>
     </md-toolbar>
     <form name="vm.registerForm" ng-submit="vm.register()" novalidate>
-        <md-input-container>
+        <md-input-container class="md-block">
             <label for="registerUsernameField">Username</label>
             <input id="registerUsernameField" autocapitalize="none" required name="username" ng-model="vm.username">
             <div ng-messages="vm.registerForm.username.$error" ng-if="vm.registerForm.username.$error.required && vm.registerForm.$submitted">
@@ -13,7 +13,7 @@
             </div>
         </md-input-container>
 
-        <md-input-container>
+        <md-input-container class="md-block">
             <label for="registerPasswordField">Password</label>
             <input id="registerPasswordField" type="password" required name="password" ng-model="vm.password">
             <div ng-messages="vm.registerForm.password.$error" ng-if="vm.registerForm.password.$error.required && vm.registerForm.$submitted">
@@ -25,7 +25,7 @@
             Back to login
         </md-button>
 
-        <md-button ng-disabled="vm.isRegistering" id="registerButton" class="md-raised md-accent">
+        <md-button type="submit" ng-disabled="vm.isRegistering" id="registerButton" class="md-raised md-accent">
             Register
         </md-button>
     </form>

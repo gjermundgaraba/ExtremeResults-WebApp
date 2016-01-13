@@ -7,38 +7,38 @@
     </md-toolbar>
     <md-content class="md-padding">
         <form name="vm.weeklyReflectionForm" ng-submit="vm.save()">
-            <md-input-container flex>
+            <md-input-container class="md-block">
                 <label for="firstThingThatWentWell">First thing that went well</label>
                 <input ng-model="vm.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" required>
             </md-input-container>
 
-            <md-input-container flex>
+            <md-input-container class="md-block">
                 <label for="secondThingThatWentWell">Second thing that went well</label>
                 <input ng-model="vm.secondThingThatWentWell" id="secondThingThatWentWell" name="secondThingThatWentWell" type="text" required>
             </md-input-container>
 
-            <md-input-container flex>
+            <md-input-container class="md-block">
                 <label for="thirdThingThatWentWell">Third thing that went well</label>
                 <input ng-model="vm.thirdThingThatWentWell" id="thirdThingThatWentWell" name="thirdThingThatWentWell" type="text" required>
             </md-input-container>
 
-            <md-input-container flex>
+            <md-input-container class="md-block">
                 <label for="firstThingToImprove">First thing to improve</label>
                 <input ng-model="vm.firstThingToImprove" id="firstThingToImprove" name="firstThingToImprove" type="text" required>
             </md-input-container>
 
-            <md-input-container flex>
+            <md-input-container class="md-block">
                 <label for="secondThingToImprove">Second thing to improve</label>
                 <input ng-model="vm.secondThingToImprove" id="secondThingToImprove" name="secondThingToImprove" type="text" required>
             </md-input-container>
 
-            <md-input-container flex>
+            <md-input-container class="md-block">
                 <label for="thirdThingToImprove">Third thing to improve</label>
                 <input ng-model="vm.thirdThingToImprove" id="thirdThingToImprove" name="thirdThingToImprove" type="text" required>
             </md-input-container>
 
             <div>
-                <md-button class="md-raised md-accent">Save</md-button>
+                <md-button type="submit" class="md-raised md-accent">Save</md-button>
             </div>
 
         </form>

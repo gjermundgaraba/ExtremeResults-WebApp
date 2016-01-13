@@ -101,6 +101,7 @@ header {
 
 .user-info {
     padding-top: 6px;
+    cursor: default;
 }
 
 .load-button {

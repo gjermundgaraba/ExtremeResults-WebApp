@@ -9,12 +9,12 @@
         <md-content class="md-padding" layout="column">
 
             <form name="vm.hotSpotBucketForm" ng-submit="vm.saveHotSpotBucket()">
-                <md-input-container flex>
+                <md-input-container class="md-block">
                     <label for="hotSpotBucketName">Hot Spot Bucket Name</label>
                     <input ng-model="vm.hotSpotBucketName" id="hotSpotBucketName" name="hotSpotBucketName" type="text" required>
                 </md-input-container>
                 <div>
-                    <md-button class="md-raised md-accent">Create</md-button>
+                    <md-button type="submit" class="md-raised md-accent">Create</md-button>
                 </div>
             </form>
         </md-content>
@@ -37,7 +37,6 @@
                           md-on-add="vm.handleHotSpotAdd(hotSpotBucket)"
                           md-on-remove="vm.handleHotSpotDelete(hotSpotBucket)">
                 </md-chips>
-                <md-button ng-click="vm.handleHotSpotAdd(hotSpotBucket)">Temp Save Button For Now</md-button>
                 <br/>
             </div>
         </md-content>
