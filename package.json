@@ -6,11 +6,13 @@
     "angular": "1.4.8",
     "angular-cookies": "1.4.8",
     "angular-messages": "1.4.8",
+    "angular-animate": "1.4.8",
+    "angular-aria": "1.4.8",
+    "angular-moment": "0.10.3",
     "angular-material": "1.0.2",
     "angular-material-icons": "0.6.0",
-    "angular-moment": "0.10.3",
     "angular-ui-router": "0.2.15",
-    "moment": "2.10.6"
+    "moment": "2.11.1"
   },
   "devDependencies": {
     "angular-mocks": "1.4.8",
@@ -21,13 +23,14 @@
     "gulp": "3.9.0",
     "gulp-angular-templatecache": "1.8.0",
     "gulp-bundle-assets": "2.23.0",
-    "gulp-connect": "2.2.0",
+    "gulp-connect": "2.3.1",
     "gulp-csslint": "0.2.0",
-    "gulp-jshint": "1.11.2",
+    "gulp-jshint": "2.0.0",
     "gulp-karma": "0.0.5",
     "gulp-replace": "0.5.4",
     "gulp-watch": "4.3.5",
     "jasmine-core": "2.4.1",
+    "jshint": "2.9.1",
     "karma": "0.13.19",
     "karma-chrome-launcher": "0.2.2",
     "karma-coverage": "0.5.3",
@@ -37,7 +40,7 @@
     "main-bower-files": "2.11.1",
     "protractor": "3.0.0",
     "vinyl-paths": "2.1.0",
-    "yargs": "3.31.0"
+    "yargs": "3.32.0"
   },
   "scripts": {
     "start": "gulp",
