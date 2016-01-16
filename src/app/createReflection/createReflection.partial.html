@@ -2,10 +2,12 @@
 <div>
     <md-toolbar>
         <h1 class="md-toolbar-tools">
-            {{::vm.header}}
+            {{vm.generateHeader()}}
         </h1>
     </md-toolbar>
     <md-content class="md-padding">
+        Effective date: <md-datepicker ng-model="vm.effectiveDate"></md-datepicker>
+
         <form name="vm.weeklyReflectionForm" ng-submit="vm.save()">
             <md-input-container class="md-block">
                 <label for="firstThingThatWentWell">First thing that went well</label>

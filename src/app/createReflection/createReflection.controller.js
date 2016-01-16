@@ -5,20 +5,23 @@
         .module('xr.createReflection')
         .controller('CreateReflectionController', CreateReflectionController);
 
-    CreateReflectionController.$inject = ['ParseService', '$location', 'reflectionType', 'XrUtils', 'AuthService'];
+    CreateReflectionController.$inject = ['$scope', 'ParseService', '$location', 'reflectionType', 'XrUtils', 'AuthService'];
 
-    function CreateReflectionController(ParseService, $location, reflectionType, XrUtils, AuthService) {
+    function CreateReflectionController($scope, ParseService, $location, reflectionType, XrUtils, AuthService) {
         var vm = this;
         vm.save = save;
-        vm.header = generateHeader();
+        vm.effectiveDate = new Date();
+        vm.generateHeader = generateHeader;
         vm.relatedEntries = [];
 
-        ParseService.callFunction('getRelatedEntriesForReflection',
-                    {typeName: reflectionType.typeName},
-                    AuthService.getUserToken())
-            .then(function (data) {
-                vm.relatedEntries = data;
-            });
+        updateRelatedEntriesForReflection();
+
+        $scope.$watch('vm.effectiveDate', function (newValue, oldValue) {
+            if (newValue !== oldValue) {
+                updateRelatedEntriesForReflection();
+            }
+
+        });
 
         function save() {
             var weeklyReflection = {
@@ -30,7 +33,7 @@
                 thirdThingToImprove: vm.thirdThingToImprove,
                 effectiveDate: {
                     '__type': 'Date',
-                    'iso': new Date().toISOString()
+                    'iso': vm.effectiveDate.toISOString()
                 },
                 typeName: reflectionType.typeName,
                 ACL: {
@@ -51,7 +54,16 @@
 
         function generateHeader() {
             return XrUtils.getEntryHeader(reflectionType) + ' for ' +
-                XrUtils.getFormattedEntryDate(reflectionType, new Date());
+                XrUtils.getFormattedEntryDate(reflectionType, vm.effectiveDate);
+        }
+
+        function updateRelatedEntriesForReflection() {
+            ParseService.callFunction('getRelatedEntriesForReflection',
+                    {typeName: reflectionType.typeName, outcomeDate: vm.effectiveDate},
+                    AuthService.getUserToken())
+                .then(function (data) {
+                    vm.relatedEntries = data;
+                });
         }
 
     }

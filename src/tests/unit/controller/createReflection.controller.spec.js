@@ -7,6 +7,7 @@
             AuthServiceMock,
             userMock,
             controller,
+            scope,
             rootScope,
             location,
             reflectionTypeMock,
@@ -55,12 +56,14 @@
         beforeEach(inject(function($controller, $q, $rootScope, $location) {
             q = $q;
             location = $location;
+            scope = $rootScope.$new();
             rootScope = $rootScope;
 
             relatedEntriesDeferred = q.defer();
             spyOn(ParseServiceMock, 'callFunction').and.returnValue(relatedEntriesDeferred.promise);
 
-            controller = $controller('CreateReflectionController', {'$location': location});
+            controller = $controller('CreateReflectionController', {'$location': location, '$scope': scope});
+            scope.vm = controller;
         }));
 
         describe('init', function () {
@@ -70,7 +73,7 @@
                 relatedEntriesDeferred.resolve(relatedEntries);
                 rootScope.$digest();
 
-                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getRelatedEntriesForReflection', {typeName: reflectionTypeMock.typeName}, AuthServiceMock.getUserToken());
+                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getRelatedEntriesForReflection', {typeName: reflectionTypeMock.typeName, outcomeDate: controller.effectiveDate}, AuthServiceMock.getUserToken());
                 expect(controller.relatedEntries).toBe(relatedEntries);
             });
         });
@@ -178,9 +181,29 @@
             });
         });
 
+        describe('change effectiveDate', function () {
+            beforeEach(function () {
+                var relatedEntries = [{test: 1}];
+
+                relatedEntriesDeferred.resolve(relatedEntries);
+                rootScope.$digest();
+            });
+
+           it('should update related entries for reflection', function () {
+               controller.effectiveDate = new Date();
+
+               var relatedEntries = [{test: 1}];
+
+               relatedEntriesDeferred.resolve(relatedEntries);
+               rootScope.$digest();
+
+               expect(ParseServiceMock.callFunction.calls.count()).toBe(2);
+           });
+        });
+
         describe('header', function () {
             it('should have entryheader and date', function () {
-                expect(controller.header).toBe(entryHeaderMock + ' for ' + formattedEntryDateMock);
+                expect(controller.generateHeader()).toBe(entryHeaderMock + ' for ' + formattedEntryDateMock);
             });
         });
 

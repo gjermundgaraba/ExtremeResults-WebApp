@@ -131,6 +131,28 @@
 
                 expect(ParseServiceMock.postObject).toHaveBeenCalled();
             });
+
+            it('should reset field after save', function () {
+                controller.hotSpotBucketName = 'test';
+                controller.hotSpotBucketForm.$valid = true;
+
+                controller.saveHotSpotBucket();
+                postHotSpotBucketDeferred.resolve();
+                rootScope.$digest();
+
+                expect(controller.hotSpotBucketName).toBe('');
+            });
+
+            it('should get all hot spot buckets after save', function () {
+                controller.hotSpotBucketName = 'test';
+                controller.hotSpotBucketForm.$valid = true;
+
+                controller.saveHotSpotBucket();
+                postHotSpotBucketDeferred.resolve();
+                rootScope.$digest();
+
+                expect(ParseServiceMock.getAllObjects.calls.count()).toBe(2);
+            });
         });
 
         describe('edit hotSpotBucket', function () {
