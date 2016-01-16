@@ -2,12 +2,9 @@ language: node_js
 node_js:
   - "4.2.1"
 
-addons:
-  firefox: "latest"
-
-
 before_script:
   - export DISPLAY=:99.0
+  - firefox --version
   - sh -e /etc/init.d/xvfb start
   - npm install
   - npm start > /dev/null &
@@ -19,6 +16,8 @@ script:
   - npm run cie2e
 
 before_install:
+  addons:
+    firefox: "latest"
   - pip install --user codecov
 after_success:
   - codecov
