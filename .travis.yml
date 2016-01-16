@@ -2,20 +2,12 @@ language: node_js
 node_js:
   - "4.2.1"
 
-
 addons:
-  apt:
-    packages:
-      - parallel
-  firefox: "43.0"
+  firefox: "latest"
 
 
 before_script:
   - export DISPLAY=:99.0
-  - echo "Extracting firefox and setting PATH variable..."
-  - tar -xjf /tmp/firefox-43.0.tar.bz2 --directory /tmp
-  - export PATH="/tmp/firefox:$PATH"
-  - echo "Using firefox version `firefox --version`"
   - sh -e /etc/init.d/xvfb start
   - npm install
   - npm start > /dev/null &
