@@ -5,5 +5,8 @@ exports.config = {
     },
     specs: [
         './src/tests/e2e/**/*.spec.js'
-    ]
+    ],
+    capabilities: {
+        browserName: 'firefox',
+    }
 };

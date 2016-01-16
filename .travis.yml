@@ -3,14 +3,14 @@ node_js:
   - "4.2.1"
 
 addons:
-  firefox: "38.0"
+  firefox: "43.0"
 
 before_install:
   - pip install --user codecov
 
 before_script:
-  - export DISPLAY=:99.0
   - firefox --version
+  - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - npm install
   - npm start > /dev/null &
@@ -19,7 +19,7 @@ before_script:
 
 script:
   - npm run citest
-  - npm run cie2e
+  - npm run e2e
 
 after_success:
   - codecov
