@@ -21,29 +21,31 @@
             });
 
         function save() {
-            var outcome = {
-                firstStory: vm.outcome1,
-                secondStory: vm.outcome2,
-                thirdStory: vm.outcome3,
-                effectiveDate: {
-                    '__type': 'Date',
-                    'iso': new Date().toISOString()
-                },
-                typeName: outcomeType.typeName,
-                ACL: {
-                    '*': { }
-                }
-            };
+            if (vm.createOutcomeForm.$valid) {
+                var outcome = {
+                    firstStory: vm.outcome1,
+                    secondStory: vm.outcome2,
+                    thirdStory: vm.outcome3,
+                    effectiveDate: {
+                        '__type': 'Date',
+                        'iso': new Date().toISOString()
+                    },
+                    typeName: outcomeType.typeName,
+                    ACL: {
+                        '*': { }
+                    }
+                };
 
-            outcome.ACL[AuthService.getCurrentUser().objectId] = {
-                read: true,
-                write: true
-            };
+                outcome.ACL[AuthService.getCurrentUser().objectId] = {
+                    read: true,
+                    write: true
+                };
 
-            ParseService.postObject(outcomeType.className, outcome, AuthService.getUserToken)
-                .then(function () {
-                    $location.path('overview');
-                });
+                ParseService.postObject(outcomeType.className, outcome, AuthService.getUserToken)
+                    .then(function () {
+                        $location.path('overview');
+                    });
+            }
         }
 
         function generateHeader() {

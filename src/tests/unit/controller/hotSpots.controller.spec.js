@@ -110,10 +110,12 @@
 
             beforeEach(function () {
                 controller.hotSpotBucketForm = {
-                    $valid: false
+                    $valid: false,
+                    $setPristine: function () {}
                 };
                 postHotSpotBucketDeferred = q.defer();
                 spyOn(ParseServiceMock, 'postObject').and.returnValue(postHotSpotBucketDeferred.promise);
+                spyOn(controller.hotSpotBucketForm, '$setPristine');
             });
 
             it('should not try to post if form is invalid', function () {
@@ -141,6 +143,7 @@
                 rootScope.$digest();
 
                 expect(controller.hotSpotBucketName).toBe('');
+                expect(controller.hotSpotBucketForm.$setPristine).toHaveBeenCalled();
             });
 
             it('should get all hot spot buckets after save', function () {

@@ -92,8 +92,18 @@
                     'thirdThingThatWentWell': { $pristine: true, $valid: true, $setDirty: function() {} },
                     'firstThingToImprove': { $pristine: true, $valid: true, $setDirty: function() {} },
                     'secondThingToImprove': { $pristine: true, $valid: true, $setDirty: function() {} },
-                    'thirdThingToImprove': { $pristine: true, $valid: true, $setDirty: function() {} }
+                    'thirdThingToImprove': { $pristine: true, $valid: true, $setDirty: function() {} },
+                    $valid: true,
+                    $setPristine: function () {}
                 }
+            });
+
+            it('should not save anything when form is invalid', function () {
+                controller.weeklyReflectionForm.$valid = false;
+
+                controller.save();
+
+                expect(ParseServiceMock.postObject).not.toHaveBeenCalled();
             });
 
 

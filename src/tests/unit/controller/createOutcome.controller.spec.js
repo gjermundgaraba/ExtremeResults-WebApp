@@ -86,10 +86,19 @@
                     '$someAngularThing': {},
                     'outcome1': { $pristine: true, $valid: true, $setDirty: function() {} },
                     'outcome2': { $pristine: true, $valid: true, $setDirty: function() {} },
-                    'outcome3': { $pristine: true, $valid: true, $setDirty: function() {} }
+                    'outcome3': { $pristine: true, $valid: true, $setDirty: function() {} },
+                    $valid: true,
+                    $setPristine: function () {}
                 }
             });
 
+            it('should not save anything when form is invalid', function () {
+                controller.createOutcomeForm.$valid = false;
+
+                controller.save();
+
+                expect(ParseServiceMock.postObject).not.toHaveBeenCalled();
+            });
 
             it('should save to outcomeType className', function () {
                 controller.save();

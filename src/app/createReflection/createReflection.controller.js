@@ -24,32 +24,34 @@
         });
 
         function save() {
-            var weeklyReflection = {
-                firstThingThatWentWell: vm.firstThingThatWentWell,
-                secondThingThatWentWell: vm.secondThingThatWentWell,
-                thirdThingThatWentWell: vm.thirdThingThatWentWell,
-                firstThingToImprove: vm.firstThingToImprove,
-                secondThingToImprove: vm.secondThingToImprove,
-                thirdThingToImprove: vm.thirdThingToImprove,
-                effectiveDate: {
-                    '__type': 'Date',
-                    'iso': vm.effectiveDate.toISOString()
-                },
-                typeName: reflectionType.typeName,
-                ACL: {
-                    '*': { }
-                }
-            };
+            if (vm.weeklyReflectionForm.$valid) {
+                var weeklyReflection = {
+                    firstThingThatWentWell: vm.firstThingThatWentWell,
+                    secondThingThatWentWell: vm.secondThingThatWentWell,
+                    thirdThingThatWentWell: vm.thirdThingThatWentWell,
+                    firstThingToImprove: vm.firstThingToImprove,
+                    secondThingToImprove: vm.secondThingToImprove,
+                    thirdThingToImprove: vm.thirdThingToImprove,
+                    effectiveDate: {
+                        '__type': 'Date',
+                        'iso': vm.effectiveDate.toISOString()
+                    },
+                    typeName: reflectionType.typeName,
+                    ACL: {
+                        '*': { }
+                    }
+                };
 
-            weeklyReflection.ACL[AuthService.getCurrentUser().objectId] = {
-                read: true,
-                write: true
-            };
+                weeklyReflection.ACL[AuthService.getCurrentUser().objectId] = {
+                    read: true,
+                    write: true
+                };
 
-            ParseService.postObject(reflectionType.className, weeklyReflection)
-                .then(function () {
-                    $location.path('overview');
-                });
+                ParseService.postObject(reflectionType.className, weeklyReflection)
+                    .then(function () {
+                        $location.path('overview');
+                    });
+            }
         }
 
         function generateHeader() {

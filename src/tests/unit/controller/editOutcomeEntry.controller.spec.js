@@ -77,8 +77,22 @@
 
                 controller.outcome = outcome;
 
+                controller.editOutcomeForm = {
+                    $valid: true,
+                    $setPristine: function () {}
+                };
+
                 updateDeferred = q.defer();
                 spyOn(ParseServiceMock, 'updateObject').and.returnValue(updateDeferred.promise);
+            });
+
+            it('should not save anything when form is invalid', function () {
+                controller.editOutcomeForm.$valid = false;
+
+                controller.save();
+
+                expect(controller.saving).toBe(false);
+                expect(ParseServiceMock.updateObject).not.toHaveBeenCalled();
             });
 
             it('should set saving flag when saving', function () {

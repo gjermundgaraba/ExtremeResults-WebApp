@@ -50,6 +50,7 @@
                 ParseService.postObject('HotSpotBucket', hotSpotBucket)
                     .then(function () {
                         vm.hotSpotBucketName = ''; // Reset field
+                        vm.hotSpotBucketForm.$setPristine();
                         getAllHotSpotBuckets();
                     });
             }

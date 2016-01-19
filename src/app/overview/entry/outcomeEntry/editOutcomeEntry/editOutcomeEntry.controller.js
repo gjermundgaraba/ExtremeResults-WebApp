@@ -14,7 +14,7 @@
         vm.header = XrUtils.getEntryHeader(vm.outcome) + ' for ' + XrUtils.getFormattedEntryDate(vm.outcome);
 
         vm.save = function () {
-            if (!vm.saving) {
+            if (!vm.saving && vm.editOutcomeForm.$valid) {
                 vm.saving = true;
                 var updateObject = {
                     firstStory: vm.outcome.firstStory,

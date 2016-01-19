@@ -7,20 +7,29 @@
     </md-toolbar>
 
     <md-content class="md-padding">
-        <form name="vm.createOutcomeForm" ng-submit="vm.save()">
+        <form name="vm.createOutcomeForm" ng-submit="vm.save()" novalidate>
             <md-input-container class="md-block">
                 <label for="outcome1">Outcome 1</label>
                 <input ng-model="vm.outcome1" id="outcome1" name="outcome1" required>
+                <div ng-messages="vm.createOutcomeForm.outcome1.$error" ng-if="vm.createOutcomeForm.outcome1.$error.required && vm.createOutcomeForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Outcome 2</label>
                 <input ng-model="vm.outcome2" id="outcome2" name="outcome2" required>
+                <div ng-messages="vm.createOutcomeForm.outcome2.$error" ng-if="vm.createOutcomeForm.outcome2.$error.required && vm.createOutcomeForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Outcome 3</label>
                 <input ng-model="vm.outcome3" id="outcome3" name="outcome3" required>
+                <div ng-messages="vm.createOutcomeForm.outcome3.$error" ng-if="vm.createOutcomeForm.outcome3.$error.required && vm.createOutcomeForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
             </md-input-container>
 
             <div>

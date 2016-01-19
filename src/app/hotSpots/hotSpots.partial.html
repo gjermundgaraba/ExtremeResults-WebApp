@@ -8,10 +8,13 @@
         </md-toolbar>
         <md-content class="md-padding" layout="column">
 
-            <form name="vm.hotSpotBucketForm" ng-submit="vm.saveHotSpotBucket()">
+            <form name="vm.hotSpotBucketForm" ng-submit="vm.saveHotSpotBucket()" novalidate>
                 <md-input-container class="md-block">
                     <label for="hotSpotBucketName">Hot Spot Bucket Name</label>
                     <input ng-model="vm.hotSpotBucketName" id="hotSpotBucketName" name="hotSpotBucketName" type="text" required>
+                    <div ng-messages="vm.hotSpotBucketForm.hotSpotBucketName.$error" ng-if="vm.hotSpotBucketForm.hotSpotBucketName.$error.required && vm.hotSpotBucketForm.$submitted">
+                        <div ng-message="required">This is required.</div>
+                    </div>
                 </md-input-container>
                 <div>
                     <md-button type="submit" class="md-raised md-accent">Create</md-button>
