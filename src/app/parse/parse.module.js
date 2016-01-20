@@ -1,3 +1,3 @@
 (function () {
-    angular.module('xr.parse', []);
+    angular.module('xr.parse', ['xr.core']);
 })();

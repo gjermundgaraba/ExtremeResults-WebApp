@@ -1,5 +1,5 @@
 (function () {
     'use strict';
 
-    angular.module('xr.core', ['ngMessages']);
+    angular.module('xr.core', []);
 })();
