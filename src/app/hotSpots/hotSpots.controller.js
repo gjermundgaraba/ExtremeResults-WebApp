@@ -70,7 +70,11 @@
                 },
                 clickOutsideToClose: true
             }).then(function (updatedHotSpotBucket) {
-                hotSpotBucket.name = updatedHotSpotBucket.name;
+                if (typeof updatedHotSpotBucket === 'undefined') {
+                    getAllHotSpotBuckets();
+                } else {
+                    hotSpotBucket.name = updatedHotSpotBucket.name;
+                }
             });
         }
     }

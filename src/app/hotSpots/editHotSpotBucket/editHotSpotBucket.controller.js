@@ -11,8 +11,10 @@
         var vm = this;
 
         vm.saving = false;
+        vm.deleteHotSpotBucket = deleteHotSpotBucket;
+        vm.save = save;
 
-        vm.save = function () {
+        function save() {
             if (!vm.saving) {
                 vm.saving = true;
                 var updateObject = {
@@ -27,8 +29,20 @@
                         vm.saving = false;
                     });
             }
+        }
 
+        function deleteHotSpotBucket() {
+            if (!vm.saving) {
+                vm.saving = true;
 
-        };
+                ParseService.deleteObject('HotSpotBucket', vm.hotSpotBucket.objectId, AuthService.getUserToken())
+                    .then(function () {
+                        $mdDialog.hide();
+                    })
+                    .finally(function () {
+                        vm.saving = false;
+                    });
+            }
+        }
     }
 })();

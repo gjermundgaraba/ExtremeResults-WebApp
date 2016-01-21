@@ -136,7 +136,7 @@ describe('ParseService', function(){
     });
 
     describe('updateObject', function () {
-        it('should return data on successful POST call', function () {
+        it('should return data on successful PUT call', function () {
             var object = {
                 className: 'derp',
                 updatedAt: '2011-08-21T14:00:00.123Z'
@@ -154,6 +154,23 @@ describe('ParseService', function(){
             httpBackend.flush();
             expect(data).toBeDefined();
             expect(data).toBe(result.updatedAt);
+        });
+    });
+
+    describe('deleteObject', function () {
+        it('should resolve on success', function () {
+            var className = 'test';
+            var id = 'objid';
+
+            httpBackend.whenDELETE('/classes/' + className + '/' + id).respond(201);
+
+            var resolved = false;
+            ParseService.deleteObject(className, id).then(function () {
+                resolved = true;
+            });
+
+            httpBackend.flush();
+            expect(resolved).toBe(true);
         });
     });
 

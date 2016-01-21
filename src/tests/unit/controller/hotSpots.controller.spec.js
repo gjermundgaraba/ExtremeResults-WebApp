@@ -194,6 +194,18 @@
 
                 expect(hotSpotBucket.name).toBe('Edited');
             });
+
+            it('should refresh all buckets if hotSpotBucket comes back as undefined', function () {
+                var hotSpotBucket = {
+                    name: 'NotEdited',
+                    hotSpots: []
+                };
+                controller.editHotSpotBucket(hotSpotBucket);
+                mdDialogDeferred.resolve();
+                rootScope.$digest();
+
+                expect(ParseServiceMock.getAllObjects.calls.count()).toBe(2);
+            });
         });
 
     });

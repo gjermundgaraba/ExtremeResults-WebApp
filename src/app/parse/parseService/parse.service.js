@@ -13,6 +13,7 @@
             getAllObjects: getAllObjects,
             postObject: postObject,
             updateObject: updateObject,
+            deleteObject: deleteObject,
             callFunction: callFunction,
             retrieveCurrentUser: retrieveCurrentUser
         };
@@ -80,6 +81,12 @@
                 .then(function (httpObj) {
                     return httpObj.data.updatedAt;
                 });
+        }
+
+        function deleteObject(className, id, token) {
+            var configWithToken = getConfigCopyWithToken(token);
+
+            return $http.delete(ParseKeyService.restUrl + '/classes/' + className + '/' + id, configWithToken);
         }
 
         function callFunction(functionName, data, token) {
