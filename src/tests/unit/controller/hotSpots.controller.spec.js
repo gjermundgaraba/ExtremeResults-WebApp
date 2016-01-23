@@ -181,28 +181,32 @@
                 expect(hotSpotBucket.name).toBe('NotEdited');
             });
 
-            it('should update the outcome if the edit is finished', function () {
+            it('should update the outcome if the edit is finished and renameCallBack gets called', function () {
+                var editedName = 'Edited';
                 var hotSpotBucket = {
                     name: 'NotEdited',
                     hotSpots: []
                 };
-                controller.editHotSpotBucket(hotSpotBucket);
-                mdDialogDeferred.resolve({
-                    name: 'Edited'
+                spyOn(mdDialogMock, 'show').and.callFake(function (showObj) {
+                    showObj.locals.renameCallback({
+                        name: editedName
+                    });
                 });
-                rootScope.$digest();
+                controller.editHotSpotBucket(hotSpotBucket);
 
-                expect(hotSpotBucket.name).toBe('Edited');
+                expect(hotSpotBucket.name).toBe(editedName);
             });
 
-            it('should refresh all buckets if hotSpotBucket comes back as undefined', function () {
+            it('should refresh all buckets if hotSpotBucket is deleted', function () {
                 var hotSpotBucket = {
                     name: 'NotEdited',
                     hotSpots: []
                 };
+                spyOn(mdDialogMock, 'show').and.callFake(function (showObj) {
+                    showObj.locals.deleteCallback();
+                });
+
                 controller.editHotSpotBucket(hotSpotBucket);
-                mdDialogDeferred.resolve();
-                rootScope.$digest();
 
                 expect(ParseServiceMock.getAllObjects.calls.count()).toBe(2);
             });

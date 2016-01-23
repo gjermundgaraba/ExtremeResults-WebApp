@@ -12,9 +12,18 @@
 
         beforeEach(module('xr.hotSpots'));
         beforeEach(module(function ($provide) {
+            var confirmObj = {
+                title: function () { return this },
+                ok: function() { return this},
+                cancel: function() { return this }
+            };
 
             mdDialogMock = {
-                hide: function () {}
+                show: function () {},
+                hide: function () {},
+                confirm: function () {
+                    return confirmObj;
+                }
             };
 
             ParseServiceMock = {
@@ -35,6 +44,8 @@
             rootScope = $rootScope;
 
             controller = $controller('EditHotSpotBucketController');
+            controller.renameCallback = function () {};
+            controller.deleteCallback = function () {};
         }));
 
         describe('init', function () {
@@ -100,16 +111,18 @@
                 expect(mdDialogMock.hide).not.toHaveBeenCalled();
             });
 
-            it('should send back the updated hotSpotBucket after save succeeded', function () {
+            it('should call callback after save succeeded', function () {
                 controller.hotSpotBucket.name = 'updated';
 
                 spyOn(mdDialogMock, 'hide');
+                spyOn(controller, 'renameCallback');
                 controller.save();
 
                 updateDeferred.resolve();
                 rootScope.$digest();
 
-                expect(mdDialogMock.hide).toHaveBeenCalledWith(controller.hotSpotBucket);
+                expect(controller.renameCallback).toHaveBeenCalledWith(controller.hotSpotBucket);
+                expect(mdDialogMock.hide).toHaveBeenCalledWith();
             });
 
             it('should set saving flag to false when succeeded', function () {
@@ -132,7 +145,8 @@
         });
 
         describe('delete', function () {
-            var deferred,
+            var deleteDeferred,
+                showConfirmDialogDeferred,
                 hotSpotBucket;
 
             beforeEach(function () {
@@ -144,57 +158,86 @@
 
                 controller.hotSpotBucket = hotSpotBucket;
 
-                deferred = q.defer();
-                spyOn(ParseServiceMock, 'deleteObject').and.returnValue(deferred.promise);
+                deleteDeferred = q.defer();
+                showConfirmDialogDeferred = q.defer();
+
+                spyOn(ParseServiceMock, 'deleteObject').and.returnValue(deleteDeferred.promise);
+                spyOn(mdDialogMock, 'show').and.returnValue(showConfirmDialogDeferred.promise);
             });
 
             it('should not delete if already saving', function () {
                 controller.saving = true;
                 controller.deleteHotSpotBucket();
 
+                expect(mdDialogMock.show).not.toHaveBeenCalled();
                 expect(ParseServiceMock.deleteObject).not.toHaveBeenCalled();
             });
 
             it('should set saving to true while deleting', function () {
                 controller.deleteHotSpotBucket();
 
+                showConfirmDialogDeferred.resolve();
+                rootScope.$digest();
+
                 expect(controller.saving).toBe(true);
             });
 
-            it('should delete the hotSpotBucket', function () {
+            it('should not delete the hot spot bucket if not confirmed by the user', function () {
                 controller.deleteHotSpotBucket();
+
+                expect(ParseServiceMock.deleteObject).not.toHaveBeenCalled();
+            });
+
+            it('should not delete the hot spot bucket if declined by the user', function () {
+                controller.deleteHotSpotBucket();
+
+                showConfirmDialogDeferred.reject();
+                rootScope.$digest();
+
+                expect(ParseServiceMock.deleteObject).not.toHaveBeenCalled();
+            });
+
+            it('should delete the hotSpotBucket if confirmed', function () {
+                controller.deleteHotSpotBucket();
+
+                showConfirmDialogDeferred.resolve();
+                rootScope.$digest();
 
                 expect(ParseServiceMock.deleteObject).toHaveBeenCalledWith('HotSpotBucket', hotSpotBucket.objectId, AuthServiceMock.getUserToken());
             });
 
-            it('should hide the dialog when succeeded', function () {
-                spyOn(mdDialogMock, 'hide');
+            it('should call the delete callback after deletion of the hot spot bucket', function () {
+                spyOn(controller, 'deleteCallback');
                 controller.deleteHotSpotBucket();
 
-                deferred.resolve();
+                showConfirmDialogDeferred.resolve();
+                rootScope.$digest();
+                deleteDeferred.resolve();
                 rootScope.$digest();
 
-                expect(mdDialogMock.hide).toHaveBeenCalled();
+                expect(controller.deleteCallback).toHaveBeenCalled();
             });
 
-            it('should not hide the dialog when failed', function () {
-                spyOn(mdDialogMock, 'hide');
+            it('should set saving to false after deletion of hot spot bucket', function () {
                 controller.deleteHotSpotBucket();
 
-                deferred.reject();
+                showConfirmDialogDeferred.resolve();
+                rootScope.$digest();
+                deleteDeferred.resolve();
                 rootScope.$digest();
 
-                expect(mdDialogMock.hide).not.toHaveBeenCalled();
+                expect(controller.saving).toBe(false);
             });
 
-            it('should send back undefined in the hide dialog', function () {
-                spyOn(mdDialogMock, 'hide');
+            it('should set saving to false after unsuccessfull deletion of hot spot bucket', function () {
                 controller.deleteHotSpotBucket();
 
-                deferred.resolve();
+                showConfirmDialogDeferred.resolve();
+                rootScope.$digest();
+                deleteDeferred.reject();
                 rootScope.$digest();
 
-                expect(mdDialogMock.hide).toHaveBeenCalledWith();
+                expect(controller.saving).toBe(false);
             });
         });
 

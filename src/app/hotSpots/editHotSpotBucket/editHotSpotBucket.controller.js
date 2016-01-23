@@ -23,7 +23,8 @@
                 ParseService.updateObject('HotSpotBucket', vm.hotSpotBucket.objectId,
                         updateObject, AuthService.getUserToken())
                     .then(function () {
-                        $mdDialog.hide(vm.hotSpotBucket);
+                        vm.renameCallback(vm.hotSpotBucket);
+                        $mdDialog.hide();
                     })
                     .finally(function () {
                         vm.saving = false;
@@ -33,15 +34,25 @@
 
         function deleteHotSpotBucket() {
             if (!vm.saving) {
-                vm.saving = true;
+                var confirm = $mdDialog.confirm()
+                    .title('Are you sure you want to delete this hot spot bucket?')
+                    .ok('Yes')
+                    .cancel('No');
 
-                ParseService.deleteObject('HotSpotBucket', vm.hotSpotBucket.objectId, AuthService.getUserToken())
+                $mdDialog.show(confirm)
                     .then(function () {
-                        $mdDialog.hide();
-                    })
-                    .finally(function () {
-                        vm.saving = false;
+                        vm.saving = true;
+
+                        ParseService.deleteObject('HotSpotBucket', vm.hotSpotBucket.objectId, AuthService.getUserToken())
+                            .then(function () {
+                                vm.deleteCallback();
+                            })
+                            .finally(function () {
+                                vm.saving = false;
+                            });
                     });
+
+
             }
         }
     }

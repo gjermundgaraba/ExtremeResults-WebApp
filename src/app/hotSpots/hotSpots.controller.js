@@ -66,15 +66,15 @@
                 templateUrl: 'hotSpots/editHotSpotBucket/editHotSpotBucket.partial.html',
                 parent: angular.element(document.body),
                 locals: {
-                    hotSpotBucket: hotSpotBucketCopy
+                    hotSpotBucket: hotSpotBucketCopy,
+                    deleteCallback: function () {
+                        getAllHotSpotBuckets();
+                    },
+                    renameCallback: function (updatedHotSpotBucket) {
+                        hotSpotBucket.name = updatedHotSpotBucket.name;
+                    }
                 },
                 clickOutsideToClose: true
-            }).then(function (updatedHotSpotBucket) {
-                if (typeof updatedHotSpotBucket === 'undefined') {
-                    getAllHotSpotBuckets();
-                } else {
-                    hotSpotBucket.name = updatedHotSpotBucket.name;
-                }
             });
         }
     }
