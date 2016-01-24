@@ -41,7 +41,7 @@
 
 <br />
 
-<div ng-if="vm.relatedEntries.length > 0" class="md-whiteframe-1dp">
+<div class="md-whiteframe-1dp" cg-busy="vm.getRelatedEntriesPromise">
     <md-toolbar>
         <h1 class="md-toolbar-tools">
             Related

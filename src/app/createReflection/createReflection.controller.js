@@ -60,7 +60,7 @@
         }
 
         function updateRelatedEntriesForReflection() {
-            ParseService.callFunction('getRelatedEntriesForReflection',
+            vm.getRelatedEntriesPromise = ParseService.callFunction('getRelatedEntriesForReflection',
                     {typeName: reflectionType.typeName, outcomeDate: vm.effectiveDate},
                     AuthService.getUserToken())
                 .then(function (data) {

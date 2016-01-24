@@ -18,7 +18,7 @@
         getAllHotSpotBuckets();
 
         function getAllHotSpotBuckets() {
-            ParseService.getAllObjects('HotSpotBucket', AuthService.getUserToken())
+            vm.getHotSpotsPromise = ParseService.getAllObjects('HotSpotBucket', AuthService.getUserToken())
                 .then(function (hotSpotBuckets) {
                     vm.hotSpotBuckets = hotSpotBuckets;
                 });

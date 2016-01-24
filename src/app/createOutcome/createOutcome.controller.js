@@ -13,7 +13,7 @@
         vm.header = generateHeader();
         vm.relatedEntries = [];
 
-        ParseService.callFunction('getRelatedEntriesForOutcome',
+        vm.getRelatedEntriesPromise = ParseService.callFunction('getRelatedEntriesForOutcome',
                 {typeName: outcomeType.typeName},
                 AuthService.getUserToken())
             .then(function (data) {

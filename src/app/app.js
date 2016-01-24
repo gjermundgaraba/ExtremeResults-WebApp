@@ -10,6 +10,7 @@
             'ngCookies',
             'ngAnimate',
             'ngMdIcons',
+            'cgBusy',
             'xr.core',
             'xr.config',
             'xr.auth',

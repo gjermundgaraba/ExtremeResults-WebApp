@@ -17,13 +17,13 @@
 
         var token = AuthService.getUserToken();
 
-        ParseService.callFunction('getActiveEntries', null, token)
+        vm.getActiveEntriesPromise = ParseService.callFunction('getActiveEntries', null, token)
             .then(function(data) {
                 vm.activeEntries = data;
             });
 
         function getAllEntries() {
-            ParseService.callFunction('getEntries', null, token)
+            vm.getAllEntriesPromise = ParseService.callFunction('getEntries', null, token)
                 .then(function(data) {
                     vm.allEntriesLoaded = true;
                     vm.overviewEntries = data;

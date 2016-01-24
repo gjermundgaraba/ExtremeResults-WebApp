@@ -65,7 +65,7 @@
     </md-content>
 </div>
 
-<div ng-if="vm.relatedEntries.length > 0">
+<div class="md-whiteframe-1dp" cg-busy="vm.getRelatedEntriesPromise">
     <md-toolbar>
         <h1 class="md-toolbar-tools">
             Related
