@@ -69,6 +69,10 @@
                     templateUrl: 'hotSpots/hotSpots.partial.html',
                     controller: 'HotSpotsController',
                     controllerAs: 'vm'
+                })
+                .state('app.settings', {
+                    url: '/settings',
+                    templateUrl: 'settings/settings.partial.html'
                 });
         }])
 })();
