@@ -4,29 +4,35 @@
             <h3 class="ng-binding">Register on Extreme Results</h3>
         </div>
     </md-toolbar>
-    <form name="vm.registerForm" ng-submit="vm.register()" novalidate>
-        <md-input-container class="md-block">
-            <label for="registerUsernameField">Username</label>
-            <input id="registerUsernameField" autocapitalize="none" required name="username" ng-model="vm.username">
-            <div ng-messages="vm.registerForm.username.$error" ng-if="vm.registerForm.username.$error.required && vm.registerForm.$submitted">
-                <div ng-message="required">This is required.</div>
-            </div>
-        </md-input-container>
+    <md-content layout-padding>
+        <form name="vm.registerForm" ng-submit="vm.register()" novalidate>
+            <md-input-container class="md-block">
+                <label for="registerUsernameField">Username</label>
+                <input id="registerUsernameField" autocapitalize="none" required name="username" ng-model="vm.username">
+                <div ng-messages="vm.registerForm.username.$error" ng-if="vm.registerForm.username.$error.required && vm.registerForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
 
-        <md-input-container class="md-block">
-            <label for="registerPasswordField">Password</label>
-            <input id="registerPasswordField" type="password" required name="password" ng-model="vm.password">
-            <div ng-messages="vm.registerForm.password.$error" ng-if="vm.registerForm.password.$error.required && vm.registerForm.$submitted">
-                <div ng-message="required">This is required.</div>
-            </div>
-        </md-input-container>
+            <md-input-container class="md-block">
+                <label for="registerPasswordField">Password</label>
+                <input id="registerPasswordField" type="password" required name="password" ng-model="vm.password">
+                <div ng-messages="vm.registerForm.password.$error" ng-if="vm.registerForm.password.$error.required && vm.registerForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
 
-        <md-button ng-click="vm.backToLogin()" type="button" ng-disabled="vm.isRegistering" class="md-raised md-accent">
+            <md-button type="submit" ng-disabled="vm.isRegistering" id="registerButton" class="md-raised md-accent pull-right">
+                Register
+            </md-button>
+        </form>
+    </md-content>
+    <md-content class="form-equality-padding">
+        <md-divider></md-divider>
+
+        <md-button ng-click="vm.backToLogin()" type="button" ng-disabled="vm.isRegistering" class="pull-right">
             Back to login
         </md-button>
+    </md-content>
 
-        <md-button type="submit" ng-disabled="vm.isRegistering" id="registerButton" class="md-raised md-accent">
-            Register
-        </md-button>
-    </form>
 </div>

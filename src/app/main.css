@@ -108,6 +108,10 @@ header {
     fill: #fff;
 }
 
+.form-equality-padding {
+    padding: 18px;
+}
+
 @media (max-width: 650px) {
     .login-container, .register-container {
         width: 400px;

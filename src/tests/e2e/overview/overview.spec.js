@@ -38,7 +38,7 @@ describe('Overview Page', function () {
         });
 
         it('should be able to edit an outcome', function () {
-            // For now, only one outcome to edit anyways, later we might need to change this
+            browser.waitForAngular();
             overviewPage.editCurrentOutcomeButton(0).click();
 
             editOutcome.firstStory.clear();
