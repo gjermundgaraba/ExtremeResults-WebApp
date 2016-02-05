@@ -8,7 +8,7 @@ var bundle = require('gulp-bundle-assets'),
     connect = require('gulp-connect'),
     templateCache = require('gulp-angular-templatecache'),
     jshint = require('gulp-jshint'),
-    karma = require('karma').server,
+    KarmaServer = require('karma').Server,
     csslint = require('gulp-csslint'),
     argv = require('yargs').argv;
 
@@ -90,9 +90,9 @@ gulp.task('check', ['jshint', 'test'], function() {
 });
 
 gulp.task('tdd', function (done) {
-    karma.start({
+    new KarmaServer({
         configFile: __dirname + '/karma.conf.js'
-    }, done);
+    }, done).start();
 });
 
 gulp.task('csslint', function() {

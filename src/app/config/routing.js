@@ -74,5 +74,5 @@
                     url: '/settings',
                     templateUrl: 'settings/settings.partial.html'
                 });
-        }])
+        }]);
 })();
