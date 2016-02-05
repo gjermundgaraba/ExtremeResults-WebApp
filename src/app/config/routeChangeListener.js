@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('xr.config')
-        .run(['AuthService', '$rootScope', '$mdDialog', '$state', function (AuthService, $rootScope, $mdDialog, $state) {
+        .run(['AuthService', '$rootScope', '$state', function (AuthService, $rootScope, $state) {
             $rootScope.$on('$stateChangeStart', function (event, toState) {
                 if (toState.name !== 'login' && toState.name !== 'register') {
                     if (!AuthService.anyOneLoggedIn()) {
