@@ -8,12 +8,12 @@
     "angular-aria": "1.5.0",
     "angular-busy2": "4.1.5",
     "angular-cookies": "1.5.0",
-    "angular-material": "1.0.4",
+    "angular-material": "1.0.5",
     "angular-material-icons": "0.6.0",
     "angular-messages": "1.5.0",
     "angular-moment": "0.10.3",
     "angular-ui-router": "0.2.17",
-    "moment": "2.11.1"
+    "moment": "2.11.2"
   },
   "devDependencies": {
     "angular-mocks": "1.5.0",
