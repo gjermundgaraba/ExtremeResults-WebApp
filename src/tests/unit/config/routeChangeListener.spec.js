@@ -7,7 +7,6 @@
             state,
             q;
 
-        // Get the provider
         beforeEach(function () {
             module('xr.config', function ($provide) {
 

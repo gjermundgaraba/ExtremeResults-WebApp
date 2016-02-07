@@ -3,7 +3,7 @@
 
     angular.module('xr.config')
         .config(['$stateProvider', '$urlRouterProvider', 'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
-            $urlRouterProvider.otherwise( function($injector) {
+            $urlRouterProvider.otherwise(function($injector) {
                 var $state = $injector.get('$state');
                 $state.go('app.overview');
             });
