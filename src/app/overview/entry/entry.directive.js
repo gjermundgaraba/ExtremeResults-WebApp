@@ -3,19 +3,15 @@
 
     angular
         .module('xr.overview')
-        .directive('overviewEntry', overviewEntryDirective);
-
-    overviewEntryDirective.$inject = [];
-
-    function overviewEntryDirective() {
-        return {
+        .component('overviewEntry', {
             restrict: 'AE',
             replace: true,
-            scope: {
+            bindings: {
                 entryObj: '='
             },
-            templateUrl: 'overview/entry/entry.partial.html'
-        };
-    }
+            templateUrl: 'overview/entry/entry.partial.html',
+            controller: function () {},
+            controllerAs: 'vm'
+        });
 
 })();

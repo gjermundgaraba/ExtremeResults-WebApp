@@ -3,19 +3,10 @@
 
     angular
         .module('xr.navigation')
-        .directive('xrNavigation', xrNavigationDirective);
-
-    xrNavigationDirective.$inject = [];
-
-    function xrNavigationDirective() {
-        return {
-            restrict: 'AE',
-            scope: {},
+        .component('xrNavigation', {
             templateUrl: 'navigation/navigation.partial.html',
-            controller: 'NavigationController',
-            controllerAs: 'vm'
-        };
-    }
+            controller: 'NavigationController as vm'
+        });
 
 
 })();

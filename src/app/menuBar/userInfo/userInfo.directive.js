@@ -3,21 +3,10 @@
 
     angular
         .module('xr.menuBar')
-        .directive('xrUserInfo', xrUserInfoDirective);
-
-    xrUserInfoDirective.$inject = [];
-
-    function xrUserInfoDirective() {
-        return {
-            restrict: 'AE',
-            scope: {
-
-            },
+        .component('xrUserInfo',  {
             templateUrl: 'menuBar/userInfo/userInfo.partial.html',
-            controller: 'UserInfoController',
-            controllerAs: 'vm'
-        };
-    }
+            controller: 'UserInfoController as vm'
+        });
 
 
 })();

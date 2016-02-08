@@ -1,8 +1,8 @@
-<div ng-switch="entryObj.className">
+<div ng-switch="vm.entryObj.className">
     <div ng-switch-when="Outcome">
-        <outcome-entry outcome-obj="entryObj"></outcome-entry>
+        <outcome-entry outcome-obj="vm.entryObj"></outcome-entry>
     </div>
     <div ng-switch-when="Reflection">
-        <reflection-entry reflection-obj="entryObj"></reflection-entry>
+        <reflection-entry reflection-obj="vm.entryObj"></reflection-entry>
     </div>
 </div>

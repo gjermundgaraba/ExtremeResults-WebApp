@@ -3,21 +3,10 @@
 
     angular
         .module('xr.menuBar')
-        .directive('xrMenuBar', xrMenuBarDirective);
-
-    xrMenuBarDirective.$inject = [];
-
-    function xrMenuBarDirective() {
-        return {
-            restrict: 'AE',
-            scope: {
-
-            },
+        .component('xrMenuBar', {
             templateUrl: 'menuBar/menuBar.partial.html',
-            controller: 'MenuBarController',
-            controllerAs: 'vm'
-        };
-    }
+            controller: 'MenuBarController as vm'
+        });
 
 
 })();
