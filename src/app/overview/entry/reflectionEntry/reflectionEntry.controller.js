@@ -5,12 +5,12 @@
         .module('xr.overview')
         .controller('ReflectionEntryController', ReflectionEntryController);
 
-    ReflectionEntryController.$inject = ['$scope', 'XrUtils'];
+    ReflectionEntryController.$inject = ['XrUtils'];
 
-    function ReflectionEntryController($scope, XrUtils) {
+    function ReflectionEntryController(XrUtils) {
         var vm = this;
 
-        vm.header = XrUtils.getEntryHeader($scope.reflectionObj);
-        vm.reflectionTime = XrUtils.getFormattedEntryDate($scope.reflectionObj);
+        vm.header = XrUtils.getEntryHeader(vm.reflectionObj);
+        vm.reflectionTime = XrUtils.getFormattedEntryDate(vm.reflectionObj);
     }
 })();

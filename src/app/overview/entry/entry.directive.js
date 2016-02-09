@@ -9,9 +9,7 @@
             bindings: {
                 entryObj: '='
             },
-            templateUrl: 'overview/entry/entry.partial.html',
-            controller: function () {},
-            controllerAs: 'vm'
+            templateUrl: 'overview/entry/entry.partial.html'
         });
 
 })();

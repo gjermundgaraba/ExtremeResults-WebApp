@@ -5,7 +5,7 @@
         .module('xr.menuBar')
         .component('xrMenuBar', {
             templateUrl: 'menuBar/menuBar.partial.html',
-            controller: 'MenuBarController as vm'
+            controller: 'MenuBarController'
         });
 
 

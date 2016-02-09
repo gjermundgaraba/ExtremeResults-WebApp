@@ -3,21 +3,12 @@
 
     angular
         .module('xr.overview')
-        .directive('outcomeEntry', outcomeEntryDirective);
-
-    outcomeEntryDirective.$inject = [];
-
-    function outcomeEntryDirective() {
-        return {
-            restrict: 'AE',
-            scope: {
+        .component('outcomeEntry', {
+            bindings: {
                 outcomeObj: '='
             },
-            bindToController: true,
-            controller: 'OutcomeEntryController',
-            controllerAs: 'vm',
-            templateUrl: 'overview/entry/outcomeEntry/outcomeEntry.partial.html'
-        };
-    }
+            templateUrl: 'overview/entry/outcomeEntry/outcomeEntry.partial.html',
+            controller: 'OutcomeEntryController'
+        });
 
 })();

@@ -1,21 +1,21 @@
 <md-content class="md-padding">
-    <h3 class="md-title">{{::vm.header}}</h3>
+    <h3 class="md-title">{{::$ctrl.header}}</h3>
 
     <md-subheader>Things that went well</md-subheader>
     <ol>
-        <li>{{::reflectionObj.firstThingThatWentWell}}</li>
-        <li>{{::reflectionObj.secondThingThatWentWell}}</li>
-        <li>{{::reflectionObj.thirdThingThatWentWell}}</li>
+        <li>{{::$ctrl.reflectionObj.firstThingThatWentWell}}</li>
+        <li>{{::$ctrl.reflectionObj.secondThingThatWentWell}}</li>
+        <li>{{::$ctrl.reflectionObj.thirdThingThatWentWell}}</li>
     </ol>
 
     <md-subheader>Things to improve</md-subheader>
     <ol>
-        <li>{{::reflectionObj.firstThingToImprove}}</li>
-        <li>{{::reflectionObj.secondThingToImprove}}</li>
-        <li>{{::reflectionObj.thirdThingToImprove}}</li>
+        <li>{{::$ctrl.reflectionObj.firstThingToImprove}}</li>
+        <li>{{::$ctrl.reflectionObj.secondThingToImprove}}</li>
+        <li>{{::$ctrl.reflectionObj.thirdThingToImprove}}</li>
     </ol>
 
-    <span><i class="fa fa-calendar-o"></i> {{::vm.reflectionTime}}</span>
-    <!-- TODO IMPLEMENT <ng-md-icon size="30" ng-click="vm.editReflection()" class="fake-button edit-button overview-edit-button" icon="mode_edit"></ng-md-icon>-->
+    <span><i class="fa fa-calendar-o"></i> {{::$ctrl.reflectionTime}}</span>
+    <!-- TODO IMPLEMENT <ng-md-icon size="30" ng-click="$ctrl.editReflection()" class="fake-button edit-button overview-edit-button" icon="mode_edit"></ng-md-icon>-->
 </md-content>
 

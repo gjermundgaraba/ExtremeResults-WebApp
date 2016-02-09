@@ -1,16 +1,16 @@
 <md-content class="md-padding">
-    <h3 class="md-title entry-title">{{::vm.header}}</h3>
+    <h3 class="md-title entry-title">{{::$ctrl.header}}</h3>
 
 
     <ol>
-        <li>{{vm.outcomeObj.firstStory}}</li>
-        <li>{{vm.outcomeObj.secondStory}}</li>
-        <li>{{vm.outcomeObj.thirdStory}}</li>
+        <li>{{$ctrl.outcomeObj.firstStory}}</li>
+        <li>{{$ctrl.outcomeObj.secondStory}}</li>
+        <li>{{$ctrl.outcomeObj.thirdStory}}</li>
     </ol>
 
-    <span><i class="fa fa-calendar-o"></i> {{::vm.outcomeTime}}</span>
+    <span><i class="fa fa-calendar-o"></i> {{::$ctrl.outcomeTime}}</span>
 
-    <ng-md-icon size="30" ng-click="vm.editOutcome()" class="fake-button edit-button overview-edit-button" icon="mode_edit"></ng-md-icon>
+    <ng-md-icon size="30" ng-click="$ctrl.editOutcome()" class="fake-button edit-button overview-edit-button" icon="mode_edit"></ng-md-icon>
 </md-content>
 
 

@@ -3,20 +3,12 @@
 
     angular
         .module('xr.overview')
-        .directive('reflectionEntry', reflectionEntryDirective);
-
-    reflectionEntryDirective.$inject = [];
-
-    function reflectionEntryDirective() {
-        return {
-            restrict: 'AE',
-            scope: {
+        .component('reflectionEntry', {
+            bindings: {
                 reflectionObj: '='
             },
-            controller: 'ReflectionEntryController',
-            controllerAs: 'vm',
-            templateUrl: 'overview/entry/reflectionEntry/reflectionEntry.partial.html'
-        };
-    }
+            templateUrl: 'overview/entry/reflectionEntry/reflectionEntry.partial.html',
+            controller: 'ReflectionEntryController'
+        });
 
 })();
