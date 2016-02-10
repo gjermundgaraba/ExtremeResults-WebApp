@@ -63,7 +63,7 @@
             spyOn(ParseServiceMock, 'callFunction').and.returnValue(relatedEntriesDeferred.promise);
 
             controller = $controller('CreateReflectionController', {'$location': location, '$scope': scope});
-            scope.vm = controller;
+            scope.$ctrl = controller;
         }));
 
         describe('init', function () {

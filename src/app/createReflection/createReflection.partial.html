@@ -2,57 +2,57 @@
 <div>
     <md-toolbar>
         <h1 class="md-toolbar-tools">
-            {{vm.generateHeader()}}
+            {{$ctrl.generateHeader()}}
         </h1>
     </md-toolbar>
     <md-content class="md-padding">
-        Effective date: <md-datepicker ng-model="vm.effectiveDate"></md-datepicker>
+        Effective date: <md-datepicker ng-model="$ctrl.effectiveDate"></md-datepicker>
 
-        <form name="vm.weeklyReflectionForm" ng-submit="vm.save()" novalidate>
+        <form name="$ctrl.weeklyReflectionForm" ng-submit="$ctrl.save()" novalidate>
             <md-input-container class="md-block">
                 <label for="firstThingThatWentWell">First thing that went well</label>
-                <input ng-model="vm.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" required>
-                <div ng-messages="vm.weeklyReflectionForm.firstThingThatWentWell.$error" ng-if="vm.weeklyReflectionForm.firstThingThatWentWell.$error.required && vm.weeklyReflectionForm.$submitted">
+                <input ng-model="$ctrl.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" required>
+                <div ng-messages="$ctrl.weeklyReflectionForm.firstThingThatWentWell.$error" ng-if="$ctrl.weeklyReflectionForm.firstThingThatWentWell.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label for="secondThingThatWentWell">Second thing that went well</label>
-                <input ng-model="vm.secondThingThatWentWell" id="secondThingThatWentWell" name="secondThingThatWentWell" type="text" required>
-                <div ng-messages="vm.weeklyReflectionForm.secondThingThatWentWell.$error" ng-if="vm.weeklyReflectionForm.secondThingThatWentWell.$error.required && vm.weeklyReflectionForm.$submitted">
+                <input ng-model="$ctrl.secondThingThatWentWell" id="secondThingThatWentWell" name="secondThingThatWentWell" type="text" required>
+                <div ng-messages="$ctrl.weeklyReflectionForm.secondThingThatWentWell.$error" ng-if="$ctrl.weeklyReflectionForm.secondThingThatWentWell.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label for="thirdThingThatWentWell">Third thing that went well</label>
-                <input ng-model="vm.thirdThingThatWentWell" id="thirdThingThatWentWell" name="thirdThingThatWentWell" type="text" required>
-                <div ng-messages="vm.weeklyReflectionForm.thirdThingThatWentWell.$error" ng-if="vm.weeklyReflectionForm.thirdThingThatWentWell.$error.required && vm.weeklyReflectionForm.$submitted">
+                <input ng-model="$ctrl.thirdThingThatWentWell" id="thirdThingThatWentWell" name="thirdThingThatWentWell" type="text" required>
+                <div ng-messages="$ctrl.weeklyReflectionForm.thirdThingThatWentWell.$error" ng-if="$ctrl.weeklyReflectionForm.thirdThingThatWentWell.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label for="firstThingToImprove">First thing to improve</label>
-                <input ng-model="vm.firstThingToImprove" id="firstThingToImprove" name="firstThingToImprove" type="text" required>
-                <div ng-messages="vm.weeklyReflectionForm.firstThingToImprove.$error" ng-if="vm.weeklyReflectionForm.firstThingToImprove.$error.required && vm.weeklyReflectionForm.$submitted">
+                <input ng-model="$ctrl.firstThingToImprove" id="firstThingToImprove" name="firstThingToImprove" type="text" required>
+                <div ng-messages="$ctrl.weeklyReflectionForm.firstThingToImprove.$error" ng-if="$ctrl.weeklyReflectionForm.firstThingToImprove.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label for="secondThingToImprove">Second thing to improve</label>
-                <input ng-model="vm.secondThingToImprove" id="secondThingToImprove" name="secondThingToImprove" type="text" required>
-                <div ng-messages="vm.weeklyReflectionForm.secondThingToImprove.$error" ng-if="vm.weeklyReflectionForm.secondThingToImprove.$error.required && vm.weeklyReflectionForm.$submitted">
+                <input ng-model="$ctrl.secondThingToImprove" id="secondThingToImprove" name="secondThingToImprove" type="text" required>
+                <div ng-messages="$ctrl.weeklyReflectionForm.secondThingToImprove.$error" ng-if="$ctrl.weeklyReflectionForm.secondThingToImprove.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label for="thirdThingToImprove">Third thing to improve</label>
-                <input ng-model="vm.thirdThingToImprove" id="thirdThingToImprove" name="thirdThingToImprove" type="text" required>
-                <div ng-messages="vm.weeklyReflectionForm.thirdThingToImprove.$error" ng-if="vm.weeklyReflectionForm.thirdThingToImprove.$error.required && vm.weeklyReflectionForm.$submitted">
+                <input ng-model="$ctrl.thirdThingToImprove" id="thirdThingToImprove" name="thirdThingToImprove" type="text" required>
+                <div ng-messages="$ctrl.weeklyReflectionForm.thirdThingToImprove.$error" ng-if="$ctrl.weeklyReflectionForm.thirdThingToImprove.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
@@ -65,14 +65,14 @@
     </md-content>
 </div>
 
-<div class="md-whiteframe-1dp" cg-busy="vm.getRelatedEntriesPromise">
+<div class="md-whiteframe-1dp" cg-busy="$ctrl.getRelatedEntriesPromise">
     <md-toolbar>
         <h1 class="md-toolbar-tools">
             Related
         </h1>
     </md-toolbar>
     <md-content>
-        <md-card ng-repeat="relatedEntry in vm.relatedEntries">
+        <md-card ng-repeat="relatedEntry in $ctrl.relatedEntries">
             <overview-entry entry-obj="relatedEntry"></overview-entry>
         </md-card>
     </md-content>

@@ -5,24 +5,24 @@
         </div>
     </md-toolbar>
     <md-content layout-padding>
-        <form name="vm.loginForm" ng-submit="vm.login()" novalidate>
+        <form name="$ctrl.loginForm" ng-submit="$ctrl.login()" novalidate>
             <md-input-container class="md-block">
                 <label for="loginUsernameField">Username</label>
-                <input id="loginUsernameField" autocapitalize="none" required name="username" ng-model="vm.username">
-                <div ng-messages="vm.loginForm.username.$error" ng-if="vm.loginForm.username.$error.required && vm.loginForm.$submitted">
+                <input id="loginUsernameField" autocapitalize="none" required name="username" ng-model="$ctrl.username">
+                <div ng-messages="$ctrl.loginForm.username.$error" ng-if="$ctrl.loginForm.username.$error.required && $ctrl.loginForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label for="loginPasswordField">Password</label>
-                <input id="loginPasswordField" type="password" required name="password" ng-model="vm.password">
-                <div ng-messages="vm.loginForm.password.$error" ng-if="vm.loginForm.password.$error.required && vm.loginForm.$submitted">
+                <input id="loginPasswordField" type="password" required name="password" ng-model="$ctrl.password">
+                <div ng-messages="$ctrl.loginForm.password.$error" ng-if="$ctrl.loginForm.password.$error.required && $ctrl.loginForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
-            <md-button type="submit" ng-disabled="vm.isLoggingIn" id="loginButton" class="md-raised md-accent pull-right">
+            <md-button type="submit" ng-disabled="$ctrl.isLoggingIn" id="loginButton" class="md-raised md-accent pull-right">
                 Login
             </md-button>
         </form>
@@ -30,11 +30,11 @@
     <md-content class="form-equality-padding">
         <md-divider></md-divider>
 
-        <md-button type="button" ng-disabled="vm.isLoggingIn" class="pull-left">
+        <md-button type="button" ng-disabled="$ctrl.isLoggingIn" class="pull-left">
             Forgot you password?
         </md-button>
 
-        <md-button type="button" ng-disabled="vm.isLoggingIn" ng-click="vm.register()" class="pull-right">
+        <md-button type="button" ng-disabled="$ctrl.isLoggingIn" ng-click="$ctrl.register()" class="pull-right">
             Register
         </md-button>
     </md-content>

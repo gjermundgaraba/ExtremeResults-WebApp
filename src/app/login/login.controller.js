@@ -8,16 +8,16 @@
     LoginController.$inject = ['AuthService', '$state'];
 
     function LoginController(AuthService, $state) {
-        var vm = this;
-        vm.isLoggingIn = false;
+        var $ctrl = this;
+        $ctrl.isLoggingIn = false;
 
-        vm.login = login;
-        vm.register = register;
+        $ctrl.login = login;
+        $ctrl.register = register;
 
         function login() {
-            if (vm.loginForm.$valid) {
-                vm.isLoggingIn = true;
-                AuthService.login(vm.username, vm.password)
+            if ($ctrl.loginForm.$valid) {
+                $ctrl.isLoggingIn = true;
+                AuthService.login($ctrl.username, $ctrl.password)
                     .then(function () {
                         $state.go('app.overview');
                     })
@@ -25,7 +25,7 @@
                         alert('Wrong username or password');
                     })
                     .finally(function() {
-                        vm.isLoggingIn = false;
+                        $ctrl.isLoggingIn = false;
                     });
             }
         }

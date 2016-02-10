@@ -8,25 +8,25 @@
     OverviewController.$inject = ['ParseService', 'AuthService'];
 
     function OverviewController(ParseService, AuthService) {
-        var vm = this;
+        var $ctrl = this;
 
-        vm.overviewEntries = [];
-        vm.activeEntries = [];
-        vm.allEntriesLoaded = false;
-        vm.getAllEntries = getAllEntries;
+        $ctrl.overviewEntries = [];
+        $ctrl.activeEntries = [];
+        $ctrl.allEntriesLoaded = false;
+        $ctrl.getAllEntries = getAllEntries;
 
         var token = AuthService.getUserToken();
 
-        vm.getActiveEntriesPromise = ParseService.callFunction('getActiveEntries', null, token)
+        $ctrl.getActiveEntriesPromise = ParseService.callFunction('getActiveEntries', null, token)
             .then(function(data) {
-                vm.activeEntries = data;
+                $ctrl.activeEntries = data;
             });
 
         function getAllEntries() {
-            vm.getAllEntriesPromise = ParseService.callFunction('getEntries', null, token)
+            $ctrl.getAllEntriesPromise = ParseService.callFunction('getEntries', null, token)
                 .then(function(data) {
-                    vm.allEntriesLoaded = true;
-                    vm.overviewEntries = data;
+                    $ctrl.allEntriesLoaded = true;
+                    $ctrl.overviewEntries = data;
                 });
         }
     }

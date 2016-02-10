@@ -8,19 +8,19 @@
     HotSpotsController.$inject = ['ParseService', 'AuthService', '$mdDialog'];
 
     function HotSpotsController(ParseService, AuthService, $mdDialog) {
-        var vm = this;
-        vm.hotSpotBuckets = [];
-        vm.handleHotSpotAdd = handleHotSpotChange;
-        vm.handleHotSpotDelete = handleHotSpotChange;
-        vm.saveHotSpotBucket = saveHotSpotBucket;
-        vm.editHotSpotBucket = editHotSpotBucket;
+        var $ctrl = this;
+        $ctrl.hotSpotBuckets = [];
+        $ctrl.handleHotSpotAdd = handleHotSpotChange;
+        $ctrl.handleHotSpotDelete = handleHotSpotChange;
+        $ctrl.saveHotSpotBucket = saveHotSpotBucket;
+        $ctrl.editHotSpotBucket = editHotSpotBucket;
 
         getAllHotSpotBuckets();
 
         function getAllHotSpotBuckets() {
-            vm.getHotSpotsPromise = ParseService.getAllObjects('HotSpotBucket', AuthService.getUserToken())
+            $ctrl.getHotSpotsPromise = ParseService.getAllObjects('HotSpotBucket', AuthService.getUserToken())
                 .then(function (hotSpotBuckets) {
-                    vm.hotSpotBuckets = hotSpotBuckets;
+                    $ctrl.hotSpotBuckets = hotSpotBuckets;
                 });
         }
 
@@ -33,9 +33,9 @@
         }
 
         function saveHotSpotBucket() {
-            if (vm.hotSpotBucketForm.$valid) {
+            if ($ctrl.hotSpotBucketForm.$valid) {
                 var hotSpotBucket = {
-                    name: vm.hotSpotBucketName,
+                    name: $ctrl.hotSpotBucketName,
                     hotSpots: [],
                     ACL: {
                         '*': { }
@@ -49,8 +49,8 @@
 
                 ParseService.postObject('HotSpotBucket', hotSpotBucket)
                     .then(function () {
-                        vm.hotSpotBucketName = ''; // Reset field
-                        vm.hotSpotBucketForm.$setPristine();
+                        $ctrl.hotSpotBucketName = ''; // Reset field
+                        $ctrl.hotSpotBucketForm.$setPristine();
                         getAllHotSpotBuckets();
                     });
             }

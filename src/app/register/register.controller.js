@@ -8,18 +8,18 @@
     RegisterController.$inject = ['AuthService', '$state'];
 
     function RegisterController(AuthService, $state) {
-        var vm = this;
-        vm.isRegistering = false;
-        vm.register = register;
-        vm.backToLogin = backToLogin;
+        var $ctrl = this;
+        $ctrl.isRegistering = false;
+        $ctrl.register = register;
+        $ctrl.backToLogin = backToLogin;
 
         function register () {
-            if (vm.registerForm.$valid) {
-                vm.isRegistering = true;
+            if ($ctrl.registerForm.$valid) {
+                $ctrl.isRegistering = true;
 
                 var user = {
-                    username: vm.username,
-                    password: vm.password
+                    username: $ctrl.username,
+                    password: $ctrl.password
                 };
 
                 AuthService.register(user)
@@ -30,7 +30,7 @@
                         alert('Something went wrong!');
                     })
                     .finally(function() {
-                        vm.isRegistering = false;
+                        $ctrl.isRegistering = false;
                     });
             }
         }

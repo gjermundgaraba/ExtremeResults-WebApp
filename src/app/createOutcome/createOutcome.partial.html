@@ -2,32 +2,32 @@
 <div class="md-whiteframe-1dp">
     <md-toolbar>
         <h1 class="md-toolbar-tools">
-            {{::vm.header}}
+            {{::$ctrl.header}}
         </h1>
     </md-toolbar>
 
     <md-content class="md-padding">
-        <form name="vm.createOutcomeForm" ng-submit="vm.save()" novalidate>
+        <form name="$ctrl.createOutcomeForm" ng-submit="$ctrl.save()" novalidate>
             <md-input-container class="md-block">
                 <label for="outcome1">Outcome 1</label>
-                <input ng-model="vm.outcome1" id="outcome1" name="outcome1" required>
-                <div ng-messages="vm.createOutcomeForm.outcome1.$error" ng-if="vm.createOutcomeForm.outcome1.$error.required && vm.createOutcomeForm.$submitted">
+                <input ng-model="$ctrl.outcome1" id="outcome1" name="outcome1" required>
+                <div ng-messages="$ctrl.createOutcomeForm.outcome1.$error" ng-if="$ctrl.createOutcomeForm.outcome1.$error.required && $ctrl.createOutcomeForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Outcome 2</label>
-                <input ng-model="vm.outcome2" id="outcome2" name="outcome2" required>
-                <div ng-messages="vm.createOutcomeForm.outcome2.$error" ng-if="vm.createOutcomeForm.outcome2.$error.required && vm.createOutcomeForm.$submitted">
+                <input ng-model="$ctrl.outcome2" id="outcome2" name="outcome2" required>
+                <div ng-messages="$ctrl.createOutcomeForm.outcome2.$error" ng-if="$ctrl.createOutcomeForm.outcome2.$error.required && $ctrl.createOutcomeForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Outcome 3</label>
-                <input ng-model="vm.outcome3" id="outcome3" name="outcome3" required>
-                <div ng-messages="vm.createOutcomeForm.outcome3.$error" ng-if="vm.createOutcomeForm.outcome3.$error.required && vm.createOutcomeForm.$submitted">
+                <input ng-model="$ctrl.outcome3" id="outcome3" name="outcome3" required>
+                <div ng-messages="$ctrl.createOutcomeForm.outcome3.$error" ng-if="$ctrl.createOutcomeForm.outcome3.$error.required && $ctrl.createOutcomeForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
@@ -41,14 +41,14 @@
 
 <br />
 
-<div class="md-whiteframe-1dp" cg-busy="vm.getRelatedEntriesPromise">
+<div class="md-whiteframe-1dp" cg-busy="$ctrl.getRelatedEntriesPromise">
     <md-toolbar>
         <h1 class="md-toolbar-tools">
             Related
         </h1>
     </md-toolbar>
     <md-content>
-        <md-card ng-repeat="relatedEntry in vm.relatedEntries">
+        <md-card ng-repeat="relatedEntry in $ctrl.relatedEntries">
             <overview-entry entry-obj="relatedEntry"></overview-entry>
         </md-card>
     </md-content>

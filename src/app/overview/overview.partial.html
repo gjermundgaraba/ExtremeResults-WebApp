@@ -1,29 +1,29 @@
-<md-content class="md-whiteframe-1dp" cg-busy="vm.getActiveEntriesPromise">
+<md-content class="md-whiteframe-1dp" cg-busy="$ctrl.getActiveEntriesPromise">
     <md-toolbar>
         <h1 class="md-toolbar-tools">
             Current Outcomes
         </h1>
     </md-toolbar>
 
-    <md-card ng-repeat="activeEntry in vm.activeEntries">
+    <md-card ng-repeat="activeEntry in $ctrl.activeEntries">
         <overview-entry entry-obj="activeEntry"></overview-entry>
     </md-card>
 </md-content>
 
 <br />
 
-<md-content class="md-whiteframe-1dp" cg-busy="vm.getAllEntriesPromise">
+<md-content class="md-whiteframe-1dp" cg-busy="$ctrl.getAllEntriesPromise">
     <md-toolbar>
         <div class="md-toolbar-tools">
             <h1 class="md-toolbar-tools">
                 All Entries
             </h1>
             <span flex></span>
-            <ng-md-icon size="30" ng-if="!vm.allEntriesLoaded" ng-click="vm.getAllEntries()" class="fake-button load-button" icon="cloud_download"></ng-md-icon>
+            <ng-md-icon size="30" ng-if="!$ctrl.allEntriesLoaded" ng-click="$ctrl.getAllEntries()" class="fake-button load-button" icon="cloud_download"></ng-md-icon>
         </div>
     </md-toolbar>
 
-    <md-card ng-repeat="entry in vm.overviewEntries">
+    <md-card ng-repeat="entry in $ctrl.overviewEntries">
         <overview-entry entry-obj="entry"></overview-entry>
     </md-card>
 </md-content>

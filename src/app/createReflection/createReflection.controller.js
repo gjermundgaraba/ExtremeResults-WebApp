@@ -8,15 +8,15 @@
     CreateReflectionController.$inject = ['$scope', 'ParseService', '$location', 'reflectionType', 'XrUtils', 'AuthService'];
 
     function CreateReflectionController($scope, ParseService, $location, reflectionType, XrUtils, AuthService) {
-        var vm = this;
-        vm.save = save;
-        vm.effectiveDate = new Date();
-        vm.generateHeader = generateHeader;
-        vm.relatedEntries = [];
+        var $ctrl = this;
+        $ctrl.save = save;
+        $ctrl.effectiveDate = new Date();
+        $ctrl.generateHeader = generateHeader;
+        $ctrl.relatedEntries = [];
 
         updateRelatedEntriesForReflection();
 
-        $scope.$watch('vm.effectiveDate', function (newValue, oldValue) {
+        $scope.$watch('$ctrl.effectiveDate', function (newValue, oldValue) {
             if (newValue !== oldValue) {
                 updateRelatedEntriesForReflection();
             }
@@ -24,17 +24,17 @@
         });
 
         function save() {
-            if (vm.weeklyReflectionForm.$valid) {
+            if ($ctrl.weeklyReflectionForm.$valid) {
                 var weeklyReflection = {
-                    firstThingThatWentWell: vm.firstThingThatWentWell,
-                    secondThingThatWentWell: vm.secondThingThatWentWell,
-                    thirdThingThatWentWell: vm.thirdThingThatWentWell,
-                    firstThingToImprove: vm.firstThingToImprove,
-                    secondThingToImprove: vm.secondThingToImprove,
-                    thirdThingToImprove: vm.thirdThingToImprove,
+                    firstThingThatWentWell: $ctrl.firstThingThatWentWell,
+                    secondThingThatWentWell: $ctrl.secondThingThatWentWell,
+                    thirdThingThatWentWell: $ctrl.thirdThingThatWentWell,
+                    firstThingToImprove: $ctrl.firstThingToImprove,
+                    secondThingToImprove: $ctrl.secondThingToImprove,
+                    thirdThingToImprove: $ctrl.thirdThingToImprove,
                     effectiveDate: {
                         '__type': 'Date',
-                        'iso': vm.effectiveDate.toISOString()
+                        'iso': $ctrl.effectiveDate.toISOString()
                     },
                     typeName: reflectionType.typeName,
                     ACL: {
@@ -56,15 +56,15 @@
 
         function generateHeader() {
             return XrUtils.getEntryHeader(reflectionType) + ' for ' +
-                XrUtils.getFormattedEntryDate(reflectionType, vm.effectiveDate);
+                XrUtils.getFormattedEntryDate(reflectionType, $ctrl.effectiveDate);
         }
 
         function updateRelatedEntriesForReflection() {
-            vm.getRelatedEntriesPromise = ParseService.callFunction('getRelatedEntriesForReflection',
-                    {typeName: reflectionType.typeName, outcomeDate: vm.effectiveDate},
+            $ctrl.getRelatedEntriesPromise = ParseService.callFunction('getRelatedEntriesForReflection',
+                    {typeName: reflectionType.typeName, outcomeDate: $ctrl.effectiveDate},
                     AuthService.getUserToken())
                 .then(function (data) {
-                    vm.relatedEntries = data;
+                    $ctrl.relatedEntries = data;
                 });
         }
 

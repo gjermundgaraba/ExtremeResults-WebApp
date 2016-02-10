@@ -8,11 +8,11 @@
         </md-toolbar>
         <md-content class="md-padding" layout="column">
 
-            <form name="vm.hotSpotBucketForm" ng-submit="vm.saveHotSpotBucket()" novalidate>
+            <form name="$ctrl.hotSpotBucketForm" ng-submit="$ctrl.saveHotSpotBucket()" novalidate>
                 <md-input-container class="md-block">
                     <label for="hotSpotBucketName">Hot Spot Bucket Name</label>
-                    <input ng-model="vm.hotSpotBucketName" id="hotSpotBucketName" name="hotSpotBucketName" type="text" required>
-                    <div ng-messages="vm.hotSpotBucketForm.hotSpotBucketName.$error" ng-if="vm.hotSpotBucketForm.hotSpotBucketName.$error.required && vm.hotSpotBucketForm.$submitted">
+                    <input ng-model="$ctrl.hotSpotBucketName" id="hotSpotBucketName" name="hotSpotBucketName" type="text" required>
+                    <div ng-messages="$ctrl.hotSpotBucketForm.hotSpotBucketName.$error" ng-if="$ctrl.hotSpotBucketForm.hotSpotBucketName.$error.required && $ctrl.hotSpotBucketForm.$submitted">
                         <div ng-message="required">This is required.</div>
                     </div>
                 </md-input-container>
@@ -26,7 +26,7 @@
 
     <br />
 
-    <div class="md-whiteframe-1dp" cg-busy="vm.getHotSpotsPromise">
+    <div class="md-whiteframe-1dp" cg-busy="$ctrl.getHotSpotsPromise">
         <md-toolbar>
             <h1 class="md-toolbar-tools">
                 Hot Spot Buckets
@@ -34,11 +34,11 @@
         </md-toolbar>
         <md-content class="md-padding">
 
-            <div ng-repeat="hotSpotBucket in vm.hotSpotBuckets">
-                <h2 class="md-title hot-spot-bucket-title">{{hotSpotBucket.name}} <ng-md-icon size="18" class="edit-button" ng-click="vm.editHotSpotBucket(hotSpotBucket)" icon="mode_edit"></ng-md-icon></h2>
+            <div ng-repeat="hotSpotBucket in $ctrl.hotSpotBuckets">
+                <h2 class="md-title hot-spot-bucket-title">{{hotSpotBucket.name}} <ng-md-icon size="18" class="edit-button" ng-click="$ctrl.editHotSpotBucket(hotSpotBucket)" icon="mode_edit"></ng-md-icon></h2>
                 <md-chips ng-model="hotSpotBucket.hotSpots"
-                          md-on-add="vm.handleHotSpotAdd(hotSpotBucket)"
-                          md-on-remove="vm.handleHotSpotDelete(hotSpotBucket)">
+                          md-on-add="$ctrl.handleHotSpotAdd(hotSpotBucket)"
+                          md-on-remove="$ctrl.handleHotSpotDelete(hotSpotBucket)">
                 </md-chips>
                 <br/>
             </div>

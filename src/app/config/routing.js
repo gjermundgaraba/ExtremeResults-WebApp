@@ -13,13 +13,13 @@
                     url: '/login',
                     templateUrl: 'login/login.partial.html',
                     controller: 'LoginController',
-                    controllerAs: 'vm'
+                    controllerAs: '$ctrl'
                 })
                 .state('register', {
                     url: '/register',
                     templateUrl: 'register/register.partial.html',
                     controller: 'RegisterController',
-                    controllerAs: 'vm'
+                    controllerAs: '$ctrl'
                 })
                 .state('app', {
                     url: '',
@@ -29,13 +29,13 @@
                     url: '/overview',
                     templateUrl: 'overview/overview.partial.html',
                     controller: 'OverviewController',
-                    controllerAs: 'vm'
+                    controllerAs: '$ctrl'
                 })
                 .state('app.daily-outcome', {
                     url: '/daily-outcome',
                     templateUrl: 'createOutcome/createOutcome.partial.html',
                     controller: 'CreateOutcomeController',
-                    controllerAs: 'vm',
+                    controllerAs: '$ctrl',
                     resolve: {
                         outcomeType: function () {
                             return CoreTypes.dailyOutcome;
@@ -46,7 +46,7 @@
                     url: '/monday-vision',
                     templateUrl: 'createOutcome/createOutcome.partial.html',
                     controller: 'CreateOutcomeController',
-                    controllerAs: 'vm',
+                    controllerAs: '$ctrl',
                     resolve: {
                         outcomeType: function () {
                             return CoreTypes.mondayVision;
@@ -57,7 +57,7 @@
                     url: '/weekly-reflection',
                     templateUrl: 'createReflection/createReflection.partial.html',
                     controller: 'CreateReflectionController',
-                    controllerAs: 'vm',
+                    controllerAs: '$ctrl',
                     resolve: {
                         reflectionType: function () {
                             return CoreTypes.weeklyReflection;
@@ -68,7 +68,7 @@
                     url: '/hot-spots',
                     templateUrl: 'hotSpots/hotSpots.partial.html',
                     controller: 'HotSpotsController',
-                    controllerAs: 'vm'
+                    controllerAs: '$ctrl'
                 })
                 .state('app.settings', {
                     url: '/settings',

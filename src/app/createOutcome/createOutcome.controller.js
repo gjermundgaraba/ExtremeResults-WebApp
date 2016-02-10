@@ -8,24 +8,24 @@
     CreateOutcomeController.$inject = ['ParseService', '$location', 'outcomeType', 'XrUtils', 'AuthService'];
 
     function CreateOutcomeController(ParseService, $location, outcomeType, XrUtils, AuthService) {
-        var vm = this;
-        vm.save = save;
-        vm.header = generateHeader();
-        vm.relatedEntries = [];
+        var $ctrl = this;
+        $ctrl.save = save;
+        $ctrl.header = generateHeader();
+        $ctrl.relatedEntries = [];
 
-        vm.getRelatedEntriesPromise = ParseService.callFunction('getRelatedEntriesForOutcome',
+        $ctrl.getRelatedEntriesPromise = ParseService.callFunction('getRelatedEntriesForOutcome',
                 {typeName: outcomeType.typeName},
                 AuthService.getUserToken())
             .then(function (data) {
-                vm.relatedEntries = data;
+                $ctrl.relatedEntries = data;
             });
 
         function save() {
-            if (vm.createOutcomeForm.$valid) {
+            if ($ctrl.createOutcomeForm.$valid) {
                 var outcome = {
-                    firstStory: vm.outcome1,
-                    secondStory: vm.outcome2,
-                    thirdStory: vm.outcome3,
+                    firstStory: $ctrl.outcome1,
+                    secondStory: $ctrl.outcome2,
+                    thirdStory: $ctrl.outcome3,
                     effectiveDate: {
                         '__type': 'Date',
                         'iso': new Date().toISOString()
