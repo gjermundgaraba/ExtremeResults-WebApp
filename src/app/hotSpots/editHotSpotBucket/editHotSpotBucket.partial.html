@@ -5,14 +5,14 @@
         </div>
     </md-toolbar>
     <md-dialog-content class="edit-dialog">
-        <form name="vm.editHotSpotBucketForm" ng-submit="vm.save()">
+        <form name="$ctrl.editHotSpotBucketForm" ng-submit="$ctrl.save()">
             <md-input-container class="md-block">
                 <label for="hotSpotBucketName">Hot Spot Bucket Name</label>
-                <input ng-model="vm.hotSpotBucket.name" id="hotSpotBucketName" name="hotSpotBucketName" required>
+                <input ng-model="$ctrl.hotSpotBucket.name" id="hotSpotBucketName" name="hotSpotBucketName" required>
             </md-input-container>
 
-            <md-button ng-disabled="vm.saving" type="submit" class="md-raised md-accent">Save</md-button>
-            <md-button ng-disabled="vm.saving" ng-click="vm.deleteHotSpotBucket()" class="md-raised md-accent">Delete</md-button>
+            <md-button ng-disabled="$ctrl.saving" type="submit" class="md-raised md-accent">Save</md-button>
+            <md-button ng-disabled="$ctrl.saving" ng-click="$ctrl.deleteHotSpotBucket()" class="md-raised md-accent">Delete</md-button>
         </form>
     </md-dialog-content>
 </md-dialog>

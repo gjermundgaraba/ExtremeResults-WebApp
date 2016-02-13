@@ -8,9 +8,9 @@
     ReflectionEntryController.$inject = ['XrUtils'];
 
     function ReflectionEntryController(XrUtils) {
-        var vm = this;
+        var $ctrl = this;
 
-        vm.header = XrUtils.getEntryHeader(vm.reflectionObj);
-        vm.reflectionTime = XrUtils.getFormattedEntryDate(vm.reflectionObj);
+        $ctrl.header = XrUtils.getEntryHeader($ctrl.reflectionObj);
+        $ctrl.reflectionTime = XrUtils.getFormattedEntryDate($ctrl.reflectionObj);
     }
 })();

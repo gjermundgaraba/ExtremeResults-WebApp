@@ -8,32 +8,32 @@
     EditHotSpotBucketController.$inject = ['$mdDialog', 'ParseService', 'AuthService'];
 
     function EditHotSpotBucketController($mdDialog, ParseService, AuthService) {
-        var vm = this;
+        var $ctrl = this;
 
-        vm.saving = false;
-        vm.deleteHotSpotBucket = deleteHotSpotBucket;
-        vm.save = save;
+        $ctrl.saving = false;
+        $ctrl.deleteHotSpotBucket = deleteHotSpotBucket;
+        $ctrl.save = save;
 
         function save() {
-            if (!vm.saving) {
-                vm.saving = true;
+            if (!$ctrl.saving) {
+                $ctrl.saving = true;
                 var updateObject = {
-                    name: vm.hotSpotBucket.name
+                    name: $ctrl.hotSpotBucket.name
                 };
-                ParseService.updateObject('HotSpotBucket', vm.hotSpotBucket.objectId,
+                ParseService.updateObject('HotSpotBucket', $ctrl.hotSpotBucket.objectId,
                         updateObject, AuthService.getUserToken())
                     .then(function () {
-                        vm.renameCallback(vm.hotSpotBucket);
+                        $ctrl.renameCallback($ctrl.hotSpotBucket);
                         $mdDialog.hide();
                     })
                     .finally(function () {
-                        vm.saving = false;
+                        $ctrl.saving = false;
                     });
             }
         }
 
         function deleteHotSpotBucket() {
-            if (!vm.saving) {
+            if (!$ctrl.saving) {
                 var confirm = $mdDialog.confirm()
                     .title('Are you sure you want to delete this hot spot bucket?')
                     .ok('Yes')
@@ -41,14 +41,14 @@
 
                 $mdDialog.show(confirm)
                     .then(function () {
-                        vm.saving = true;
+                        $ctrl.saving = true;
 
-                        ParseService.deleteObject('HotSpotBucket', vm.hotSpotBucket.objectId, AuthService.getUserToken())
+                        ParseService.deleteObject('HotSpotBucket', $ctrl.hotSpotBucket.objectId, AuthService.getUserToken())
                             .then(function () {
-                                vm.deleteCallback();
+                                $ctrl.deleteCallback();
                             })
                             .finally(function () {
-                                vm.saving = false;
+                                $ctrl.saving = false;
                             });
                     });
 

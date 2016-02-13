@@ -8,18 +8,18 @@
     OutcomeEntryController.$inject = ['XrUtils', '$mdDialog'];
 
     function OutcomeEntryController(XrUtils, $mdDialog) {
-        var vm = this;
-        vm.editOutcome = editOutcome;
+        var $ctrl = this;
+        $ctrl.editOutcome = editOutcome;
 
-        vm.header = XrUtils.getEntryHeader(vm.outcomeObj);
-        vm.outcomeTime = XrUtils.getFormattedEntryDate(vm.outcomeObj);
+        $ctrl.header = XrUtils.getEntryHeader($ctrl.outcomeObj);
+        $ctrl.outcomeTime = XrUtils.getFormattedEntryDate($ctrl.outcomeObj);
 
         function editOutcome() {
             var outcomeCopy = {};
-            angular.copy(vm.outcomeObj, outcomeCopy);
+            angular.copy($ctrl.outcomeObj, outcomeCopy);
             $mdDialog.show({
                 controller: 'EditOutcomeEntryController',
-                controllerAs: 'vm',
+                controllerAs: '$ctrl',
                 bindToController: true,
                 templateUrl: 'overview/entry/outcomeEntry/editOutcomeEntry/editOutcomeEntry.partial.html',
                 parent: angular.element(document.body),
@@ -28,7 +28,7 @@
                 },
                 clickOutsideToClose: true
             }).then(function (updatedOutcome) {
-                vm.outcomeObj = updatedOutcome;
+                $ctrl.outcomeObj = updatedOutcome;
             });
         }
     }

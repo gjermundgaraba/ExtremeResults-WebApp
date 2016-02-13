@@ -8,13 +8,13 @@
     MenuBarController.$inject = ['$mdSidenav', 'AuthService', '$rootScope'];
 
     function MenuBarController($mdSidenav, AuthService, $rootScope) {
-        var vm = this;
+        var $ctrl = this;
 
-        vm.toggleSidenav = function(menuId) {
+        $ctrl.toggleSidenav = function(menuId) {
             $mdSidenav(menuId).toggle();
         };
 
-        vm.logout = function () {
+        $ctrl.logout = function () {
             AuthService.logout();
             $rootScope.$broadcast('$stateChangeStart', 'overview');
         };

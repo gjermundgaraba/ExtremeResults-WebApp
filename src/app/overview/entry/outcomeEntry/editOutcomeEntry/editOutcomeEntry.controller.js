@@ -8,26 +8,26 @@
     OutcomeEntryController.$inject = ['$mdDialog', 'XrUtils', 'ParseService', 'AuthService'];
 
     function OutcomeEntryController($mdDialog, XrUtils, ParseService, AuthService) {
-        var vm = this;
+        var $ctrl = this;
 
-        vm.saving = false;
-        vm.header = XrUtils.getEntryHeader(vm.outcome) + ' for ' + XrUtils.getFormattedEntryDate(vm.outcome);
+        $ctrl.saving = false;
+        $ctrl.header = XrUtils.getEntryHeader($ctrl.outcome) + ' for ' + XrUtils.getFormattedEntryDate($ctrl.outcome);
 
-        vm.save = function () {
-            if (!vm.saving && vm.editOutcomeForm.$valid) {
-                vm.saving = true;
+        $ctrl.save = function () {
+            if (!$ctrl.saving && $ctrl.editOutcomeForm.$valid) {
+                $ctrl.saving = true;
                 var updateObject = {
-                    firstStory: vm.outcome.firstStory,
-                    secondStory: vm.outcome.secondStory,
-                    thirdStory: vm.outcome.thirdStory
+                    firstStory: $ctrl.outcome.firstStory,
+                    secondStory: $ctrl.outcome.secondStory,
+                    thirdStory: $ctrl.outcome.thirdStory
                 };
-                ParseService.updateObject(vm.outcome.className, vm.outcome.objectId,
+                ParseService.updateObject($ctrl.outcome.className, $ctrl.outcome.objectId,
                         updateObject, AuthService.getUserToken())
                     .then(function () {
-                        $mdDialog.hide(vm.outcome);
+                        $mdDialog.hide($ctrl.outcome);
                     })
                     .finally(function () {
-                        vm.saving = false;
+                        $ctrl.saving = false;
                     });
             }
 

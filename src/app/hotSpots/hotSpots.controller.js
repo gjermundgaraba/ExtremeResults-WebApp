@@ -61,7 +61,7 @@
             angular.copy(hotSpotBucket, hotSpotBucketCopy);
             $mdDialog.show({
                 controller: 'EditHotSpotBucketController',
-                controllerAs: 'vm',
+                controllerAs: '$ctrl',
                 bindToController: true,
                 templateUrl: 'hotSpots/editHotSpotBucket/editHotSpotBucket.partial.html',
                 parent: angular.element(document.body),

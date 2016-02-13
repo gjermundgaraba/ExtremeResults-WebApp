@@ -8,9 +8,9 @@
     UserInfoController.$inject = ['AuthService'];
 
     function UserInfoController(AuthService) {
-        var vm = this;
+        var $ctrl = this;
 
-        vm.currentUser = AuthService.getCurrentUser();
+        $ctrl.currentUser = AuthService.getCurrentUser();
     }
 
 })();

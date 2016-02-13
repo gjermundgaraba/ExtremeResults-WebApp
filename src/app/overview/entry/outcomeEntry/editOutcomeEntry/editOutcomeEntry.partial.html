@@ -1,36 +1,36 @@
 <md-dialog ng-cloak>
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2>{{vm.header}}</h2>
+            <h2>{{$ctrl.header}}</h2>
         </div>
     </md-toolbar>
     <md-dialog-content class="edit-dialog">
-        <form name="vm.editOutcomeForm" ng-submit="vm.save()" novalidate>
+        <form name="$ctrl.editOutcomeForm" ng-submit="$ctrl.save()" novalidate>
             <md-input-container class="md-block">
                 <label for="outcome1">Outcome 1</label>
-                <input ng-model="vm.outcome.firstStory" id="outcome1" name="outcome1" required>
-                <div ng-messages="vm.editOutcomeForm.outcome1.$error" ng-if="vm.editOutcomeForm.outcome1.$error.required && vm.editOutcomeForm.$submitted">
+                <input ng-model="$ctrl.outcome.firstStory" id="outcome1" name="outcome1" required>
+                <div ng-messages="$ctrl.editOutcomeForm.outcome1.$error" ng-if="$ctrl.editOutcomeForm.outcome1.$error.required && $ctrl.editOutcomeForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Outcome 2</label>
-                <input ng-model="vm.outcome.secondStory" id="outcome2" name="outcome2" required>
-                <div ng-messages="vm.editOutcomeForm.outcome2.$error" ng-if="vm.editOutcomeForm.outcome2.$error.required && vm.editOutcomeForm.$submitted">
+                <input ng-model="$ctrl.outcome.secondStory" id="outcome2" name="outcome2" required>
+                <div ng-messages="$ctrl.editOutcomeForm.outcome2.$error" ng-if="$ctrl.editOutcomeForm.outcome2.$error.required && $ctrl.editOutcomeForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Outcome 3</label>
-                <input ng-model="vm.outcome.thirdStory" id="outcome3" name="outcome3" required>
-                <div ng-messages="vm.editOutcomeForm.outcome3.$error" ng-if="vm.editOutcomeForm.outcome3.$error.required && vm.editOutcomeForm.$submitted">
+                <input ng-model="$ctrl.outcome.thirdStory" id="outcome3" name="outcome3" required>
+                <div ng-messages="$ctrl.editOutcomeForm.outcome3.$error" ng-if="$ctrl.editOutcomeForm.outcome3.$error.required && $ctrl.editOutcomeForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
             </md-input-container>
 
-            <md-button ng-disabled="vm.saving" type="submit" class="md-raised md-accent">Save</md-button>
+            <md-button ng-disabled="$ctrl.saving" type="submit" class="md-raised md-accent">Save</md-button>
         </form>
     </md-dialog-content>
 </md-dialog>

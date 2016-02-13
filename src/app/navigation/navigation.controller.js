@@ -8,9 +8,9 @@
     NavigationController.$inject = ['$mdSidenav', '$state'];
 
     function NavigationController($mdSidenav, $state) {
-        var vm = this;
+        var $ctrl = this;
 
-        vm.goToState = function (state) {
+        $ctrl.goToState = function (state) {
             $state.go(state);
             $mdSidenav('left').close();
         };
