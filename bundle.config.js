@@ -2,7 +2,9 @@ module.exports = {
     bundle: {
         main: {
             scripts: [
-                './src/app/app.js',
+                './tmp/typescript/app.js',
+                './tmp/typescript/*.module.js',
+                './tmp/typescript/*.js',
                 './src/**/*.module.js',
                 './src/app/**/*.js'
             ],

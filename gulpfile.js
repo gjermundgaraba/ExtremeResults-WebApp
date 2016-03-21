@@ -10,7 +10,8 @@ var bundle = require('gulp-bundle-assets'),
     jshint = require('gulp-jshint'),
     KarmaServer = require('karma').Server,
     csslint = require('gulp-csslint'),
-    argv = require('yargs').argv;
+    argv = require('yargs').argv,
+    typescript = require('gulp-typescript');
 
 gulp.task('clean', function () {
     return gulp.src(['public', 'tmp'])
@@ -31,7 +32,7 @@ gulp.task('compile', ['clean', 'bundle'], function () {
         .pipe(connect.reload());
 });
 
-gulp.task('bundle', ['clean', 'templates'], function() {
+gulp.task('bundle', ['clean', 'templates', 'typescript'], function() {
     return gulp.src('./bundle.config.js')
         .pipe(bundle({
             quietMode: true
@@ -56,6 +57,15 @@ gulp.task('templates', ['clean'], function() {
             }
         ))
         .pipe(gulp.dest('public'));
+});
+
+gulp.task('typescript', ['clean'], function () {
+    return gulp.src('src/app/**/*.ts')
+        .pipe(typescript({
+            target:'es5'
+        }))
+        .js
+        .pipe(gulp.dest('tmp/typescript'));
 });
 
 gulp.task('webserver', ['compile'], function () {
