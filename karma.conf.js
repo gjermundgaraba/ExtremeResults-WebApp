@@ -12,6 +12,8 @@ module.exports = function (config) {
             'node_modules/angular-animate/angular-animate.js',
             'node_modules/angular-aria/angular-aria.js',
             'node_modules/angular-material/angular-material.js',
+            'tmp/typescript/**/*.module.js',
+            'tmp/typescript/**/*.js',
             'src/app/**/*.module.js',
             'src/app/**/*.js',
             'src/tests/unit/**/*.js'
@@ -26,7 +28,8 @@ module.exports = function (config) {
         reporters: ['progress', 'coverage'],
 
         preprocessors: {
-            'src/app/**/*.js': ['coverage']
+            'src/app/**/*.js': ['coverage'],
+            'tmp/typescript/**/*.js': ['coverage']
         },
 
         coverageReporter: {

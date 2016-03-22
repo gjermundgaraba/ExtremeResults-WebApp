@@ -3,10 +3,8 @@ module.exports = {
         main: {
             scripts: [
                 './tmp/typescript/app.js',
-                './tmp/typescript/*.module.js',
-                './tmp/typescript/*.js',
-                './src/**/*.module.js',
-                './src/app/**/*.js'
+                './tmp/typescript/**/*.module.js',
+                './tmp/typescript/**/*.js'
             ],
             options: {
                 uglify: false
