@@ -11,7 +11,8 @@ var bundle = require('gulp-bundle-assets'),
     KarmaServer = require('karma').Server,
     csslint = require('gulp-csslint'),
     argv = require('yargs').argv,
-    typescript = require('gulp-typescript');
+    typescript = require('gulp-typescript'),
+    sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('clean', function () {
     return gulp.src(['public', 'tmp'])
@@ -61,10 +62,12 @@ gulp.task('templates', ['clean'], function() {
 
 gulp.task('typescript', ['clean'], function () {
     return gulp.src('src/app/**/*.ts')
+        .pipe(sourcemaps.init())
         .pipe(typescript({
             target:'es5'
         }))
         .js
+        .pipe(sourcemaps.write({sourceRoot: __dirname + '/src/app'}))
         .pipe(gulp.dest('tmp/typescript'));
 });
 

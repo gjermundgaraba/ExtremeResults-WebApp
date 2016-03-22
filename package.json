@@ -30,6 +30,7 @@
     "gulp-csslint": "0.2.0",
     "gulp-jshint": "2.0.0",
     "gulp-replace": "0.5.4",
+    "gulp-sourcemaps": "1.6.0",
     "gulp-watch": "4.3.5",
     "jasmine-core": "2.4.1",
     "jshint": "2.9.1",
@@ -42,6 +43,7 @@
     "karma-typescript-preprocessor": "0.0.21",
     "main-bower-files": "2.11.1",
     "protractor": "3.0.0",
+    "remap-istanbul": "0.5.1",
     "vinyl-paths": "2.1.0",
     "yargs": "3.32.0"
   },
@@ -52,7 +54,8 @@
     "selenium": "webdriver-manager update && webdriver-manager start",
     "e2e": "protractor protractor.conf.js",
     "debuge2e": "protractor debug protractor.conf.js",
-    "citest": "karma start karma.conf.js --no-auto-watch --single-run"
+    "citest": "karma start karma.conf.js --no-auto-watch --single-run",
+    "generateLcov": "remap-istanbul -b src/app/ -i coverage/coverage-final.json -o coverage/lcov.info -t lcovonly"
   },
   "repository": {
     "type": "git",

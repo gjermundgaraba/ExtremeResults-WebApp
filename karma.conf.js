@@ -28,12 +28,12 @@ module.exports = function (config) {
         reporters: ['progress', 'coverage'],
 
         preprocessors: {
-            'src/app/**/*.js': ['coverage'],
             'tmp/typescript/**/*.js': ['coverage']
         },
 
         coverageReporter: {
-            type : 'lcov',
+            type : 'json',
+            subdir: '.',
             dir : 'coverage/'
         },
 
