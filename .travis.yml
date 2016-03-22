@@ -17,6 +17,7 @@ before_script:
 #  - sleep 10 # give server time to start
 
 script:
+  - npm run buildprod
   - npm run citest
 #  - npm run e2e
 
