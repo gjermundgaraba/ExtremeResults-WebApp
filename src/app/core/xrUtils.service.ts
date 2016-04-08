@@ -15,7 +15,7 @@
         return service;
 
         function getFormattedEntryDate(entry, optionalDate) {
-            var date = optionalDate || entry.effectiveDate.iso;
+            var date = optionalDate || entry.effectiveDate;
 
             switch (entry.typeName) {
                 case 'Daily':

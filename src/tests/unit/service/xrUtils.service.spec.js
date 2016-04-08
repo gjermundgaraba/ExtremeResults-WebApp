@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    describe('ParseService', function(){
+    describe('XrUtils', function(){
 
         var XrUtils,
             filter,
@@ -31,24 +31,18 @@
                 var isoDate = new Date().toISOString();
                 var dailyEntry = {
                     typeName: 'Daily',
-                    effectiveDate: {
-                        "__type": "Date",
-                        "iso": isoDate
-                    }
+                    effectiveDate: isoDate
                 };
 
                 var formattedDate = XrUtils.getFormattedEntryDate(dailyEntry);
-                expect(formattedDate).toBe(filter('date')(dailyEntry.effectiveDate.iso));
+                expect(formattedDate).toBe(filter('date')(dailyEntry.effectiveDate));
             });
 
             it('should set up week number date for weekly entries', function () {
                 var isoDate = new Date().toISOString();
                 var weeklyEntry = {
                     typeName: 'Weekly',
-                    effectiveDate: {
-                        "__type": "Date",
-                        "iso": isoDate
-                    }
+                    effectiveDate: isoDate
                 };
 
                 var formattedDate = XrUtils.getFormattedEntryDate(weeklyEntry);
@@ -59,10 +53,7 @@
                 var isoDate = new Date().toISOString();
                 var invalidEntry = {
                     typeName: 'Quarterly',
-                    effectiveDate: {
-                        "__type": "Date",
-                        "iso": isoDate
-                    }
+                    effectiveDate: isoDate
                 };
 
                 var formattedDate = XrUtils.getFormattedEntryDate(invalidEntry);
