@@ -5,9 +5,9 @@
         .module('xr.createReflection')
         .controller('CreateReflectionController', CreateReflectionController);
 
-    CreateReflectionController.$inject = ['$scope', 'ParseService', '$location', 'reflectionType', 'XrUtils', 'AuthService'];
+    CreateReflectionController.$inject = ['$scope', 'CreateReflectionService', '$location', 'reflectionType', 'XrUtils'];
 
-    function CreateReflectionController($scope, ParseService, $location, reflectionType, XrUtils, AuthService) {
+    function CreateReflectionController($scope, CreateReflectionService, $location, reflectionType, XrUtils, AuthService) {
         var $ctrl = this;
         $ctrl.save = save;
         $ctrl.effectiveDate = new Date();
@@ -32,22 +32,11 @@
                     firstThingToImprove: $ctrl.firstThingToImprove,
                     secondThingToImprove: $ctrl.secondThingToImprove,
                     thirdThingToImprove: $ctrl.thirdThingToImprove,
-                    effectiveDate: {
-                        '__type': 'Date',
-                        'iso': $ctrl.effectiveDate.toISOString()
-                    },
-                    typeName: reflectionType.typeName,
-                    ACL: {
-                        '*': { }
-                    }
+                    effectiveDate: $ctrl.effectiveDate.toISOString(),
+                    typeName: reflectionType.typeName
                 };
 
-                weeklyReflection.ACL[AuthService.getCurrentUser().objectId] = {
-                    read: true,
-                    write: true
-                };
-
-                ParseService.postObject(reflectionType.className, weeklyReflection)
+                CreateReflectionService.createReflection(weeklyReflection)
                     .then(function () {
                         $location.path('overview');
                     });
@@ -60,9 +49,7 @@
         }
 
         function updateRelatedEntriesForReflection() {
-            $ctrl.getRelatedEntriesPromise = ParseService.callFunction('getRelatedEntriesForReflection',
-                    {typeName: reflectionType.typeName, outcomeDate: $ctrl.effectiveDate},
-                    AuthService.getUserToken())
+            $ctrl.getRelatedEntriesPromise = CreateReflectionService.getRelatedEntriesForReflection(reflectionType.typeName, $ctrl.effectiveDate)
                 .then(function (data) {
                     $ctrl.relatedEntries = data;
                 });

@@ -6,8 +6,7 @@
         var q,
             rootScope,
             mdDialogMock,
-            ParseServiceMock,
-            AuthServiceMock,
+            HotSpotsServiceMock,
             controller;
 
         beforeEach(module('xr.hotSpots'));
@@ -26,18 +25,13 @@
                 }
             };
 
-            ParseServiceMock = {
-                updateObject: function () {},
-                deleteObject: function () {}
-            };
-
-            AuthServiceMock = {
-                getUserToken: function () {}
+            HotSpotsServiceMock = {
+                editHotSpotBucket: function () {},
+                deleteHotSpotBucket: function () {}
             };
 
             $provide.value('$mdDialog', mdDialogMock);
-            $provide.value('ParseService', ParseServiceMock);
-            $provide.value('AuthService', AuthServiceMock);
+            $provide.value('HotSpotsService', HotSpotsServiceMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope) {
             q = $q;
@@ -68,7 +62,7 @@
                 controller.hotSpotBucket = hotSpotBucket;
 
                 updateDeferred = q.defer();
-                spyOn(ParseServiceMock, 'updateObject').and.returnValue(updateDeferred.promise);
+                spyOn(HotSpotsServiceMock, 'editHotSpotBucket').and.returnValue(updateDeferred.promise);
             });
 
             it('should set saving flag when saving', function () {
@@ -82,13 +76,13 @@
                 controller.save();
                 controller.save();
 
-                expect(ParseServiceMock.updateObject.calls.count()).toBe(1); // 1 because it will be called the first time
+                expect(HotSpotsServiceMock.editHotSpotBucket.calls.count()).toBe(1); // 1 because it will be called the first time
             });
 
             it('should update the hotSpotBukcet', function () {
                 controller.save();
 
-                expect(ParseServiceMock.updateObject).toHaveBeenCalledWith('HotSpotBucket', hotSpotBucket.objectId, {name: hotSpotBucket.name}, AuthServiceMock.getUserToken());
+                expect(HotSpotsServiceMock.editHotSpotBucket).toHaveBeenCalledWith(hotSpotBucket.objectId, {name: hotSpotBucket.name});
             });
 
             it('should hide the dialog when succeeded', function () {
@@ -161,7 +155,7 @@
                 deleteDeferred = q.defer();
                 showConfirmDialogDeferred = q.defer();
 
-                spyOn(ParseServiceMock, 'deleteObject').and.returnValue(deleteDeferred.promise);
+                spyOn(HotSpotsServiceMock, 'deleteHotSpotBucket').and.returnValue(deleteDeferred.promise);
                 spyOn(mdDialogMock, 'show').and.returnValue(showConfirmDialogDeferred.promise);
             });
 
@@ -170,7 +164,7 @@
                 controller.deleteHotSpotBucket();
 
                 expect(mdDialogMock.show).not.toHaveBeenCalled();
-                expect(ParseServiceMock.deleteObject).not.toHaveBeenCalled();
+                expect(HotSpotsServiceMock.deleteHotSpotBucket).not.toHaveBeenCalled();
             });
 
             it('should set saving to true while deleting', function () {
@@ -185,7 +179,7 @@
             it('should not delete the hot spot bucket if not confirmed by the user', function () {
                 controller.deleteHotSpotBucket();
 
-                expect(ParseServiceMock.deleteObject).not.toHaveBeenCalled();
+                expect(HotSpotsServiceMock.deleteHotSpotBucket).not.toHaveBeenCalled();
             });
 
             it('should not delete the hot spot bucket if declined by the user', function () {
@@ -194,7 +188,7 @@
                 showConfirmDialogDeferred.reject();
                 rootScope.$digest();
 
-                expect(ParseServiceMock.deleteObject).not.toHaveBeenCalled();
+                expect(HotSpotsServiceMock.deleteHotSpotBucket).not.toHaveBeenCalled();
             });
 
             it('should delete the hotSpotBucket if confirmed', function () {
@@ -203,7 +197,7 @@
                 showConfirmDialogDeferred.resolve();
                 rootScope.$digest();
 
-                expect(ParseServiceMock.deleteObject).toHaveBeenCalledWith('HotSpotBucket', hotSpotBucket.objectId, AuthServiceMock.getUserToken());
+                expect(HotSpotsServiceMock.deleteHotSpotBucket).toHaveBeenCalledWith(hotSpotBucket.objectId);
             });
 
             it('should call the delete callback after deletion of the hot spot bucket', function () {
@@ -229,7 +223,7 @@
                 expect(controller.saving).toBe(false);
             });
 
-            it('should set saving to false after unsuccessfull deletion of hot spot bucket', function () {
+            it('should set saving to false after unsuccessful deletion of hot spot bucket', function () {
                 controller.deleteHotSpotBucket();
 
                 showConfirmDialogDeferred.resolve();

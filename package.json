@@ -8,6 +8,7 @@
     "angular-aria": "1.5.0",
     "angular-busy2": "4.1.5",
     "angular-cookies": "1.5.0",
+    "angular-jwt": "0.0.9",
     "angular-material": "1.0.5",
     "angular-material-icons": "0.6.0",
     "angular-messages": "1.5.0",
@@ -48,14 +49,13 @@
     "yargs": "3.32.0"
   },
   "scripts": {
-    "start": "gulp",
-    "buildprod": "gulp build --prod",
-    "test": "gulp tdd",
+    "start": "gulp --server \"http://localhost:4321/api/\"",
+    "buildprod": "gulp build",
+    "test": "gulp testSingleRun && remap-istanbul -b src/app/ -i coverage/coverage-final.json -o coverage/html-report -t html",
     "selenium": "webdriver-manager update && webdriver-manager start",
     "e2e": "protractor protractor.conf.js",
     "debuge2e": "protractor debug protractor.conf.js",
-    "citest": "karma start karma.conf.js --no-auto-watch --single-run",
-    "generateLcov": "remap-istanbul -b src/app/ -i coverage/coverage-final.json -o coverage/lcov.info -t lcovonly"
+    "citest": "karma start karma.conf.js --no-auto-watch --single-run && remap-istanbul -b src/app/ -i coverage/coverage-final.json -o coverage/lcov.info -t lcovonly"
   },
   "repository": {
     "type": "git",

@@ -5,17 +5,15 @@
         .module('xr.createOutcome')
         .controller('CreateOutcomeController', CreateOutcomeController);
 
-    CreateOutcomeController.$inject = ['ParseService', '$location', 'outcomeType', 'XrUtils', 'AuthService'];
+    CreateOutcomeController.$inject = ['CreateOutcomeService', '$location', 'outcomeType', 'XrUtils'];
 
-    function CreateOutcomeController(ParseService, $location, outcomeType, XrUtils, AuthService) {
+    function CreateOutcomeController(CreateOutcomeService, $location, outcomeType, XrUtils) {
         var $ctrl = this;
         $ctrl.save = save;
         $ctrl.header = generateHeader();
         $ctrl.relatedEntries = [];
 
-        $ctrl.getRelatedEntriesPromise = ParseService.callFunction('getRelatedEntriesForOutcome',
-                {typeName: outcomeType.typeName},
-                AuthService.getUserToken())
+        $ctrl.getRelatedEntriesPromise = CreateOutcomeService.getRelatedEntriesForOutcome(outcomeType.typeName)
             .then(function (data) {
                 $ctrl.relatedEntries = data;
             });
@@ -26,22 +24,11 @@
                     firstStory: $ctrl.outcome1,
                     secondStory: $ctrl.outcome2,
                     thirdStory: $ctrl.outcome3,
-                    effectiveDate: {
-                        '__type': 'Date',
-                        'iso': new Date().toISOString()
-                    },
                     typeName: outcomeType.typeName,
-                    ACL: {
-                        '*': { }
-                    }
+                    effectiveDate: new Date()
                 };
 
-                outcome.ACL[AuthService.getCurrentUser().objectId] = {
-                    read: true,
-                    write: true
-                };
-
-                ParseService.postObject(outcomeType.className, outcome, AuthService.getUserToken)
+                CreateOutcomeService.createOutcome(outcome)
                     .then(function () {
                         $location.path('overview');
                     });

@@ -42,8 +42,7 @@ gulp.task('bundle', ['clean', 'templates', 'typescript'], function() {
             dest: './tmp',
             fileName: 'manifest'
         }))
-        .pipe(replace('<!APPLICATION-ID!>', argv.prod ? '2CThkkVCrwd6sI3Ox3ee9e0J8YkKyxJ7MdSJag9M' : 'up5CMogFVZwyOSwLx7JljkinU6ZVyuUKM0asSK1P'))
-        .pipe(replace('<!REST-API-KEY!>', argv.prod ? 'VL3nlNneieFCdSrDTUGkKpDPqW1u4LHRTUofSR5u' : 'TtFcYgRiVB9PLPIbWhm4pBxRUwfRYup2mvCtUlZb'))
+        .pipe(replace('<!SERVER-URL!>', argv.server))
         .pipe(gulp.dest('./public'));
 });
 
@@ -106,6 +105,13 @@ gulp.task('tdd', function (done) {
     new KarmaServer({
         configFile: __dirname + '/karma.conf.js'
     }, done).start();
+});
+
+gulp.task('testSingleRun', ['build'], function() {
+    new KarmaServer({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }).start();
 });
 
 gulp.task('csslint', function() {

@@ -9,21 +9,3 @@
         <overview-entry entry-obj="activeEntry"></overview-entry>
     </md-card>
 </md-content>
-
-<br />
-
-<md-content class="md-whiteframe-1dp" cg-busy="$ctrl.getAllEntriesPromise">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h1 class="md-toolbar-tools">
-                All Entries
-            </h1>
-            <span flex></span>
-            <ng-md-icon size="30" ng-if="!$ctrl.allEntriesLoaded" ng-click="$ctrl.getAllEntries()" class="fake-button load-button" icon="cloud_download"></ng-md-icon>
-        </div>
-    </md-toolbar>
-
-    <md-card ng-repeat="entry in $ctrl.overviewEntries">
-        <overview-entry entry-obj="entry"></overview-entry>
-    </md-card>
-</md-content>

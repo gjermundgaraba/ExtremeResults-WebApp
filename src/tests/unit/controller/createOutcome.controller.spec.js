@@ -3,9 +3,7 @@
 
     describe('CreateOutcome controller', function(){
 
-        var ParseServiceMock,
-            AuthServiceMock,
-            userMock,
+        var CreateOutcomeServiceMock,
             controller,
             rootScope,
             location,
@@ -18,26 +16,14 @@
 
         beforeEach(module('xr.createOutcome'));
         beforeEach(module(function ($provide) {
-            ParseServiceMock = {
-                postObject: function () {},
-                callFunction: function () {}
+            CreateOutcomeServiceMock = {
+                getRelatedEntriesForOutcome: function () {},
+                createOutcome: function () {}
             };
 
             outcomeTypeMock = {
                 className: 'Outcome',
                 typeName: 'Daily'
-            };
-
-            userMock = {
-                objectId: '1234'
-            };
-            AuthServiceMock = {
-                getCurrentUser: function () {
-                    return userMock;
-                },
-                getUserToken: function () {
-                    return '1234';
-                }
             };
 
             formattedEntryDateMock = 'mockymockmockdate';
@@ -47,10 +33,9 @@
                 getEntryHeader: function () { return entryHeaderMock }
             };
 
-            $provide.value('ParseService', ParseServiceMock);
+            $provide.value('CreateOutcomeService', CreateOutcomeServiceMock);
             $provide.value('outcomeType', outcomeTypeMock);
             $provide.value('XrUtils', XrUtilsMock);
-            $provide.value('AuthService', AuthServiceMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope, $location) {
             q = $q;
@@ -58,7 +43,7 @@
             rootScope = $rootScope;
 
             relatedEntriesDeferred = q.defer();
-            spyOn(ParseServiceMock, 'callFunction').and.returnValue(relatedEntriesDeferred.promise);
+            spyOn(CreateOutcomeServiceMock, 'getRelatedEntriesForOutcome').and.returnValue(relatedEntriesDeferred.promise);
 
             controller = $controller('CreateOutcomeController', {'$location': location});
         }));
@@ -70,7 +55,7 @@
                 relatedEntriesDeferred.resolve(relatedEntries);
                 rootScope.$digest();
 
-                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getRelatedEntriesForOutcome', {typeName: outcomeTypeMock.typeName}, AuthServiceMock.getUserToken());
+                expect(CreateOutcomeServiceMock.getRelatedEntriesForOutcome).toHaveBeenCalledWith(outcomeTypeMock.typeName);
                 expect(controller.relatedEntries).toBe(relatedEntries);
             });
         });
@@ -80,7 +65,7 @@
 
             beforeEach(function () {
                 deferred = q.defer();
-                spyOn(ParseServiceMock, 'postObject').and.returnValue(deferred.promise);
+                spyOn(CreateOutcomeServiceMock, 'createOutcome').and.returnValue(deferred.promise);
 
                 controller.createOutcomeForm = {
                     '$someAngularThing': {},
@@ -97,20 +82,14 @@
 
                 controller.save();
 
-                expect(ParseServiceMock.postObject).not.toHaveBeenCalled();
-            });
-
-            it('should save to outcomeType className', function () {
-                controller.save();
-
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[0]).toBe(outcomeTypeMock.className);
+                expect(CreateOutcomeServiceMock.createOutcome).not.toHaveBeenCalled();
             });
 
             it('should save outcomeType', function () {
                 controller.save();
 
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].typeName).toBeDefined();
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].typeName).toBe(outcomeTypeMock.typeName);
+                expect(CreateOutcomeServiceMock.createOutcome.calls.mostRecent().args[0].typeName).toBeDefined();
+                expect(CreateOutcomeServiceMock.createOutcome.calls.mostRecent().args[0].typeName).toBe(outcomeTypeMock.typeName);
             });
 
             it('should save all stories', function () {
@@ -120,38 +99,12 @@
 
                 controller.save();
 
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].firstStory).toBeDefined();
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].firstStory).toBe(controller.outcome1);
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].secondStory).toBeDefined();
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].secondStory).toBe(controller.outcome2);
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].thirdStory).toBeDefined();
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].thirdStory).toBe(controller.outcome3);
-            });
-
-            it('should set ACL', function () {
-                controller.outcome1 = "Test1";
-                controller.outcome2 = "Test2";
-                controller.outcome3 = "Test3";
-
-                controller.save();
-
-                var expectedACL = {
-                    "*": { }
-                };
-                expectedACL[userMock.objectId] = {
-                    "read": true,
-                    "write": true
-                };
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].ACL).toBeDefined();
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].ACL).toEqual(expectedACL);
-            });
-
-            it('should save the date as ISO 8601 String', function () {
-                controller.save();
-
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].effectiveDate).toBeDefined();
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].effectiveDate.__type).toBe('Date');
-                expect(ParseServiceMock.postObject.calls.mostRecent().args[1].effectiveDate.iso).toMatch("[0-9]{4}-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-9]:[0-5][0-9].[0-9]{3}Z");
+                expect(CreateOutcomeServiceMock.createOutcome.calls.mostRecent().args[0].firstStory).toBeDefined();
+                expect(CreateOutcomeServiceMock.createOutcome.calls.mostRecent().args[0].firstStory).toBe(controller.outcome1);
+                expect(CreateOutcomeServiceMock.createOutcome.calls.mostRecent().args[0].secondStory).toBeDefined();
+                expect(CreateOutcomeServiceMock.createOutcome.calls.mostRecent().args[0].secondStory).toBe(controller.outcome2);
+                expect(CreateOutcomeServiceMock.createOutcome.calls.mostRecent().args[0].thirdStory).toBeDefined();
+                expect(CreateOutcomeServiceMock.createOutcome.calls.mostRecent().args[0].thirdStory).toBe(controller.outcome3);
             });
 
             describe('finished', function () {

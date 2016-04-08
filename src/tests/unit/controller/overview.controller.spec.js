@@ -3,36 +3,27 @@
 
     describe('Overview Controller', function(){
 
-        var ParseServiceMock,
-            userTokenMock,
-            AuthServiceMock,
-            controller,
+        var controller,
+            OverviewServiceMock,
             rootScope,
             initDeferred,
             q;
 
         beforeEach(module('xr.overview'));
         beforeEach(module(function ($provide) {
-            ParseServiceMock = {
-                callFunction: function () {}
+
+            OverviewServiceMock = {
+                getActiveEntries: function () {}
             };
 
-            userTokenMock = '1234';
-            AuthServiceMock = {
-                getUserToken: function () {
-                    return userTokenMock;
-                }
-            };
-
-            $provide.value('ParseService', ParseServiceMock);
-            $provide.value('AuthService', AuthServiceMock);
+            $provide.value('OverviewService', OverviewServiceMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope) {
             q = $q;
             rootScope = $rootScope;
 
             initDeferred = q.defer();
-            spyOn(ParseServiceMock, 'callFunction').and.returnValue(initDeferred.promise);
+            spyOn(OverviewServiceMock, 'getActiveEntries').and.returnValue(initDeferred.promise);
 
             controller = $controller('OverviewController');
         }));
@@ -45,7 +36,7 @@
             });
 
             it('should get active entries', function () {
-                expect(ParseServiceMock.callFunction).toHaveBeenCalledWith('getActiveEntries', null, userTokenMock);
+                expect(OverviewServiceMock.getActiveEntries).toHaveBeenCalled();
             });
 
             it('should update array of overviews when entries get back from service', function () {
@@ -56,21 +47,6 @@
 
                 expect(controller.activeEntries).toBe(resolvedData);
             });
-        });
-
-        describe('getAllEntries', function () {
-
-            it('should get all entries and update them', function () {
-                var allEntries = [{hi: null}, {hui: 'HOTL!'}];
-
-                controller.getAllEntries();
-
-                initDeferred.resolve(allEntries);
-                rootScope.$digest();
-
-                expect(controller.overviewEntries).toBe(allEntries);
-            });
-
         });
 
     });

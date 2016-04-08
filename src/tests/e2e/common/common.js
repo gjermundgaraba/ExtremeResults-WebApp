@@ -1,4 +1,4 @@
-var http = require('https');
+var http = require('http');
 
 var Common = function () {
 
@@ -16,13 +16,10 @@ var Common = function () {
         var deferred = protractor.promise.defer();
 
         var options = {
-            hostname: 'api.parse.com',
-            path: '/1/functions/clearDB',
-            method: 'POST',
-            headers: {
-                'X-Parse-Application-Id': 'up5CMogFVZwyOSwLx7JljkinU6ZVyuUKM0asSK1P',
-                'X-Parse-REST-API-Key': 'TtFcYgRiVB9PLPIbWhm4pBxRUwfRYup2mvCtUlZb'
-            }
+            hostname: 'localhost',
+            port: 4321,
+            path: '/api/forTest',
+            method: 'DELETE'
         };
 
         callback = function() {

@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('xr.overview', []);
+        .module('xr.overview', ['xr.core']);
 })();

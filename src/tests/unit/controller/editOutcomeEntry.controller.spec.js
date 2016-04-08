@@ -9,8 +9,7 @@
             mdDialogMock,
             headerMock,
             formattedDateMock,
-            ParseServiceMock,
-            AuthServiceMock,
+            EditOutcomeEntryServiceMock,
             controller;
 
         beforeEach(module('xr.overview'));
@@ -31,18 +30,15 @@
                 hide: function () {}
             };
 
-            ParseServiceMock = {
-                updateObject: function () {}
+            EditOutcomeEntryServiceMock = {
+                editOutcome: function () {}
             };
 
-            AuthServiceMock = {
-                getUserToken: function () {}
-            };
+
 
             $provide.value('XrUtils', XrUtilsMock);
             $provide.value('$mdDialog', mdDialogMock);
-            $provide.value('ParseService', ParseServiceMock);
-            $provide.value('AuthService', AuthServiceMock);
+            $provide.value('EditOutcomeEntryService', EditOutcomeEntryServiceMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope) {
             q = $q;
@@ -83,7 +79,7 @@
                 };
 
                 updateDeferred = q.defer();
-                spyOn(ParseServiceMock, 'updateObject').and.returnValue(updateDeferred.promise);
+                spyOn(EditOutcomeEntryServiceMock, 'editOutcome').and.returnValue(updateDeferred.promise);
             });
 
             it('should not save anything when form is invalid', function () {
@@ -92,7 +88,7 @@
                 controller.save();
 
                 expect(controller.saving).toBe(false);
-                expect(ParseServiceMock.updateObject).not.toHaveBeenCalled();
+                expect(EditOutcomeEntryServiceMock.editOutcome).not.toHaveBeenCalled();
             });
 
             it('should set saving flag when saving', function () {
@@ -106,7 +102,7 @@
                 controller.save();
                 controller.save();
 
-                expect(ParseServiceMock.updateObject.calls.count()).toBe(1); // 1 because it will be called the first time
+                expect(EditOutcomeEntryServiceMock.editOutcome.calls.count()).toBe(1); // 1 because it will be called the first time
             });
 
             it('should hide the dialog when succeeded', function () {

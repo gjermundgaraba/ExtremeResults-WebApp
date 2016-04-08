@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('xr.createReflection', []);
+        .module('xr.createReflection', ['xr.core']);
 })();

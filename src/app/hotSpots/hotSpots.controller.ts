@@ -5,9 +5,9 @@
         .module('xr.hotSpots')
         .controller('HotSpotsController', HotSpotsController);
 
-    HotSpotsController.$inject = ['ParseService', 'AuthService', '$mdDialog'];
+    HotSpotsController.$inject = ['HotSpotsService', '$mdDialog'];
 
-    function HotSpotsController(ParseService, AuthService, $mdDialog) {
+    function HotSpotsController(HotSpotsService, $mdDialog) {
         var $ctrl = this;
         $ctrl.hotSpotBuckets = [];
         $ctrl.handleHotSpotAdd = handleHotSpotChange;
@@ -18,7 +18,7 @@
         getAllHotSpotBuckets();
 
         function getAllHotSpotBuckets() {
-            $ctrl.getHotSpotsPromise = ParseService.getAllObjects('HotSpotBucket', AuthService.getUserToken())
+            $ctrl.getHotSpotsPromise = HotSpotsService.getHotSpotBuckets()
                 .then(function (hotSpotBuckets) {
                     $ctrl.hotSpotBuckets = hotSpotBuckets;
                 });
@@ -26,28 +26,21 @@
 
         function handleHotSpotChange(hotSpotBucket) {
             var updateObj = {
+                name: hotSpotBucket.name,
                 hotSpots: hotSpotBucket.hotSpots
             };
 
-            ParseService.updateObject('HotSpotBucket', hotSpotBucket.objectId, updateObj, AuthService.getUserToken());
+            HotSpotsService.editHotSpotBucket(hotSpotBucket.objectId, updateObj);
         }
 
         function saveHotSpotBucket() {
             if ($ctrl.hotSpotBucketForm.$valid) {
                 var hotSpotBucket = {
                     name: $ctrl.hotSpotBucketName,
-                    hotSpots: [],
-                    ACL: {
-                        '*': { }
-                    }
+                    hotSpots: []
                 };
 
-                hotSpotBucket.ACL[AuthService.getCurrentUser().objectId] = {
-                    read: true,
-                    write: true
-                };
-
-                ParseService.postObject('HotSpotBucket', hotSpotBucket)
+                HotSpotsService.createHotSpotBucket(hotSpotBucket)
                     .then(function () {
                         $ctrl.hotSpotBucketName = ''; // Reset field
                         $ctrl.hotSpotBucketForm.$setPristine();

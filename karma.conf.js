@@ -12,6 +12,7 @@ module.exports = function (config) {
             'node_modules/angular-animate/angular-animate.js',
             'node_modules/angular-aria/angular-aria.js',
             'node_modules/angular-material/angular-material.js',
+            'node_modules/angular-jwt/dist/angular-jwt.js',
             'tmp/typescript/**/*.module.js',
             'tmp/typescript/**/*.js',
             'src/app/**/*.module.js',

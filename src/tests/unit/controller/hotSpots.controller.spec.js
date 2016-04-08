@@ -3,8 +3,7 @@
 
     describe('CreateOutcome controller', function(){
 
-        var ParseServiceMock,
-            AuthServiceMock,
+        var HotSpotsServiceMock,
             mdDialogMock,
             mdDialogDeferred,
             initDeferred,
@@ -14,29 +13,17 @@
 
         beforeEach(module('xr.hotSpots'));
         beforeEach(module(function ($provide) {
-            ParseServiceMock = {
-                getAllObjects: function () {},
-                updateObject: function () {},
-                postObject: function () {}
-            };
-
-            AuthServiceMock = {
-                getUserToken: function () {
-                    return '1234';
-                },
-                getCurrentUser: function () {
-                    return {
-                        objectId: '123'
-                    }
-                }
+            HotSpotsServiceMock = {
+                getHotSpotBuckets: function () {},
+                createHotSpotBucket: function () {},
+                editHotSpotBucket: function () {}
             };
 
             mdDialogMock = {
                 show: function () {}
             };
 
-            $provide.value('ParseService', ParseServiceMock);
-            $provide.value('AuthService', AuthServiceMock);
+            $provide.value('HotSpotsService', HotSpotsServiceMock);
             $provide.value('$mdDialog', mdDialogMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope) {
@@ -44,7 +31,7 @@
             rootScope = $rootScope;
 
             initDeferred = q.defer();
-            spyOn(ParseServiceMock, 'getAllObjects').and.returnValue(initDeferred.promise);
+            spyOn(HotSpotsServiceMock, 'getHotSpotBuckets').and.returnValue(initDeferred.promise);
 
             mdDialogDeferred = q.defer();
             mdDialogMock.show = function (showObj) {
@@ -62,16 +49,17 @@
                 initDeferred.resolve(hotSpotBuckets);
                 rootScope.$digest();
 
-                expect(ParseServiceMock.getAllObjects).toHaveBeenCalledWith('HotSpotBucket', AuthServiceMock.getUserToken());
+                expect(HotSpotsServiceMock.getHotSpotBuckets).toHaveBeenCalled();
                 expect(controller.hotSpotBuckets).toBe(hotSpotBuckets);
             });
         });
 
         describe('handleHotSpotAdd', function () {
             it('should update the hot spot bucket with the new hotSpots', function () {
-                spyOn(ParseServiceMock, 'updateObject');
+                spyOn(HotSpotsServiceMock, 'editHotSpotBucket');
                 var hotSpotBucket = {
                     objectId: 'abc',
+                    name: 'hotSpotName',
                     hotSpots: [
                         'hot', 'spots', 'are', 'cool!'
                     ]
@@ -79,18 +67,20 @@
 
                 controller.handleHotSpotAdd(hotSpotBucket);
 
-                var expecteUpdateObj = {
+                var expectedUpdateObj = {
+                    name: hotSpotBucket.name,
                     hotSpots: hotSpotBucket.hotSpots
                 };
-                expect(ParseServiceMock.updateObject).toHaveBeenCalledWith('HotSpotBucket', hotSpotBucket.objectId, expecteUpdateObj, AuthServiceMock.getUserToken());
+                expect(HotSpotsServiceMock.editHotSpotBucket).toHaveBeenCalledWith(hotSpotBucket.objectId, expectedUpdateObj);
             });
         });
 
         describe('handleHotSpotDelete', function () {
             it('should update the hot spot bucket with the new hotSpots', function () {
-                spyOn(ParseServiceMock, 'updateObject');
+                spyOn(HotSpotsServiceMock, 'editHotSpotBucket');
                 var hotSpotBucket = {
                     objectId: 'abc',
+                    name: 'hotSpotName',
                     hotSpots: [
                         'are', 'cool!'
                     ]
@@ -98,10 +88,11 @@
 
                 controller.handleHotSpotDelete(hotSpotBucket);
 
-                var expecteUpdateObj = {
+                var expectedUpdateObj = {
+                    name: hotSpotBucket.name,
                     hotSpots: hotSpotBucket.hotSpots
                 };
-                expect(ParseServiceMock.updateObject).toHaveBeenCalledWith('HotSpotBucket', hotSpotBucket.objectId, expecteUpdateObj, AuthServiceMock.getUserToken());
+                expect(HotSpotsServiceMock.editHotSpotBucket).toHaveBeenCalledWith(hotSpotBucket.objectId, expectedUpdateObj);
             });
         });
 
@@ -114,7 +105,7 @@
                     $setPristine: function () {}
                 };
                 postHotSpotBucketDeferred = q.defer();
-                spyOn(ParseServiceMock, 'postObject').and.returnValue(postHotSpotBucketDeferred.promise);
+                spyOn(HotSpotsServiceMock, 'createHotSpotBucket').and.returnValue(postHotSpotBucketDeferred.promise);
                 spyOn(controller.hotSpotBucketForm, '$setPristine');
             });
 
@@ -123,7 +114,7 @@
 
                 controller.saveHotSpotBucket();
 
-                expect(ParseServiceMock.postObject).not.toHaveBeenCalled();
+                expect(HotSpotsServiceMock.createHotSpotBucket).not.toHaveBeenCalled();
             });
 
             it('should try to post if form is valid', function () {
@@ -131,7 +122,7 @@
 
                 controller.saveHotSpotBucket();
 
-                expect(ParseServiceMock.postObject).toHaveBeenCalled();
+                expect(HotSpotsServiceMock.createHotSpotBucket).toHaveBeenCalled();
             });
 
             it('should reset field after save', function () {
@@ -154,7 +145,7 @@
                 postHotSpotBucketDeferred.resolve();
                 rootScope.$digest();
 
-                expect(ParseServiceMock.getAllObjects.calls.count()).toBe(2);
+                expect(HotSpotsServiceMock.getHotSpotBuckets.calls.count()).toBe(2);
             });
         });
 
@@ -208,7 +199,7 @@
 
                 controller.editHotSpotBucket(hotSpotBucket);
 
-                expect(ParseServiceMock.getAllObjects.calls.count()).toBe(2);
+                expect(HotSpotsServiceMock.getHotSpotBuckets.calls.count()).toBe(2);
             });
         });
 

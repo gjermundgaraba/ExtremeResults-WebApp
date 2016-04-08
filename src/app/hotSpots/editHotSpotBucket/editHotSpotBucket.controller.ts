@@ -5,9 +5,9 @@
         .module('xr.hotSpots')
         .controller('EditHotSpotBucketController', EditHotSpotBucketController);
 
-    EditHotSpotBucketController.$inject = ['$mdDialog', 'ParseService', 'AuthService'];
+    EditHotSpotBucketController.$inject = ['$mdDialog', 'HotSpotsService'];
 
-    function EditHotSpotBucketController($mdDialog, ParseService, AuthService) {
+    function EditHotSpotBucketController($mdDialog, HotSpotsService) {
         var $ctrl = this;
 
         $ctrl.saving = false;
@@ -20,8 +20,7 @@
                 var updateObject = {
                     name: $ctrl.hotSpotBucket.name
                 };
-                ParseService.updateObject('HotSpotBucket', $ctrl.hotSpotBucket.objectId,
-                        updateObject, AuthService.getUserToken())
+                HotSpotsService.editHotSpotBucket($ctrl.hotSpotBucket.objectId, updateObject)
                     .then(function () {
                         $ctrl.renameCallback($ctrl.hotSpotBucket);
                         $mdDialog.hide();
@@ -43,7 +42,7 @@
                     .then(function () {
                         $ctrl.saving = true;
 
-                        ParseService.deleteObject('HotSpotBucket', $ctrl.hotSpotBucket.objectId, AuthService.getUserToken())
+                        HotSpotsService.deleteHotSpotBucket($ctrl.hotSpotBucket.objectId)
                             .then(function () {
                                 $ctrl.deleteCallback();
                             })

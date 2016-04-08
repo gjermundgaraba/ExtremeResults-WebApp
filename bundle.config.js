@@ -23,7 +23,8 @@ module.exports = {
                 { src: './node_modules/angular-material-icons/angular-material-icons.js', minSrc: './node_modules/angular-material-icons/angular-material-icons.min.js' },
                 { src: './node_modules/moment/moment.js', minSrc: './node_modules/moment/min/moment.min.js' },
                 { src: './node_modules/angular-moment/angular-moment.js', minSrc: './node_modules/angular-moment/angular-moment.min.js' },
-                { src: './node_modules/angular-busy2/dist/angular-busy.js', minSrc: './node_modules/angular-busy2/dist/angular-busy.min.js' }
+                { src: './node_modules/angular-busy2/dist/angular-busy.js', minSrc: './node_modules/angular-busy2/dist/angular-busy.min.js' },
+                { src: './node_modules/angular-jwt/dist/angular-jwt.js', minSrc: './node_modules/angular-jwt/dist/angular-jwt.min.js' }
             ],
             styles: [
                 { src: './node_modules/angular-material/angular-material.css', minSrc: './node_modules/angular-material/angular-material.min.css' },

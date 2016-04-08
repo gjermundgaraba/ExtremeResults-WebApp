@@ -4,17 +4,17 @@
     describe('AuthService', function () {
 
         var AuthService,
-            ParseServiceMock,
+            Urls,
+            jwtHelperMock,
             CookiesServiceMock,
             rootScope,
+            httpBackend,
             q;
 
         beforeEach(module('xr.auth'));
         beforeEach(module(function ($provide) {
-            ParseServiceMock = {
-                login: function () {},
-                retrieveCurrentUser: function () {},
-                register: function () {}
+            jwtHelperMock = {
+                decodeToken: function () {}
             };
 
             CookiesServiceMock = {
@@ -23,49 +23,29 @@
                 remove: function () {}
             };
 
-            $provide.value('ParseService', ParseServiceMock);
+            $provide.value('jwtHelper', jwtHelperMock);
             $provide.value('$cookies', CookiesServiceMock);
         }));
-        beforeEach(inject(function (_AuthService_, $q, $rootScope) {
+        beforeEach(inject(function (_AuthService_, $q, $rootScope, $httpBackend, _Urls_) {
             rootScope = $rootScope;
+            httpBackend = $httpBackend;
             q = $q;
             AuthService = _AuthService_;
+            Urls = _Urls_;
         }));
 
         describe('login', function () {
-            var user,
-                deferred;
-
-            beforeEach(function () {
-                user = {
-                    "username": "cooldude6",
-                    "phone": "415-392-0202",
-                    "createdAt": "2011-11-07T20:58:34.448Z",
-                    "updatedAt": "2011-11-07T20:58:34.448Z",
-                    "objectId": "g7y9tkhB7O",
-                    "sessionToken": "r:pnktnjyb996sj4p156gjtp4im"
-                };
-
-                deferred = q.defer();
-                spyOn(ParseServiceMock, 'login').and.returnValue(deferred.promise);
-            });
-
-            it('should set currentUser to the logged in user', function () {
-                AuthService.login('test', 'test');
-                deferred.resolve(user);
-                rootScope.$digest();
-
-                expect(AuthService.getCurrentUser()).toBe(user);
-            });
-
             it('should set the xrAuthCookie', function () {
+                var token = '1234';
                 spyOn(CookiesServiceMock, 'put');
 
+                httpBackend.whenPOST(Urls.baseApi + 'login').respond(200, { token: token});
                 AuthService.login('test', 'test');
-                deferred.resolve(user);
-                rootScope.$digest();
 
-                expect(CookiesServiceMock.put).toHaveBeenCalledWith('xrAuthCookie', user.sessionToken);
+                rootScope.$digest();
+                httpBackend.flush();
+
+                expect(CookiesServiceMock.put).toHaveBeenCalledWith('xrAuthCookie', token);
             });
         });
 
@@ -83,131 +63,49 @@
             });
         });
 
-        describe('updateCurrentUser', function () {
-            var retrieveCurrentUserDeferred;
-
-            beforeEach(function () {
-                retrieveCurrentUserDeferred = q.defer();
-                spyOn(ParseServiceMock, 'retrieveCurrentUser').and.returnValue(retrieveCurrentUserDeferred.promise);
-            });
-
-            it('should set rootScope.currentUser if not already set', function () {
-                var user = {
-                    username: 'derp',
-                    sessionToken: '1234'
-                };
-                spyOn(CookiesServiceMock, 'get').and.returnValue('Token1234');
-
-                AuthService.updateCurrentUser();
-                retrieveCurrentUserDeferred.resolve(user);
-                rootScope.$digest();
-
-                expect(AuthService.getCurrentUser()).toBe(user);
-            });
-
-            it('should not set rootScope.currentUser if it is already set', function () {
-                var user = {
-                    username: 'derp',
-                    sessionToken: '1234'
-                };
-                spyOn(CookiesServiceMock, 'get').and.returnValue('Token1234');
-
-                AuthService.updateCurrentUser();
-                retrieveCurrentUserDeferred.resolve(user);
-                rootScope.$digest();
-
-                expect(AuthService.getCurrentUser()).toBe(user);
-            });
-
-            it('should not set rootScope.currentUser if no cookie exists', function () {
-                spyOn(CookiesServiceMock, 'get').and.returnValue(undefined);
-
-                AuthService.updateCurrentUser();
-
-                expect(ParseServiceMock.retrieveCurrentUser).not.toHaveBeenCalled();
-                expect(rootScope.currentUser).toBeUndefined();
-            });
-
-            it('should resolve when everything works ok', function () {
-                var user = {
-                    username: 'derp',
-                    sessionToken: '1234'
-                };
-                spyOn(CookiesServiceMock, 'get').and.returnValue('Token1234');
-
-                var resolved = false;
-                AuthService.updateCurrentUser().then(function () {
-                    resolved = true;
-                });
-                retrieveCurrentUserDeferred.resolve(user);
-                rootScope.$digest();
-
-                expect(resolved).toBe(true);
-            });
-
-            it('should return error if retrieveCurrentUser fails', function () {
-                spyOn(CookiesServiceMock, 'get').and.returnValue('Token1234');
-
-                var error = false;
-                AuthService.updateCurrentUser().catch(function () {
-                    error = true;
-                });
-
-                retrieveCurrentUserDeferred.reject();
-                rootScope.$digest();
-
-                expect(error).toBe(true);
-            });
-        });
-
         describe('register', function () {
-            var registerDeferred,
-                returnedUser;
 
-            beforeEach(function () {
-                returnedUser = {
-                    objectId: 'lkjlkj',
-                    sessionToken: 'ksdf342k3jh4k2j3h4'
-                };
-                registerDeferred = q.defer();
-                spyOn(ParseServiceMock, 'register').and.returnValue(registerDeferred.promise);
-            });
-
-            it('should resolve when service is OK', function () {
+            it('should resolve when register API call is OK', function () {
                 var resolved = false;
+
+                httpBackend.whenPOST(Urls.baseApi + 'register').respond(201, {token: '123'});
 
                 AuthService.register({}).then(function () {
                     resolved = true;
                 });
 
-                registerDeferred.resolve(returnedUser);
                 rootScope.$digest();
+                httpBackend.flush();
 
                 expect(resolved).toBe(true);
             });
 
-            it('should return an error when service fails', function () {
+            it('should return an error when register API call fails', function () {
                 var error = false;
+
+                httpBackend.whenPOST(Urls.baseApi + 'register').respond(500);
+
 
                 AuthService.register({}).catch(function () {
                     error = true;
                 });
 
-                registerDeferred.reject();
                 rootScope.$digest();
+                httpBackend.flush();
 
                 expect(error).toBe(true);
             });
 
-            it('should update objectId and sessionToken after register completes', function () {
+            it('should update token after register completes', function () {
+                spyOn(CookiesServiceMock, 'put');
+                var token = '123';
+                httpBackend.whenPOST(Urls.baseApi + 'register').respond(201, {token: token});
                 AuthService.register({});
 
-                registerDeferred.resolve(returnedUser);
                 rootScope.$digest();
+                httpBackend.flush();
 
-                var user = AuthService.getCurrentUser();
-                expect(user.objectId).toBe(returnedUser.objectId);
-                expect(user.sessionToken).toBe(returnedUser.sessionToken);
+                expect(CookiesServiceMock.put).toHaveBeenCalledWith('xrAuthCookie', token);
             });
 
         });
@@ -220,27 +118,39 @@
 
                 expect(CookiesServiceMock.remove).toHaveBeenCalled();
             });
-
-            it('should set current user to undefined', function () {
-                AuthService.logout();
-
-                expect(AuthService.getCurrentUser()).toBeUndefined();
-            });
         });
 
         describe('getUserToken', function () {
             it('should return current users sessionToken', function () {
                 var token = '1234';
-                var registerDeferred = q.defer();
-                spyOn(ParseServiceMock, 'register').and.returnValue(registerDeferred.promise);
-                AuthService.register({});
-                registerDeferred.resolve({
-                    sessionToken: token
-                });
+                spyOn(CookiesServiceMock, 'get').and.returnValue(token);
+
                 rootScope.$digest();
 
                 expect(AuthService.getUserToken()).toBe(token);
             });
+        });
+
+        describe('getCurrentUser', function () {
+            var token,
+                tokenPayLoad;
+
+            beforeEach(function () {
+                token = 'token123';
+                tokenPayLoad = {
+                    username: 'test'
+                };
+
+                spyOn(CookiesServiceMock, 'get').and.returnValue(token);
+                spyOn(jwtHelperMock, 'decodeToken').and.returnValue(tokenPayLoad);
+            });
+
+            it('should return the payload from the token', function () {
+                var currentUser = AuthService.getCurrentUser();
+
+                expect(currentUser).toEqual(tokenPayLoad);
+            });
+
         });
 
     });
