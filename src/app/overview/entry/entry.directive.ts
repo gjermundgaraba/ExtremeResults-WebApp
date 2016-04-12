@@ -4,8 +4,6 @@
     angular
         .module('xr.overview')
         .component('overviewEntry', {
-            restrict: 'AE',
-            replace: true,
             bindings: {
                 entryObj: '='
             },

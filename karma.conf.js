@@ -13,10 +13,9 @@ module.exports = function (config) {
             'node_modules/angular-aria/angular-aria.js',
             'node_modules/angular-material/angular-material.js',
             'node_modules/angular-jwt/dist/angular-jwt.js',
+            'node_modules/angular-moment/angular-moment.js',
             'tmp/typescript/**/*.module.js',
             'tmp/typescript/**/*.js',
-            'src/app/**/*.module.js',
-            'src/app/**/*.js',
             'src/tests/unit/**/*.js'
         ],
 

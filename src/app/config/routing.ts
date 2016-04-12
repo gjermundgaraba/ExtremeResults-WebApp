@@ -31,38 +31,17 @@
                     controller: 'OverviewController',
                     controllerAs: '$ctrl'
                 })
-                .state('app.daily-outcome', {
-                    url: '/daily-outcome',
-                    templateUrl: 'createOutcome/createOutcome.partial.html',
-                    controller: 'CreateOutcomeController',
-                    controllerAs: '$ctrl',
-                    resolve: {
-                        outcomeType: function () {
-                            return CoreTypes.dailyOutcome;
-                        }
-                    }
+                .state('app.outcomes', {
+                    url: '/outcomes',
+                    templateUrl: 'outcomes/outcomes.partial.html',
+                    controller: 'OutcomesController',
+                    controllerAs: '$ctrl'
                 })
-                .state('app.monday-vision', {
-                    url: '/monday-vision',
-                    templateUrl: 'createOutcome/createOutcome.partial.html',
-                    controller: 'CreateOutcomeController',
-                    controllerAs: '$ctrl',
-                    resolve: {
-                        outcomeType: function () {
-                            return CoreTypes.mondayVision;
-                        }
-                    }
-                })
-                .state('app.weekly-reflection', {
-                    url: '/weekly-reflection',
-                    templateUrl: 'createReflection/createReflection.partial.html',
-                    controller: 'CreateReflectionController',
-                    controllerAs: '$ctrl',
-                    resolve: {
-                        reflectionType: function () {
-                            return CoreTypes.weeklyReflection;
-                        }
-                    }
+                .state('app.reflections', {
+                    url: '/reflections',
+                    templateUrl: 'reflections/reflections.partial.html',
+                    controller: 'ReflectionsController',
+                    controllerAs: '$ctrl'
                 })
                 .state('app.hot-spots', {
                     url: '/hot-spots',

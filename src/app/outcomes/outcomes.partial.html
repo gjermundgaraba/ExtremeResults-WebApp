@@ -1,0 +1,46 @@
+
+<div class="md-whiteframe-1dp">
+    <md-toolbar>
+        <h1 class="md-toolbar-tools">
+            Outcomes
+        </h1>
+    </md-toolbar>
+
+    <md-content class="md-padding">
+        <md-menu>
+            <md-button type="submit" class="md-raised md-accent" ng-click="$mdOpenMenu()">Create New Outcome</md-button>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button ng-click="$ctrl.createOutcome('Daily')">
+                        Daily Outcome
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="$ctrl.createOutcome('Weekly')">
+                        Weekly Outcome
+                    </md-button>
+                </md-menu-item>
+                <!--<md-menu-item>-->
+                    <!--<md-button ng-click="$ctrl.createOutcome('Monthly')">-->
+                        <!--Monthly Outcome-->
+                    <!--</md-button>-->
+                <!--</md-menu-item>-->
+                <!--<md-menu-item>-->
+                    <!--<md-button ng-click="$ctrl.createOutcome('Yearly')">-->
+                        <!--Yearly Outcome-->
+                    <!--</md-button>-->
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-content>
+
+    <md-content ng-show="$ctrl.showCreateOutcome" class="md-padding">
+        <div>
+            <xr-create-outcome type="$ctrl.outcomeType"></xr-create-outcome>
+        </div>
+    </md-content>
+
+
+</div>
+
+

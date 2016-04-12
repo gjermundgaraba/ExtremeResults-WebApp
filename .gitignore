@@ -5,6 +5,6 @@ bower_components/
 tmp
 .DS_Store
 .idea
-
+typings
 coverage/
 public/

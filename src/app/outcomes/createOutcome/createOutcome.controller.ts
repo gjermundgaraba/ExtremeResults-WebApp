@@ -2,18 +2,18 @@
     'use strict';
 
     angular
-        .module('xr.createOutcome')
+        .module('xr.outcomes')
         .controller('CreateOutcomeController', CreateOutcomeController);
 
-    CreateOutcomeController.$inject = ['CreateOutcomeService', '$location', 'outcomeType', 'XrUtils'];
+    CreateOutcomeController.$inject = ['CreateOutcomeService', '$location', 'XrUtils'];
 
-    function CreateOutcomeController(CreateOutcomeService, $location, outcomeType, XrUtils) {
+    function CreateOutcomeController(CreateOutcomeService, $location, XrUtils) {
         var $ctrl = this;
         $ctrl.save = save;
-        $ctrl.header = generateHeader();
+        $ctrl.generateHeader = generateHeader;
         $ctrl.relatedEntries = [];
 
-        $ctrl.getRelatedEntriesPromise = CreateOutcomeService.getRelatedEntriesForOutcome(outcomeType.typeName)
+        $ctrl.getRelatedEntriesPromise = CreateOutcomeService.getRelatedEntriesForOutcome($ctrl.type.typeName)
             .then(function (data) {
                 $ctrl.relatedEntries = data;
             });
@@ -24,7 +24,7 @@
                     firstStory: $ctrl.outcome1,
                     secondStory: $ctrl.outcome2,
                     thirdStory: $ctrl.outcome3,
-                    typeName: outcomeType.typeName,
+                    typeName: $ctrl.type.typeName,
                     effectiveDate: new Date()
                 };
 
@@ -36,8 +36,8 @@
         }
 
         function generateHeader() {
-            return XrUtils.getEntryHeader(outcomeType) + ' for ' +
-                   XrUtils.getFormattedEntryDate(outcomeType, new Date());
+            return XrUtils.getEntryHeader($ctrl.type) + ' for ' +
+                   XrUtils.getFormattedEntryDate($ctrl.type, new Date());
         }
     }
 })();

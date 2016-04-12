@@ -7,23 +7,18 @@
             controller,
             rootScope,
             location,
+            outcomeTypeMock,
             formattedEntryDateMock,
             entryHeaderMock,
-            outcomeTypeMock,
             relatedEntriesDeferred,
             XrUtilsMock,
             q;
 
-        beforeEach(module('xr.createOutcome'));
+        beforeEach(module('xr.outcomes'));
         beforeEach(module(function ($provide) {
             CreateOutcomeServiceMock = {
                 getRelatedEntriesForOutcome: function () {},
                 createOutcome: function () {}
-            };
-
-            outcomeTypeMock = {
-                className: 'Outcome',
-                typeName: 'Daily'
             };
 
             formattedEntryDateMock = 'mockymockmockdate';
@@ -33,8 +28,12 @@
                 getEntryHeader: function () { return entryHeaderMock }
             };
 
+            outcomeTypeMock = {
+                className: 'Outcome',
+                typeName: 'Daily'
+            };
+
             $provide.value('CreateOutcomeService', CreateOutcomeServiceMock);
-            $provide.value('outcomeType', outcomeTypeMock);
             $provide.value('XrUtils', XrUtilsMock);
         }));
         beforeEach(inject(function($controller, $q, $rootScope, $location) {
@@ -45,7 +44,10 @@
             relatedEntriesDeferred = q.defer();
             spyOn(CreateOutcomeServiceMock, 'getRelatedEntriesForOutcome').and.returnValue(relatedEntriesDeferred.promise);
 
-            controller = $controller('CreateOutcomeController', {'$location': location});
+            var data = {
+                type: outcomeTypeMock
+            };
+            controller = $controller('CreateOutcomeController', {'$location': location}, data);
         }));
 
         describe('init', function () {
@@ -125,7 +127,7 @@
 
         describe('header', function () {
             it('should have entryheader and date', function () {
-                expect(controller.header).toBe(entryHeaderMock + ' for ' + formattedEntryDateMock);
+                expect(controller.generateHeader()).toBe(entryHeaderMock + ' for ' + formattedEntryDateMock);
             });
         });
 

@@ -1,5 +1,5 @@
-(function () {
-    'use strict';
+/* istanbul ignore else  */
+namespace xrApp {
 
     angular
         .module('xr',
@@ -19,11 +19,11 @@
             'xr.login',
             'xr.menuBar',
             'xr.navigation',
-            'xr.createOutcome',
-            'xr.createReflection',
+            'xr.outcomes',
+            'xr.reflections',
             'xr.overview',
             'xr.hotSpots',
             'xr.templates', // gets made during build step (see gulpfile)
             'xr.settings'
         ]);
-})();
+}

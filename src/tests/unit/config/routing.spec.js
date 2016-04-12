@@ -49,18 +49,6 @@
 
             expect(stateNameCalled).toBe('app.overview');
         });
-
-        it('should resolve correct outcome type for app.daily-outcome', function () {
-            expect(stateProviderData['app.daily-outcome'].resolve.outcomeType()).toBe(CoreTypes.dailyOutcome);
-        });
-
-        it('should resolve correct outcome type for app.monday-vision', function () {
-            expect(stateProviderData['app.monday-vision'].resolve.outcomeType()).toBe(CoreTypes.mondayVision)
-        });
-
-        it('should resolve correct outcome type for app.weekly-reflection', function () {
-            expect(stateProviderData['app.weekly-reflection'].resolve.reflectionType()).toBe(CoreTypes.weeklyReflection)
-        });
     });
 
 })();

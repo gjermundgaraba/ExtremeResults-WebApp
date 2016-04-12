@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('xr.createOutcome')
+        .module('xr.outcomes')
         .factory('CreateOutcomeService', CreateOutcomeServiceFactory);
 
     CreateOutcomeServiceFactory.$inject = ['Urls', '$http'];

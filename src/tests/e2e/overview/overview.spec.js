@@ -1,6 +1,6 @@
 var OverviewPage = require('./overview.po.js');
 var Login = require('../login/login.po.js');
-var CreateOutcomePage = require('../common/createOutcome.po.js');
+var OutcomesPage = require('../outcomes/outcomes.po');
 var EditOutcome = require('./editOutcome.po');
 var Common = require('../common/common.js');
 
@@ -8,7 +8,7 @@ describe('Overview Page', function () {
 
     var overviewPage = new OverviewPage();
     var login = new Login();
-    var createOutcomePage = new CreateOutcomePage();
+    var outcomesPage = new OutcomesPage();
     var editOutcome = new EditOutcome();
     var common = new Common();
 
@@ -30,11 +30,14 @@ describe('Overview Page', function () {
 
     describe('edit', function () {
         beforeAll(function () {
-            common.dailyOutcomeMenuButton.click();
-            createOutcomePage.outcome1InputField.sendKeys('Outcome number 1 to be edited');
-            createOutcomePage.outcome2InputField.sendKeys('Outcome number 2 to be edited');
-            createOutcomePage.outcome3InputField.sendKeys('Outcome number 3 to be edited');
-            createOutcomePage.saveButton.click();
+            common.outcomesMenuBytton.click();
+            outcomesPage.createNewOutcomeButton.click();
+            outcomesPage.createNewOutcomeDailyOutcomeSubChoiceButton.click();
+
+            outcomesPage.outcome1InputField.sendKeys('Outcome number 1 to be edited');
+            outcomesPage.outcome2InputField.sendKeys('Outcome number 2 to be edited');
+            outcomesPage.outcome3InputField.sendKeys('Outcome number 3 to be edited');
+            outcomesPage.saveButton.click();
             common.overviewMenuButton.click();
         });
 

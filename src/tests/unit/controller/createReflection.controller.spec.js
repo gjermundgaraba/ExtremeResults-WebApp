@@ -15,7 +15,7 @@
             entryHeaderMock,
             q;
 
-        beforeEach(module('xr.createReflection'));
+        beforeEach(module('xr.reflections'));
         beforeEach(module(function ($provide) {
             CreateReflectionServiceMock = {
                 createReflection: function () {},
@@ -47,7 +47,10 @@
             relatedEntriesDeferred = q.defer();
             spyOn(CreateReflectionServiceMock, 'getRelatedEntriesForReflection').and.returnValue(relatedEntriesDeferred.promise);
 
-            controller = $controller('CreateReflectionController', {'$location': location, '$scope': scope});
+            var data = {
+                type: reflectionTypeMock
+            };
+            controller = $controller('CreateReflectionController', {'$location': location, '$scope': scope}, data);
             scope.$ctrl = controller;
         }));
 

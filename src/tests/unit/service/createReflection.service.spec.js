@@ -6,7 +6,7 @@ describe('CreateReflectionService', function(){
         Urls,
         CreateReflectionService;
 
-    beforeEach(module('xr.createReflection'));
+    beforeEach(module('xr.reflections'));
     beforeEach(inject(function($httpBackend, _CreateReflectionService_, _Urls_) {
         httpBackend = $httpBackend;
         CreateReflectionService = _CreateReflectionService_;

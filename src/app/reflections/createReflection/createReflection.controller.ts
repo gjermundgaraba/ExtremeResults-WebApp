@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('xr.createReflection')
+        .module('xr.reflections')
         .controller('CreateReflectionController', CreateReflectionController);
 
-    CreateReflectionController.$inject = ['$scope', 'CreateReflectionService', '$location', 'reflectionType', 'XrUtils'];
+    CreateReflectionController.$inject = ['$scope', 'CreateReflectionService', '$location', 'XrUtils'];
 
-    function CreateReflectionController($scope, CreateReflectionService, $location, reflectionType, XrUtils, AuthService) {
+    function CreateReflectionController($scope, CreateReflectionService, $location, XrUtils) {
         var $ctrl = this;
         $ctrl.save = save;
         $ctrl.effectiveDate = new Date();
@@ -33,7 +33,7 @@
                     secondThingToImprove: $ctrl.secondThingToImprove,
                     thirdThingToImprove: $ctrl.thirdThingToImprove,
                     effectiveDate: $ctrl.effectiveDate.toISOString(),
-                    typeName: reflectionType.typeName
+                    typeName: $ctrl.type.typeName
                 };
 
                 CreateReflectionService.createReflection(weeklyReflection)
@@ -44,12 +44,12 @@
         }
 
         function generateHeader() {
-            return XrUtils.getEntryHeader(reflectionType) + ' for ' +
-                XrUtils.getFormattedEntryDate(reflectionType, $ctrl.effectiveDate);
+            return XrUtils.getEntryHeader($ctrl.type) + ' for ' +
+                XrUtils.getFormattedEntryDate($ctrl.type, $ctrl.effectiveDate);
         }
 
         function updateRelatedEntriesForReflection() {
-            $ctrl.getRelatedEntriesPromise = CreateReflectionService.getRelatedEntriesForReflection(reflectionType.typeName, $ctrl.effectiveDate)
+            $ctrl.getRelatedEntriesPromise = CreateReflectionService.getRelatedEntriesForReflection($ctrl.type.typeName, $ctrl.effectiveDate)
                 .then(function (data) {
                     $ctrl.relatedEntries = data;
                 });

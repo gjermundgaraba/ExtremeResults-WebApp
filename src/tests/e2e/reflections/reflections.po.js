@@ -1,6 +1,9 @@
 
 var ReflectionPage = function () {
 
+    this.createNewReflectionButton = element(by.buttonText('Create New Reflection'));
+    this.createNewReflectionWeeklyReflectionSubChoiceButton = element(by.buttonText('Weekly Reflection'));
+
     this.firstThingThatWentWellInputField = element(by.model('$ctrl.firstThingThatWentWell'));
     this.secondThingThatWentWellInputField = element(by.model('$ctrl.secondThingThatWentWell'));
     this.thirdThingThatWentWellInputField = element(by.model('$ctrl.thirdThingThatWentWell'));

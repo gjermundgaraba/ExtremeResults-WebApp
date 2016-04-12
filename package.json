@@ -16,7 +16,6 @@
     "angular-ui-router": "0.2.17",
     "gulp-typescript": "2.12.1",
     "moment": "2.11.2",
-    "ng-material-floating-button": "0.6.2",
     "typescript": "1.8.9"
   },
   "devDependencies": {
@@ -30,12 +29,10 @@
     "gulp-bundle-assets": "2.23.0",
     "gulp-connect": "2.3.1",
     "gulp-csslint": "0.2.0",
-    "gulp-jshint": "2.0.0",
     "gulp-replace": "0.5.4",
     "gulp-sourcemaps": "1.6.0",
     "gulp-watch": "4.3.5",
     "jasmine-core": "2.4.1",
-    "jshint": "2.9.1",
     "karma": "0.13.19",
     "karma-chrome-launcher": "0.2.2",
     "karma-coverage": "0.5.3",
@@ -44,12 +41,15 @@
     "karma-junit-reporter": "0.3.8",
     "karma-typescript-preprocessor": "0.0.21",
     "main-bower-files": "2.11.1",
-    "protractor": "3.0.0",
+    "protractor": "3.2.2",
     "remap-istanbul": "0.5.1",
+    "typings": "0.7.12",
     "vinyl-paths": "2.1.0",
     "yargs": "3.32.0"
   },
   "scripts": {
+    "postinstall": "typings install",
+    "installTyping": "typings install --save --ambient",
     "start": "gulp --server \"http://localhost:4321/api/\"",
     "buildprod": "gulp build",
     "test": "gulp testSingleRun && remap-istanbul -b src/app/ -i coverage/coverage-final.json -o coverage/html-report -t html",

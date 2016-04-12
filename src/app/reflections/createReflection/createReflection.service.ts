@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('xr.createReflection')
+        .module('xr.reflections')
         .factory('CreateReflectionService', CreateReflectionServiceFactory);
 
     CreateReflectionServiceFactory.$inject = ['Urls', '$http'];

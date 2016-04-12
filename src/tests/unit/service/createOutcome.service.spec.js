@@ -6,7 +6,7 @@ describe('CreateOutcomeService', function(){
         Urls,
         CreateOutcomeService;
 
-    beforeEach(module('xr.createOutcome'));
+    beforeEach(module('xr.outcomes'));
     beforeEach(inject(function($httpBackend, _CreateOutcomeService_, _Urls_) {
         httpBackend = $httpBackend;
         CreateOutcomeService = _CreateOutcomeService_;

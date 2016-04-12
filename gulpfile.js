@@ -7,7 +7,6 @@ var bundle = require('gulp-bundle-assets'),
     replace = require('gulp-replace'),
     connect = require('gulp-connect'),
     templateCache = require('gulp-angular-templatecache'),
-    jshint = require('gulp-jshint'),
     KarmaServer = require('karma').Server,
     csslint = require('gulp-csslint'),
     argv = require('yargs').argv,
@@ -60,13 +59,14 @@ gulp.task('templates', ['clean'], function() {
 });
 
 gulp.task('typescript', ['clean'], function () {
-    return gulp.src('src/app/**/*.ts')
+
+    var tsProject = typescript.createProject('tsconfig.json');
+
+    return tsProject.src('src/app/**/*.ts')
         .pipe(sourcemaps.init())
-        .pipe(typescript({
-            target:'es5'
-        }))
+        .pipe(typescript(tsProject))
         .js
-        .pipe(sourcemaps.write({sourceRoot: __dirname + '/src/app'}))
+        .pipe(sourcemaps.write({sourceRoot: __dirname}))
         .pipe(gulp.dest('tmp/typescript'));
 });
 
@@ -81,22 +81,12 @@ gulp.task('webserver', ['compile'], function () {
 gulp.task('build', ['clean', 'bundle', 'compile']);
 
 gulp.task('datWatch', function() {
-    gulp.watch(['./src/app/**/*.*'], ['jshint', 'csslint', 'build']);
+    gulp.watch(['./src/app/**/*.ts', './src/app/**/*.css', './src/app/**/*.html'], ['csslint', 'build']);
 });
 
-gulp.task('default', ['build', 'jshint', 'csslint', 'datWatch', 'webserver']);
+gulp.task('default', ['build', 'csslint', 'datWatch', 'webserver']);
 
-gulp.task('jshint', function() {
-    return gulp.src('./src/app/**/*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
-});
-
-gulp.task('jshint:watch', ['jshint'], function() {
-    gulp.watch(['./src/app/**/*.js'], ['jshint']);
-});
-
-gulp.task('check', ['jshint', 'test'], function() {
+gulp.task('check', ['test'], function() {
     gulp.watch(['./src/app/**/*.js'], ['test']);
 
 });
