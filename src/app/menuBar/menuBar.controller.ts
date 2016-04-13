@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.menuBar')
@@ -10,7 +9,7 @@
     function MenuBarController($mdSidenav, AuthService, $rootScope) {
         var $ctrl = this;
 
-        $ctrl.toggleSidenav = function(menuId) {
+        $ctrl.toggleSidenav = function (menuId) {
             $mdSidenav(menuId).toggle();
         };
 
@@ -19,5 +18,4 @@
             $rootScope.$broadcast('$stateChangeStart', 'overview');
         };
     }
-
-})();
+}

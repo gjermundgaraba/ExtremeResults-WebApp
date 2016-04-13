@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.overview')
@@ -10,5 +9,4 @@
             templateUrl: 'overview/entry/reflectionEntry/reflectionEntry.partial.html',
             controller: 'ReflectionEntryController'
         });
-
-})();
+}

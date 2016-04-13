@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular.module('xr.config')
         .config(function ($mdThemingProvider) {
@@ -7,4 +6,4 @@
                 .primaryPalette('blue')
                 .accentPalette('red');
         });
-})();
+}

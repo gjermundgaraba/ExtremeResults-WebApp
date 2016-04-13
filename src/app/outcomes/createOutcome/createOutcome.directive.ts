@@ -1,5 +1,4 @@
 namespace xrApp {
-    'use strict';
 
     angular
         .module('xr.outcomes')
@@ -10,6 +9,4 @@ namespace xrApp {
                 type: '='
             }
         });
-
-
 }

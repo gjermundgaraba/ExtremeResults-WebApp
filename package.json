@@ -52,7 +52,7 @@
     "installTyping": "typings install --save --ambient",
     "start": "gulp --server \"http://localhost:4321/api/\"",
     "buildprod": "gulp build",
-    "test": "gulp testSingleRun && remap-istanbul -b src/app/ -i coverage/coverage-final.json -o coverage/html-report -t html",
+    "test": "gulp testSingleRun && remap-istanbul -i coverage/coverage-final.json -o coverage/html-report -t html",
     "selenium": "webdriver-manager update && webdriver-manager start",
     "e2e": "protractor protractor.conf.js",
     "debuge2e": "protractor debug protractor.conf.js",

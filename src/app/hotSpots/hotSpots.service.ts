@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.hotSpots')
@@ -35,7 +34,5 @@
         function deleteHotSpotBucket(objectId) {
             return $http.delete(Urls.baseApi + 'hotSpotBuckets/' + objectId);
         }
-
     }
-
-})();
+}

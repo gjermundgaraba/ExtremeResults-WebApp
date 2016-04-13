@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.outcomes')
@@ -40,4 +39,4 @@
                    XrUtils.getFormattedEntryDate($ctrl.type, new Date());
         }
     }
-})();
+}

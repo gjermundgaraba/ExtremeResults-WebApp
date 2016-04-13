@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.register')
@@ -13,7 +12,7 @@
         $ctrl.register = register;
         $ctrl.backToLogin = backToLogin;
 
-        function register () {
+        function register() {
             if ($ctrl.registerForm.$valid) {
                 $ctrl.isRegistering = true;
 
@@ -29,15 +28,14 @@
                     .catch(function () {
                         alert('Something went wrong!');
                     })
-                    .finally(function() {
+                    .finally(function () {
                         $ctrl.isRegistering = false;
                     });
             }
         }
 
-        function backToLogin () {
+        function backToLogin() {
             $state.go('login');
         }
     }
-
-})();
+}

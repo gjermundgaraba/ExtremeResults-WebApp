@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.menuBar')
@@ -12,5 +11,4 @@
 
         $ctrl.currentUser = AuthService.getCurrentUser();
     }
-
-})();
+}

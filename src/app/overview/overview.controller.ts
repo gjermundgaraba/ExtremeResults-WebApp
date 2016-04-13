@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.overview')
@@ -15,9 +14,8 @@
         $ctrl.allEntriesLoaded = false;
 
         $ctrl.getActiveEntriesPromise = OverviewService.getActiveEntries()
-            .then(function(data) {
+            .then(function (data) {
                 $ctrl.activeEntries = data;
             });
     }
-
-})();
+}

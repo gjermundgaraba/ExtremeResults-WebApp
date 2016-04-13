@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.menuBar')
@@ -7,6 +6,4 @@
             templateUrl: 'menuBar/menuBar.partial.html',
             controller: 'MenuBarController'
         });
-
-
-})();
+}

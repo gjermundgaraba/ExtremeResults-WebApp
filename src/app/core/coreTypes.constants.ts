@@ -1,7 +1,7 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
-    angular.module('xr.core')
+    angular
+        .module('xr.core')
         .constant('CoreTypes', {
             mondayVision: {
                 className: 'Outcome',
@@ -16,4 +16,4 @@
                 typeName: 'Weekly'
             }
         });
-})();
+}

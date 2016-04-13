@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.overview')
@@ -13,4 +12,4 @@
         $ctrl.header = XrUtils.getEntryHeader($ctrl.reflectionObj);
         $ctrl.reflectionTime = XrUtils.getFormattedEntryDate($ctrl.reflectionObj);
     }
-})();
+}

@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular.module('xr.config')
         .config(['$stateProvider', '$urlRouterProvider', 'CoreTypes', function($stateProvider, $urlRouterProvider, CoreTypes) {
@@ -54,4 +53,4 @@
                     templateUrl: 'settings/settings.partial.html'
                 });
         }]);
-})();
+}

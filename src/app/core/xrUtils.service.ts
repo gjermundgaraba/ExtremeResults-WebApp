@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular.module('xr.core')
         .factory('XrUtils', XrUtilsFactory);
@@ -32,4 +31,4 @@
             return entry.typeName + ' ' + entry.className;
         }
     }
-})();
+}

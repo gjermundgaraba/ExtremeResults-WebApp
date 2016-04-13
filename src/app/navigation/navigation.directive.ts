@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.navigation')
@@ -7,6 +6,4 @@
             templateUrl: 'navigation/navigation.partial.html',
             controller: 'NavigationController'
         });
-
-
-})();
+}

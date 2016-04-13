@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.settings')
@@ -7,4 +6,4 @@
             templateUrl: 'settings/userSettings/userSettings.partial.html'
         });
 
-})();
+}

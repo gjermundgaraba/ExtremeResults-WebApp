@@ -65,7 +65,8 @@ gulp.task('typescript', ['clean'], function () {
     return tsProject.src('src/app/**/*.ts')
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject))
-        .js
+        //write comments to tell istanbul to ignore the code inside the iife parameters
+        .js.pipe(replace(/(}\)\()(.*\|\|.*;)/g, '$1/* istanbul ignore next */$2')) // To ignore
         .pipe(sourcemaps.write({sourceRoot: __dirname}))
         .pipe(gulp.dest('tmp/typescript'));
 });

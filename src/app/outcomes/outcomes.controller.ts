@@ -19,5 +19,4 @@ namespace xrApp {
             $ctrl.outcomeType.typeName = typeName;
         }
     }
-
 }

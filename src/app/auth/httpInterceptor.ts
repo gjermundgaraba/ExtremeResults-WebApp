@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.auth')
@@ -23,5 +22,4 @@
             return config;
         }
     }
-
-})();
+}

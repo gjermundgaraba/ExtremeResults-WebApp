@@ -1,4 +1,3 @@
-/* istanbul ignore else  */
 namespace xrApp {
 
     angular

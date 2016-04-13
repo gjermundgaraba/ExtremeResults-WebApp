@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.login')
@@ -24,7 +23,7 @@
                     .catch(function () {
                         alert('Wrong username or password');
                     })
-                    .finally(function() {
+                    .finally(function () {
                         $ctrl.isLoggingIn = false;
                     });
             }
@@ -34,5 +33,4 @@
             $state.go('register');
         }
     }
-
-})();
+}

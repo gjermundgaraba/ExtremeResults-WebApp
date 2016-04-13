@@ -1,6 +1,5 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
-    angular
-        .module('xr.settings', []);
-})();
+    angular.module('xr.settings', []);
+
+}

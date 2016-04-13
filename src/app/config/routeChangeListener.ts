@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular.module('xr.config')
         .run(['AuthService', '$rootScope', '$state', function (AuthService, $rootScope, $state) {
@@ -10,4 +9,4 @@
                 }
             });
         }]);
-})();
+}

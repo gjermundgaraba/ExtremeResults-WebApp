@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace xrApp {
 
     angular
         .module('xr.reflections')
@@ -31,7 +30,5 @@
         function createReflection(reflection) {
             return $http.post(Urls.baseApi + 'reflections', reflection);
         }
-
     }
-
-})();
+}
