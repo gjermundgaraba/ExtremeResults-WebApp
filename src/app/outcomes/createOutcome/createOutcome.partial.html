@@ -10,7 +10,7 @@
         <form name="$ctrl.createOutcomeForm" ng-submit="$ctrl.save()" novalidate>
             <md-input-container class="md-block">
                 <label for="outcome1">Outcome 1</label>
-                <input ng-model="$ctrl.outcome1" id="outcome1" name="outcome1" required>
+                <input ng-model="$ctrl.outcome1" id="outcome1" name="outcome1" autofocus required>
                 <div ng-messages="$ctrl.createOutcomeForm.outcome1.$error" ng-if="$ctrl.createOutcomeForm.outcome1.$error.required && $ctrl.createOutcomeForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>

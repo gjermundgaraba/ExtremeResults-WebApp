@@ -19,7 +19,7 @@
         </md-menu>
     </md-content>
 
-    <md-content ng-show="$ctrl.showCreateReflection" class="md-padding">
+    <md-content ng-if="$ctrl.showCreateReflection" class="md-padding">
         <div>
             <xr-create-reflection type="$ctrl.reflectionType"></xr-create-reflection>
         </div>

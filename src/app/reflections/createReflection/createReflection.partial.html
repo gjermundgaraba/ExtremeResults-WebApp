@@ -11,7 +11,7 @@
         <form name="$ctrl.weeklyReflectionForm" ng-submit="$ctrl.save()" novalidate>
             <md-input-container class="md-block">
                 <label for="firstThingThatWentWell">First thing that went well</label>
-                <input ng-model="$ctrl.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" required>
+                <input ng-model="$ctrl.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" autofocus required>
                 <div ng-messages="$ctrl.weeklyReflectionForm.firstThingThatWentWell.$error" ng-if="$ctrl.weeklyReflectionForm.firstThingThatWentWell.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>

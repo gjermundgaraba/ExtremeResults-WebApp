@@ -34,7 +34,7 @@
         </md-menu>
     </md-content>
 
-    <md-content ng-show="$ctrl.showCreateOutcome" class="md-padding">
+    <md-content ng-if="$ctrl.showCreateOutcome" class="md-padding">
         <div>
             <xr-create-outcome type="$ctrl.outcomeType"></xr-create-outcome>
         </div>

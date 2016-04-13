@@ -7,7 +7,15 @@ module.exports = {
                 './tmp/typescript/**/*.js'
             ],
             options: {
-                uglify: false
+                uglify: false,
+                order: {
+                    scripts: [
+                        '**/app.js',
+                        '**/*.module.js',
+                        '!**/bootstrap.js',
+                        '**/bootstrap.js'
+                    ]
+                }
             },
             styles: './src/**/*.css'
         },

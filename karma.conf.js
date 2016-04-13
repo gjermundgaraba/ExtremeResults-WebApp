@@ -15,7 +15,7 @@ module.exports = function (config) {
             'node_modules/angular-jwt/dist/angular-jwt.js',
             'node_modules/angular-moment/angular-moment.js',
             'tmp/typescript/**/*.module.js',
-            'tmp/typescript/**/*.js',
+            'tmp/typescript/**/!(bootstrap).js',
             'src/tests/unit/**/*.js'
         ],
 
