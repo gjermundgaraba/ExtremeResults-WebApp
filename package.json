@@ -56,7 +56,7 @@
     "selenium": "webdriver-manager update && webdriver-manager start",
     "e2e": "protractor protractor.conf.js",
     "debuge2e": "protractor debug protractor.conf.js",
-    "citest": "karma start karma.conf.js --no-auto-watch --single-run && remap-istanbul -b src/app/ -i coverage/coverage-final.json -o coverage/lcov.info -t lcovonly"
+    "citest": "karma start karma.conf.js --no-auto-watch --single-run && remap-istanbul -i coverage/coverage-final.json -o coverage/lcov.info -t lcovonly"
   },
   "repository": {
     "type": "git",
