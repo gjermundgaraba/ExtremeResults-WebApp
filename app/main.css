@@ -1,0 +1,131 @@
+nav {
+    width: 100%;
+}
+
+header {
+    height: 80px;
+}
+
+.pull-right {
+    float: right;
+}
+
+.flex-container-column {
+    display: flex;
+    flex-flow: column;
+}
+
+.flex-container-row {
+    display: flex;
+    flex-flow: row;
+}
+
+.flex-wrap-content {
+    flex-wrap: wrap;
+}
+
+.flex-column {
+    flex: 1;
+}
+
+.overview-entry {
+    border: 1px solid #333;
+    display: inline-block;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.md-toolbar-tools {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: inherit;
+}
+
+.hot-spot-bucket-title {
+    padding-left: 10px;
+}
+
+.layout-content {
+    max-width: 846px;
+    min-height: calc(100vh - 64px);
+}
+
+.menu-link {
+    width: 100%;
+}
+
+.navigation-button.md-menu-button {
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    margin: 0;
+    min-height: 48px;
+    padding: 0 0 0 10px;
+    text-align: left;
+    width: 100%;
+}
+
+.login-container, .register-container {
+    border-radius: 4px;
+    left: 50%;
+    margin-bottom: 16px;
+    padding-bottom: 0;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
+    width: 600px;
+}
+
+.entry-title {
+    margin-top: 0;
+}
+
+.overview-edit-button {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+
+.fake-button {
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    fill: lightblue;
+}
+
+.edit-dialog {
+    width: 400px;
+}
+
+.user-info {
+    padding-top: 6px;
+    cursor: default;
+}
+
+.load-button {
+    fill: #fff;
+}
+
+.form-equality-padding {
+    padding: 18px;
+}
+
+@media (max-width: 650px) {
+    .login-container, .register-container {
+        width: 400px;
+    }
+}
+
+@media (max-width: 450px) {
+    .login-container, .register-container {
+        width: 300px;
+    }
+}
+
+@media (max-width: 350px) {
+    .login-container, .register-container {
+        width: 250px;
+    }
+}
