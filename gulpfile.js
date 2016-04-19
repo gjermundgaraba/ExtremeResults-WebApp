@@ -73,7 +73,7 @@ gulp.task('compile', ['clean'], function () {
         .pipe(gulp.dest('.'));
 });
 
-gulp.task('build', ['clean', 'compile', 'bundle', 'index']);
+gulp.task('build', ['clean', 'templates', 'compile', 'bundle', 'index']);
 
 gulp.task('bundle', ['clean', 'compile'], function () {
     return gulp.src('app/bootstrap.js')
