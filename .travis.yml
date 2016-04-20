@@ -1,28 +1,21 @@
 language: node_js
-
 node_js:
 - 4.2.4
-
 addons:
   firefox: '43.0'
-
 env:
   global:
-    - secure: CNqpqebCUKaN5T0r9y8v1goAKsYA++VviB3wUCuy6RuYM9b5dM461fQxMacoBxl9H/v5GsCoNuOCBQDDAtTgn5i/9ME7M4p4RcHN8uXCk+qZxNg1vhWL+8oDuuWTZqzhr8wfa0O5Zdl3eh1q8108Lc+87hQxHUMPc31iTTGDJ/4Ka67G4Xii99xVMBuwkXVhXOd/gUqVbJ6+8V1Thgojh4otCmSvmThzIwpqBfUU7hu1Xz+dnLLL/yum8MuXSecXrCgPNaHBWjRPvTxHN98uaSryXx4dkvdoThMsogK+Ofj6QZus5TxgEI7xrePFn/Jj9YpzUmBJxatO8eCKYW0wsCrl0Px1PQELpCoYUwDZ6o+ejSf98zzNdt9t9QxfHSiJAbCBZX5F/f7+iOzU2fE0Mr5siFuBu384vY/A+s218shIoxoEdxZ0Ubbcry0yv12hThseG/hDXaVDaaPALgKkRwS/GRmJZBfUxT5xYGPT1iuDgzC3UuIlN1m7s3ZRxNwPctZT4YfIqik8eAS60JounKbZae8EBQ9tl3awN6uLJZIsMaS+deiyI6PSf1mK+2rU2jIdMvfM6mB+w3oVdTKElduq3WSu0qov4+YsEVlr38yxl2nYB3/064cAbWbIx4ndHEMtazKi0QdxkQ+yJLiSsQoSyuMhlcZSILASJ5q2PIo=
-
+  - secure: reHCrpMsX3kkW7IyNRdnMcdNsMd7WhJ/QhYa/CBTwUGeAjSRIJyWGnhZym3C+4QStam9mMDBMFFySQoItmT58od6258WVNoYAh5UntTQlxsfwRvDPhu6rqjL7jTFA2PwzUOnIUK+drgavNUerHtWXpJLJxhTq8Sgr89IaLhO5ad/tR9ee+Zq7FwYgwXvD6SATNs6jiC89aF671Lqsh7rNhi9hBCbglaqeNVa82QgooueIuQxVx8xLnVeN5Stu7KRjaoMjsEMuQFRbYgKq1SCiGMCT2SOpgYM3WRxsCjiV/+cPXWAIWbda7hmbPTho6VnaTZEpez26FPx3uqEhE7nhFwkVogDmRb++ODagf+GPUVQyPozCIinmuYxMWt1OXOBK2QVCGh75iZtqOnEDynDONHWyivYpgZHp3aj03XQmRPAqdUU9tGbyZUbCY3FEtDVlfg6VH2Y6vMdhlW341qXFC+gRn/7kcBJr6fVzXhtFKXy9qbBg78XjRzrpGJGGaUPqVLSrDBCg++Z3Q13Wb2OdX1wIZ/An+/gSTgOu2vqy46lBJCE7jJXEGQhujXGPEFqbmV458OpBjcfmEbwqR5rl0L3b4CfdvitcI3Hmo+nJ64hOEzF90rkT2Tc8+S+PjRYD5xRnZD1FZm03sd0Dczi6LXjGlWD1mNmSWwwSzIZSNI=
 before_install:
 - npm install -g jspm
 - jspm config endpoints.github.auth $JSPM_GITHUB_AUTH_TOKEN
 - pip install --user codecov
-
 before_script:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - npm install
-
 script:
 - npm run buildprod
 - npm run citest
-
 after_success:
 - codecov
