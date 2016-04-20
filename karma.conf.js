@@ -28,7 +28,7 @@ module.exports = function (config) {
 
         frameworks: ['jspm', 'jasmine'],
 
-        browsers: ['Chrome'],
+        browsers: ['Firefox'],
 
         reporters: ['progress', 'coverage'],
 
@@ -44,7 +44,7 @@ module.exports = function (config) {
 
         plugins: [
             'karma-jspm',
-            'karma-chrome-launcher',
+            'karma-firefox-launcher',
             'karma-jasmine',
             'karma-coverage',
             'karma-junit-reporter'
