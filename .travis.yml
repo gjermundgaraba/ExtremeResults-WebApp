@@ -6,6 +6,10 @@ node_js:
 addons:
   firefox: '43.0'
 
+env:
+  global:
+    - secure: CNqpqebCUKaN5T0r9y8v1goAKsYA++VviB3wUCuy6RuYM9b5dM461fQxMacoBxl9H/v5GsCoNuOCBQDDAtTgn5i/9ME7M4p4RcHN8uXCk+qZxNg1vhWL+8oDuuWTZqzhr8wfa0O5Zdl3eh1q8108Lc+87hQxHUMPc31iTTGDJ/4Ka67G4Xii99xVMBuwkXVhXOd/gUqVbJ6+8V1Thgojh4otCmSvmThzIwpqBfUU7hu1Xz+dnLLL/yum8MuXSecXrCgPNaHBWjRPvTxHN98uaSryXx4dkvdoThMsogK+Ofj6QZus5TxgEI7xrePFn/Jj9YpzUmBJxatO8eCKYW0wsCrl0Px1PQELpCoYUwDZ6o+ejSf98zzNdt9t9QxfHSiJAbCBZX5F/f7+iOzU2fE0Mr5siFuBu384vY/A+s218shIoxoEdxZ0Ubbcry0yv12hThseG/hDXaVDaaPALgKkRwS/GRmJZBfUxT5xYGPT1iuDgzC3UuIlN1m7s3ZRxNwPctZT4YfIqik8eAS60JounKbZae8EBQ9tl3awN6uLJZIsMaS+deiyI6PSf1mK+2rU2jIdMvfM6mB+w3oVdTKElduq3WSu0qov4+YsEVlr38yxl2nYB3/064cAbWbIx4ndHEMtazKi0QdxkQ+yJLiSsQoSyuMhlcZSILASJ5q2PIo=
+
 before_install:
 - npm install -g jspm
 - jspm config endpoints.github.auth $JSPM_GITHUB_AUTH_TOKEN
@@ -22,7 +26,3 @@ script:
 
 after_success:
 - codecov
-
-env:
-  global:
-    secure: CNqpqebCUKaN5T0r9y8v1goAKsYA++VviB3wUCuy6RuYM9b5dM461fQxMacoBxl9H/v5GsCoNuOCBQDDAtTgn5i/9ME7M4p4RcHN8uXCk+qZxNg1vhWL+8oDuuWTZqzhr8wfa0O5Zdl3eh1q8108Lc+87hQxHUMPc31iTTGDJ/4Ka67G4Xii99xVMBuwkXVhXOd/gUqVbJ6+8V1Thgojh4otCmSvmThzIwpqBfUU7hu1Xz+dnLLL/yum8MuXSecXrCgPNaHBWjRPvTxHN98uaSryXx4dkvdoThMsogK+Ofj6QZus5TxgEI7xrePFn/Jj9YpzUmBJxatO8eCKYW0wsCrl0Px1PQELpCoYUwDZ6o+ejSf98zzNdt9t9QxfHSiJAbCBZX5F/f7+iOzU2fE0Mr5siFuBu384vY/A+s218shIoxoEdxZ0Ubbcry0yv12hThseG/hDXaVDaaPALgKkRwS/GRmJZBfUxT5xYGPT1iuDgzC3UuIlN1m7s3ZRxNwPctZT4YfIqik8eAS60JounKbZae8EBQ9tl3awN6uLJZIsMaS+deiyI6PSf1mK+2rU2jIdMvfM6mB+w3oVdTKElduq3WSu0qov4+YsEVlr38yxl2nYB3/064cAbWbIx4ndHEMtazKi0QdxkQ+yJLiSsQoSyuMhlcZSILASJ5q2PIo=
