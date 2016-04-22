@@ -1,33 +1,24 @@
-HotSpotsServiceFactory.$inject = ['Urls', '$http'];
 
-function HotSpotsServiceFactory(Urls, $http) {
-    var service = {
-        getHotSpotBuckets: getHotSpotBuckets,
-        createHotSpotBucket: createHotSpotBucket,
-        editHotSpotBucket: editHotSpotBucket,
-        deleteHotSpotBucket: deleteHotSpotBucket
-    };
+export class HotSpotsService {
 
-    return service;
-
-    function getHotSpotBuckets() {
-        return $http.get(Urls.baseApi + 'hotSpotBuckets')
-            .then(function (httpObj) {
-                return httpObj.data;
-            });
+    static $inject = ['Urls', '$http'];
+    
+    constructor(private Urls, private $http) {}
+    
+    getHotSpotBuckets() {
+        return this.$http.get(this.Urls.baseApi + 'hotSpotBuckets')
+            .then((httpObj) => httpObj.data);
     }
 
-    function createHotSpotBucket(hotSpotBucket) {
-        return $http.post(Urls.baseApi + 'hotSpotBuckets', hotSpotBucket);
+    createHotSpotBucket(hotSpotBucket) {
+        return this.$http.post(this.Urls.baseApi + 'hotSpotBuckets', hotSpotBucket);
     }
 
-    function editHotSpotBucket(objectId, hotSpotBucket) {
-        return $http.put(Urls.baseApi + 'hotSpotBuckets/' + objectId, hotSpotBucket);
+    editHotSpotBucket(objectId, hotSpotBucket) {
+        return this.$http.put(this.Urls.baseApi + 'hotSpotBuckets/' + objectId, hotSpotBucket);
     }
 
-    function deleteHotSpotBucket(objectId) {
-        return $http.delete(Urls.baseApi + 'hotSpotBuckets/' + objectId);
+    deleteHotSpotBucket(objectId) {
+        return this.$http.delete(this.Urls.baseApi + 'hotSpotBuckets/' + objectId);
     }
 }
-
-export {HotSpotsServiceFactory} ;

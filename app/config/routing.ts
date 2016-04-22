@@ -1,4 +1,5 @@
-function routing($stateProvider, $urlRouterProvider) {
+
+export function routing($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise(function ($injector) {
         var $state = $injector.get('$state');
         $state.go('app.overview');
@@ -50,5 +51,3 @@ function routing($stateProvider, $urlRouterProvider) {
             templateUrl: 'settings/settings.partial.html'
         });
 }
-
-export {routing};

@@ -1,54 +1,45 @@
-AuthServiceFactory.$inject = ['jwtHelper', 'Urls', '$cookies', '$http'];
 
-function AuthServiceFactory(jwtHelper, Urls, $cookies, $http) {
-    var service = {
-        anyOneLoggedIn: anyOneLoggedIn,
-        getCurrentUser: getCurrentUser,
-        getUserToken: getUserToken,
-        login: login,
-        logout: logout,
-        register: register
-    };
+export class AuthService {
 
-    return service;
+    static $inject = ['jwtHelper', 'Urls', '$cookies', '$http'];
 
-    function anyOneLoggedIn() {
-        var authCookie = getUserToken();
+    constructor(private jwtHelper, private Urls, private $cookies, private $http) {}
+
+    anyOneLoggedIn() {
+        var authCookie = this.getUserToken();
         return (typeof authCookie !== 'undefined');
     }
 
-    function getCurrentUser() {
-        var token = getUserToken();
-        var tokenPayload = jwtHelper.decodeToken(token);
+    getCurrentUser() {
+        var token = this.getUserToken();
+        var tokenPayload = this.jwtHelper.decodeToken(token);
         return tokenPayload;
     }
 
-    function getUserToken() {
-        return $cookies.get('xrAuthCookie');
+    getUserToken() {
+        return this.$cookies.get('xrAuthCookie');
     }
 
-    function login(username, password) {
+    login(username, password) {
         var userLogin = {
             username: username,
             password: password
         };
 
-        return $http.post(Urls.baseApi + 'login', userLogin)
-            .then(function (loginObj) {
-                $cookies.put('xrAuthCookie', loginObj.data.token);
+        return this.$http.post(this.Urls.baseApi + 'login', userLogin)
+            .then((loginObj) => {
+                this.$cookies.put('xrAuthCookie', loginObj.data.token);
             });
     }
 
-    function logout() {
-        $cookies.remove('xrAuthCookie');
+    logout() {
+        this.$cookies.remove('xrAuthCookie');
     }
 
-    function register(user) {
-        return $http.post(Urls.baseApi + 'register', user)
-            .then(function (registerObj) {
-                $cookies.put('xrAuthCookie', registerObj.data.token);
+    register(user) {
+        return this.$http.post(this.Urls.baseApi + 'register', user)
+            .then((registerObj) => {
+                this.$cookies.put('xrAuthCookie', registerObj.data.token);
             });
     }
 }
-
-export { AuthServiceFactory };

@@ -1,4 +1,4 @@
-var CoreTypes = {
+export const CoreTypes = {
     mondayVision: {
         className: 'Outcome',
         typeName: 'Weekly'
@@ -12,5 +12,3 @@ var CoreTypes = {
         typeName: 'Weekly'
     }
 };
-
-export { CoreTypes };

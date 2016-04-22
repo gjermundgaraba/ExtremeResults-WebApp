@@ -1,5 +1,4 @@
-function interceptorConfig($httpProvider) {
+
+export function interceptorConfig($httpProvider) {
     $httpProvider.interceptors.push('httpHeaderInterceptor');
 }
-
-export { interceptorConfig };
