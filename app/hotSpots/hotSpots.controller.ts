@@ -1,53 +1,61 @@
 import angular from "angular";
 
-HotSpotsController.$inject = ['HotSpotsService', '$mdDialog'];
+export class HotSpotsController {
+    static $inject = ['HotSpotsService', '$mdDialog'];
 
-function HotSpotsController(HotSpotsService, $mdDialog) {
-    var $ctrl = this;
-    $ctrl.hotSpotBuckets = [];
-    $ctrl.handleHotSpotAdd = handleHotSpotChange;
-    $ctrl.handleHotSpotDelete = handleHotSpotChange;
-    $ctrl.saveHotSpotBucket = saveHotSpotBucket;
-    $ctrl.editHotSpotBucket = editHotSpotBucket;
+    hotSpotBuckets = [];
+    getHotSpotsPromise;
+    hotSpotBucketForm;
+    hotSpotBucketName;
 
-    getAllHotSpotBuckets();
+    constructor(private HotSpotsService, private $mdDialog) {
+        this.getAllHotSpotBuckets();
+    }
 
-    function getAllHotSpotBuckets() {
-        $ctrl.getHotSpotsPromise = HotSpotsService.getHotSpotBuckets()
-            .then(function (hotSpotBuckets) {
-                $ctrl.hotSpotBuckets = hotSpotBuckets;
+    getAllHotSpotBuckets() {
+        this.getHotSpotsPromise = this.HotSpotsService.getHotSpotBuckets()
+            .then((hotSpotBuckets) => {
+                this.hotSpotBuckets = hotSpotBuckets;
             });
     }
 
-    function handleHotSpotChange(hotSpotBucket) {
+    private handleHotSpotChange(hotSpotBucket) {
         var updateObj = {
             name: hotSpotBucket.name,
             hotSpots: hotSpotBucket.hotSpots
         };
 
-        HotSpotsService.editHotSpotBucket(hotSpotBucket.objectId, updateObj);
+        this.HotSpotsService.editHotSpotBucket(hotSpotBucket.objectId, updateObj);
     }
 
-    function saveHotSpotBucket() {
-        if ($ctrl.hotSpotBucketForm.$valid) {
+    handleHotSpotAdd(hotSpotBucket) {
+        this.handleHotSpotChange(hotSpotBucket);
+    }
+
+    handleHotSpotDelete(hotSpotBucket) {
+        this.handleHotSpotChange(hotSpotBucket);
+    }
+
+    saveHotSpotBucket() {
+        if (this.hotSpotBucketForm.$valid) {
             var hotSpotBucket = {
-                name: $ctrl.hotSpotBucketName,
+                name: this.hotSpotBucketName,
                 hotSpots: []
             };
 
-            HotSpotsService.createHotSpotBucket(hotSpotBucket)
-                .then(function () {
-                    $ctrl.hotSpotBucketName = ''; // Reset field
-                    $ctrl.hotSpotBucketForm.$setPristine();
-                    getAllHotSpotBuckets();
+            this.HotSpotsService.createHotSpotBucket(hotSpotBucket)
+                .then(() => {
+                    this.hotSpotBucketName = ''; // Reset field
+                    this.hotSpotBucketForm.$setPristine();
+                    this.getAllHotSpotBuckets();
                 });
         }
     }
 
-    function editHotSpotBucket(hotSpotBucket) {
+    editHotSpotBucket(hotSpotBucket) {
         var hotSpotBucketCopy = {};
         angular.copy(hotSpotBucket, hotSpotBucketCopy);
-        $mdDialog.show({
+        this.$mdDialog.show({
             controller: 'EditHotSpotBucketController',
             controllerAs: '$ctrl',
             bindToController: true,
@@ -55,16 +63,15 @@ function HotSpotsController(HotSpotsService, $mdDialog) {
             parent: angular.element(document.body),
             locals: {
                 hotSpotBucket: hotSpotBucketCopy,
-                deleteCallback: function () {
-                    getAllHotSpotBuckets();
+                deleteCallback: () => {
+                    this.getAllHotSpotBuckets();
                 },
-                renameCallback: function (updatedHotSpotBucket) {
+                renameCallback: (updatedHotSpotBucket) => {
                     hotSpotBucket.name = updatedHotSpotBucket.name;
                 }
             },
             clickOutsideToClose: true
         });
     }
-}
 
-export {HotSpotsController};
+}

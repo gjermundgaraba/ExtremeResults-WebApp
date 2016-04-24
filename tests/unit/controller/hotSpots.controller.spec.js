@@ -5,7 +5,7 @@ import "../../../app/hotSpots/hotSpots.module";
 (function () {
     'use strict';
 
-    describe('CreateOutcome controller', function(){
+    describe('Hot Spots controller', function(){
 
         var HotSpotsServiceMock,
             mdDialogMock,

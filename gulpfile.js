@@ -20,33 +20,6 @@ gulp.task('clean', function () {
         .pipe(vinylPaths(del));
 });
 
-
-// gulp.task('compile', ['clean', 'bundle'], function () {
-//     var manifest = JSON.parse(fs.readFileSync('./tmp/manifest.json', 'utf8'));
-//
-//     return gulp.src(['src/app/index.html'])
-//         .pipe(replace('<!-- vendor-js-injectionpoint -->', manifest.vendor.scripts))
-//         .pipe(replace('<!-- vendor-css-injectionpoint -->', manifest.vendor.styles))
-//         .pipe(replace('<!-- templates-js-injectionpoint -->', '<script src=\'templates.js\'></script>'))
-//         .pipe(replace('<!-- main-js-injectionpoint -->', manifest.main.scripts))
-//         .pipe(replace('<!-- main-css-injectionpoint -->', manifest.main.styles))
-//         .pipe(gulp.dest('public'))
-//         .pipe(connect.reload());
-// });
-
-// gulp.task('bundle', ['clean', 'templates', 'typescript'], function() {
-//     return gulp.src('./bundle.config.js')
-//         .pipe(bundle({
-//             quietMode: true
-//         }))
-//         .pipe(bundle.results({
-//             dest: './tmp',
-//             fileName: 'manifest'
-//         }))
-//         .pipe(replace('<!SERVER-URL!>', argv.server))
-//         .pipe(gulp.dest('./public'));
-// });
-
 gulp.task('templates', ['clean'], function() {
     return gulp.src('app/**/*.html')
         .pipe(templateCache(
@@ -89,35 +62,6 @@ gulp.task('index', ['clean'], function () {
         }))
         .pipe(gulp.dest('public'));
 });
-
-
-
-
-
-
-
-
-
-
-
-// gulp.task('webserver', ['compile'], function () {
-//     connect.server({
-//         root: 'public',
-//         livereload: true
-//     });
-//
-// });
-
-
-
-
-
-
-
-
-
-
-
 
 gulp.task('datWatch', function() {
     gulp.watch(['./src/app/**/*.ts', './src/app/**/*.css', './src/app/**/*.html'], ['csslint', 'build']);
