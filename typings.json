@@ -1,6 +1,10 @@
 {
   "ambientDependencies": {
     "angular": "registry:dt/angular#1.5.0+20160328125810",
+    "angular-cookies": "registry:dt/angular-cookies#1.4.0+20160317120654",
+    "angular-jwt": "registry:dt/angular-jwt#0.0.0+20160317120654",
+    "angular-material": "registry:dt/angular-material#1.0.0-rc5.0+20160412154003",
+    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160412134757",
     "jquery": "registry:dt/jquery#1.10.0+20160316155526"
   }
 }

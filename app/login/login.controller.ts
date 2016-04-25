@@ -1,31 +1,35 @@
-LoginController.$inject = ['AuthService', '$state'];
+import { AuthService } from "../auth/auth.service";
+import IFormController = angular.IFormController;
+import IStateService = angular.ui.IStateService;
 
-function LoginController(AuthService, $state) {
-    var $ctrl = this;
-    $ctrl.isLoggingIn = false;
+export class LoginController {
+    static $inject = ['AuthService', '$state'];
 
-    $ctrl.login = login;
-    $ctrl.register = register;
+    isLoggingIn: boolean = false;
+    loginForm: IFormController;
+    username: string;
+    password: string;
 
-    function login() {
-        if ($ctrl.loginForm.$valid) {
-            $ctrl.isLoggingIn = true;
-            AuthService.login($ctrl.username, $ctrl.password)
-                .then(function () {
-                    $state.go('app.overview');
+    constructor(private authService: AuthService, private $state: IStateService) {}
+
+    login() {
+        if (this.loginForm.$valid) {
+            this.isLoggingIn = true;
+            this.authService.login(this.username, this.password)
+                .then(() => {
+                    this.$state.go('app.overview');
                 })
-                .catch(function () {
+                .catch(() => {
                     alert('Wrong username or password');
                 })
-                .finally(function () {
-                    $ctrl.isLoggingIn = false;
+                .finally(() => {
+                    this.isLoggingIn = false;
                 });
         }
     }
 
-    function register() {
-        $state.go('register');
+    register() {
+        this.$state.go('register');
     }
-}
 
-export { LoginController };
+}

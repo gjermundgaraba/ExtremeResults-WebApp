@@ -16,7 +16,7 @@
     "angular-ui-router": "0.2.17",
     "gulp-typescript": "2.12.1",
     "moment": "2.11.2",
-    "systemjs": "^0.19.26",
+    "systemjs": "0.19.26",
     "traceur": "0.0.107",
     "typescript": "1.8.9"
   },

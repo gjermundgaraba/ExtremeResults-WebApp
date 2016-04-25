@@ -1,24 +1,32 @@
 
+import IFilterService = angular.IFilterService;
+
+
 export class XrUtils {
     static $inject = ['$filter', 'moment'];
     
-    constructor(private $filter, private moment) {}
+    constructor(private $filter: IFilterService, private moment) {}
     
-    getFormattedEntryDate(entry, optionalDate) {
+    getFormattedEntryDate(entry, optionalDate): string {
         var date = optionalDate || entry.effectiveDate;
+
+        var formattedEntryDate;
 
         switch (entry.typeName) {
             case 'Daily':
-                return this.$filter('date')(date);
+                formattedEntryDate = this.$filter('date')(date);
+                break;
             case 'Weekly':
-                return 'Week ' + this.moment(date).isoWeek();
+                formattedEntryDate = 'Week ' + this.moment(date).isoWeek();
+                break;
             default:
-                return '';
-
+                formattedEntryDate = '';
         }
+
+        return formattedEntryDate;
     }
 
-    getEntryHeader(entry) {
+    getEntryHeader(entry): string {
         return entry.typeName + ' ' + entry.className;
     }
 }

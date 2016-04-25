@@ -1,37 +1,41 @@
+import IStateService = angular.ui.IStateService;
 
-RegisterController.$inject = ['AuthService', '$state'];
+import { AuthService } from "../auth/auth.service";
+import IFormController = angular.IFormController;
 
-function RegisterController(AuthService, $state) {
-    var $ctrl = this;
-    $ctrl.isRegistering = false;
-    $ctrl.register = register;
-    $ctrl.backToLogin = backToLogin;
+export class RegisterController {
+    static $inject = ['AuthService', '$state'];
+    
+    constructor (private authService: AuthService, private $state: IStateService) {}
 
-    function register() {
-        if ($ctrl.registerForm.$valid) {
-            $ctrl.isRegistering = true;
+    isRegistering: boolean = false;
+    registerForm: IFormController;
+    username: string;
+    password: string;
+
+    register(): void {
+        if (this.registerForm.$valid) {
+            this.isRegistering = true;
 
             var user = {
-                username: $ctrl.username,
-                password: $ctrl.password
+                username: this.username,
+                password: this.password
             };
 
-            AuthService.register(user)
-                .then(function () {
-                    $state.go('app.overview');
+            this.authService.register(user)
+                .then(() => {
+                    this.$state.go('app.overview');
                 })
-                .catch(function () {
+                .catch(() => {
                     alert('Something went wrong!');
                 })
-                .finally(function () {
-                    $ctrl.isRegistering = false;
+                .finally(() => {
+                    this.isRegistering = false;
                 });
         }
     }
 
-    function backToLogin() {
-        $state.go('login');
+    backToLogin(): void {
+        this.$state.go('login');
     }
 }
-
-export { RegisterController };

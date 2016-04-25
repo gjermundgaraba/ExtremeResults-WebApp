@@ -1,44 +1,55 @@
 
+import IJwtHelper = angular.jwt.IJwtHelper;
+import ICookiesService = angular.cookies.ICookiesService;
+import IHttpService = angular.IHttpService;
+import IHttpPromiseCallbackArg = angular.IHttpPromiseCallbackArg;
+import IHttpPromise = angular.IHttpPromise;
+import IPromise = angular.IPromise;
+
+export interface User {
+    username?: string
+}
+
 export class AuthService {
 
     static $inject = ['jwtHelper', 'Urls', '$cookies', '$http'];
 
-    constructor(private jwtHelper, private Urls, private $cookies, private $http) {}
+    constructor(private jwtHelper: IJwtHelper, private Urls, private $cookies: ICookiesService, private $http: IHttpService) {}
 
-    anyOneLoggedIn() {
+    anyOneLoggedIn(): boolean {
         var authCookie = this.getUserToken();
         return (typeof authCookie !== 'undefined');
     }
 
-    getCurrentUser() {
+    getCurrentUser(): User {
         var token = this.getUserToken();
-        var tokenPayload = this.jwtHelper.decodeToken(token);
+        var tokenPayload = this.jwtHelper.decodeToken(token) as User;
         return tokenPayload;
     }
 
-    getUserToken() {
+    getUserToken(): string {
         return this.$cookies.get('xrAuthCookie');
     }
 
-    login(username, password) {
+    login(username, password): IPromise<void> {
         var userLogin = {
             username: username,
             password: password
         };
 
         return this.$http.post(this.Urls.baseApi + 'login', userLogin)
-            .then((loginObj) => {
+            .then((loginObj: IHttpPromiseCallbackArg<any>) => {
                 this.$cookies.put('xrAuthCookie', loginObj.data.token);
             });
     }
 
-    logout() {
+    logout(): void {
         this.$cookies.remove('xrAuthCookie');
     }
 
-    register(user) {
+    register(user): IPromise<void> {
         return this.$http.post(this.Urls.baseApi + 'register', user)
-            .then((registerObj) => {
+            .then((registerObj: IHttpPromiseCallbackArg<any>) => {
                 this.$cookies.put('xrAuthCookie', registerObj.data.token);
             });
     }
