@@ -1,15 +1,11 @@
-EditOutcomeEntryServiceFactory.$inject = ['Urls', '$http'];
+import IHttpService = angular.IHttpService;
 
-function EditOutcomeEntryServiceFactory(Urls, $http) {
-    var service = {
-        editOutcome: editOutcome
-    };
+export class EditOutcomeEntryService {
+    static $inject = ['Urls', '$http'];
 
-    return service;
+    constructor(private Urls, private $http:IHttpService) {}
 
-    function editOutcome(objectId, outcome) {
-        return $http.put(Urls.baseApi + 'outcomes/' + objectId, outcome);
+    editOutcome(objectId, outcome) {
+        return this.$http.put(this.Urls.baseApi + 'outcomes/' + objectId, outcome);
     }
 }
-
-export {EditOutcomeEntryServiceFactory};

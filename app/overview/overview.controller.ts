@@ -1,16 +1,18 @@
-OverviewController.$inject = ['OverviewService'];
+import {OverviewService} from "./overview.service";
+import IPromise = angular.IPromise;
 
-function OverviewController(OverviewService) {
-    var $ctrl = this;
+export class OverviewController {
+    static $inject = ['OverviewService'];
 
-    $ctrl.overviewEntries = [];
-    $ctrl.activeEntries = [];
-    $ctrl.allEntriesLoaded = false;
+    getActiveEntriesPromise: IPromise<any>;
+    activeEntries = [];
+    overviewEntries = [];
+    allEntriesLoaded: boolean = false;
 
-    $ctrl.getActiveEntriesPromise = OverviewService.getActiveEntries()
-        .then(function (data) {
-            $ctrl.activeEntries = data;
-        });
+    constructor(overviewService: OverviewService) {
+        this.getActiveEntriesPromise = overviewService.getActiveEntries()
+            .then((data) => {
+                this.activeEntries = data;
+            });
+    }
 }
-
-export {OverviewController};

@@ -1,37 +1,49 @@
-CreateOutcomeController.$inject = ['CreateOutcomeService', '$location', 'XrUtils'];
+import IPromise = angular.IPromise;
+import IFormController = angular.IFormController;
+import ILocationService = angular.ILocationService;
 
-function CreateOutcomeController(CreateOutcomeService, $location, XrUtils) {
-    var $ctrl = this;
-    $ctrl.save = save;
-    $ctrl.generateHeader = generateHeader;
-    $ctrl.relatedEntries = [];
+import {CreateOutcomeService} from "./createOutcome.service";
+import {XrUtils} from "../../core/xrUtils.service";
+import {ICoreType} from "../../core/coreTypes.constants";
 
-    $ctrl.getRelatedEntriesPromise = CreateOutcomeService.getRelatedEntriesForOutcome($ctrl.type.typeName)
-        .then(function (data) {
-            $ctrl.relatedEntries = data;
-        });
+export class CreateOutcomeController {
+    static $inject = ['CreateOutcomeService', '$location', 'XrUtils'];
 
-    function save() {
-        if ($ctrl.createOutcomeForm.$valid) {
+    relatedEntries = [];
+    getRelatedEntriesPromise: IPromise<any>;
+    createOutcomeForm: IFormController;
+
+    outcome1: string;
+    outcome2: string;
+    outcome3: string;
+    type: ICoreType;
+
+    constructor(private createOutcomeService: CreateOutcomeService, private $location: ILocationService, private xrUtils: XrUtils) {
+        this.getRelatedEntriesPromise = createOutcomeService.getRelatedEntriesForOutcome(this.type.typeName)
+            .then((data) => {
+                this.relatedEntries = data;
+            });
+    }
+
+    save(): void {
+        if (this.createOutcomeForm.$valid) {
             var outcome = {
-                firstStory: $ctrl.outcome1,
-                secondStory: $ctrl.outcome2,
-                thirdStory: $ctrl.outcome3,
-                typeName: $ctrl.type.typeName,
+                firstStory: this.outcome1,
+                secondStory: this.outcome2,
+                thirdStory: this.outcome3,
+                typeName: this.type.typeName,
                 effectiveDate: new Date()
             };
 
-            CreateOutcomeService.createOutcome(outcome)
-                .then(function () {
-                    $location.path('overview');
+            this.createOutcomeService.createOutcome(outcome)
+                .then(() => {
+                    this.$location.path('overview');
                 });
         }
     }
 
-    function generateHeader() {
-        return XrUtils.getEntryHeader($ctrl.type) + ' for ' +
-            XrUtils.getFormattedEntryDate($ctrl.type, new Date());
+    generateHeader(): string {
+        return this.xrUtils.getEntryHeader(this.type) + ' for ' +
+            this.xrUtils.getFormattedEntryDate(this.type, new Date());
     }
 }
-
-export {CreateOutcomeController};

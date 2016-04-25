@@ -1,16 +1,21 @@
-MenuBarController.$inject = ['$mdSidenav', 'AuthService', '$rootScope'];
 
-function MenuBarController($mdSidenav, AuthService, $rootScope) {
-    var $ctrl = this;
+import ISidenavService = angular.material.ISidenavService;
+import IScope = angular.IScope;
 
-    $ctrl.toggleSidenav = function (menuId) {
-        $mdSidenav(menuId).toggle();
-    };
+import { AuthService } from "../auth/auth.service";
 
-    $ctrl.logout = function () {
-        AuthService.logout();
-        $rootScope.$broadcast('$stateChangeStart', 'overview');
+
+export class MenuBarController {
+    static $inject = ['$mdSidenav', 'AuthService', '$rootScope'];
+
+    constructor(private $mdSidenav: ISidenavService, private authService: AuthService, private $rootScope: IScope) {}
+
+    toggleSidenav(menuId: string): void {
+        this.$mdSidenav(menuId).toggle();
+    }
+
+    logout(): void {
+        this.authService.logout();
+        this.$rootScope.$broadcast('$stateChangeStart', 'overview');
     };
 }
-
-export { MenuBarController };

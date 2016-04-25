@@ -1,33 +1,42 @@
-EditOutcomeEntryControllerFactory.$inject = ['$mdDialog', 'XrUtils', 'EditOutcomeEntryService'];
+import IDialogService = angular.material.IDialogService;
 
-function EditOutcomeEntryControllerFactory($mdDialog, XrUtils, EditOutcomeEntryService) {
-    var $ctrl = this;
+import {XrUtils} from "../../../../core/xrUtils.service";
+import {EditOutcomeEntryService} from "./editOutcomeEntry.service";
+import IFormController = angular.IFormController;
 
-    $ctrl.saving = false;
-    $ctrl.header = XrUtils.getEntryHeader($ctrl.outcome) + ' for ' + XrUtils.getFormattedEntryDate($ctrl.outcome);
+export class EditOutcomeEntryController {
+    static $inject = ['$mdDialog', 'XrUtils', 'EditOutcomeEntryService'];
 
-    $ctrl.save = function () {
-        if (!$ctrl.saving && $ctrl.editOutcomeForm.$valid) {
-            $ctrl.saving = true;
-            var updateObject = {
-                typeName: $ctrl.outcome.typeName,
-                firstStory: $ctrl.outcome.firstStory,
-                secondStory: $ctrl.outcome.secondStory,
-                thirdStory: $ctrl.outcome.thirdStory,
-                effectiveDate: $ctrl.outcome.effectiveDate,
-            };
+    editOutcomeForm: IFormController;
+    saving: boolean = false;
+    header: string;
+    outcome;
+    
+    constructor(private $mdDialog: IDialogService, xrUtils: XrUtils, private editOutcomeEntryService: EditOutcomeEntryService) {
+        this.header = xrUtils.getEntryHeader(this.outcome) + ' for ' + xrUtils.getFormattedEntryDate(this.outcome);
+    }
 
-            EditOutcomeEntryService.editOutcome($ctrl.outcome.objectId, updateObject)
-                .then(function () {
-                    $mdDialog.hide($ctrl.outcome);
-                })
-                .finally(function () {
-                    $ctrl.saving = false;
-                });
-        }
+    save(): void {
+    if (!this.saving && this.editOutcomeForm.$valid) {
+        this.saving = true;
+        var updateObject = {
+            typeName: this.outcome.typeName,
+            firstStory: this.outcome.firstStory,
+            secondStory: this.outcome.secondStory,
+            thirdStory: this.outcome.thirdStory,
+            effectiveDate: this.outcome.effectiveDate,
+        };
+
+        this.editOutcomeEntryService.editOutcome(this.outcome.objectId, updateObject)
+            .then(() => {
+                this.$mdDialog.hide(this.outcome);
+            })
+            .finally(() => {
+                this.saving = false;
+            });
+    }
 
 
-    };
-}
+};
 
-export {EditOutcomeEntryControllerFactory};
+} 

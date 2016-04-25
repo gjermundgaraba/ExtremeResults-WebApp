@@ -1,19 +1,13 @@
-OverviewServiceFactory.$inject = ['Urls', '$http'];
+import IHttpService = angular.IHttpService;
+import IPromise = angular.IPromise;
 
-function OverviewServiceFactory(Urls, $http) {
-    var service = {
-        getActiveEntries: getActiveEntries
-    };
+export class OverviewService {
+    static $inject = ['Urls', '$http'];
 
-    return service;
+    constructor(private Urls, private $http: IHttpService) {}
 
-    function getActiveEntries() {
-        return $http.get(Urls.baseApi + 'activeEntries')
-            .then(function (httpObj) {
-                return httpObj.data;
-            });
+    getActiveEntries(): IPromise<any> {
+        return this.$http.get(this.Urls.baseApi + 'activeEntries')
+            .then(httpObj => httpObj.data);
     }
-
 }
-
-export {OverviewServiceFactory}

@@ -7,7 +7,7 @@ export class XrUtils {
     
     constructor(private $filter: IFilterService, private moment) {}
     
-    getFormattedEntryDate(entry, optionalDate): string {
+    getFormattedEntryDate(entry, optionalDate?): string {
         var date = optionalDate || entry.effectiveDate;
 
         var formattedEntryDate;

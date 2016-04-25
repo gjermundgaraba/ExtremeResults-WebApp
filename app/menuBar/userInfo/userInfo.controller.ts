@@ -1,9 +1,12 @@
-UserInfoController.$inject = ['AuthService'];
 
-function UserInfoController(AuthService) {
-    var $ctrl = this;
+import {AuthService} from "../../auth/auth.service";
 
-    $ctrl.currentUser = AuthService.getCurrentUser();
+export class UserInfoController {
+    static $inject = ['AuthService'];
+
+    currentUser;
+
+    constructor(authService: AuthService) {
+        this.currentUser = authService.getCurrentUser();
+    }
 }
-
-export {UserInfoController};

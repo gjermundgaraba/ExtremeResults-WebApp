@@ -1,18 +1,24 @@
 import angular from "angular";
 
-OutcomeEntryController.$inject = ['XrUtils', '$mdDialog'];
+import {XrUtils} from "../../../core/xrUtils.service";
+import IDialogService = angular.material.IDialogService;
 
-function OutcomeEntryController(XrUtils, $mdDialog) {
-    var $ctrl = this;
-    $ctrl.editOutcome = editOutcome;
+export class OutcomeEntryController {
+    static $inject = ['XrUtils', '$mdDialog'];
 
-    $ctrl.header = XrUtils.getEntryHeader($ctrl.outcomeObj);
-    $ctrl.outcomeTime = XrUtils.getFormattedEntryDate($ctrl.outcomeObj);
+    header:string;
+    outcomeTime:string;
+    outcomeObj;
 
-    function editOutcome() {
+    constructor(xrUtils:XrUtils, private $mdDialog:IDialogService) {
+        this.header = xrUtils.getEntryHeader(this.outcomeObj);
+        this.outcomeTime = xrUtils.getFormattedEntryDate(this.outcomeObj);
+    }
+
+    editOutcome() {
         var outcomeCopy = {};
-        angular.copy($ctrl.outcomeObj, outcomeCopy);
-        $mdDialog.show({
+        angular.copy(this.outcomeObj, outcomeCopy);
+        this.$mdDialog.show({
             controller: 'EditOutcomeEntryController',
             controllerAs: '$ctrl',
             bindToController: true,
@@ -22,10 +28,10 @@ function OutcomeEntryController(XrUtils, $mdDialog) {
                 outcome: outcomeCopy
             },
             clickOutsideToClose: true
-        }).then(function (updatedOutcome) {
-            $ctrl.outcomeObj = updatedOutcome;
+        }).then((updatedOutcome) => {
+            this.outcomeObj = updatedOutcome;
         });
     }
-}
 
-export {OutcomeEntryController};
+
+}

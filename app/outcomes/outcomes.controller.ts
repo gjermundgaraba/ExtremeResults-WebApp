@@ -1,17 +1,12 @@
-OutcomesController.$inject = [];
-
-function OutcomesController() {
-    var $ctrl = this;
-    $ctrl.showCreateOutcome = false;
-    $ctrl.outcomeType = {
+export class OutcomesController {
+    showCreateOutcome:boolean = false;
+    outcomeType = {
         className: 'Outcome',
         typeName: 'Daily'
     };
 
-    $ctrl.createOutcome = function (typeName) {
-        $ctrl.showCreateOutcome = true;
-        $ctrl.outcomeType.typeName = typeName;
+    createOutcome(typeName:string):void {
+        this.showCreateOutcome = true;
+        this.outcomeType.typeName = typeName;
     }
 }
-
-export {OutcomesController};

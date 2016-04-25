@@ -1,24 +1,17 @@
-CreateOutcomeServiceFactory.$inject = ['Urls', '$http'];
+import IHttpService = angular.IHttpService;
+import IPromise = angular.IPromise;
 
-function CreateOutcomeServiceFactory(Urls, $http) {
-    var service = {
-        getRelatedEntriesForOutcome: getRelatedEntriesForOutcome,
-        createOutcome: createOutcome
-    };
+export class CreateOutcomeService {
+    static $inject = ['Urls', '$http'];
 
-    return service;
+    constructor(private Urls, private $http:IHttpService) {}
 
-    function getRelatedEntriesForOutcome(typeName) {
-        return $http.get(Urls.baseApi + 'related/outcomes?typeName=' + typeName)
-            .then(function (httpObj) {
-                return httpObj.data;
-            });
+    getRelatedEntriesForOutcome(typeName: string): IPromise<any> {
+        return this.$http.get(this.Urls.baseApi + 'related/outcomes?typeName=' + typeName)
+            .then(httpObj => httpObj.data);
     }
 
-    function createOutcome(outcome) {
-        return $http.post(Urls.baseApi + 'outcomes', outcome);
+    createOutcome(outcome) {
+        return this.$http.post(this.Urls.baseApi + 'outcomes', outcome);
     }
-
 }
-
-export {CreateOutcomeServiceFactory};

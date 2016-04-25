@@ -1,12 +1,13 @@
-NavigationController.$inject = ['$mdSidenav', '$state'];
+import ISidenavService = angular.material.ISidenavService;
+import IStateService = angular.ui.IStateService;
 
-function NavigationController($mdSidenav, $state) {
-    var $ctrl = this;
+export class NavigationController {
+    static $inject = ['$mdSidenav', '$state'];
 
-    $ctrl.goToState = function (state) {
-        $state.go(state);
-        $mdSidenav('left').close();
+    constructor(private $mdSidenav:ISidenavService, private $state:IStateService) {}
+
+    goToState(state:string):void {
+        this.$state.go(state);
+        this.$mdSidenav('left').close();
     };
 }
-
-export { NavigationController };
