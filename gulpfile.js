@@ -46,7 +46,7 @@ gulp.task('compile', ['clean'], function () {
         .pipe(gulp.dest('.'));
 });
 
-gulp.task('build', ['clean', 'templates', 'compile', 'bundle', 'index']);
+gulp.task('build', ['clean', 'templates', 'compile', 'bundle', 'index', 'assets']);
 
 gulp.task('bundle', ['clean', 'compile'], function () {
     return gulp.src('app/bootstrap.js')
@@ -62,6 +62,13 @@ gulp.task('index', ['clean'], function () {
         }))
         .pipe(gulp.dest('public'));
 });
+
+gulp.task('assets', ['clean'], function () {
+    gulp.src('app/assets/**/*.*', { base: 'app'})
+        .pipe(gulp.dest('public'));
+});
+
+
 
 gulp.task('datWatch', function() {
     gulp.watch(['./src/app/**/*.ts', './src/app/**/*.css', './src/app/**/*.html'], ['csslint', 'build']);
