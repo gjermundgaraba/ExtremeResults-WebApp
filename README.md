@@ -53,6 +53,11 @@ npm install
 
 #### Build and run
 
+To build:
+```bash
+npm run build
+```
+
 To build and run the application, you can just use
 ```bash
 npm start
@@ -61,7 +66,7 @@ npm start
 
 #### Test
 
-To run the unit tests in a TDD matter
+To run the unit tests once
 ```bash
 npm test
 ```

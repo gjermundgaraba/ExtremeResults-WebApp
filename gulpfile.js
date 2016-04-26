@@ -13,11 +13,17 @@ var bundle = require('gulp-bundle-assets'),
     typescript = require('gulp-typescript'),
     sourcemaps = require('gulp-sourcemaps'),
     jspm = require('gulp-jspm'),
-    htmlreplace = require('gulp-html-replace');
+    htmlreplace = require('gulp-html-replace'),
+    cleanCompiledTypeScript = require('gulp-clean-compiled-typescript');
 
-gulp.task('clean', function () {
-    return gulp.src(['public', 'tmp'])
+gulp.task('clean', ['clean-ts-generated'], function () {
+    return gulp.src(['public'])
         .pipe(vinylPaths(del));
+});
+
+gulp.task('clean-ts-generated', function () {
+    return gulp.src('./app/**/*.ts')
+        .pipe(cleanCompiledTypeScript());
 });
 
 gulp.task('templates', ['clean'], function() {
@@ -46,7 +52,9 @@ gulp.task('compile', ['clean'], function () {
         .pipe(gulp.dest('.'));
 });
 
-gulp.task('build', ['clean', 'templates', 'compile', 'bundle', 'index', 'assets']);
+gulp.task('build', ['clean', 'templates', 'compile']);
+
+gulp.task('dist', ['clean', 'build', 'bundle', 'index', 'assets']);
 
 gulp.task('bundle', ['clean', 'compile'], function () {
     return gulp.src('app/bootstrap.js')
@@ -67,18 +75,6 @@ gulp.task('index', ['clean'], function () {
 gulp.task('assets', ['clean'], function () {
     gulp.src('app/assets/**/*.*', { base: 'app'})
         .pipe(gulp.dest('public'));
-});
-
-
-
-gulp.task('datWatch', function() {
-    gulp.watch(['./src/app/**/*.ts', './src/app/**/*.css', './src/app/**/*.html'], ['csslint', 'build']);
-});
-
-gulp.task('default', ['build', 'csslint', 'datWatch', 'webserver']);
-
-gulp.task('check', ['test'], function() {
-    gulp.watch(['./src/app/**/*.js'], ['test']);
 });
 
 gulp.task('tdd', function (done) {

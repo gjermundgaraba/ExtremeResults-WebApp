@@ -2,6 +2,18 @@
   "name": "ExtremeResults",
   "version": "1.0.0",
   "description": "A web app for Extreme Results. Extreme Results is implement the systems proposed in the book 'Getting Results the Agile Way'.",
+  "scripts": {
+    "postinstall": "typings install && jspm install",
+    "start": "lite-server -c browser-sync-config.json",
+    "build": "gulp build",
+    "buildprod": "gulp dist",
+    "test": "gulp testSingleRun && remap-istanbul -i coverage/coverage-final.json -o coverage/html-report -t html",
+    "installTyping": "typings install --save --ambient",
+    "selenium": "webdriver-manager update && webdriver-manager start",
+    "e2e": "protractor protractor.conf.js",
+    "debuge2e": "protractor debug protractor.conf.js",
+    "citest": "gulp testSingleRun && remap-istanbul -i coverage/coverage-final.json -o coverage/lcov.info -t lcovonly"
+  },
   "dependencies": {
     "angular": "1.5.3",
     "angular-animate": "1.5.3",
@@ -29,6 +41,7 @@
     "gulp": "3.9.0",
     "gulp-angular-templatecache": "1.8.0",
     "gulp-bundle-assets": "2.23.0",
+    "gulp-clean-compiled-typescript": "1.0.1",
     "gulp-connect": "2.3.1",
     "gulp-csslint": "0.2.0",
     "gulp-html-replace": "1.5.5",
@@ -50,22 +63,10 @@
     "main-bower-files": "2.11.1",
     "protractor": "3.2.2",
     "remap-istanbul": "0.5.1",
+    "through2": "^2.0.1",
     "typings": "0.7.12",
     "vinyl-paths": "2.1.0",
     "yargs": "3.32.0"
-  },
-  "scripts": {
-    "postinstall": "typings install && jspm install",
-    "installTyping": "typings install --save --ambient",
-    "start": "gulp --server \"http://localhost:4321/api/\"",
-    "buildprod": "gulp build",
-    "test": "gulp testSingleRun && remap-istanbul -i coverage/coverage-final.json -o coverage/html-report -t html",
-    "selenium": "webdriver-manager update && webdriver-manager start",
-    "e2e": "protractor protractor.conf.js",
-    "debuge2e": "protractor debug protractor.conf.js",
-    "citest": "gulp testSingleRun && remap-istanbul -i coverage/coverage-final.json -o coverage/lcov.info -t lcovonly",
-    "lite": "lite-server",
-    "compile": "gulp compile"
   },
   "repository": {
     "type": "git",
