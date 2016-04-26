@@ -22,7 +22,6 @@ System.config({
     "angular": "github:angular/bower-angular@1.5.5",
     "angular-animate": "github:angular/bower-angular-animate@1.5.5",
     "angular-aria": "github:angular/bower-angular-aria@1.5.5",
-    "angular-busy": "npm:angular-busy@4.1.3",
     "angular-busy2": "npm:angular-busy2@4.1.6",
     "angular-cookies": "github:angular/bower-angular-cookies@1.5.5",
     "angular-jwt": "npm:angular-jwt@0.0.9",
@@ -107,9 +106,8 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:angular-busy2@4.1.6": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:angular-busy@4.1.3": {
+      "angular": "npm:angular@1.5.5",
+      "css": "github:systemjs/plugin-css@0.1.20",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:angular-material-icons@0.7.0": {
