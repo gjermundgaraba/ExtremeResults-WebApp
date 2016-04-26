@@ -8,12 +8,21 @@ import "../../../app/outcomes/outcomes.module";
     describe('Create Outcome Directive', function () {
 
         var rootScope,
+            httpBackend,
             compile;
 
-        beforeEach(module('xr.outcomes'));
+        beforeEach(function () {
+            module('xr.outcomes', function ($controllerProvider) {
+                $controllerProvider.register('CreateOutcomeController', function() {
+                });
+            });
+        });
         beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
             rootScope = $rootScope;
             compile = $compile;
+            httpBackend = $httpBackend;
+
+
             $httpBackend.whenGET('outcomes/createOutcome/createOutcome.partial.html').respond(200, '');
         }));
 
@@ -21,6 +30,7 @@ import "../../../app/outcomes/outcomes.module";
             var element = angular.element('<xr-create-outcome></xr-create-outcome>');
             compile(element)(rootScope);
             rootScope.$digest();
+            httpBackend.flush();
         });
 
     });

@@ -8,12 +8,14 @@ import "../../../app/overview/overview.module";
     describe('Entry Directive', function () {
 
         var rootScope,
+            httpBackend,
             compile;
 
         beforeEach(module('xr.overview'));
         beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
             rootScope = $rootScope;
             compile = $compile;
+            httpBackend = $httpBackend;
             $httpBackend.whenGET('overview/entry/entry.partial.html').respond(200, '');
         }));
 
@@ -21,6 +23,7 @@ import "../../../app/overview/overview.module";
             var element = angular.element('<overview-entry></overview-entry>');
             compile(element)(rootScope);
             rootScope.$digest();
+            httpBackend.flush();
         });
 
     });

@@ -8,12 +8,20 @@ import "../../../app/overview/overview.module";
     describe('Reflection Entry Directive', function () {
 
         var rootScope,
+            httpBackend,
             compile;
 
-        beforeEach(module('xr.overview'));
+        beforeEach(function () {
+            module('xr.overview', function ($controllerProvider) {
+                $controllerProvider.register('ReflectionEntryController', function() {
+                });
+            });
+        });
         beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
             rootScope = $rootScope;
             compile = $compile;
+            httpBackend = $httpBackend;
+
             $httpBackend.whenGET('overview/entry/reflectionEntry/reflectionEntry.partial.html').respond(200, '');
         }));
 
@@ -21,6 +29,7 @@ import "../../../app/overview/overview.module";
             var element = angular.element('<reflection-entry></reflection-entry>');
             compile(element)(rootScope);
             rootScope.$digest();
+            httpBackend.flush();
         });
 
     });

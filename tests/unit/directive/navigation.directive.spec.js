@@ -8,12 +8,20 @@ import "../../../app/navigation/navigation.module";
     describe('Navigation Directive', function () {
 
         var rootScope,
+            httpBackend,
             compile;
 
-        beforeEach(module('xr.navigation'));
+        beforeEach(function () {
+            module('xr.navigation', function ($controllerProvider) {
+                $controllerProvider.register('NavigationController', function() {
+                });
+            });
+        });
         beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
             rootScope = $rootScope;
             compile = $compile;
+            httpBackend = $httpBackend;
+
             $httpBackend.whenGET('navigation/navigation.partial.html').respond(200, '');
         }));
 
@@ -21,6 +29,7 @@ import "../../../app/navigation/navigation.module";
             var element = angular.element('<xr-navigation></xr-navigation>');
             compile(element)(rootScope);
             rootScope.$digest();
+            httpBackend.flush();
         });
 
     });
