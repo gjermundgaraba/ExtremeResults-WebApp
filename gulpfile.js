@@ -58,7 +58,8 @@ gulp.task('bundle', ['clean', 'compile'], function () {
 gulp.task('index', ['clean'], function () {
     gulp.src('app/index.html')
         .pipe(htmlreplace({
-            js: 'bootstrap.bundle.js'
+            js: 'bootstrap.bundle.js',
+            html: ''
         }))
         .pipe(gulp.dest('public'));
 });

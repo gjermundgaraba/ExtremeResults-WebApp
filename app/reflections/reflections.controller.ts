@@ -1,17 +1,15 @@
-ReflectionsController.$inject = [];
+import {ICoreType} from "../core/coreTypes.constants";
 
-function ReflectionsController() {
-    var $ctrl = this;
-    $ctrl.showCreateReflection = false;
-    $ctrl.reflectionType = {
+export class ReflectionsController {
+
+    showCreateReflection = false;
+    reflectionType: ICoreType = {
         className: 'Reflection',
         typeName: 'Weekly'
     };
 
-    $ctrl.createReflection = function (typeName) {
-        $ctrl.showCreateReflection = true;
-        $ctrl.reflectionType.typeName = typeName;
+    createReflection(typeName: string): void {
+        this.showCreateReflection = true;
+        this.reflectionType.typeName = typeName;
     }
 }
-
-export {ReflectionsController};

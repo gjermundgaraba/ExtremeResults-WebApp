@@ -5,9 +5,10 @@ import ILocationService = angular.ILocationService;
 import {CreateOutcomeService} from "./createOutcome.service";
 import {XrUtils} from "../../core/xrUtils.service";
 import {ICoreType} from "../../core/coreTypes.constants";
+import IScope = angular.IScope;
 
 export class CreateOutcomeController {
-    static $inject = ['CreateOutcomeService', '$location', 'XrUtils'];
+    static $inject = ['CreateOutcomeService', '$location', 'XrUtils', '$scope'];
 
     relatedEntries = [];
     getRelatedEntriesPromise: IPromise<any>;
@@ -18,8 +19,18 @@ export class CreateOutcomeController {
     outcome3: string;
     type: ICoreType;
 
-    constructor(private createOutcomeService: CreateOutcomeService, private $location: ILocationService, private xrUtils: XrUtils) {
-        this.getRelatedEntriesPromise = createOutcomeService.getRelatedEntriesForOutcome(this.type.typeName)
+    constructor(private createOutcomeService: CreateOutcomeService, private $location: ILocationService, private xrUtils: XrUtils, private $scope: IScope) {
+        $scope.$watch('$ctrl.type.typeName', (newValue, oldValue) => {
+            if (newValue !== oldValue) {
+                this.updateRelatedEntriesForOutcome();
+            }
+        });
+
+        this.updateRelatedEntriesForOutcome();
+    }
+
+    private updateRelatedEntriesForOutcome() {
+        this.getRelatedEntriesPromise = this.createOutcomeService.getRelatedEntriesForOutcome(this.type.typeName)
             .then((data) => {
                 this.relatedEntries = data;
             });

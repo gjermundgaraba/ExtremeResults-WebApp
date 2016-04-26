@@ -166,6 +166,26 @@ import "../../../app/reflections/reflections.module";
            });
         });
 
+        describe('change typeName', function () {
+            beforeEach(function () {
+                var relatedEntries = [{test: 1}];
+
+                relatedEntriesDeferred.resolve(relatedEntries);
+                rootScope.$digest();
+            });
+
+            it('should update related entries for reflection', function () {
+                controller.type.typeName = 'teee';
+
+                var relatedEntries = [{test: 1}];
+
+                relatedEntriesDeferred.resolve(relatedEntries);
+                rootScope.$digest();
+
+                expect(CreateReflectionServiceMock.getRelatedEntriesForReflection.calls.count()).toBe(2);
+            });
+        });
+
         describe('header', function () {
             it('should have entryheader and date', function () {
                 expect(controller.generateHeader()).toBe(entryHeaderMock + ' for ' + formattedEntryDateMock);

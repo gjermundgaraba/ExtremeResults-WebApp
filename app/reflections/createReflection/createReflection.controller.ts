@@ -1,53 +1,73 @@
-CreateReflectionController.$inject = ['$scope', 'CreateReflectionService', '$location', 'XrUtils'];
+import IScope = angular.IScope;
+import IPromise = angular.IPromise;
+import ILocationService = angular.ILocationService;
 
-function CreateReflectionController($scope, CreateReflectionService, $location, XrUtils) {
-    var $ctrl = this;
-    $ctrl.save = save;
-    $ctrl.effectiveDate = new Date();
-    $ctrl.generateHeader = generateHeader;
-    $ctrl.relatedEntries = [];
+import {CreateReflectionService} from "./createReflection.service";
+import {XrUtils} from "../../core/xrUtils.service";
+import {ICoreType} from "../../core/coreTypes.constants";
+import IFormController = angular.IFormController;
 
-    updateRelatedEntriesForReflection();
+export class CreateReflectionController {
+    static $inject = ['$scope', 'CreateReflectionService', '$location', 'XrUtils'];
 
-    $scope.$watch('$ctrl.effectiveDate', function (newValue, oldValue) {
-        if (newValue !== oldValue) {
-            updateRelatedEntriesForReflection();
-        }
+    relatedEntries = [];
+    getRelatedEntriesPromise: IPromise<any>;
+    effectiveDate = new Date();
+    type: ICoreType;
+    weeklyReflectionForm: IFormController;
 
-    });
+    firstThingThatWentWell: string;
+    secondThingThatWentWell: string;
+    thirdThingThatWentWell: string;
+    firstThingToImprove: string;
+    secondThingToImprove: string;
+    thirdThingToImprove: string;
+    
+    constructor($scope: IScope, private createReflectionService: CreateReflectionService, private $location: ILocationService, private xrUtils: XrUtils) {
+        $scope.$watch('$ctrl.effectiveDate', (newValue, oldValue) => {
+            if (newValue !== oldValue) {
+                this.updateRelatedEntriesForReflection();
+            }
+        });
 
-    function save() {
-        if ($ctrl.weeklyReflectionForm.$valid) {
+        $scope.$watch('$ctrl.type.typeName', (newValue, oldValue) => {
+            if (newValue !== oldValue) {
+                this.updateRelatedEntriesForReflection();
+            }
+        });
+
+        this.updateRelatedEntriesForReflection();
+    }
+
+    private updateRelatedEntriesForReflection() {
+        this.getRelatedEntriesPromise = this.createReflectionService.getRelatedEntriesForReflection(this.type.typeName, this.effectiveDate)
+            .then((data) => {
+                this.relatedEntries = data;
+            });
+    }
+
+    save() {
+        if (this.weeklyReflectionForm.$valid) {
             var weeklyReflection = {
-                firstThingThatWentWell: $ctrl.firstThingThatWentWell,
-                secondThingThatWentWell: $ctrl.secondThingThatWentWell,
-                thirdThingThatWentWell: $ctrl.thirdThingThatWentWell,
-                firstThingToImprove: $ctrl.firstThingToImprove,
-                secondThingToImprove: $ctrl.secondThingToImprove,
-                thirdThingToImprove: $ctrl.thirdThingToImprove,
-                effectiveDate: $ctrl.effectiveDate.toISOString(),
-                typeName: $ctrl.type.typeName
+                firstThingThatWentWell: this.firstThingThatWentWell,
+                secondThingThatWentWell: this.secondThingThatWentWell,
+                thirdThingThatWentWell: this.thirdThingThatWentWell,
+                firstThingToImprove: this.firstThingToImprove,
+                secondThingToImprove: this.secondThingToImprove,
+                thirdThingToImprove: this.thirdThingToImprove,
+                effectiveDate: this.effectiveDate.toISOString(),
+                typeName: this.type.typeName
             };
 
-            CreateReflectionService.createReflection(weeklyReflection)
-                .then(function () {
-                    $location.path('overview');
+            this.createReflectionService.createReflection(weeklyReflection)
+                .then(() => {
+                    this.$location.path('overview');
                 });
         }
     }
 
-    function generateHeader() {
-        return XrUtils.getEntryHeader($ctrl.type) + ' for ' +
-            XrUtils.getFormattedEntryDate($ctrl.type, $ctrl.effectiveDate);
+    generateHeader() {
+        return this.xrUtils.getEntryHeader(this.type) + ' for ' +
+            this.xrUtils.getFormattedEntryDate(this.type, this.effectiveDate);
     }
-
-    function updateRelatedEntriesForReflection() {
-        $ctrl.getRelatedEntriesPromise = CreateReflectionService.getRelatedEntriesForReflection($ctrl.type.typeName, $ctrl.effectiveDate)
-            .then(function (data) {
-                $ctrl.relatedEntries = data;
-            });
-    }
-
 }
-
-export {CreateReflectionController};

@@ -1,29 +1,30 @@
-CreateReflectionServiceFactory.$inject = ['Urls', '$http'];
+import IHttpService = angular.IHttpService;
+import IPromise = angular.IPromise;
+import IHttpPromise = angular.IHttpPromise;
 
-function CreateReflectionServiceFactory(Urls, $http) {
-    var service = {
-        getRelatedEntriesForReflection: getRelatedEntriesForReflection,
-        createReflection: createReflection
-    };
+export class CreateReflectionService {
 
-    return service;
+    static $inject = ['Urls', '$http'];
 
-    function getRelatedEntriesForReflection(typeName, effectiveDate) {
-        return $http({
-            url: Urls.baseApi + 'related/reflections',
-            params: {
-                typeName: typeName,
-                effectiveDate: effectiveDate
-            }
-        })
+    constructor(private Urls, private $http: IHttpService) {
+    }
+
+    getRelatedEntriesForReflection(typeName: string, effectiveDate: Date): IPromise<any> {
+        return this.$http({
+                method: 'GET',
+                url: this.Urls.baseApi + 'related/reflections',
+                params: {
+                    typeName: typeName,
+                    effectiveDate: effectiveDate
+                }
+            })
             .then(function (httpObj) {
                 return httpObj.data;
             });
     }
 
-    function createReflection(reflection) {
-        return $http.post(Urls.baseApi + 'reflections', reflection);
+    createReflection(reflection): IHttpPromise<any> {
+        return this.$http.post(this.Urls.baseApi + 'reflections', reflection);
     }
-}
 
-export {CreateReflectionServiceFactory};
+}

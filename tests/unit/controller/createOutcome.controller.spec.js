@@ -9,6 +9,7 @@ import "../../../app/outcomes/outcomes.module";
 
         var CreateOutcomeServiceMock,
             controller,
+            scope,
             rootScope,
             location,
             outcomeTypeMock,
@@ -43,6 +44,7 @@ import "../../../app/outcomes/outcomes.module";
         beforeEach(inject(function($controller, $q, $rootScope, $location) {
             q = $q;
             location = $location;
+            scope = $rootScope.$new();
             rootScope = $rootScope;
 
             relatedEntriesDeferred = q.defer();
@@ -51,7 +53,8 @@ import "../../../app/outcomes/outcomes.module";
             var data = {
                 type: outcomeTypeMock
             };
-            controller = $controller('CreateOutcomeController', {'$location': location}, data);
+            controller = $controller('CreateOutcomeController', {'$location': location, '$scope': scope}, data);
+            scope.$ctrl = controller;
         }));
 
         describe('init', function () {
@@ -126,6 +129,26 @@ import "../../../app/outcomes/outcomes.module";
 
                     expect(location.path).toHaveBeenCalledWith('overview');
                 });
+            });
+        });
+
+        describe('change typeName', function () {
+            beforeEach(function () {
+                var relatedEntries = [{test: 1}];
+
+                relatedEntriesDeferred.resolve(relatedEntries);
+                rootScope.$digest();
+            });
+
+            it('should update related entries for outcome', function () {
+                controller.type.typeName = 'teee';
+
+                var relatedEntries = [{test: 1}];
+
+                relatedEntriesDeferred.resolve(relatedEntries);
+                rootScope.$digest();
+
+                expect(CreateOutcomeServiceMock.getRelatedEntriesForOutcome.calls.count()).toBe(2);
             });
         });
 
