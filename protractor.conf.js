@@ -1,10 +1,10 @@
 exports.config = {
     framework: 'jasmine2',
     params: {
-        client: 'http://localhost:8080/'
+        client: 'http://localhost:3000/app/index.html#/'
     },
     specs: [
-        './src/tests/e2e/**/*.spec.js'
+        './tests/e2e/**/*.spec.js'
     ],
     capabilities: {
         browserName: 'firefox'

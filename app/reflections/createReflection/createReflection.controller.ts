@@ -12,6 +12,7 @@ export class CreateReflectionController {
 
     relatedEntries = [];
     getRelatedEntriesPromise: IPromise<any>;
+    createReflectionPromise: IPromise<any>;
     effectiveDate = new Date();
     type: ICoreType;
     weeklyReflectionForm: IFormController;
@@ -46,7 +47,7 @@ export class CreateReflectionController {
             });
     }
 
-    save() {
+    save(): void {
         if (this.weeklyReflectionForm.$valid) {
             var weeklyReflection = {
                 firstThingThatWentWell: this.firstThingThatWentWell,
@@ -59,14 +60,14 @@ export class CreateReflectionController {
                 typeName: this.type.typeName
             };
 
-            this.createReflectionService.createReflection(weeklyReflection)
+            this.createReflectionPromise = this.createReflectionService.createReflection(weeklyReflection)
                 .then(() => {
                     this.$location.path('overview');
                 });
         }
     }
 
-    generateHeader() {
+    generateHeader(): string {
         return this.xrUtils.getEntryHeader(this.type) + ' for ' +
             this.xrUtils.getFormattedEntryDate(this.type, this.effectiveDate);
     }

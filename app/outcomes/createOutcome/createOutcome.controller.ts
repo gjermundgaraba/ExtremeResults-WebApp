@@ -11,6 +11,7 @@ export class CreateOutcomeController {
     static $inject = ['CreateOutcomeService', '$location', 'XrUtils', '$scope'];
 
     relatedEntries = [];
+    createOutcomePromise: IPromise<any>;
     getRelatedEntriesPromise: IPromise<any>;
     createOutcomeForm: IFormController;
 
@@ -29,7 +30,7 @@ export class CreateOutcomeController {
         this.updateRelatedEntriesForOutcome();
     }
 
-    private updateRelatedEntriesForOutcome() {
+    private updateRelatedEntriesForOutcome(): void {
         this.getRelatedEntriesPromise = this.createOutcomeService.getRelatedEntriesForOutcome(this.type.typeName)
             .then((data) => {
                 this.relatedEntries = data;
@@ -46,7 +47,7 @@ export class CreateOutcomeController {
                 effectiveDate: new Date()
             };
 
-            this.createOutcomeService.createOutcome(outcome)
+            this.createOutcomePromise = this.createOutcomeService.createOutcome(outcome)
                 .then(() => {
                     this.$location.path('overview');
                 });
