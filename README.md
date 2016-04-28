@@ -71,14 +71,17 @@ To run the unit tests once
 npm test
 ```
 
-Otherwise you can run the tests from karma as you normally would.
-
 
 To run the e2e tests with protractor you can do the following:
 
-Start the selenium server
+Build production environment
 ```bash
-npm run selenium
+npm run buildprod
+```
+
+Start the "production" server
+```bash
+npm run serveprod
 ```
 
 Run the tests:

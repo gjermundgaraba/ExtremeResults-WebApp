@@ -7,8 +7,8 @@ var Common = function () {
     };
 
     this.overviewMenuButton = element(by.buttonText('Overview'));
-    this.outcomesMenuBytton = element(by.buttonText('Outcomes'));
-    this.reflectionsMenuBytton = element(by.buttonText('Reflections'));
+    this.outcomesMenuButton = element(by.buttonText('Outcomes'));
+    this.reflectionsMenuButton = element(by.buttonText('Reflections'));
     this.hotSpotsMenuButton = element(by.buttonText('Hot Spots'));
 
     this.clearDB = function () {

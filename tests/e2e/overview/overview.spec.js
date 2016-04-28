@@ -30,7 +30,7 @@ describe('Overview Page', function () {
 
     describe('edit', function () {
         beforeAll(function () {
-            common.outcomesMenuBytton.click();
+            common.outcomesMenuButton.click();
             outcomesPage.createNewOutcomeButton.click();
             outcomesPage.createNewOutcomeDailyOutcomeSubChoiceButton.click();
 

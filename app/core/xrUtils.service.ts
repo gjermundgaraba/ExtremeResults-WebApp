@@ -19,6 +19,9 @@ export class XrUtils {
             case 'Weekly':
                 formattedEntryDate = 'Week ' + this.moment(date).isoWeek();
                 break;
+            case 'Monthly':
+                formattedEntryDate = this.moment.months()[this.moment(date).month()];
+                break;
             default:
                 formattedEntryDate = '';
         }

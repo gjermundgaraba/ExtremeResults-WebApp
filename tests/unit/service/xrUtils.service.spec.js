@@ -19,8 +19,15 @@ import "../../../app/core/core.module";
                 return {
                     isoWeek: function () {
                         return mockWeekNumber;
+                    },
+                    month: function () {
+                        return 0;
                     }
                 }
+            };
+
+            momentMock.months = function () {
+                return ["January","February","March","April","May","June","July","August","September","October","November","December"];
             };
 
             $provide.value('moment', momentMock);
@@ -51,6 +58,17 @@ import "../../../app/core/core.module";
 
                 var formattedDate = XrUtils.getFormattedEntryDate(weeklyEntry);
                 expect(formattedDate).toBe('Week ' + mockWeekNumber);
+            });
+            
+            it('should set up month for monthly entries', function () {
+                var isoDate = new Date().toISOString();
+                var monthlyEntry = {
+                    typeName: 'Monthly',
+                    effectiveDate: isoDate
+                };
+
+                var formattedDate = XrUtils.getFormattedEntryDate(monthlyEntry);
+                expect(formattedDate).toBe('January');
             });
 
             it('should return empty string for non-supported entries', function () {

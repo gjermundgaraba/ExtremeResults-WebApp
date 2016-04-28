@@ -25,7 +25,7 @@ describe('Reflections Page', function () {
         });
 
         beforeEach(function () {
-            common.reflectionsMenuBytton.click();
+            common.reflectionsMenuButton.click();
             reflectionsPage.createNewReflectionButton.click();
             reflectionsPage.createNewReflectionWeeklyReflectionSubChoiceButton.click();
         });
@@ -34,7 +34,7 @@ describe('Reflections Page', function () {
             expect(reflectionsPage.relatedEntries.count()).toBe(0);
         });
 
-        it('should be able to create a new daily outcome', function () {
+        it('should be able to create a new weekly reflection', function () {
             reflectionsPage.firstThingThatWentWellInputField.sendKeys('First thing that went well');
             reflectionsPage.secondThingThatWentWellInputField.sendKeys('Second thing that went well');
             reflectionsPage.thirdThingThatWentWellInputField.sendKeys('Third thing that went well');
@@ -51,7 +51,7 @@ describe('Reflections Page', function () {
         });
 
         it('should show related entries', function () {
-            common.outcomesMenuBytton.click();
+            common.outcomesMenuButton.click();
             outcomesPage.createNewOutcomeButton.click();
             outcomesPage.createNewOutcomeWeeklyOutcomeSubChoiceButton.click();
 
@@ -63,13 +63,69 @@ describe('Reflections Page', function () {
 
             common.overviewMenuButton.click();
 
-            common.reflectionsMenuBytton.click();
+            common.reflectionsMenuButton.click();
             reflectionsPage.createNewReflectionButton.click();
             reflectionsPage.createNewReflectionWeeklyReflectionSubChoiceButton.click();
             expect(reflectionsPage.relatedEntries.count()).toBe(1);
         });
     });
 
+    describe('Create Monthly Reflection', function () {
+        beforeAll(function () {
+            common.clearDB();
+            browser.driver.manage().deleteAllCookies();
 
+            common.goHome();
+            login.setLoginUserName('bjaanes');
+            login.setPassword('1234');
+            login.loginButton.click();
+            browser.waitForAngular();
+        });
+
+        beforeEach(function () {
+            common.reflectionsMenuButton.click();
+            reflectionsPage.createNewReflectionButton.click();
+            reflectionsPage.createNewReflectionMonthlyReflectionSubChoiceButton.click();
+        });
+
+        it('should have no related entries before any related entries exist', function (){
+            expect(reflectionsPage.relatedEntries.count()).toBe(0);
+        });
+
+        it('should be able to create a new monthly reflection', function () {
+            reflectionsPage.firstThingThatWentWellInputField.sendKeys('First thing that went well');
+            reflectionsPage.secondThingThatWentWellInputField.sendKeys('Second thing that went well');
+            reflectionsPage.thirdThingThatWentWellInputField.sendKeys('Third thing that went well');
+            reflectionsPage.firstThingToImproveInputField.sendKeys('First thing to improve');
+            reflectionsPage.secondThingToImproveInputField.sendKeys('First thing to improve');
+            reflectionsPage.thirdThingToImproveInputField.sendKeys('First thing to improve');
+
+            reflectionsPage.saveButton.click();
+
+            common.overviewMenuButton.click();
+            //overviewPage.downloadAllEntriesButton.click();
+            //
+            //expect(overviewPage.allEntries.count()).toBe(1);
+        });
+
+        it('should show related entries', function () {
+            common.outcomesMenuButton.click();
+            outcomesPage.createNewOutcomeButton.click();
+            outcomesPage.createNewOutcomeMonthlyOutcomeSubChoiceButton.click();
+
+            outcomesPage.outcome1InputField.sendKeys('Outcome number 1');
+            outcomesPage.outcome2InputField.sendKeys('Outcome number 2');
+            outcomesPage.outcome3InputField.sendKeys('Outcome number 3');
+
+            outcomesPage.saveButton.click();
+
+            common.overviewMenuButton.click();
+
+            common.reflectionsMenuButton.click();
+            reflectionsPage.createNewReflectionButton.click();
+            reflectionsPage.createNewReflectionMonthlyReflectionSubChoiceButton.click();
+            expect(reflectionsPage.relatedEntries.count()).toBe(1);
+        });
+    });
 
 });
