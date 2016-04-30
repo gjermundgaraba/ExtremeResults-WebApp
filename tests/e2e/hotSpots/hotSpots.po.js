@@ -19,6 +19,8 @@ var HotSpotsPage = function () {
     };
 
     this.hotSpotBuckets = element.all(by.repeater('hotSpotBucket in $ctrl.hotSpotBuckets'));
+
+    this.hotSpotBucketNameInputMessage = this.createHotSpotBucketInput.element(by.xpath('..')).element(by.css('[ng-messages]')).element(by.xpath('*[1]'));
 };
 
 module.exports = HotSpotsPage;

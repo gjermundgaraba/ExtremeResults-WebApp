@@ -35,6 +35,21 @@ describe('Outcomes Page', function () {
         it('should have no related outcomes before any related outcomes exist', function () {
             expect(outcomesPage.relatedEntries.count()).toBe(0);
         });
+        
+        it('should not let you save without text in the fields', function () {
+            outcomesPage.outcome1InputField.sendKeys('jibbajabba');
+            outcomesPage.saveButton.click();
+            expect(outcomesPage.outcomeHeader.isPresent()).toBe(true);
+        });
+        
+        it('should show error messages when trying to save with missing fields', function () {
+            outcomesPage.saveButton.click();
+
+            expect(outcomesPage.outcomeHeader.isPresent()).toBe(true);
+            expect(outcomesPage.outcome1InputFieldMessage.getText()).toBe('This is required.');
+            expect(outcomesPage.outcome2InputFieldMessage.getText()).toBe('This is required.');
+            expect(outcomesPage.outcome3InputFieldMessage.getText()).toBe('This is required.');
+        });
 
         it('should be able to create a new daily outcome', function () {
             var outcome1 = 'Outcome number 1';
@@ -92,6 +107,28 @@ describe('Outcomes Page', function () {
             outcomesPage.createNewOutcomeWeeklyOutcomeSubChoiceButton.click();
 
             expect(outcomesPage.relatedEntries.count()).toBe(0);
+        });
+
+        it('should not let you save without text in the fields', function () {
+            common.outcomesMenuButton.click();
+            outcomesPage.createNewOutcomeButton.click();
+            outcomesPage.createNewOutcomeWeeklyOutcomeSubChoiceButton.click();
+
+            outcomesPage.outcome1InputField.sendKeys('jibbajabba');
+            outcomesPage.saveButton.click();
+            expect(outcomesPage.outcomeHeader.isPresent()).toBe(true);
+        });
+
+        it('should show error messages when trying to save with missing fields', function () {
+            common.outcomesMenuButton.click();
+            outcomesPage.createNewOutcomeButton.click();
+            outcomesPage.createNewOutcomeWeeklyOutcomeSubChoiceButton.click();
+            outcomesPage.saveButton.click();
+
+            expect(outcomesPage.outcomeHeader.isPresent()).toBe(true);
+            expect(outcomesPage.outcome1InputFieldMessage.getText()).toBe('This is required.');
+            expect(outcomesPage.outcome2InputFieldMessage.getText()).toBe('This is required.');
+            expect(outcomesPage.outcome3InputFieldMessage.getText()).toBe('This is required.');
         });
 
 
@@ -163,6 +200,27 @@ describe('Outcomes Page', function () {
             expect(outcomesPage.relatedEntries.count()).toBe(0);
         });
 
+        it('should not let you save without text in the fields', function () {
+            common.outcomesMenuButton.click();
+            outcomesPage.createNewOutcomeButton.click();
+            outcomesPage.createNewOutcomeMonthlyOutcomeSubChoiceButton.click();
+
+            outcomesPage.outcome1InputField.sendKeys('jibbajabba');
+            outcomesPage.saveButton.click();
+            expect(outcomesPage.outcomeHeader.isPresent()).toBe(true);
+        });
+
+        it('should show error messages when trying to save with missing fields', function () {
+            common.outcomesMenuButton.click();
+            outcomesPage.createNewOutcomeButton.click();
+            outcomesPage.createNewOutcomeMonthlyOutcomeSubChoiceButton.click();
+            outcomesPage.saveButton.click();
+
+            expect(outcomesPage.outcomeHeader.isPresent()).toBe(true);
+            expect(outcomesPage.outcome1InputFieldMessage.getText()).toBe('This is required.');
+            expect(outcomesPage.outcome2InputFieldMessage.getText()).toBe('This is required.');
+            expect(outcomesPage.outcome3InputFieldMessage.getText()).toBe('This is required.');
+        });
 
         it('should be able to create a new monthly outcome', function () {
             var outcome1 = 'Outcome number 1';

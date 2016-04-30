@@ -26,6 +26,13 @@ describe('Hot Spots Page', function () {
         common.hotSpotsMenuButton.click();
     });
 
+    it('should not let you add a hot spot bucket without name', function () {
+        hotSpotsPage.createButton.click();
+
+        expect(hotSpotsPage.hotSpotBucketNameInputMessage.getText()).toBe('This is required.');
+        expect(hotSpotsPage.hotSpotBuckets.count()).toBe(0);
+    });
+
     it('should be possible to add a new hot spot bucket', function () {
         var hotSpotBucketName = 'test1123';
 
@@ -58,7 +65,13 @@ describe('Hot Spots Page', function () {
         expect(hotSpotsPage.hotSpotBucketName(0).getText()).toBe(newHotSpotBucketName);
     });
 
-    it('should be possible to add new hot spot to a hot spot bucket', function () {
+    it('should not be possible to add new hot spots to a bucket without name', function () {
+        hotSpotsPage.hotSpotInput(0).sendKeys(protractor.Key.ENTER);
+
+        expect(hotSpotsPage.hotSpots(0).count()).toBe(0);
+    });
+
+    it('should be possible to add new hot spot to a bucket', function () {
         var hotSpotName = 'Number One';
 
         hotSpotsPage.hotSpotInput(0).sendKeys(hotSpotName);

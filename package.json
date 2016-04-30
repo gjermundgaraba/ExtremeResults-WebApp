@@ -16,15 +16,15 @@
     "citest": "gulp testSingleRun && remap-istanbul -i coverage/coverage-final.json -o coverage/lcov.info -t lcovonly"
   },
   "dependencies": {
-    "angular": "1.5.3",
-    "angular-animate": "1.5.3",
-    "angular-aria": "1.5.3",
+    "angular": "1.5.5",
+    "angular-animate": "1.5.5",
+    "angular-aria": "1.5.5",
     "angular-busy2": "4.1.5",
-    "angular-cookies": "1.5.3",
+    "angular-cookies": "1.5.5",
     "angular-jwt": "0.0.9",
     "angular-material": "1.0.7",
     "angular-material-icons": "0.7.0",
-    "angular-messages": "1.5.3",
+    "angular-messages": "1.5.5",
     "angular-moment": "0.10.3",
     "angular-ui-router": "0.2.17",
     "gulp-typescript": "2.12.1",
@@ -34,7 +34,7 @@
     "typescript": "1.8.9"
   },
   "devDependencies": {
-    "angular-mocks": "1.5.3",
+    "angular-mocks": "1.5.5",
     "codecov.io": "0.1.6",
     "del": "2.2.0",
     "eslint": "1.10.3",
@@ -63,7 +63,7 @@
     "karma-typescript-preprocessor": "0.0.21",
     "lite-server": "2.2.0",
     "main-bower-files": "2.11.1",
-    "protractor": "3.2.2",
+    "protractor": "3.3.0",
     "remap-istanbul": "0.5.1",
     "through2": "^2.0.1",
     "typings": "0.7.12",
