@@ -1,7 +1,7 @@
 
 var OutcomesPage = function () {
     
-    this.outcomeHeader = element(by.cssContainingText('h1', 'Outcome'));
+    this.outcomeHeader = element(by.cssContainingText('h1', 'Outcomes'));
 
     this.createNewOutcomeButton = element(by.buttonText('Create New Outcome'));
     this.createNewOutcomeDailyOutcomeSubChoiceButton = element(by.buttonText('Daily Outcome')); 

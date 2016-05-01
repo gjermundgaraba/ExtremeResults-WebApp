@@ -34,6 +34,19 @@ describe('Reflections Page', function () {
             expect(reflectionsPage.relatedEntries.count()).toBe(0);
         });
 
+        it('should show error messages when trying to save with missing fields', function () {
+            reflectionsPage.saveButton.click();
+
+            expect(reflectionsPage.reflectionsHeader.isPresent()).toBe(true);
+            expect(reflectionsPage.firstThingThatWentWellInputFieldMessage.getText()).toBe('This is required.');
+            expect(reflectionsPage.secondThingThatWentWellInputFieldMessage.getText()).toBe('This is required.');
+            expect(reflectionsPage.thirdThingThatWentWellInputFieldMessage.getText()).toBe('This is required.');
+            expect(reflectionsPage.firstThingToImproveInputFieldMessage.getText()).toBe('This is required.');
+            expect(reflectionsPage.secondThingToImproveInputFieldMessage.getText()).toBe('This is required.');
+            expect(reflectionsPage.thirdThingToImproveInputFieldMessage.getText()).toBe('This is required.');
+        });
+
+
         it('should be able to create a new weekly reflection', function () {
             reflectionsPage.firstThingThatWentWellInputField.sendKeys('First thing that went well');
             reflectionsPage.secondThingThatWentWellInputField.sendKeys('Second thing that went well');
@@ -90,6 +103,18 @@ describe('Reflections Page', function () {
 
         it('should have no related entries before any related entries exist', function (){
             expect(reflectionsPage.relatedEntries.count()).toBe(0);
+        });
+
+        it('should show error messages when trying to save with missing fields', function () {
+            reflectionsPage.saveButton.click();
+
+            expect(reflectionsPage.reflectionsHeader.isPresent()).toBe(true);
+            expect(reflectionsPage.firstThingThatWentWellInputFieldMessage.getText()).toBe('This is required.');
+            expect(reflectionsPage.secondThingThatWentWellInputFieldMessage.getText()).toBe('This is required.');
+            expect(reflectionsPage.thirdThingThatWentWellInputFieldMessage.getText()).toBe('This is required.');
+            expect(reflectionsPage.firstThingToImproveInputFieldMessage.getText()).toBe('This is required.');
+            expect(reflectionsPage.secondThingToImproveInputFieldMessage.getText()).toBe('This is required.');
+            expect(reflectionsPage.thirdThingToImproveInputFieldMessage.getText()).toBe('This is required.');
         });
 
         it('should be able to create a new monthly reflection', function () {

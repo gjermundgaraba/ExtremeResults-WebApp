@@ -26,6 +26,9 @@ var Common = function () {
         };
 
         var req = http.request(options, callback);
+        req.on('error', function (e) {
+            console.log("Error occurred with clear DB API Call: " + e.message);
+        });
         req.end();
 
         return deferred.promise;
