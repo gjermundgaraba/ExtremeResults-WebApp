@@ -5,7 +5,7 @@ import "../../../app/config/config.module";
 (function () {
     'use strict';
 
-    describe('ParseKeyServiceProvider Config', function () {
+    describe('Routing Config', function () {
         var stateProvider,
             stateProviderData,
             urlRouterProvider,

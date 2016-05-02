@@ -1,10 +1,5 @@
 
 export function routing($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise(function ($injector) {
-        var $state = $injector.get('$state');
-        $state.go('app.overview');
-    });
-
     $stateProvider
         .state('login', {
             url: '/login',
@@ -20,7 +15,8 @@ export function routing($stateProvider, $urlRouterProvider) {
         })
         .state('app', {
             url: '',
-            templateUrl: 'app.html'
+            templateUrl: 'app.html',
+            abstract: true
         })
         .state('app.overview', {
             url: '/overview',
@@ -50,4 +46,9 @@ export function routing($stateProvider, $urlRouterProvider) {
             url: '/settings',
             templateUrl: 'settings/settings.partial.html'
         });
+
+    $urlRouterProvider.otherwise(function ($injector) {
+        var $state = $injector.get('$state');
+        $state.go('app.overview');
+    });
 }

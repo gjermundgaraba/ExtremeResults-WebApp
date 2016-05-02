@@ -25,7 +25,12 @@ describe('Overview Page', function () {
 
     beforeEach(function () {
         common.goHome();
-        common.overviewMenuButton.click();
+    });
+
+    describe('presentation', function () {
+        it('should go to the overview page by default', function () {
+            expect(overviewPage.currentOutcomesHeader.isPresent()).toBe(true);
+        });
     });
 
     describe('edit', function () {
