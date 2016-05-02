@@ -147,8 +147,6 @@ describe('Outcomes Page', function () {
 
             outcomesPage.saveButton.click();
 
-            common.overviewMenuButton.click();
-
             expect(overviewPage.currentOutcomes.count()).toBe(1);
             expect(overviewPage.titleFromCurrentOutcome(0).getText()).toBe('Weekly Outcome');
             expect(overviewPage.firstStoryFromCurrentOutcome(0).getText()).toBe(outcome1);
@@ -237,14 +235,13 @@ describe('Outcomes Page', function () {
 
             outcomesPage.saveButton.click();
 
-            common.overviewMenuButton.click();
-
             expect(overviewPage.currentOutcomes.count()).toBe(1);
             expect(overviewPage.titleFromCurrentOutcome(0).getText()).toBe('Monthly Outcome');
             expect(overviewPage.firstStoryFromCurrentOutcome(0).getText()).toBe(outcome1);
             expect(overviewPage.secondStoryFromCurrentOutcome(0).getText()).toBe(outcome2);
             expect(overviewPage.thirdStoryFromCurrentOutcome(0).getText()).toBe(outcome3);
         });
+        
     });
 
 

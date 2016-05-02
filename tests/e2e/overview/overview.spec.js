@@ -41,7 +41,7 @@ describe('Overview Page', function () {
             common.overviewMenuButton.click();
         });
 
-        it('should be aoble to edit an outcome', function () {
+        it('should be able to edit an outcome', function () {
             browser.waitForAngular();
             overviewPage.editCurrentOutcomeButton(0).click();
 
@@ -57,6 +57,20 @@ describe('Overview Page', function () {
             expect(overviewPage.firstStoryFromCurrentOutcome(0).getText()).toBe('updated1');
             expect(overviewPage.secondStoryFromCurrentOutcome(0).getText()).toBe('updated2');
             expect(overviewPage.thirdStoryFromCurrentOutcome(0).getText()).toBe('updated3');
+        });
+
+        it('should show error messages when trying to save with missing fields', function () {
+            overviewPage.editCurrentOutcomeButton(0).click();
+
+            editOutcome.firstStory.clear();
+            editOutcome.secondStory.clear();
+            editOutcome.thirdStory.clear();
+
+            editOutcome.saveButton.click();
+
+            expect(editOutcome.firstStoryFieldMessage.getText()).toBe('This is required.');
+            expect(editOutcome.secondStoryFieldMessage.getText()).toBe('This is required.');
+            expect(editOutcome.thirdStoryFieldMessage.getText()).toBe('This is required.');
         });
     });
 

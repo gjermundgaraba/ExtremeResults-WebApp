@@ -58,9 +58,6 @@ describe('Reflections Page', function () {
             reflectionsPage.saveButton.click();
 
             common.overviewMenuButton.click();
-            //overviewPage.downloadAllEntriesButton.click();
-            //
-            //expect(overviewPage.allEntries.count()).toBe(1);
         });
 
         it('should show related entries', function () {
@@ -126,11 +123,6 @@ describe('Reflections Page', function () {
             reflectionsPage.thirdThingToImproveInputField.sendKeys('First thing to improve');
 
             reflectionsPage.saveButton.click();
-
-            common.overviewMenuButton.click();
-            //overviewPage.downloadAllEntriesButton.click();
-            //
-            //expect(overviewPage.allEntries.count()).toBe(1);
         });
 
         it('should show related entries', function () {
