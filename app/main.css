@@ -114,18 +114,46 @@ header {
 
 @media (max-width: 650px) {
     .login-container, .register-container {
+        width: 550px;
+    }
+}
+
+@media (max-width: 600px) {
+    .login-container, .register-container {
+        width: 450px;
+    }
+}
+
+@media (max-width: 500px) {
+    xr-user-info {
+        display: none;
+    }
+    .login-container, .register-container {
         width: 400px;
     }
 }
 
 @media (max-width: 450px) {
     .login-container, .register-container {
+        width: 380px;
+    }
+}
+
+@media (max-width: 410px) {
+    .login-container, .register-container {
+        width: 350px;
+    }
+}
+
+@media (max-width: 380px) {
+    .login-container, .register-container {
+        width: 320px;
+    }
+}
+
+@media (max-width: 330px) {
+    .login-container, .register-container {
         width: 300px;
     }
 }
 
-@media (max-width: 350px) {
-    .login-container, .register-container {
-        width: 250px;
-    }
-}
