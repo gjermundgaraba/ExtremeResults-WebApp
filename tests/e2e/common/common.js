@@ -5,6 +5,8 @@ var Common = function () {
     this.goHome = function () {
         browser.get(browser.params.client)
     };
+    
+    this.logoutButton = element(by.buttonText('Logout'));
 
     this.overviewMenuButton = element(by.buttonText('Overview'));
     this.outcomesMenuButton = element(by.buttonText('Outcomes'));
