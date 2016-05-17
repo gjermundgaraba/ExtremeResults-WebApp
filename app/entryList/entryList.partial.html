@@ -1,0 +1,11 @@
+<div class="md-whiteframe-1dp" cg-busy="$ctrl.createOutcomePromise">
+    <md-toolbar>
+        <h1 class="md-toolbar-tools">
+            All Entries
+        </h1>
+    </md-toolbar>
+
+    <md-card ng-repeat="entry in $ctrl.entryList">
+        <overview-entry entry-obj="entry"></overview-entry>
+    </md-card>
+</div>

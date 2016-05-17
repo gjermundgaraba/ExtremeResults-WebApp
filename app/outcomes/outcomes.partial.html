@@ -25,11 +25,6 @@
                         Monthly Outcome
                     </md-button>
                 </md-menu-item>
-                <!--<md-menu-item>-->
-                    <!--<md-button ng-click="$ctrl.createOutcome('Yearly')">-->
-                        <!--Yearly Outcome-->
-                    <!--</md-button>-->
-                </md-menu-item>
             </md-menu-content>
         </md-menu>
     </md-content>
@@ -37,6 +32,12 @@
     <md-content ng-if="$ctrl.showCreateOutcome" class="md-padding">
         <div>
             <xr-create-outcome type="$ctrl.outcomeType"></xr-create-outcome>
+        </div>
+    </md-content>
+
+    <md-content class="md-padding">
+        <div>
+            <entry-list class-name="Outcome"></entry-list>
         </div>
     </md-content>
 

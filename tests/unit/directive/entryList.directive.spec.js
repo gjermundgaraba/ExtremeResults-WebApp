@@ -1,19 +1,19 @@
 import { module, inject } from "angular-mocks";
 
-import "../../../app/outcomes/outcomes.module";
+import "../../../app/entryList/entryList.module";
 
 (function () {
     'use strict';
 
-    describe('Create Outcome Directive', function () {
+    describe('Entry List Directive', function () {
 
         var rootScope,
             httpBackend,
             compile;
 
         beforeEach(function () {
-            module('xr.outcomes', function ($controllerProvider) {
-                $controllerProvider.register('CreateOutcomeController', function() {
+            module('xr.entryList', function ($controllerProvider) {
+                $controllerProvider.register('EntryListController', function() {
                 });
             });
         });
@@ -22,11 +22,11 @@ import "../../../app/outcomes/outcomes.module";
             compile = $compile;
             httpBackend = $httpBackend;
 
-            $httpBackend.whenGET('outcomes/createOutcome/createOutcome.partial.html').respond(200, '');
+            $httpBackend.whenGET('entryList/entryList.partial.html').respond(200, '');
         }));
 
         it('should compile', function () {
-            var element = angular.element('<xr-create-outcome></xr-create-outcome>');
+            var element = angular.element('<entry-list></entry-list>');
             compile(element)(rootScope);
             rootScope.$digest();
             httpBackend.flush();
