@@ -2,6 +2,6 @@ export var reflectionEntryComponent = {
     bindings: {
         reflectionObj: '='
     },
-    templateUrl: 'overview/entry/reflectionEntry/reflectionEntry.partial.html',
+    templateUrl: 'entry/reflectionEntry/reflectionEntry.partial.html',
     controller: 'ReflectionEntryController'
 };

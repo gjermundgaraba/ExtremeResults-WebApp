@@ -1,6 +1,6 @@
 import { module, inject } from "angular-mocks";
 
-import "../../../app/overview/overview.module";
+import "../../../app/entry/entry.module";
 
 (function () {
     'use strict';
@@ -16,7 +16,7 @@ import "../../../app/overview/overview.module";
             EditOutcomeEntryServiceMock,
             controller;
 
-        beforeEach(module('xr.overview'));
+        beforeEach(module('xr.entry'));
         beforeEach(module(function ($provide) {
             headerMock = 'HEADERMOCKYMOCK';
             formattedDateMock = 'Some formatted date';

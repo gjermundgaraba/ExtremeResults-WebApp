@@ -1,6 +1,6 @@
 import { module, inject } from "angular-mocks";
 
-import "../../../app/overview/overview.module";
+import "../../../app/entry/entry.module";
 
 (function () {
     'use strict';
@@ -12,7 +12,7 @@ import "../../../app/overview/overview.module";
             compile;
 
         beforeEach(function () {
-            module('xr.overview', function ($controllerProvider) {
+            module('xr.entry', function ($controllerProvider) {
                 $controllerProvider.register('ReflectionEntryController', function() {
                 });
             });
@@ -22,7 +22,7 @@ import "../../../app/overview/overview.module";
             compile = $compile;
             httpBackend = $httpBackend;
 
-            $httpBackend.whenGET('overview/entry/reflectionEntry/reflectionEntry.partial.html').respond(200, '');
+            $httpBackend.whenGET('entry/reflectionEntry/reflectionEntry.partial.html').respond(200, '');
         }));
 
         it('should compile', function () {

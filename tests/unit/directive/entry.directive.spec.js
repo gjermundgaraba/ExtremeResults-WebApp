@@ -1,6 +1,6 @@
 import { module, inject } from "angular-mocks";
 
-import "../../../app/overview/overview.module";
+import "../../../app/entry/entry.module";
 
 (function () {
     'use strict';
@@ -11,12 +11,12 @@ import "../../../app/overview/overview.module";
             httpBackend,
             compile;
 
-        beforeEach(module('xr.overview'));
+        beforeEach(module('xr.entry'));
         beforeEach(inject(function ($rootScope, $compile, $httpBackend) {
             rootScope = $rootScope;
             compile = $compile;
             httpBackend = $httpBackend;
-            $httpBackend.whenGET('overview/entry/entry.partial.html').respond(200, '');
+            $httpBackend.whenGET('entry/entry.partial.html').respond(200, '');
         }));
 
         it('should compile', function () {

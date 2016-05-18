@@ -2,5 +2,5 @@ export var overviewEntryComponent = {
     bindings: {
         entryObj: '='
     },
-    templateUrl: 'overview/entry/entry.partial.html'
+    templateUrl: 'entry/entry.partial.html'
 };

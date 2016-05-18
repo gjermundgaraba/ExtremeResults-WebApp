@@ -1,6 +1,6 @@
 import { module, inject } from "angular-mocks";
 
-import "../../../app/overview/overview.module";
+import "../../../app/entry/entry.module";
 
 describe('EditOutcomeEntryService', function(){
 
@@ -8,7 +8,7 @@ describe('EditOutcomeEntryService', function(){
         Urls,
         EditOutcomeEntryService;
 
-    beforeEach(module('xr.overview'));
+    beforeEach(module('xr.entry'));
     beforeEach(inject(function($httpBackend, _EditOutcomeEntryService_, _Urls_) {
         httpBackend = $httpBackend;
         EditOutcomeEntryService = _EditOutcomeEntryService_;

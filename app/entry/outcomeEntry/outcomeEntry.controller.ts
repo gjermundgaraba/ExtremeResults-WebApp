@@ -22,7 +22,7 @@ export class OutcomeEntryController {
             controller: 'EditOutcomeEntryController',
             controllerAs: '$ctrl',
             bindToController: true,
-            templateUrl: 'overview/entry/outcomeEntry/editOutcomeEntry/editOutcomeEntry.partial.html',
+            templateUrl: 'entry/outcomeEntry/editOutcomeEntry/editOutcomeEntry.partial.html',
             parent: angular.element(document.body),
             locals: {
                 outcome: outcomeCopy
