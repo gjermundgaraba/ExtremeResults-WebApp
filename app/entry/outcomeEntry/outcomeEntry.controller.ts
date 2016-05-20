@@ -1,7 +1,7 @@
 import angular from "angular";
-
-import {XrUtils} from "../../../core/xrUtils.service";
 import IDialogService = angular.material.IDialogService;
+
+import {XrUtils} from "../../core/xrUtils.service";
 
 export class OutcomeEntryController {
     static $inject = ['XrUtils', '$mdDialog'];
@@ -10,7 +10,7 @@ export class OutcomeEntryController {
     outcomeTime:string;
     outcomeObj;
 
-    constructor(xrUtils:XrUtils, private $mdDialog:IDialogService) {
+    constructor(xrUtils: XrUtils, private $mdDialog: IDialogService) {
         this.header = xrUtils.getEntryHeader(this.outcomeObj);
         this.outcomeTime = xrUtils.getFormattedEntryDate(this.outcomeObj);
     }

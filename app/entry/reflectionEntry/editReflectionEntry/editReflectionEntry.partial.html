@@ -1,0 +1,61 @@
+<md-dialog ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{$ctrl.header}}</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="edit-dialog">
+        <form name="$ctrl.editReflectionForm" ng-submit="$ctrl.save()" novalidate>
+
+            <md-input-container class="md-block">
+                <label for="firstThingThatWentWell">First thing that went well</label>
+                <input ng-model="$ctrl.reflection.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" autofocus required>
+                <div ng-messages="$ctrl.editReflectionForm.firstThingThatWentWell.$error" ng-if="$ctrl.editReflectionForm.firstThingThatWentWell.$error.required && $ctrl.editReflectionForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label for="secondThingThatWentWell">Second thing that went well</label>
+                <input ng-model="$ctrl.reflection.secondThingThatWentWell" id="secondThingThatWentWell" name="secondThingThatWentWell" type="text" required>
+                <div ng-messages="$ctrl.editReflectionForm.secondThingThatWentWell.$error" ng-if="$ctrl.editReflectionForm.secondThingThatWentWell.$error.required && $ctrl.editReflectionForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label for="thirdThingThatWentWell">Third thing that went well</label>
+                <input ng-model="$ctrl.reflection.thirdThingThatWentWell" id="thirdThingThatWentWell" name="thirdThingThatWentWell" type="text" required>
+                <div ng-messages="$ctrl.editReflectionForm.thirdThingThatWentWell.$error" ng-if="$ctrl.editReflectionForm.thirdThingThatWentWell.$error.required && $ctrl.editReflectionForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label for="firstThingToImprove">First thing to improve</label>
+                <input ng-model="$ctrl.reflection.firstThingToImprove" id="firstThingToImprove" name="firstThingToImprove" type="text" required>
+                <div ng-messages="$ctrl.editReflectionForm.firstThingToImprove.$error" ng-if="$ctrl.editReflectionForm.firstThingToImprove.$error.required && $ctrl.editReflectionForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label for="secondThingToImprove">Second thing to improve</label>
+                <input ng-model="$ctrl.reflection.secondThingToImprove" id="secondThingToImprove" name="secondThingToImprove" type="text" required>
+                <div ng-messages="$ctrl.editReflectionForm.secondThingToImprove.$error" ng-if="$ctrl.editReflectionForm.secondThingToImprove.$error.required && $ctrl.editReflectionForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label for="thirdThingToImprove">Third thing to improve</label>
+                <input ng-model="$ctrl.reflection.thirdThingToImprove" id="thirdThingToImprove" name="thirdThingToImprove" type="text" required>
+                <div ng-messages="$ctrl.editReflectionForm.thirdThingToImprove.$error" ng-if="$ctrl.editReflectionForm.thirdThingToImprove.$error.required && $ctrl.editReflectionForm.$submitted">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+
+            <md-button ng-disabled="$ctrl.saving" type="submit" class="md-raised md-accent">Save</md-button>
+        </form>
+    </md-dialog-content>
+</md-dialog>

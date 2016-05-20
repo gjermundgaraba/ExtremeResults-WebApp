@@ -1,6 +1,6 @@
 import IDialogService = angular.material.IDialogService;
 
-import {XrUtils} from "../../../../core/xrUtils.service";
+import {XrUtils} from "../../../core/xrUtils.service";
 import {EditOutcomeEntryService} from "./editOutcomeEntry.service";
 import IFormController = angular.IFormController;
 
