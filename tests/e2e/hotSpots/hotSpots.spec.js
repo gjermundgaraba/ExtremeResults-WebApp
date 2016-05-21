@@ -42,7 +42,6 @@ describe('Hot Spots Page', function () {
         expect(hotSpotsPage.hotSpotBuckets.count()).toBe(1);
         expect(hotSpotsPage.hotSpotBucketName(0).getText()).toBe(hotSpotBucketName);
         expect(hotSpotsPage.hotSpots(0).count()).toBe(0);
-
     });
 
     it('should reset the create hot spot bucket field after success', function () {
@@ -53,6 +52,23 @@ describe('Hot Spots Page', function () {
 
         expect(hotSpotsPage.createHotSpotBucketInput.getAttribute('value')).toBe('');
     });
+
+    it('should be possible to decline a delete of a hot spot bucket', function () {
+        hotSpotsPage.hotSpotBucketEditButton(0).click();
+        editHotSpotBucket.deleteButton.click();
+        editHotSpotBucket.declineDeleteButton.click();
+
+        expect(hotSpotsPage.hotSpotBuckets.count()).toBe(2);
+    });
+
+    it('should be possible to delete a hot spot bucket', function () {
+        hotSpotsPage.hotSpotBucketEditButton(1).click();
+        editHotSpotBucket.deleteButton.click();
+        editHotSpotBucket.confirmDeleteButton.click();
+
+        expect(hotSpotsPage.hotSpotBuckets.count()).toBe(1);
+    });
+
 
     it('should be possible to change hot spot bucket name', function () {
         var newHotSpotBucketName = 'Steve Holt!';
@@ -84,33 +100,16 @@ describe('Hot Spots Page', function () {
     });
 
     it('should be possible to delete a hot spot from a hot spot bucket', function () {
-        var hotSpotName = 'Number One';
+        var hotSpotName = 'Number Two';
 
         hotSpotsPage.hotSpotInput(0).sendKeys(hotSpotName);
         hotSpotsPage.hotSpotInput(0).sendKeys(protractor.Key.ENTER);
         hotSpotsPage.hotSpotDeleteButton(0, 0).click();
 
-        expect(hotSpotsPage.hotSpots(0).count()).toBe(0);
+        expect(hotSpotsPage.hotSpots(0).count()).toBe(1);
         common.goHome();
         common.hotSpotsMenuButton.click();
-        expect(hotSpotsPage.hotSpots(0).count()).toBe(0);
-    });
-
-    it('should be possible to decline a delete of a hot spot bucket', function () {
-        hotSpotsPage.hotSpotBucketEditButton(0).click();
-        editHotSpotBucket.deleteButton.click();
-        editHotSpotBucket.declineDeleteButton.click();
-
-        expect(hotSpotsPage.hotSpotBuckets.count()).toBe(2);
-    });
-
-
-    it('should be possible to delete a hot spot bucket', function () {
-        hotSpotsPage.hotSpotBucketEditButton(0).click();
-        editHotSpotBucket.deleteButton.click();
-        editHotSpotBucket.confirmDeleteButton.click();
-
-        expect(hotSpotsPage.hotSpotBuckets.count()).toBe(1);
+        expect(hotSpotsPage.hotSpots(0).count()).toBe(1);
     });
 
 });

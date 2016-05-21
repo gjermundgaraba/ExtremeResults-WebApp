@@ -82,6 +82,8 @@ describe('Register Page', function () {
         registerPage.usernameInputField.sendKeys(userTwo);
         registerPage.passwordInputField.sendKeys(passwordTwo);
         registerPage.registerButton.click();
+
+        browser.waitForAngular();
     });
 
     beforeEach(function () {
