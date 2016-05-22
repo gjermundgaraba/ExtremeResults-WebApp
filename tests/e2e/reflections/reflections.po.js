@@ -28,6 +28,7 @@ var ReflectionPage = function () {
     this.saveButton = element(by.cssContainingText('button', 'Save'));
 
     this.relatedEntries = element.all(by.repeater('relatedEntry in $ctrl.relatedEntries'));
+    this.allEntries = element.all(by.repeater('entry in $ctrl.entryList'));
 };
 
 module.exports = ReflectionPage;

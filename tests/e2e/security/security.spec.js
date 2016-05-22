@@ -94,6 +94,18 @@ describe('Register Page', function () {
         expect(overviewPage.currentOutcomes.count()).toBe(0);
     });
 
+    it('should not show anything for outcomes', function () {
+        common.outcomesMenuButton.click();
+
+        expect(outcomesPage.allEntries.count()).toBe(0);
+    });
+
+    it('should not show anything for reflections', function () {
+        common.reflectionsMenuButton.click();
+
+        expect(reflectionsPage.allEntries.count()).toBe(0);
+    });
+
     it('should not show anything for daily outcomes', function () {
         common.outcomesMenuButton.click();
         outcomesPage.createNewOutcomeButton.click();
