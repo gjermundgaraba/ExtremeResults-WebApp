@@ -9,6 +9,7 @@
     "buildprod": "gulp dist",
     "serveprod": "http-server",
     "test": "gulp testSingleRun && remap-istanbul -i coverage/coverage-final.json -o coverage/html-report -t html",
+    "tdd": "gulp tdd",
     "installTyping": "typings install --save --ambient",
     "updateWebdriver": "webdriver-manager update",
     "selenium": "webdriver-manager update && webdriver-manager start",

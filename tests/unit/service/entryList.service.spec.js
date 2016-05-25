@@ -20,10 +20,10 @@ describe('EntryList Service', function(){
             var response = {
                 test: 'test'
             };
-            httpBackend.whenGET(Urls.baseApi + 'outcomes').respond(200, response);
+            httpBackend.whenGET(Urls.baseApi + 'outcomes?offset=0&limit=5').respond(200, response);
 
             var data;
-            EntryListService.getOutcomes()
+            EntryListService.getOutcomes(0)
                 .then(function (returnedData) {
                     data = returnedData;
                 });
@@ -34,10 +34,10 @@ describe('EntryList Service', function(){
         });
 
         it('should return error on failure', function () {
-            httpBackend.whenGET(Urls.baseApi + 'outcomes').respond(500);
+            httpBackend.whenGET(Urls.baseApi + 'outcomes?offset=0&limit=5').respond(500);
 
             var failed = false;
-            EntryListService.getOutcomes()
+            EntryListService.getOutcomes(0)
                 .catch(function () {
                     failed = true;
                 });
@@ -45,6 +45,14 @@ describe('EntryList Service', function(){
             httpBackend.flush();
 
             expect(failed).toEqual(true);
+        });
+
+        it('should set offset', function () {
+            httpBackend.expectGET(Urls.baseApi + 'outcomes?offset=5&limit=5').respond(200);
+
+            EntryListService.getOutcomes(5);
+
+            httpBackend.flush();
         });
     });
 
@@ -53,10 +61,10 @@ describe('EntryList Service', function(){
             var response = {
                 test: 'test'
             };
-            httpBackend.whenGET(Urls.baseApi + 'reflections').respond(200, response);
+            httpBackend.whenGET(Urls.baseApi + 'reflections?offset=0&limit=5').respond(200, response);
 
             var data;
-            EntryListService.getReflections()
+            EntryListService.getReflections(0)
                 .then(function (returnedData) {
                     data = returnedData;
                 });
@@ -67,10 +75,10 @@ describe('EntryList Service', function(){
         });
 
         it('should return error on failure', function () {
-            httpBackend.whenGET(Urls.baseApi + 'reflections').respond(500);
+            httpBackend.whenGET(Urls.baseApi + 'reflections?offset=0&limit=5').respond(500);
 
             var failed = false;
-            EntryListService.getReflections()
+            EntryListService.getReflections(0)
                 .catch(function () {
                     failed = true;
                 });
@@ -78,6 +86,14 @@ describe('EntryList Service', function(){
             httpBackend.flush();
 
             expect(failed).toEqual(true);
+        });
+
+        it('should set offset', function () {
+            httpBackend.expectGET(Urls.baseApi + 'reflections?offset=5&limit=5').respond(200);
+
+            EntryListService.getReflections(5);
+
+            httpBackend.flush();
         });
     });
 

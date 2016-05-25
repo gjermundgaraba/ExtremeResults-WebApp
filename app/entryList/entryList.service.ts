@@ -6,13 +6,13 @@ export class EntryListService {
 
     constructor(private Urls, private $http:IHttpService) {}
 
-    getOutcomes(): IPromise<any> {
-        return this.$http.get(this.Urls.baseApi + 'outcomes')
+    getOutcomes(offset: Number): IPromise<any> {
+        return this.$http.get(this.Urls.baseApi + 'outcomes?offset=' + offset + '&limit=5')
             .then(httpObj => httpObj.data);
     }
 
-    getReflections(): IPromise<any> {
-        return this.$http.get(this.Urls.baseApi + 'reflections')
+    getReflections(offset: Number): IPromise<any> {
+        return this.$http.get(this.Urls.baseApi + 'reflections?offset=' + offset + '&limit=5')
             .then(httpObj => httpObj.data);
     }
 

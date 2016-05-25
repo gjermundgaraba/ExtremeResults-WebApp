@@ -1,4 +1,4 @@
-<div class="md-whiteframe-1dp" cg-busy="$ctrl.createOutcomePromise">
+<div class="md-whiteframe-1dp" cg-busy="$ctrl.fetchEntryListPromise">
     <md-toolbar>
         <h1 class="md-toolbar-tools">
             All Entries
@@ -8,4 +8,5 @@
     <md-card ng-repeat="entry in $ctrl.entryList">
         <overview-entry entry-obj="entry"></overview-entry>
     </md-card>
+    <md-button class="md-raised md-accent" ng-if="$ctrl.showLoadMore" ng-click="$ctrl.fetchMore()">Show More...</md-button>
 </div>

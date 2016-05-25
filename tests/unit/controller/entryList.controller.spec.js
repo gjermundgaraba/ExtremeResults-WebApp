@@ -1,72 +1,40 @@
-import { module, inject } from "angular-mocks";
+import {module, inject} from "angular-mocks";
 
 import "../../../app/entryList/entryList.module";
 
 (function () {
     'use strict';
 
-    describe('EntryList Controller', function(){
+    describe('EntryList Controller', function () {
 
         var controller,
             EntryListServiceMock,
             rootScope,
             initDeferred,
+            moreDeferred,
             q;
 
         beforeEach(module('xr.entryList'));
         beforeEach(module(function ($provide) {
 
             EntryListServiceMock = {
-                getOutcomes: function () {},
-                getReflections: function() {}
+                getOutcomes: function () {
+                },
+                getReflections: function () {
+                }
             };
 
             $provide.value('EntryListService', EntryListServiceMock);
         }));
 
-        describe('init for outcomes', function () {
-            beforeEach(inject(function($controller, $q, $rootScope) {
+        describe('reflections', function () {
+            beforeEach(inject(function ($controller, $q, $rootScope) {
                 q = $q;
                 rootScope = $rootScope;
 
                 initDeferred = q.defer();
-                spyOn(EntryListServiceMock, 'getOutcomes').and.returnValue(initDeferred.promise);
-
-                var data = {
-                    className: 'Outcome'
-                };
-                controller = $controller('EntryListController', {}, data);
-            }));
-
-            describe('init', function () {
-
-                it('should set set up with empty array of entires', function() {
-                    expect(controller.entryList).toBeDefined();
-                    expect(controller.entryList.length).toBe(0);
-                });
-
-                it('should get outcomes', function () {
-                    expect(EntryListServiceMock.getOutcomes).toHaveBeenCalled();
-                });
-
-                it('should update array of entries when entries get back from service', function () {
-                    var resolvedData = [{something: null}, {somethingElse: 'Derp'}];
-
-                    initDeferred.resolve(resolvedData);
-                    rootScope.$digest();
-
-                    expect(controller.entryList).toBe(resolvedData);
-                });
-            });
-        });
-
-        describe('for reflections', function () {
-            beforeEach(inject(function($controller, $q, $rootScope) {
-                q = $q;
-                rootScope = $rootScope;
-
-                initDeferred = q.defer();
-                spyOn(EntryListServiceMock, 'getReflections').and.returnValue(initDeferred.promise);
+                moreDeferred = q.defer();
+                spyOn(EntryListServiceMock, 'getReflections').and.returnValues(initDeferred.promise, moreDeferred.promise);
 
                 var data = {
                     className: 'Reflection'
@@ -76,7 +44,11 @@ import "../../../app/entryList/entryList.module";
 
             describe('init', function () {
 
-                it('should set set up with empty array of entires', function() {
+                it('should set showLoadMore to true', function () {
+                    expect(controller.showLoadMore).toBe(true);
+                });
+
+                it('should set set up with empty array of entires', function () {
                     expect(controller.entryList).toBeDefined();
                     expect(controller.entryList.length).toBe(0);
                 });
@@ -94,10 +66,56 @@ import "../../../app/entryList/entryList.module";
                     expect(controller.entryList).toBe(resolvedData);
                 });
             });
+
+            describe('fetchMore', function () {
+                beforeEach(function () {
+                    initDeferred.resolve([]);
+                    rootScope.$digest();
+                });
+
+                it('should call entryListService with current number of entries for offset', function () {
+                    controller.entryList = [{}, {}];
+
+                    controller.fetchMore();
+
+                    expect(EntryListServiceMock.getReflections).toHaveBeenCalledWith(2);
+                });
+
+                it('should add the new entries to the existing ones', function () {
+                    controller.entryList = [{}];
+
+                    controller.fetchMore();
+                    moreDeferred.resolve([{}]);
+                    rootScope.$digest();
+
+                    expect(controller.entryList.length).toBe(2);
+                });
+
+                it('should keep showLoadMore true if entries are returned', function () {
+                    controller.entryList = [{}];
+
+                    controller.fetchMore();
+                    moreDeferred.resolve([{}]);
+                    rootScope.$digest();
+
+                    expect(controller.showLoadMore).toBe(true);
+                });
+
+                it('should set showLoadMore to false if no entries are returned', function () {
+                    controller.entryList = [{}];
+
+                    controller.fetchMore();
+                    moreDeferred.resolve([]);
+                    rootScope.$digest();
+
+                    expect(controller.showLoadMore).toBe(false);
+                });
+            });
+
         });
 
-        describe('for bad className', function() {
-            beforeEach(inject(function($controller, $q, $rootScope) {
+        describe('bad className', function () {
+            beforeEach(inject(function ($controller, $q, $rootScope) {
                 q = $q;
                 rootScope = $rootScope;
 
@@ -112,7 +130,11 @@ import "../../../app/entryList/entryList.module";
 
             describe('init', function () {
 
-                it('should set set up with empty array of entires', function() {
+                it('should set showLoadMore to true', function () {
+                    expect(controller.showLoadMore).toBe(true);
+                });
+
+                it('should set set up with empty array of entires', function () {
                     expect(controller.entryList).toBeDefined();
                     expect(controller.entryList.length).toBe(0);
                 });
@@ -123,7 +145,103 @@ import "../../../app/entryList/entryList.module";
                 });
             });
 
+            describe('fetchMore', function () {
+                it('should not get outcomes or reflections', function () {
+                    controller.fetchMore();
+
+                    expect(EntryListServiceMock.getReflections).not.toHaveBeenCalled();
+                    expect(EntryListServiceMock.getOutcomes).not.toHaveBeenCalled();
+                });
+            });
+
+
         });
 
+        describe('outcomes', function () {
+            beforeEach(inject(function ($controller, $q, $rootScope) {
+                q = $q;
+                rootScope = $rootScope;
+
+                initDeferred = q.defer();
+                moreDeferred = q.defer();
+                spyOn(EntryListServiceMock, 'getOutcomes').and.returnValues(initDeferred.promise, moreDeferred.promise);
+
+                var data = {
+                    className: 'Outcome'
+                };
+                controller = $controller('EntryListController', {}, data);
+            }));
+
+            describe('init', function () {
+
+                it('should set showLoadMore to true', function () {
+                    expect(controller.showLoadMore).toBe(true);
+                });
+
+                it('should set set up with empty array of entries', function () {
+                    expect(controller.entryList).toBeDefined();
+                    expect(controller.entryList.length).toBe(0);
+                });
+
+                it('should get outcomes', function () {
+                    expect(EntryListServiceMock.getOutcomes).toHaveBeenCalled();
+                });
+
+                it('should update array of entries when entries get back from service', function () {
+                    var resolvedData = [{something: null}, {somethingElse: 'Derp'}];
+
+                    initDeferred.resolve(resolvedData);
+                    rootScope.$digest();
+
+                    expect(controller.entryList).toBe(resolvedData);
+                });
+            });
+
+            describe('fetchMore', function () {
+                beforeEach(function () {
+                    initDeferred.resolve([]);
+                    rootScope.$digest();
+                });
+
+                it('should call entryListService with current number of entries for offset', function () {
+                    controller.entryList = [{}, {}];
+
+                    controller.fetchMore();
+
+                    expect(EntryListServiceMock.getOutcomes).toHaveBeenCalledWith(2);
+                });
+
+                it('should add the new entries to the existing ones', function () {
+                    controller.entryList = [{}];
+
+                    controller.fetchMore();
+                    moreDeferred.resolve([{}]);
+                    rootScope.$digest();
+
+                    expect(controller.entryList.length).toBe(2);
+                });
+
+                it('should keep showLoadMore true if entries are returned', function () {
+                    controller.entryList = [{}];
+
+                    controller.fetchMore();
+                    moreDeferred.resolve([{}]);
+                    rootScope.$digest();
+
+                    expect(controller.showLoadMore).toBe(true);
+                });
+
+                it('should set showLoadMore to false if no entries are returned', function () {
+                    controller.entryList = [{}];
+
+                    controller.fetchMore();
+                    moreDeferred.resolve([]);
+                    rootScope.$digest();
+
+                    expect(controller.showLoadMore).toBe(false);
+                });
+            });
+
+        });
     });
 })();
