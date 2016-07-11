@@ -112,9 +112,22 @@ header {
     padding: 18px;
 }
 
+#xr-logo {
+    height: 75%;
+    padding-right: 10px;
+}
+
+#xr-logo-text {
+    font-size: 1.5em;
+}
+
 @media (max-width: 650px) {
     .login-container, .register-container {
         width: 550px;
+    }
+
+    #xr-logo-text {
+        font-size: 1.2em;
     }
 }
 

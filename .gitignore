@@ -8,3 +8,6 @@ tmp
 typings
 coverage/
 public/
+app/jspm_packages/
+app/**/*.js
+!app/config.js

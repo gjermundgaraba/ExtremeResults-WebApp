@@ -5,6 +5,7 @@
   "scripts": {
     "postinstall": "typings install && jspm install",
     "start": "lite-server -c browser-sync-config.json",
+    "clean": "gulp clean",
     "build": "gulp build",
     "buildprod": "gulp dist",
     "serveprod": "http-server",
