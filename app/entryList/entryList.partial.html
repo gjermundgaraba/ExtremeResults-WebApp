@@ -8,5 +8,5 @@
     <md-card ng-repeat="entry in $ctrl.entryList">
         <overview-entry entry-obj="entry"></overview-entry>
     </md-card>
-    <md-button class="md-raised md-accent" ng-if="$ctrl.showLoadMore" ng-click="$ctrl.fetchMore()">Show More...</md-button>
+    <md-button class="md-raised md-accent" ng-if="$ctrl.showLoadMoreButton()" ng-click="$ctrl.fetchMore()">Show More...</md-button>
 </div>

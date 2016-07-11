@@ -1,11 +1,24 @@
 <md-content class="md-whiteframe-1dp" cg-busy="$ctrl.getActiveEntriesPromise">
+
     <md-toolbar>
         <h1 class="md-toolbar-tools">
             Current Outcomes
         </h1>
     </md-toolbar>
 
+    <div ng-if="$ctrl.loaded && $ctrl.activeEntries.length === 0">
+        <md-card>
+            <md-content class="md-padding">
+                <h3 class="md-title entry-title">Looks like there are no current outcomes yet!</h3>
+
+                <div>Why don't you head over to <a href="" ui-sref="app.outcomes">Outcomes</a> and create one for the day?</div>
+            </md-content>
+
+        </md-card>
+    </div>
+
     <md-card ng-repeat="activeEntry in $ctrl.activeEntries">
         <overview-entry entry-obj="activeEntry"></overview-entry>
     </md-card>
+
 </md-content>

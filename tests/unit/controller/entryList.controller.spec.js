@@ -58,7 +58,7 @@ import "../../../app/entryList/entryList.module";
                 });
 
                 it('should update array of entries when entries get back from service', function () {
-                    var resolvedData = [{something: null}, {somethingElse: 'Derp'}];
+                    var resolvedData = [{ something: null }, { somethingElse: 'Derp' }];
 
                     initDeferred.resolve(resolvedData);
                     rootScope.$digest();
@@ -69,7 +69,7 @@ import "../../../app/entryList/entryList.module";
 
             describe('fetchMore', function () {
                 beforeEach(function () {
-                    initDeferred.resolve([]);
+                    initDeferred.resolve([{}]);
                     rootScope.$digest();
                 });
 
@@ -174,10 +174,6 @@ import "../../../app/entryList/entryList.module";
 
             describe('init', function () {
 
-                it('should set showLoadMore to true', function () {
-                    expect(controller.showLoadMore).toBe(true);
-                });
-
                 it('should set set up with empty array of entries', function () {
                     expect(controller.entryList).toBeDefined();
                     expect(controller.entryList.length).toBe(0);
@@ -188,7 +184,7 @@ import "../../../app/entryList/entryList.module";
                 });
 
                 it('should update array of entries when entries get back from service', function () {
-                    var resolvedData = [{something: null}, {somethingElse: 'Derp'}];
+                    var resolvedData = [{ something: null }, { somethingElse: 'Derp' }];
 
                     initDeferred.resolve(resolvedData);
                     rootScope.$digest();
@@ -199,7 +195,7 @@ import "../../../app/entryList/entryList.module";
 
             describe('fetchMore', function () {
                 beforeEach(function () {
-                    initDeferred.resolve([]);
+                    initDeferred.resolve([{}]);
                     rootScope.$digest();
                 });
 
@@ -239,6 +235,26 @@ import "../../../app/entryList/entryList.module";
                     rootScope.$digest();
 
                     expect(controller.showLoadMore).toBe(false);
+                });
+            });
+
+            describe('showLoadMoreButton', function () {
+                it('should return false if still loading', function () {
+                    expect(controller.showLoadMoreButton()).toBe(false);
+                });
+
+                it('should return false if loaded, but there are no entries', function () {
+                    initDeferred.resolve([]);
+                    rootScope.$digest();
+
+                    expect(controller.showLoadMoreButton()).toBe(false);
+                });
+
+                it('should return true if loaded and there are entries', function () {
+                    initDeferred.resolve([{}]);
+                    rootScope.$digest();
+
+                    expect(controller.showLoadMoreButton()).toBe(true);
                 });
             });
 

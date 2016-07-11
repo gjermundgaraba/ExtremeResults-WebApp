@@ -6,14 +6,15 @@ export class EntryListController {
 
     public fetchEntryListPromise: IPromise<any>;
     public entryList = [];
-    public showLoadMore = true;
-    
+
+    private loading: boolean = true;
+    private showLoadMore: boolean = true;
     private className: string;
 
     constructor(private entryListService: EntryListService) {
         this.fetchEntries();
     }
-    
+
     fetchEntries() {
         if (this.className === 'Outcome') {
             this.fetchEntryListPromise = this.entryListService.getOutcomes(0)
@@ -25,11 +26,19 @@ export class EntryListController {
 
         var controller = this;
         function addEntries(entries) {
+            controller.loading = false;
+
+            if (entries.length === 0) {
+                controller.showLoadMore = false;
+            }
+            
             controller.entryList = entries;
         }
     }
 
     fetchMore() {
+        this.loading = true;
+
         if (this.className === 'Outcome') {
             this.fetchEntryListPromise = this.entryListService.getOutcomes(this.entryList.length)
                 .then(concatEntries);
@@ -40,6 +49,8 @@ export class EntryListController {
 
         var controller = this;
         function concatEntries(entries) {
+            controller.loading = false;
+
             if (entries.length > 0) {
                 controller.entryList = controller.entryList.concat(entries);
             } else {
@@ -47,6 +58,10 @@ export class EntryListController {
             }
 
         }
+    }
+
+    showLoadMoreButton() {
+        return !this.loading && this.showLoadMore;
     }
 
 }

@@ -8,11 +8,13 @@ export class OverviewController {
     activeEntries = [];
     overviewEntries = [];
     allEntriesLoaded: boolean = false;
+    loaded: boolean = false;
 
     constructor(overviewService: OverviewService) {
         this.getActiveEntriesPromise = overviewService.getActiveEntries()
             .then((data) => {
                 this.activeEntries = data;
+                this.loaded = true;
             });
     }
 }
