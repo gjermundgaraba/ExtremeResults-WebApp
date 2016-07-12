@@ -1,5 +1,5 @@
 var Urls = {
-    baseApi: 'http://localhost:4321/api/'
+    baseApi: '<!SERVER-URL!>'
 };
 
 export { Urls };
