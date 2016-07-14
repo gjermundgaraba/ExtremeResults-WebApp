@@ -5,11 +5,17 @@ export class EntryListController {
     static $inject = ['EntryListService'];
 
     public fetchEntryListPromise: IPromise<any>;
-    public entryList = [];
+    public entryList: Array<any> = [];
 
     private loading: boolean = true;
     private showLoadMore: boolean = true;
     private className: string;
+
+    deleteDelegate = {
+        delete: (entry) => {
+            this.deleteCallback(entry);
+        }
+    };
 
     constructor(private entryListService: EntryListService) {
         this.fetchEntries();
@@ -62,6 +68,14 @@ export class EntryListController {
 
     showLoadMoreButton() {
         return !this.loading && this.showLoadMore;
+    }
+
+    deleteCallback(entry) {
+        var indexOfEntry = this.entryList.indexOf(entry);
+
+        if (indexOfEntry !== -1) {
+            this.entryList.splice(indexOfEntry, 1);
+        }
     }
 
 }

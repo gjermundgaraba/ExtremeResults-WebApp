@@ -1,6 +1,7 @@
 export var overviewEntryComponent = {
     bindings: {
-        entryObj: '='
+        entryObj: '=',
+        deleteDelegate: '='
     },
     templateUrl: 'entry/entry.partial.html'
 };

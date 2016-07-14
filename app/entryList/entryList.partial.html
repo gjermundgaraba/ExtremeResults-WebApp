@@ -6,7 +6,7 @@
     </md-toolbar>
 
     <md-card ng-repeat="entry in $ctrl.entryList">
-        <overview-entry entry-obj="entry"></overview-entry>
+        <overview-entry entry-obj="entry" delete-delegate="$ctrl.deleteDelegate"></overview-entry>
     </md-card>
     <md-button class="md-raised md-accent" ng-if="$ctrl.showLoadMoreButton()" ng-click="$ctrl.fetchMore()">Show More...</md-button>
 </div>

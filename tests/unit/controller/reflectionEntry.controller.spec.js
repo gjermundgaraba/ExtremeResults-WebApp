@@ -10,9 +10,9 @@ import "../../../app/entry/entry.module";
         var XrUtilsMock,
             q,
             rootScope,
-            mdDialogDeferred,
             mdDialogMock,
             headerMock,
+            deleteDelegate,
             formattedDateMock,
             controller;
 
@@ -30,6 +30,10 @@ import "../../../app/entry/entry.module";
                 }
             };
 
+            deleteDelegate = {
+                delete: function () {}
+            };
+
             mdDialogMock = {
                 show: function () {}
             };
@@ -41,13 +45,8 @@ import "../../../app/entry/entry.module";
             q = $q;
             rootScope = $rootScope;
 
-            mdDialogDeferred = q.defer();
-            mdDialogMock.show = function (showObj) {
-                showObj.locals.reflection.firstThingThatWentWell = 'Edited';
-                return mdDialogDeferred.promise;
-            };
-
             controller = $controller('ReflectionEntryController', {$scope: $rootScope});
+            controller.deleteDelegate = deleteDelegate;
         }));
 
         describe('init', function () {
@@ -77,22 +76,35 @@ import "../../../app/entry/entry.module";
                     firstThingThatWentWell: 'NotEdited'
                 };
                 controller.editReflection();
-                mdDialogDeferred.reject();
 
                 expect(controller.reflectionObj.firstThingThatWentWell).toBe('NotEdited');
             });
 
             it('should update the outcome if the edit is finished', function () {
+                mdDialogMock.show = function (showObj) {
+                    var updatedReflection = showObj.locals.reflection;
+                    updatedReflection.firstThingThatWentWell = 'Edited';
+                    showObj.locals.updateCallback(updatedReflection);
+                };
+
                 controller.reflectionObj = {
                     firstThingThatWentWell: 'NotEdited'
                 };
                 controller.editReflection();
-                mdDialogDeferred.resolve({
-                    firstThingThatWentWell: 'Edited'
-                });
-                rootScope.$digest();
 
                 expect(controller.reflectionObj.firstThingThatWentWell).toBe('Edited');
+            });
+
+            it('should delete the reflection when deleteCallback is called', function () {
+                spyOn(deleteDelegate, 'delete');
+
+                mdDialogMock.show = function (showObj) {
+                    showObj.locals.deleteCallback();
+                };
+
+                controller.editReflection();
+
+                expect(deleteDelegate.delete).toHaveBeenCalledWith(controller.reflectionObj);
             });
         });
     });

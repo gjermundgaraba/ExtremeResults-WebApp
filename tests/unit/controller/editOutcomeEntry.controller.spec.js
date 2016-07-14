@@ -14,6 +14,7 @@ import "../../../app/entry/entry.module";
             headerMock,
             formattedDateMock,
             EditOutcomeEntryServiceMock,
+            confirmMock,
             controller;
 
         beforeEach(module('xr.entry'));
@@ -30,14 +31,30 @@ import "../../../app/entry/entry.module";
                 }
             };
 
+            confirmMock = {
+                title: function () {
+                    return confirmMock;
+                },
+                ok: function () {
+                    return confirmMock;
+                },
+                cancel: function () {
+                    return confirmMock;
+                }
+            };
+
             mdDialogMock = {
-                hide: function () {}
+                hide: function () {},
+                show: function () {},
+                confirm: function () {
+                    return confirmMock;
+                }
             };
 
             EditOutcomeEntryServiceMock = {
-                editOutcome: function () {}
+                editOutcome: function () {},
+                deleteOutcome: function () {}
             };
-
 
 
             $provide.value('XrUtils', XrUtilsMock);
@@ -49,6 +66,8 @@ import "../../../app/entry/entry.module";
             rootScope = $rootScope;
 
             controller = $controller('EditOutcomeEntryController');
+            controller.editCallback = function () {}
+            controller.deleteCallback = function () {}
         }));
 
         describe('init', function () {
@@ -134,13 +153,13 @@ import "../../../app/entry/entry.module";
                 controller.outcome.secondStory = 'updated2';
                 controller.outcome.thirdStory = 'updated3';
 
-                spyOn(mdDialogMock, 'hide');
+                spyOn(controller, 'editCallback');
                 controller.save();
 
                 updateDeferred.resolve();
                 rootScope.$digest();
 
-                expect(mdDialogMock.hide).toHaveBeenCalledWith(controller.outcome);
+                expect(controller.editCallback).toHaveBeenCalledWith(controller.outcome);
             });
 
             it('should set saving flag to false when succeeded', function () {
@@ -156,6 +175,145 @@ import "../../../app/entry/entry.module";
                 controller.save();
 
                 updateDeferred.reject();
+                rootScope.$digest();
+
+                expect(controller.saving).toBe(false);
+            });
+        });
+
+        describe('deleteOutcome', function () {
+            it('should not show the dialog if saving', function () {
+                spyOn(mdDialogMock, 'show');
+                controller.saving = true;
+
+                controller.deleteOutcome();
+
+                expect(mdDialogMock.show).not.toHaveBeenCalled();
+            });
+
+            it('should show the confirm dialog', function () {
+                spyOn(mdDialogMock, 'show').and.returnValue(q.defer().promise);
+
+                controller.deleteOutcome();
+
+                expect(mdDialogMock.show).toHaveBeenCalledWith(confirmMock);
+            });
+
+            it('should set saving to true if confirmed', function () {
+                controller.outcome = {};
+                var deferred = q.defer();
+                spyOn(mdDialogMock, 'show').and.returnValue(deferred.promise);
+                spyOn(EditOutcomeEntryServiceMock, 'deleteOutcome').and.returnValue(q.defer().promise);
+
+                controller.deleteOutcome();
+
+                deferred.resolve();
+                rootScope.$digest();
+
+                expect(controller.saving).toBe(true);
+            });
+
+            it('should call deleteOutcome if confirmed', function () {
+                controller.outcome = {};
+                var deferred = q.defer();
+                spyOn(mdDialogMock, 'show').and.returnValue(deferred.promise);
+                spyOn(EditOutcomeEntryServiceMock, 'deleteOutcome').and.returnValue(q.defer().promise);
+                spyOn(controller, 'deleteCallback');
+
+                controller.deleteOutcome();
+
+                deferred.resolve();
+                rootScope.$digest();
+
+                expect(EditOutcomeEntryServiceMock.deleteOutcome).toHaveBeenCalled();
+            });
+
+            it('should not call deleteOutcome if not confirmed', function () {
+                controller.outcome = {};
+                var deferred = q.defer();
+                spyOn(mdDialogMock, 'show').and.returnValue(deferred.promise);
+                spyOn(EditOutcomeEntryServiceMock, 'deleteOutcome').and.returnValue(q.defer().promise);
+                spyOn(controller, 'deleteCallback');
+
+                controller.deleteOutcome();
+
+                deferred.reject();
+                rootScope.$digest();
+
+                expect(EditOutcomeEntryServiceMock.deleteOutcome).not.toHaveBeenCalled();
+            });
+
+            it('should call deleteCallback if deletion is successful', function () {
+                controller.outcome = {};
+                var deferred = q.defer();
+                var deleteDeferred = q.defer();
+                spyOn(mdDialogMock, 'show').and.returnValue(deferred.promise);
+                spyOn(EditOutcomeEntryServiceMock, 'deleteOutcome').and.returnValue(deleteDeferred.promise);
+                spyOn(controller, 'deleteCallback');
+
+                controller.deleteOutcome();
+
+                deferred.resolve();
+                rootScope.$digest();
+
+                deleteDeferred.resolve();
+                rootScope.$digest();
+
+                expect(controller.deleteCallback).toHaveBeenCalled();
+            });
+
+            it('should not call deleteCallback if deletion is not successful', function () {
+                controller.outcome = {};
+                var deferred = q.defer();
+                var deleteDeferred = q.defer();
+                spyOn(mdDialogMock, 'show').and.returnValue(deferred.promise);
+                spyOn(EditOutcomeEntryServiceMock, 'deleteOutcome').and.returnValue(deleteDeferred.promise);
+                spyOn(controller, 'deleteCallback');
+
+                controller.deleteOutcome();
+
+                deferred.resolve();
+                rootScope.$digest();
+
+                deleteDeferred.reject();
+                rootScope.$digest();
+
+                expect(controller.deleteCallback).not.toHaveBeenCalled();
+            });
+
+            it('should set saving to false if deletion is successful', function () {
+                controller.outcome = {};
+                var deferred = q.defer();
+                var deleteDeferred = q.defer();
+                spyOn(mdDialogMock, 'show').and.returnValue(deferred.promise);
+                spyOn(EditOutcomeEntryServiceMock, 'deleteOutcome').and.returnValue(deleteDeferred.promise);
+                spyOn(controller, 'deleteCallback');
+
+                controller.deleteOutcome();
+
+                deferred.resolve();
+                rootScope.$digest();
+
+                deleteDeferred.resolve();
+                rootScope.$digest();
+
+                expect(controller.saving).toBe(false);
+            });
+
+            it('should set saving to false if deletion is not successful', function () {
+                controller.outcome = {};
+                var deferred = q.defer();
+                var deleteDeferred = q.defer();
+                spyOn(mdDialogMock, 'show').and.returnValue(deferred.promise);
+                spyOn(EditOutcomeEntryServiceMock, 'deleteOutcome').and.returnValue(deleteDeferred.promise);
+                spyOn(controller, 'deleteCallback');
+
+                controller.deleteOutcome();
+
+                deferred.resolve();
+                rootScope.$digest();
+
+                deleteDeferred.reject();
                 rootScope.$digest();
 
                 expect(controller.saving).toBe(false);

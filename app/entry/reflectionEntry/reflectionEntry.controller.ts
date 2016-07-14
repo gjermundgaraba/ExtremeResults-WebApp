@@ -5,14 +5,15 @@ import {XrUtils} from "../../core/xrUtils.service";
 
 export class ReflectionEntryController {
     static $inject = ['XrUtils', '$mdDialog'];
-    
-    header:string;
-    reflectionTime:string;
+
+    header: string;
+    reflectionTime: string;
     reflectionObj;
-    
+    deleteDelegate;
+
     constructor(xrUtils: XrUtils, private $mdDialog: IDialogService) {
         this.header = xrUtils.getEntryHeader(this.reflectionObj);
-        this.reflectionTime = xrUtils.getFormattedEntryDate(this.reflectionObj); 
+        this.reflectionTime = xrUtils.getFormattedEntryDate(this.reflectionObj);
     }
 
     editReflection() {
@@ -25,11 +26,15 @@ export class ReflectionEntryController {
             templateUrl: 'entry/reflectionEntry/editReflectionEntry/editReflectionEntry.partial.html',
             parent: angular.element(document.body),
             locals: {
+                deleteCallback: () => {
+                    this.deleteDelegate.delete(this.reflectionObj);
+                },
+                updateCallback: (updatedReflection) => {
+                    this.reflectionObj = updatedReflection;
+                },
                 reflection: reflectionCopy
             },
             clickOutsideToClose: true
-        }).then((updatedReflection) => {
-            this.reflectionObj = updatedReflection;
         });
     }
 } 

@@ -259,5 +259,44 @@ import "../../../app/entryList/entryList.module";
             });
 
         });
+
+        describe('any className', function () {
+            beforeEach(inject(function ($controller, $q, $rootScope) {
+                q = $q;
+                rootScope = $rootScope;
+
+                controller = $controller('EntryListController', {});
+            }));
+
+            describe('deleteDelegate', function () {
+                it('should remove the entry sent in from the entry list', function () {
+                    var entry = {
+                        test: 'test'
+                    };
+                    controller.entryList = [
+                        entry
+                    ];
+
+                    controller.deleteDelegate.delete(entry);
+
+                    expect(controller.entryList.length).toBe(0);
+                });
+
+                it('should not remove an entry if not in the list', function () {
+                    var entry = {
+                        test: 'test'
+                    };
+                    controller.entryList = [
+                        {
+                            not: 'the same'
+                        }
+                    ];
+
+                    controller.deleteDelegate.delete(entry);
+
+                    expect(controller.entryList.length).toBe(1);
+                });
+            });
+        });
     });
 })();

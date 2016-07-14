@@ -47,4 +47,36 @@ describe('EditOutcomeEntryService', function(){
         });
     });
 
+    describe('deleteOutcome', function () {
+        it('should return on success', function () {
+            var objectId = '123';
+            httpBackend.whenDELETE(Urls.baseApi + 'outcomes/' + objectId).respond(201);
+
+            var resolved = false;
+            EditOutcomeEntryService.deleteOutcome(objectId)
+                .then(function () {
+                    resolved = true;
+                });
+
+            httpBackend.flush();
+
+            expect(resolved).toEqual(true);
+        });
+
+        it('should return error on failure', function () {
+            var objectId = '123';
+            httpBackend.whenDELETE(Urls.baseApi + 'outcomes/' + objectId).respond(500);
+
+            var failed = false;
+            EditOutcomeEntryService.deleteOutcome(objectId)
+                .catch(function () {
+                    failed = true;
+                });
+
+            httpBackend.flush();
+
+            expect(failed).toEqual(true);
+        });
+    });
+
 });

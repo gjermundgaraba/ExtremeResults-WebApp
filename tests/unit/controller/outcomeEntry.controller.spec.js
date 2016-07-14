@@ -10,10 +10,10 @@ import "../../../app/entry/entry.module";
         var XrUtilsMock,
             q,
             rootScope,
-            mdDialogDeferred,
             mdDialogMock,
             headerMock,
             formattedDateMock,
+            deleteDelegate,
             controller;
 
         beforeEach(module('xr.entry'));
@@ -34,6 +34,10 @@ import "../../../app/entry/entry.module";
                 show: function () {}
             };
 
+            deleteDelegate = {
+                delete: function () {}
+            };
+
             $provide.value('XrUtils', XrUtilsMock);
             $provide.value('$mdDialog', mdDialogMock);
         }));
@@ -41,13 +45,8 @@ import "../../../app/entry/entry.module";
             q = $q;
             rootScope = $rootScope;
 
-            mdDialogDeferred = q.defer();
-            mdDialogMock.show = function (showObj) {
-                showObj.locals.outcome.firstStory = 'Edited';
-                return mdDialogDeferred.promise;
-            };
-
             controller = $controller('OutcomeEntryController');
+            controller.deleteDelegate = deleteDelegate;
         }));
 
         describe('init', function () {
@@ -67,7 +66,6 @@ import "../../../app/entry/entry.module";
                 controller.outcomeObj = {
                     firstStory: 'NotEdited'
                 };
-                controller.editOutcome();
 
                 expect(controller.outcomeObj.firstStory).toBe('NotEdited');
             });
@@ -77,22 +75,36 @@ import "../../../app/entry/entry.module";
                     firstStory: 'NotEdited'
                 };
                 controller.editOutcome();
-                mdDialogDeferred.reject();
 
                 expect(controller.outcomeObj.firstStory).toBe('NotEdited');
             });
 
             it('should update the outcome if the edit is finished', function () {
+                mdDialogMock.show = function (showObj) {
+                    var updatedOutcome = showObj.locals.outcome;
+                    updatedOutcome.firstStory = 'Edited';
+                    showObj.locals.editCallback(updatedOutcome);
+                };
+
                 controller.outcomeObj = {
                     firstStory: 'NotEdited'
                 };
                 controller.editOutcome();
-                mdDialogDeferred.resolve({
-                    firstStory: 'Edited'
-                });
-                rootScope.$digest();
 
                 expect(controller.outcomeObj.firstStory).toBe('Edited');
+            });
+
+            it('should delete the outcome when deleteCallback is called', function () {
+                spyOn(deleteDelegate, 'delete');
+
+                mdDialogMock.show = function (showObj) {
+                    showObj.locals.deleteCallback();
+                };
+
+                controller.editOutcome();
+
+                expect(deleteDelegate.delete).toHaveBeenCalledWith(controller.outcomeObj);
+
             });
         });
 

@@ -47,4 +47,36 @@ describe('EditReflectionEntryService', function(){
         });
     });
 
+    describe('deleteReflection', function () {
+        it('should return on success', function () {
+            var objectId = '123';
+            httpBackend.whenDELETE(Urls.baseApi + 'reflections/' + objectId).respond(201);
+
+            var resolved = false;
+            EditReflectionEntryService.deleteReflection(objectId)
+                .then(function () {
+                    resolved = true;
+                });
+
+            httpBackend.flush();
+
+            expect(resolved).toEqual(true);
+        });
+
+        it('should return error on failure', function () {
+            var objectId = '1234';
+            httpBackend.whenDELETE(Urls.baseApi + 'reflections/' + objectId).respond(500);
+
+            var failed = false;
+            EditReflectionEntryService.deleteReflection(objectId)
+                .catch(function () {
+                    failed = true;
+                });
+
+            httpBackend.flush();
+
+            expect(failed).toEqual(true);
+        });
+    });
+
 });

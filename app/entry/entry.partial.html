@@ -1,8 +1,8 @@
 <div ng-switch="$ctrl.entryObj.className">
     <div ng-switch-when="Outcome">
-        <outcome-entry outcome-obj="$ctrl.entryObj"></outcome-entry>
+        <outcome-entry outcome-obj="$ctrl.entryObj" delete-delegate="$ctrl.deleteDelegate"></outcome-entry>
     </div>
     <div ng-switch-when="Reflection">
-        <reflection-entry reflection-obj="$ctrl.entryObj"></reflection-entry>
+        <reflection-entry reflection-obj="$ctrl.entryObj" delete-delegate="$ctrl.deleteDelegate"></reflection-entry>
     </div>
 </div>

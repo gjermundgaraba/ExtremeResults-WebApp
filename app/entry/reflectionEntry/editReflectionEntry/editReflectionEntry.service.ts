@@ -8,4 +8,8 @@ export class EditReflectionEntryService {
     editReflection(objectId, outcome) {
         return this.$http.put(this.Urls.baseApi + 'reflections/' + objectId, outcome);
     }
+
+    deleteReflection(objectId) {
+        return this.$http.delete(this.Urls.baseApi + 'reflections/' + objectId);
+    }
 }

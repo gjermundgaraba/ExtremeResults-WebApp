@@ -8,4 +8,8 @@ export class EditOutcomeEntryService {
     editOutcome(objectId, outcome) {
         return this.$http.put(this.Urls.baseApi + 'outcomes/' + objectId, outcome);
     }
+
+    deleteOutcome(objectId) {
+        return this.$http.delete(this.Urls.baseApi + 'outcomes/' + objectId);
+    }
 }
