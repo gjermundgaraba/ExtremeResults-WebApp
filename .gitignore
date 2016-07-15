@@ -10,4 +10,5 @@ coverage/
 public/
 app/jspm_packages/
 app/**/*.js
+app/**/*.js.map
 !app/config.js

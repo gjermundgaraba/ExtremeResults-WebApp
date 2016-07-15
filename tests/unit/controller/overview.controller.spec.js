@@ -34,9 +34,9 @@ import "../../../app/overview/overview.module";
 
         describe('init', function () {
 
-            it('should set set up with empty array of overview', function() {
-                expect(controller.overviewEntries).toBeDefined();
-                expect(controller.overviewEntries.length).toBe(0);
+            it('should set set up with empty array of active entries', function() {
+                expect(controller.activeEntries).toBeDefined();
+                expect(controller.activeEntries.length).toBe(0);
             });
 
             it('should get active entries', function () {
@@ -52,6 +52,37 @@ import "../../../app/overview/overview.module";
                 expect(controller.activeEntries).toBe(resolvedData);
             });
         });
+
+        describe('deleteDelegate', function () {
+            it('should remove the entry sent in from the entry list', function () {
+                var entry = {
+                    test: 'test'
+                };
+                controller.activeEntries = [
+                    entry
+                ];
+
+                controller.deleteDelegate.delete(entry);
+
+                expect(controller.activeEntries.length).toBe(0);
+            });
+
+            it('should not remove an entry if not in the list', function () {
+                var entry = {
+                    test: 'test'
+                };
+                controller.activeEntries = [
+                    {
+                        not: 'the same'
+                    }
+                ];
+
+                controller.deleteDelegate.delete(entry);
+
+                expect(controller.activeEntries.length).toBe(1);
+            });
+        });
+
 
     });
 })();

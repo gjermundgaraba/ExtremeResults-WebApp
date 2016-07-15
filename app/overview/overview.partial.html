@@ -18,7 +18,7 @@
     </div>
 
     <md-card ng-repeat="activeEntry in $ctrl.activeEntries">
-        <overview-entry entry-obj="activeEntry"></overview-entry>
+        <overview-entry entry-obj="activeEntry" delete-delegate="$ctrl.deleteDelegate"></overview-entry>
     </md-card>
 
 </md-content>
