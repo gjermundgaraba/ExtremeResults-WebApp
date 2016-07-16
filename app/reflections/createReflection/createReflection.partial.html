@@ -11,7 +11,7 @@
         <form name="$ctrl.weeklyReflectionForm" ng-submit="$ctrl.save()" novalidate>
             <md-input-container class="md-block">
                 <label for="firstThingThatWentWell">First thing that went well</label>
-                <input ng-model="$ctrl.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" autofocus required>
+                <input ng-model="$ctrl.firstThingThatWentWell" id="firstThingThatWentWell" name="firstThingThatWentWell" type="text" autocomplete="off" autofocus required>
                 <div ng-messages="$ctrl.weeklyReflectionForm.firstThingThatWentWell.$error" ng-if="$ctrl.weeklyReflectionForm.firstThingThatWentWell.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
@@ -19,7 +19,7 @@
 
             <md-input-container class="md-block">
                 <label for="secondThingThatWentWell">Second thing that went well</label>
-                <input ng-model="$ctrl.secondThingThatWentWell" id="secondThingThatWentWell" name="secondThingThatWentWell" type="text" required>
+                <input ng-model="$ctrl.secondThingThatWentWell" id="secondThingThatWentWell" name="secondThingThatWentWell" type="text" autocomplete="off" required>
                 <div ng-messages="$ctrl.weeklyReflectionForm.secondThingThatWentWell.$error" ng-if="$ctrl.weeklyReflectionForm.secondThingThatWentWell.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
@@ -27,7 +27,7 @@
 
             <md-input-container class="md-block">
                 <label for="thirdThingThatWentWell">Third thing that went well</label>
-                <input ng-model="$ctrl.thirdThingThatWentWell" id="thirdThingThatWentWell" name="thirdThingThatWentWell" type="text" required>
+                <input ng-model="$ctrl.thirdThingThatWentWell" id="thirdThingThatWentWell" name="thirdThingThatWentWell" type="text" autocomplete="off" required>
                 <div ng-messages="$ctrl.weeklyReflectionForm.thirdThingThatWentWell.$error" ng-if="$ctrl.weeklyReflectionForm.thirdThingThatWentWell.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
@@ -35,7 +35,7 @@
 
             <md-input-container class="md-block">
                 <label for="firstThingToImprove">First thing to improve</label>
-                <input ng-model="$ctrl.firstThingToImprove" id="firstThingToImprove" name="firstThingToImprove" type="text" required>
+                <input ng-model="$ctrl.firstThingToImprove" id="firstThingToImprove" name="firstThingToImprove" type="text" autocomplete="off" required>
                 <div ng-messages="$ctrl.weeklyReflectionForm.firstThingToImprove.$error" ng-if="$ctrl.weeklyReflectionForm.firstThingToImprove.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
@@ -43,7 +43,7 @@
 
             <md-input-container class="md-block">
                 <label for="secondThingToImprove">Second thing to improve</label>
-                <input ng-model="$ctrl.secondThingToImprove" id="secondThingToImprove" name="secondThingToImprove" type="text" required>
+                <input ng-model="$ctrl.secondThingToImprove" id="secondThingToImprove" name="secondThingToImprove" type="text" autocomplete="off" required>
                 <div ng-messages="$ctrl.weeklyReflectionForm.secondThingToImprove.$error" ng-if="$ctrl.weeklyReflectionForm.secondThingToImprove.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
@@ -51,7 +51,7 @@
 
             <md-input-container class="md-block">
                 <label for="thirdThingToImprove">Third thing to improve</label>
-                <input ng-model="$ctrl.thirdThingToImprove" id="thirdThingToImprove" name="thirdThingToImprove" type="text" required>
+                <input ng-model="$ctrl.thirdThingToImprove" id="thirdThingToImprove" name="thirdThingToImprove" type="text" autocomplete="off" required>
                 <div ng-messages="$ctrl.weeklyReflectionForm.thirdThingToImprove.$error" ng-if="$ctrl.weeklyReflectionForm.thirdThingToImprove.$error.required && $ctrl.weeklyReflectionForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>

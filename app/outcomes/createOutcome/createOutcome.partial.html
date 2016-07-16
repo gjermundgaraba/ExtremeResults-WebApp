@@ -9,7 +9,7 @@
         <form name="$ctrl.createOutcomeForm" ng-submit="$ctrl.save()" novalidate>
             <md-input-container class="md-block">
                 <label for="outcome1">Outcome 1</label>
-                <input ng-model="$ctrl.outcome1" id="outcome1" name="outcome1" autofocus required>
+                <input ng-model="$ctrl.outcome1" id="outcome1" name="outcome1" autofocus autocomplete="off" required>
                 <div ng-messages="$ctrl.createOutcomeForm.outcome1.$error" ng-if="$ctrl.createOutcomeForm.outcome1.$error.required && $ctrl.createOutcomeForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
@@ -17,7 +17,7 @@
 
             <md-input-container class="md-block">
                 <label>Outcome 2</label>
-                <input ng-model="$ctrl.outcome2" id="outcome2" name="outcome2" required>
+                <input ng-model="$ctrl.outcome2" id="outcome2" name="outcome2" autocomplete="off" required>
                 <div ng-messages="$ctrl.createOutcomeForm.outcome2.$error" ng-if="$ctrl.createOutcomeForm.outcome2.$error.required && $ctrl.createOutcomeForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
@@ -25,7 +25,7 @@
 
             <md-input-container class="md-block">
                 <label>Outcome 3</label>
-                <input ng-model="$ctrl.outcome3" id="outcome3" name="outcome3" required>
+                <input ng-model="$ctrl.outcome3" id="outcome3" name="outcome3" autocomplete="off" required>
                 <div ng-messages="$ctrl.createOutcomeForm.outcome3.$error" ng-if="$ctrl.createOutcomeForm.outcome3.$error.required && $ctrl.createOutcomeForm.$submitted">
                     <div ng-message="required">This is required.</div>
                 </div>
