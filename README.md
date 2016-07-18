@@ -16,7 +16,7 @@ Usually, you would implement Agile Results with pen and paper, or something simp
 ## Screenshots
 
 ### Overview
-![Overview](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/Overview.png "Overview")
+![Overview](https://github.com/bjaanes/ExtremeResults-WebApp/raw/master/screenshots/Overview2.png "Overview")
 
 ### Outcomes
 ![Outcomes](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/Outcomes.png "Outcomes")
