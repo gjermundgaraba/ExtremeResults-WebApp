@@ -18,17 +18,11 @@ Usually, you would implement Agile Results with pen and paper, or something simp
 ### Overview
 ![Overview](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/Overview.png "Overview")
 
-### Daily Outcome
-![Daily Outcome](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/DailyOutcome.png "Daily Outcome")
+### Outcomes
+![Outcomes](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/Outcomes.png "Outcomes")
 
-### Weekly Outcome
-![Weekly Outcome](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/WeeklyOutcome.png "Weekly Outcome")
-
-### Weekly Reflection
-![Weekly Reflection](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/WeeklyReflection.png "Weekly Reflection")
-
-### Hot Spots
-![Hot Spots](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/HotSpots.png "Hot Spots")
+### Reflections
+![Reflections](https://raw.githubusercontent.com/bjaanes/ExtremeResults-WebApp/master/screenshots/Reflections.png "Reflections")
 
 ## Technology
 
