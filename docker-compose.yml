@@ -13,3 +13,4 @@ services:
      - MONGO_SERVER=mongodb://mongo-server/db
      - MONGO_USERNAME=mongousername
      - MONGO_PASSWORD=mongopassword
+     - SECRET=use-a-proper-secret-here-please
