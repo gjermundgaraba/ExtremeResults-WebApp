@@ -1,0 +1,15 @@
+version: '2'
+services:
+  xrweb:
+    image: bjaanes/xrwebapp:1.0
+    command: public-server-address
+    ports:
+     - "8080:8080"
+    depends_on:
+     - xrserver
+  xrserver:
+    image: bjaanes/xrserver:1.0
+    environment:
+     - MONGO_SERVER=mongodb://mongo-server/db
+     - MONGO_USERNAME=mongousername
+     - MONGO_PASSWORD=mongopassword
