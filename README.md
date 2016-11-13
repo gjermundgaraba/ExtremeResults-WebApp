@@ -7,6 +7,9 @@
 
 A web app for Extreme Results.
 
+Read all about the app and what it tries to solve here: http://www.gjermundbjaanes.com/xr/
+
+If you want to give it a try, it is available here: https://xr.gjermundbjaanes.com
 
 Extreme Results is trying to implement the systems proposed in the book 'Getting Results the Agile Way'.
 Read more about Agile Results here: http://gettingresults.com/wiki/Explained_-_Agile_Results_in_a_Nutshell
