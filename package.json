@@ -45,7 +45,7 @@
     "gulp": "3.9.0",
     "gulp-angular-templatecache": "1.8.0",
     "gulp-bundle-assets": "2.23.0",
-    "gulp-clean-compiled-typescript": "1.0.1",
+    "gulp-clean-compiled-typescript": "1.2.0",
     "gulp-connect": "2.3.1",
     "gulp-csslint": "0.2.0",
     "gulp-html-replace": "1.5.5",
